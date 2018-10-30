@@ -33,12 +33,17 @@ app.use(express.static('../front/dist'));
 
 app.get('/', function(req, res) {
     models.User.create({
-        nombre: 'tuvieja',
-        apellido: 'uno',
-        email: 'aaaasd@gmail.com',
+        nombre: 'Sir',
+        apellido: 'Lancelot',
+        email: 'tusho100pre@gmail.com',
+        carrito: ['Max Steel', 'transformers', 'locion anal'],
+        admin: false,
+        password: 'banana30',
+        telefono: 0303456,
     })
     .catch((error) => console.log(error))
     .then(data => {
         res.sendFile(path.resolve('../front/index.html'));
     })
 });
+
