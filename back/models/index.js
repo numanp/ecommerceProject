@@ -28,3 +28,8 @@ Venta.belongsToMany(Producto, { through: 'ProductoVenta' });
 
 Categoria.belongsToMany(Producto, { through: 'ProductoxCategoria' });
 Producto.belongsToMany(Categoria, { through: 'ProductoxCategoria' });
+
+module.exports = {
+  modelos,
+  db
+}

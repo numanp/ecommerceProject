@@ -41,8 +41,8 @@ app.get('/', function (req, res) {
         email: 'tuvieja69@gmail.com',
         userId: 1
     })
-        .catch((error) => console.log(error))
-        .then(data => {
-            res.sendFile(path.resolve('../front/index.html'));
-        })
+    .catch((error) => console.log(error))
+    .then(data => {
+        res.sendFile(path.resolve('../front/index.html'));
+    })
 });
