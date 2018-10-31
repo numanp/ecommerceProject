@@ -2549,7 +2549,7 @@ if (process.env.NODE_ENV === 'production') {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionTypes; });
-/* unused harmony export default */
+/* harmony export (immutable) */ __webpack_exports__["b"] = createStore;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(96);
 
@@ -3098,27 +3098,25 @@ var _reactRouterDom = __webpack_require__(12);
 
 var _reactRedux = __webpack_require__(27);
 
+var _store = __webpack_require__(113);
+
+var _store2 = _interopRequireDefault(_store);
+
 var _Main = __webpack_require__(107);
 
 var _Main2 = _interopRequireDefault(_Main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import store from './redux/store'
-
 _reactDom2.default.render(_react2.default.createElement(
-  _reactRouterDom.BrowserRouter,
-  null,
-  _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Main2.default })
+  _reactRedux.Provider,
+  { store: _store2.default },
+  _react2.default.createElement(
+    _reactRouterDom.BrowserRouter,
+    null,
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Main2.default })
+  )
 ), document.getElementById('root'));
-
-// const app = <Provider store = {store}>
-//   <BrowserRouter>
-//     <Main />
-//   </BrowserRouter>
-// </Provider>
-
-// ReactDOM.render(app, document.getElementById('root'))
 
 /***/ }),
 /* 42 */
@@ -28459,7 +28457,7 @@ function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
 }
 function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
   return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? Object(__WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__["a" /* wrapMapToPropsConstant */])(function (dispatch) {
-    return Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* bindActionCreators */])(mapDispatchToProps, dispatch);
+    return Object(__WEBPACK_IMPORTED_MODULE_0_redux__["bindActionCreators"])(mapDispatchToProps, dispatch);
   }) : undefined;
 }
 /* harmony default export */ __webpack_exports__["a"] = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
@@ -28469,17 +28467,18 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(36);
-/* unused harmony reexport createStore */
-/* unused harmony reexport combineReducers */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
-/* unused harmony reexport applyMiddleware */
-/* unused harmony reexport compose */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "compose", function() { return __WEBPACK_IMPORTED_MODULE_4__compose__["a"]; });
 
 
 
@@ -28810,7 +28809,7 @@ function symbolObservablePonyfill(root) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* unused harmony export default */
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(36);
@@ -29005,7 +29004,7 @@ function bindActionCreators(actionCreators, dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export default */
+/* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(37);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -29286,15 +29285,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(12);
+var _Router = __webpack_require__(115);
 
-var _NavBar = __webpack_require__(114);
+var _Router2 = _interopRequireDefault(_Router);
+
+var _NavBar = __webpack_require__(108);
 
 var _NavBar2 = _interopRequireDefault(_NavBar);
-
-var _LandingPage = __webpack_require__(108);
-
-var _LandingPage2 = _interopRequireDefault(_LandingPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29307,13 +29304,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Main = function (_Component) {
     _inherits(Main, _Component);
 
-    function Main(props) {
+    function Main() {
         _classCallCheck(this, Main);
 
-        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
-
-        _this.state = {};
-        return _this;
+        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
     }
 
     _createClass(Main, [{
@@ -29323,7 +29317,7 @@ var Main = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_NavBar2.default, null),
-                _react2.default.createElement(_LandingPage2.default, null)
+                _react2.default.createElement(_Router2.default, null)
             );
         }
     }]);
@@ -29335,6 +29329,90 @@ exports.default = Main;
 
 /***/ }),
 /* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        "nav",
+        { className: "navbar navbar-default" },
+        _react2.default.createElement(
+            "div",
+            { className: "container" },
+            _react2.default.createElement(
+                "div",
+                { className: "container-fluid" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "navbar-header" },
+                    _react2.default.createElement(
+                        "button",
+                        { type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1", "aria-expanded": "false" },
+                        _react2.default.createElement(
+                            "span",
+                            { className: "sr-only" },
+                            "Toggle navigation"
+                        ),
+                        _react2.default.createElement("span", { className: "icon-bar" }),
+                        _react2.default.createElement("span", { className: "icon-bar" }),
+                        _react2.default.createElement("span", { className: "icon-bar" })
+                    ),
+                    _react2.default.createElement(
+                        "a",
+                        { href: "ver-todo.html", className: "navbar-brand" },
+                        _react2.default.createElement("img", { src: "./images/mercadonuma.png" })
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1" },
+                    _react2.default.createElement(
+                        "ul",
+                        { className: "nav navbar-nav navbar-right" },
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#" },
+                                "Reg\xEDstrate"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#" },
+                                "Ingresa"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            _react2.default.createElement("a", { className: "glyphicon glyphicon-question-sign", href: "https://www.mercadolibre.com.ar/ayuda", target: "_blank" })
+                        )
+                    )
+                )
+            )
+        )
+    );
+};
+
+/***/ }),
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29416,7 +29494,6 @@ var LandingPage = function (_Component) {
 exports.default = LandingPage;
 
 /***/ }),
-/* 109 */,
 /* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29459,6 +29536,12 @@ exports.default = function () {
                         "h3",
                         { className: "margin-text", style: { fontSize: "3vw" } },
                         "Compra online!"
+                    ),
+                    _react2.default.createElement("br", null),
+                    _react2.default.createElement(
+                        "a",
+                        { href: "/carrito", style: { fontSize: "20px", border: "solid black 1px" } },
+                        " INGRESAR "
                     ),
                     _react2.default.createElement(
                         "ul",
@@ -29723,8 +29806,68 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 113 */,
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(87);
+
+var _reducer = __webpack_require__(114);
+
+var _reducer2 = _interopRequireDefault(_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+    cart: _reducer2.default
+});
+
+var store = (0, _redux.createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+exports.default = store;
+
+/***/ }),
 /* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var cartReducer = function cartReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'ADD':
+            return [].concat(_toConsumableArray(state), [action.payload]);
+
+        case 'REMOVE':
+            var firstMatchIndex = state.indexOf(action.payload);
+            return state.filter(function (item, index) {
+                return index !== firstMatchIndex;
+            });
+
+        default:
+            return state;
+    }
+};
+
+exports.default = cartReducer;
+
+/***/ }),
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29738,73 +29881,287 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(12);
+
+var _LandingPage = __webpack_require__(109);
+
+var _LandingPage2 = _interopRequireDefault(_LandingPage);
+
+var _ProductosContainer = __webpack_require__(119);
+
+var _ProductosContainer2 = _interopRequireDefault(_ProductosContainer);
+
+var _Carrito = __webpack_require__(116);
+
+var _Carrito2 = _interopRequireDefault(_Carrito);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+var Router = function Router() {
     return _react2.default.createElement(
-        "nav",
-        { className: "navbar navbar-default" },
+        _reactRouterDom.Switch,
+        null,
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _Carrito2.default })
+    );
+};
+
+exports.default = Router;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Carrito;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Carrito(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
         _react2.default.createElement(
-            "div",
-            { className: "container" },
+            'h2',
+            null,
+            ' My Cart '
+        )
+    );
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _productoListaItem = __webpack_require__(118);
+
+var _productoListaItem2 = _interopRequireDefault(_productoListaItem);
+
+var _reactRedux = __webpack_require__(27);
+
+var _cart = __webpack_require__(142);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ListadoProductos(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
+        props.products.map(function (product) {
+            return _react2.default.createElement(_productoListaItem2.default, {
+                key: props.id,
+                product: product,
+                addToCart: props.addToCart,
+
+                cart: (0, _cart.cartItemsWithQuantities)(props.cart)
+
+            });
+        })
+    );
+}
+
+function mapStateToProps(state) {
+    return {
+        cart: state.cart
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToCart: function addToCart(item) {
+            dispatch({ type: 'ADD', payload: item });
+        },
+        removeFromCart: function removeFromCart(item) {
+            dispatch({ type: 'REMOVE', payload: item });
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListadoProductos);
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = ProductListItem;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ProductListItem(props) {
+    var thisItemInCart = props.cart.filter(function (item) {
+        return item.id === props.product.id;
+    })[0];
+    return _react2.default.createElement(
+        'div',
+        { className: 'product-list-item', key: props.id },
+        _react2.default.createElement(
+            'h3',
+            null,
+            props.name
+        ),
+        _react2.default.createElement('img', {
+            height: 100,
+            title: props.product.name,
+            src: "https://img.europapress.es/fotoweb/fotonoticia_20180228142446_640.jpg"
+            // src={`/productos/${props.product.image}`}
+        }),
+        _react2.default.createElement(
+            'div',
+            null,
+            ' ',
+            props.product.description,
+            ' '
+        ),
+        _react2.default.createElement(
+            'div',
+            null,
+            ' $',
+            props.product.price,
+            ' '
+        ),
+        _react2.default.createElement(
+            'div',
+            null,
             _react2.default.createElement(
-                "div",
-                { className: "container-fluid" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "navbar-header" },
-                    _react2.default.createElement(
-                        "button",
-                        { type: "button", className: "navbar-toggle collapsed", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1", "aria-expanded": "false" },
-                        _react2.default.createElement(
-                            "span",
-                            { className: "sr-only" },
-                            "Toggle navigation"
-                        ),
-                        _react2.default.createElement("span", { className: "icon-bar" }),
-                        _react2.default.createElement("span", { className: "icon-bar" }),
-                        _react2.default.createElement("span", { className: "icon-bar" })
-                    ),
-                    _react2.default.createElement(
-                        "a",
-                        { href: "ver-todo.html", className: "navbar-brand" },
-                        _react2.default.createElement("img", { src: "./images/mercadonuma.png" })
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1" },
-                    _react2.default.createElement(
-                        "ul",
-                        { className: "nav navbar-nav navbar-right" },
-                        _react2.default.createElement(
-                            "li",
-                            null,
-                            _react2.default.createElement(
-                                "a",
-                                { href: "#" },
-                                "Reg\xEDstrate"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "li",
-                            null,
-                            _react2.default.createElement(
-                                "a",
-                                { href: "#" },
-                                "Ingresa"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "li",
-                            null,
-                            _react2.default.createElement("a", { className: "glyphicon glyphicon-question-sign", href: "https://www.mercadolibre.com.ar/ayuda", target: "_blank" })
-                        )
-                    )
-                )
+                'button',
+                { onClick: function onClick() {
+                        return props.addToCart(props.product);
+                    } },
+                'Add to cart (',
+                thisItemInCart && thisItemInCart.quantity || 0,
+                ')'
             )
         )
     );
+}
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Homepage;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Productos = __webpack_require__(117);
+
+var _Productos2 = _interopRequireDefault(_Productos);
+
+var _products = __webpack_require__(120);
+
+var _products2 = _interopRequireDefault(_products);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Homepage(props) {
+    return _react2.default.createElement(
+        'div',
+        { style: { width: "800px", margin: "10px auto", padding: "32px", backgroundColor: "white" } },
+        _react2.default.createElement(
+            'h2',
+            null,
+            ' PRODUCTOS '
+        ),
+        _react2.default.createElement(_Productos2.default, { products: _products2.default.products })
+    );
+}
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports) {
+
+module.exports = {"products":[{"id":1,"name":"I am Groot","description":"This stuffed Groot makes an excellent toy for both youngsters due to it's soft nature and adorable design, to fans and collectors of 'The Guardians of the Galaxy' franchise.","keywords":["stuffed","plush","groot","guardians of the galaxy"],"image":"1-groot.jpg","age":["0","+"],"price":19.99},{"id":2,"name":"Buzz Lightyear Action Doll","description":"Buzz Lightyear is a favorite of youngsters. He has a ray-gun, wings that can be retracted or extended on the push of a button, and a grin that could make any alien get a chill up their spine - should they have one.","keywords":["action figure","toy story","posable","requires batteries"],"image":"2-buzz.jpg","age":["3","10"],"price":38.5},{"id":3,"name":"Minion Dave","description":"Dave is a two-eyed and medium-sized minion with nice combed hair. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"3-minion-dave.jpg","age":["0","10"],"price":12.99},{"id":4,"name":"Minion Kevin","description":"Kevin is a tall, two-eyed minion with sprout cut hair and is usually seen wearing his golf apparel. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"4-minion-kevin.jpg","age":["0","10"],"price":12.99},{"id":5,"name":"Minion Bob","description":"Bob is a short and bald minion with multi-colored eyes (green and brown). He often carries around a teddy bear that he owns called Tim, which is brown with yellow buttoned eyes. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"5-minion-bob.jpg","age":["0","10"],"price":12.99}]}
+
+/***/ }),
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.cartItemsWithQuantities = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(27);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cartItemsWithQuantities = exports.cartItemsWithQuantities = function cartItemsWithQuantities(cartItems) {
+    return cartItems.reduce(function (acc, item) {
+        var filteredItem = acc.filter(function (item2) {
+            return item2.id === item.id;
+        })[0];
+        filteredItem !== undefined ? filteredItem.quantity++ : acc.push(_extends({}, item, { quantity: 1 }));
+        return acc;
+    }, []);
 };
 
 /***/ })
