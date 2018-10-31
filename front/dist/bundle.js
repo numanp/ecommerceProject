@@ -28963,6 +28963,18 @@ var _ProfileContainer = __webpack_require__(106);
 
 var _ProfileContainer2 = _interopRequireDefault(_ProfileContainer);
 
+var _AdminComponent = __webpack_require__(108);
+
+var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
+
+var _AdminAddProduct = __webpack_require__(112);
+
+var _AdminAddProduct2 = _interopRequireDefault(_AdminAddProduct);
+
+var _AdminEditProduct = __webpack_require__(113);
+
+var _AdminEditProduct2 = _interopRequireDefault(_AdminEditProduct);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28990,8 +29002,12 @@ var Main = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_NavBar2.default, null),
-                _react2.default.createElement(_SidebarContainer2.default, null),
-                _react2.default.createElement(_ProfileContainer2.default, null)
+                _react2.default.createElement(_AdminComponent2.default, null),
+                _react2.default.createElement('hr', null),
+                _react2.default.createElement(_AdminAddProduct2.default, null),
+                _react2.default.createElement('hr', null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(_AdminEditProduct2.default, null)
             );
         }
     }]);
@@ -29723,6 +29739,563 @@ exports.default = function (_ref) {
                 )
             );
         })
+    );
+};
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        "div",
+        { className: "container-fluid", id: "adminPanel" },
+        _react2.default.createElement(
+            "div",
+            { className: "container" },
+            _react2.default.createElement(
+                "h1",
+                null,
+                "ADMIN PANEL"
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "row" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Agregar/Editar Producto"
+                            ),
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#", className: "btn btn-primary" },
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    "Agregar"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#", className: "btn " },
+                                "Editar"
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Crear Categorias"
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-primary" },
+                                    "Button"
+                                ),
+                                " ",
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-default" },
+                                    "Button"
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Manejar disponiblidad producto"
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-primary" },
+                                    "Button"
+                                ),
+                                " ",
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-default" },
+                                    "Button"
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Ver lista ordenes"
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-primary" },
+                                    "Button"
+                                ),
+                                " ",
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-default" },
+                                    "Button"
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Buscar por orden especifica"
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "form-group" },
+                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Search" })
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-primary" },
+                                    "Button"
+                                ),
+                                " ",
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-default" },
+                                    "Button"
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Promover Usuario"
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "form-group" },
+                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Promover" })
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-warning" },
+                                    "Haceme admin"
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            " "
+        ),
+        "   "
+    ) //CIERRO CONTAINER-FLUID
+    ;
+};
+
+/***/ }),
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container', id: 'AdminAddCategory' },
+        _react2.default.createElement(
+            'h1',
+            null,
+            'Crear Producto'
+        ),
+        _react2.default.createElement(
+            'form',
+            null,
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'nombreProducto' },
+                    'Nombre Producto'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': '' },
+                    'Precio'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Precio' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': '' },
+                    'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': '' },
+                    'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': '' },
+                    'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
+                ),
+                _react2.default.createElement(
+                    'select',
+                    { className: 'form-control' },
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 1'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 2'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 3'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 4'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 5'
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'exampleInputPassword1' },
+                    'Descripcion'
+                ),
+                _react2.default.createElement('textarea', { type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
+            ),
+            _react2.default.createElement(
+                'button',
+                { type: 'submit', className: 'btn  btn-lg btn-primary' },
+                'Agregar Producto'
+            )
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null)
+    );
+};
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var arregloProductos = [{
+    producto: 'Producto',
+    precio: 150,
+    categoria: ['Categoria1', 'Categoria2'],
+    stock: 40,
+    disponibilidad: 'Disponible'
+}, {
+    producto: 'Producto2',
+    precio: 250,
+    categoria: ['cosita', 'asdasd'],
+    stock: 4,
+    disponibilidad: 'Disponible'
+}, {
+    producto: 'Producto3',
+    precio: 150,
+    categoria: ['Categoria1', 'Categoria2'],
+    stock: 20,
+    disponibilidad: 'No disponible'
+}, {
+    producto: 'Producto 4',
+    precio: 1550,
+    categoria: ['Zapatillas', 'Otra'],
+    stock: 10,
+    disponibilidad: 'Disponible'
+}];
+console.log(arregloProductos);
+
+exports.default = function () {
+    return (
+        //DEBE RECIBIR UN ARREGLO DE OBJETOS DE TODOS LOS PRODUCTOS Y HACE UN DISPLAY DE CADA UNO
+
+
+        _react2.default.createElement(
+            'div',
+            { className: 'container-fluid', id: 'AdminEditProduct' },
+            _react2.default.createElement(
+                'h1',
+                null,
+                'Productos'
+            ),
+            _react2.default.createElement(
+                'table',
+                { className: 'table table-striped' },
+                _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Producto'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Precio'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Categoria'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Stock'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Disponibilidad'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Editar'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement('div', null)
+                    ),
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Jill'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Smith'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Categoria 1, categoria 2'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            '50'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            '50'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            _react2.default.createElement(
+                                'button',
+                                { className: 'btn btn-primary' },
+                                'EDITAR PRODUCTO'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Jill'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Smith'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            'Categoria 1, categoria 2'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            '50'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            '50'
+                        ),
+                        _react2.default.createElement(
+                            'td',
+                            null,
+                            _react2.default.createElement(
+                                'button',
+                                { className: 'btn btn-primary' },
+                                'EDITAR PRODUCTO'
+                            )
+                        )
+                    )
+                )
+            )
+        )
     );
 };
 

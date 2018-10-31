@@ -5,6 +5,9 @@ import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import SidebarContainer from './SidebarContainer';
 import ProfileContainer from './ProfileContainer';
+import AdminComponent from '../components/AdminComponent';
+import AdminAddProduct from '../components/AdminAddProduct';
+import AdminEditProduct from '../components/AdminEditProduct';
 
 class Main extends Component {
     constructor(props) {
@@ -17,8 +20,12 @@ class Main extends Component {
             <div>
 
                 <NavBar/>
-                <SidebarContainer />
-                <ProfileContainer />
+                <AdminComponent/>
+                <hr/>
+                <AdminAddProduct/>
+                <hr/>
+                <br/>
+                <AdminEditProduct/>
             </div>
         );
     }

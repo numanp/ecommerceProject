@@ -36,4 +36,17 @@
   color: #666;
 }
 
+#adminPanel {
+  background-color: #f5f5f5;
+}
+
+#AdminAddCategory {
+  font-size: 16px;
+  color: #666;
+}
+
+#AdminEditProduct {
+  font-size: 16px;
+}
+
 /*# sourceMappingURL=profile.css.map */
