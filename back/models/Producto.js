@@ -1,5 +1,5 @@
+const db = require('./db');
 const Sequelize = require('sequelize');
-const db = new Sequelize('postgres://localhost:5432/ecommerce');
 
 const Producto = db.define('producto', {
   nombre: {
