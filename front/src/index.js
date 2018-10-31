@@ -5,16 +5,17 @@ import { Provider } from 'react-redux'
 
 
 import Main from './containers/Main';
+import SidebarContainer from './containers/SidebarContainer';
 //import store from './redux/store'
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route path="/" component={Main} />
+      <Main />
   </BrowserRouter>,
   document.getElementById('root')
 );
 
-
+//<Route path="/" component={Main} />
 // const app = <Provider store = {store}>
 //   <BrowserRouter>
 //     <Main />

@@ -1,36 +1,15 @@
 import React from 'react';
 
 export default () => (
-  <div className="col-xs-2">
-      <sidebar>
-        <img src="/juke.svg" className="logo" />
-        <section>
-          <h4 className="menu-item active">
-            <Link to="/albums">ALBUMS</Link>
-          </h4>
-        </section>
-        <hr />
-        <section>
-          <h4 className="text-muted">PLAYLISTS</h4>
-          <ul className="list-unstyled">
-            {
-                /*
-              playlists.map(playlist => {
-                return (
-                  <li key={playlist.id} className="playlist-item menu-item">
-                    <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
-                  </li>
-                );
-              })
-              */
-            }
-          </ul>
-          <h4>
-            <Link className="btn btn-primary btn-block" to="/playlists/new">
-              <span className="glyphicon glyphicon-plus"></span> PLAYLIST
-            </Link>
-          </h4>
-        </section>
-      </sidebar>
+    <div className="col-xs-3">
+        <h1>Navbar</h1>
+        <hr/>
+
+        <h3>COmpras Realizadas</h3>
+        <h3>Ultimas COmpras</h3>
+        <h3>Otras Cosas</h3>
+        <h3>Otras Cosas</h3>
+
+
     </div>
 );

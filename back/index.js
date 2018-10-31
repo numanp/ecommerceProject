@@ -17,6 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('../front/dist'));
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
     res.sendFile(path.resolve('../front/index.html'));
 });
