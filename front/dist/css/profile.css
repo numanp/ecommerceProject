@@ -1,0 +1,39 @@
+.profile_compra {
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+}
+.profile_compra img {
+  max-width: 100px;
+  padding: 10px;
+}
+.profile_compra p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
+}
+.profile_compra .profile_celeste {
+  color: #3855a2;
+}
+
+.profile_comentario {
+  border: 1px solid #d1d1d1;
+  margin: 1px;
+  border-radius: 4px;
+}
+.profile_comentario img {
+  max-width: 100px;
+  padding: 10px;
+}
+.profile_comentario p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.sidebar {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  color: #666;
+}
+
+/*# sourceMappingURL=profile.css.map */

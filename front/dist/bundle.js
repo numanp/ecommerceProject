@@ -28989,6 +28989,7 @@ var Main = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_NavBar2.default, null),
                 _react2.default.createElement(_SidebarContainer2.default, null),
                 _react2.default.createElement(_ProfileContainer2.default, null)
             );
@@ -29492,7 +29493,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
     return _react2.default.createElement(
         "div",
-        { className: "col-xs-3" },
+        { className: "col-xs-3 sidebar" },
         _react2.default.createElement(
             "h1",
             null,
@@ -29502,7 +29503,7 @@ exports.default = function () {
         _react2.default.createElement(
             "h3",
             null,
-            "COmpras Realizadas"
+            "Ver Ordenes"
         ),
         _react2.default.createElement(
             "h3",
@@ -29570,13 +29571,53 @@ var ProfileContainer = function (_React$Component) {
         key: 'render',
         value: function render() {
             var userPerfil = {
-                userId: 25
-            };
+                userId: 25,
+                nombre: 'Diego',
+                apellido: 'Fernandez'
 
-            var comprasUsuario = [{
-                producto: [1, 10, 15]
+            };
+            var arregloCompras = [{
+                idVenta: 1,
+                productos: [10, 20, 30],
+                fechaVenta: '10:25PM',
+                status: 'Completado',
+                linkProducto: '#'
+            }, {
+                idVenta: 3,
+                productos: [10, 20, 30],
+                fechaVenta: '10:25PM',
+                status: 'incompleto',
+                linkProducto: '#'
+            },, {
+                idVenta: 4,
+                productos: [10, 20, 30],
+                fechaVenta: '10:25PM',
+                status: 'incompleto',
+                linkProducto: '#'
             }];
-            return _react2.default.createElement(_UserProfile2.default, { userPerfil: userPerfil, comprasUsuario: comprasUsuario });
+
+            var misReviews = [{
+                reviewId: 1,
+                comentario: "Producto muyroducto muyroducto muyroducto muyroducto muyroducto muy bueno 5/5",
+                estrellas: 4
+            }, {
+                reviewId: 2,
+                comentario: "Producto muy malo 1/5Producto muy malo 1/5Producto muy malo 1/5",
+                estrellas: 1
+            }, {
+                reviewId: 1,
+                comentario: "Producto muyroducto muyroducto muyroducto muyroducto muyroducto muy bueno 5/5",
+                estrellas: 4
+            }, {
+                reviewId: 2,
+                comentario: "Producto muy malo 1/5Producto muy malo 1/5Producto muy malo 1/5",
+                estrellas: 1
+            }];
+
+            //console.log(userPerfil);
+            console.log(arregloCompras);
+            //ARREGLO COMPRAS SERIA EL ARREGLO A ENVIAR CON LA DATA DEL USUARIO Y SUS COMPRAS
+            return _react2.default.createElement(_UserProfile2.default, { userPerfil: [userPerfil], arregloCompras: arregloCompras, misReviews: misReviews });
         }
     }]);
 
@@ -29602,7 +29643,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+exports.default = function (_ref) {
+    var userPerfil = _ref.userPerfil,
+        arregloCompras = _ref.arregloCompras,
+        misReviews = _ref.misReviews;
     return _react2.default.createElement(
         "div",
         { className: "col-xs-9" },
@@ -29611,46 +29655,74 @@ exports.default = function () {
             null,
             "Compras"
         ),
+        //MAPEO POR EL ARREGLO DE COMPRAS
+        arregloCompras.map(function (compra) {
+            return _react2.default.createElement(
+                "div",
+                { className: "profile_compra", key: compra.idVenta },
+                _react2.default.createElement(
+                    "a",
+                    { href: compra.linkProducto },
+                    _react2.default.createElement("img", { src: "https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg", alt: "" })
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    "INFO DEL PRODUCTO."
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    "ID: ",
+                    compra.idVenta
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    "Fecha: ",
+                    compra.fechaVenta
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    "Status: ",
+                    compra.status
+                ),
+                _react2.default.createElement(
+                    "p",
+                    { "class": "profile_celeste" },
+                    "Ver Detalle"
+                )
+            );
+        }),
         _react2.default.createElement(
-            "div",
-            { style: { border: 1 } },
-            _react2.default.createElement("img", { style: { width: 200 }, src: "https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg", alt: "" }),
-            _react2.default.createElement(
-                "p",
-                null,
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum asperiores amet sequi optio minus blanditiis, magnam nesciunt provident, veniam unde eos saepe quisquam reprehenderit perferendis eum, voluptate ducimus a labore!"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.info"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.fecha"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.status"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.items"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.info"
-            ),
-            _react2.default.createElement(
-                "p",
-                null,
-                " props.info"
-            )
-        )
+            "h1",
+            null,
+            "Reviews (PURAMENTE OPCIONAL) NO LO PIDE EN LOS PUNTOS"
+        ),
+        //MAPEO DE LAS ULTIMAS REVIEWS
+        misReviews.map(function (review) {
+            return _react2.default.createElement(
+                "div",
+                { className: "profile_comentario", key: review.reviewId },
+                _react2.default.createElement(
+                    "a",
+                    { href: review.linkProducto },
+                    _react2.default.createElement("img", { src: "https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg", alt: "" })
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    review.comentario
+                ),
+                _react2.default.createElement(
+                    "p",
+                    null,
+                    review.estrellas,
+                    "/5 ESTRELLAS AGREGAR ESTRELLAS"
+                )
+            );
+        })
     );
 };
 

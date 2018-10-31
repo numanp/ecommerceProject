@@ -15,6 +15,8 @@ class Main extends Component {
     render() {
         return (
             <div>
+
+                <NavBar/>
                 <SidebarContainer />
                 <ProfileContainer />
             </div>
