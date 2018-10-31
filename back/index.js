@@ -29,8 +29,8 @@ app.use(express.static('../front/dist'));
     }) */
 db.sync({ force: true })
     .then(function () {
-        app.listen('3000', function () {
-            console.log('listening at 3000');
+        app.listen('3001', function () {
+            console.log('listening at 3001');
         });
     })
     .catch(console.error);
