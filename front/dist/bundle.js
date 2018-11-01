@@ -28967,13 +28967,21 @@ var _AdminComponent = __webpack_require__(108);
 
 var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
 
-var _AdminAddProduct = __webpack_require__(112);
+var _AdminAddProduct = __webpack_require__(109);
 
 var _AdminAddProduct2 = _interopRequireDefault(_AdminAddProduct);
 
-var _AdminEditProduct = __webpack_require__(113);
+var _AdminEditProduct = __webpack_require__(110);
 
 var _AdminEditProduct2 = _interopRequireDefault(_AdminEditProduct);
+
+var _AdminAddCategory = __webpack_require__(111);
+
+var _AdminAddCategory2 = _interopRequireDefault(_AdminAddCategory);
+
+var _AdminOrdenes = __webpack_require__(112);
+
+var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29007,7 +29015,15 @@ var Main = function (_Component) {
                 _react2.default.createElement(_AdminAddProduct2.default, null),
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement('br', null),
-                _react2.default.createElement(_AdminEditProduct2.default, null)
+                _react2.default.createElement(_AdminEditProduct2.default, null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('hr', null),
+                _react2.default.createElement(_AdminAddCategory2.default, null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('hr', null),
+                _react2.default.createElement(_AdminOrdenes2.default, null)
             );
         }
     }]);
@@ -29800,7 +29816,7 @@ exports.default = function () {
                             _react2.default.createElement(
                                 "a",
                                 { href: "#", className: "btn " },
-                                "Editar"
+                                "Editar Producto"
                             )
                         )
                     )
@@ -29968,6 +29984,37 @@ exports.default = function () {
                             )
                         )
                     )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6 col-md-4" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "thumbnail" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "caption" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Eliminar Usuario"
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "form-group" },
+                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Eliminar" })
+                            ),
+                            _react2.default.createElement(
+                                "p",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#", className: "btn btn-danger" },
+                                    "Eliminar Usuario"
+                                )
+                            )
+                        )
+                    )
                 )
             ),
             " "
@@ -29978,10 +30025,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30116,7 +30160,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 113 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30296,6 +30340,284 @@ exports.default = function () {
                 )
             )
         )
+    );
+};
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//MAPEAR POR TODAS LAS CATEGORIAS HACER UN  DISPLAY
+//Agregarle un boton para elminar la categoria de la db
+// Y DEJAR UN BOTON PARA AGREGAR UNA NUEVA CATEGORIA
+
+exports.default = function () {
+	return _react2.default.createElement(
+		"div",
+		{ className: "container-fluid", id: "AdminAddCategory" },
+		_react2.default.createElement("br", null),
+		_react2.default.createElement("br", null),
+		_react2.default.createElement("br", null),
+		_react2.default.createElement(
+			"div",
+			{ "class": "row" },
+			_react2.default.createElement(
+				"div",
+				{ "class": "col-sm-6 col-md-offset-2 col-md-8" },
+				_react2.default.createElement(
+					"h1",
+					null,
+					"Editar Categorias"
+				),
+				_react2.default.createElement(
+					"div",
+					{ "class": "thumbnail edit" },
+					_react2.default.createElement(
+						"ul",
+						null,
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						" ",
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						"    ",
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement("input", { type: "text", "class": "form-control" }),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"button",
+							{ className: "btn btn-success" },
+							_react2.default.createElement(
+								"span",
+								{ "class": "glyphicon glyphicon-plus", "aria-hidden": "true" },
+								" "
+							),
+							" Agregar categoria"
+						)
+					)
+				)
+			)
+		)
+	);
+};
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var arregloCompras = [{
+    idVenta: 1,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'Completado',
+    linkProducto: '#'
+}, {
+    idVenta: 3,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+},, {
+    idVenta: 4,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+}];
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid', id: '' },
+        _react2.default.createElement(
+            'h1',
+            null,
+            'Manejo de ordenes'
+        ),
+        _react2.default.createElement(
+            'div',
+            { 'class': 'btn-group' },
+            _react2.default.createElement(
+                'button',
+                { type: 'button', 'class': 'btn btn-default dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                'Filtrar por Status ',
+                _react2.default.createElement('span', { 'class': 'caret' })
+            ),
+            _react2.default.createElement(
+                'ul',
+                { 'class': 'dropdown-menu' },
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'CREADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'PROCESADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'CANCELADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'COMPLETADO'
+                    )
+                )
+            )
+        ),
+        //MAPEO POR EL ARREGLO DE COMPRAS
+        arregloCompras.map(function (compra) {
+            return _react2.default.createElement(
+                'div',
+                { className: 'profile_compra', key: compra.idVenta },
+                _react2.default.createElement(
+                    'a',
+                    { href: compra.linkProducto },
+                    _react2.default.createElement('img', { src: 'https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg', alt: '' })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'INFO DE LA VENTA.'
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'ID VENTA: ',
+                    compra.idVenta
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Fecha: ',
+                    compra.fechaVenta
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Status: ',
+                    compra.status
+                ),
+                _react2.default.createElement(
+                    'p',
+                    { 'class': 'profile_celeste' },
+                    'Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { 'class': 'btn btn-primary' },
+                    'Cambiar el Status'
+                )
+            );
+        })
     );
 };
 

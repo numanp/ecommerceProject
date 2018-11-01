@@ -51,7 +51,8 @@ export default () => (
         <tr>
         <div>
             {
-               /* arregloProductos.map(producto => (    
+               /*
+                arregloProductos.map(producto => (    
                     <td>ALgo</td>
                     <td>ALgo</td>  <td>{producto.precio}</td>,
                     <td>ALgo</td> <td>{producto.categoria}</td>,
@@ -59,7 +60,8 @@ export default () => (
                     <td>ALgo</td><td>{producto.disponibilidad} <button className="btn btn-success"> EDITAR</button></td>
                     <td>ALgo</td><td>{producto.disponibilidad} <button className="btn btn-success"> EDITAR</button></td>
                     <td>ALgo</td>
-                ))*/
+               ))
+               */ 
             }
         </div>
         </tr>

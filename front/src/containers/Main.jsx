@@ -8,6 +8,8 @@ import ProfileContainer from './ProfileContainer';
 import AdminComponent from '../components/AdminComponent';
 import AdminAddProduct from '../components/AdminAddProduct';
 import AdminEditProduct from '../components/AdminEditProduct';
+import AdminAddCategory from '../components/AdminAddCategory';
+import AdminOrdenes from '../components/AdminOrdenes';
 
 class Main extends Component {
     constructor(props) {
@@ -26,6 +28,14 @@ class Main extends Component {
                 <hr/>
                 <br/>
                 <AdminEditProduct/>
+                <br/>
+                <hr/>
+                <AdminAddCategory/>
+                <br/>
+                <br/>
+                <br/>
+                <hr/>
+                <AdminOrdenes/>
             </div>
         );
     }
