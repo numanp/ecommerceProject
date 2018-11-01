@@ -23,7 +23,6 @@ export default class LandingPage extends Component {
                 <GroupProducts />
                 <ContenidoCelulares />
                 <ContenidoInformativo />
-                
             </div>
         );
     }

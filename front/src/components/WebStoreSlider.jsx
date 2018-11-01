@@ -6,7 +6,7 @@ export default () => {
             <div id="myCarousel" className="carousel slide" data-ride="carousel">
             {/* <!-- Indicators --> */}
             <ol className="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
@@ -29,7 +29,7 @@ export default () => {
 
                 <div className="item">
                     <img src="https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="imagen2" />
-                    <div class="carousel-caption">
+                    <div className="carousel-caption">
                     <h1 className="margin-text" style={{fontSize:"5.9vw"}}><strong>Let's Get It Store (ha)</strong></h1>
                     <h3 className="margin-text" style={{fontSize:"3vw"}}>let's get it Store (in here!)</h3>
                     <p className='ingresa-link'><a href='#'>Ingresa!</a></p>
@@ -43,7 +43,7 @@ export default () => {
 
                 <div className="item">
                 <img src="http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png" alt="imagen3" />
-                    <div class="carousel-caption">
+                    <div className="carousel-caption">
                     <h1 className="margin-text" style={{fontSize:"5.9vw"}}><strong>Let's Get It Store (ha)</strong></h1>
                     <h3 className="margin-text" style={{fontSize:"3vw"}}>let's get it Store (in here!)</h3>
                     <p className='ingresa-link'><a href='#'>Ingresa!</a></p>
