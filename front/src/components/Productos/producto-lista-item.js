@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function ProductListItem(props) {
+    console.log(props.cart)
     const thisItemInCart = props.cart.filter(item => item.id === props.product.id)[0]
     return <div className='product-list-item' key={props.id}>
         <h3>{ props.name }</h3>
@@ -13,7 +14,7 @@ export default function ProductListItem(props) {
         <div> { props.product.description } </div>
         <div> ${ props.product.price } </div>
         <div>
-        
+
         {
             
             <button onClick={ () => props.addToCart(props.product)}> 
@@ -26,3 +27,4 @@ export default function ProductListItem(props) {
         </div>
     </div>
 }
+

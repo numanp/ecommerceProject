@@ -8,7 +8,7 @@ class Main extends Component {
         return (
             <div>
                 <NavBar />
-                    <Router /> 
+                <Router /> 
             </div>
         );
     }

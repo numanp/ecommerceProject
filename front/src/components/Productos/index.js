@@ -12,15 +12,11 @@ function ListadoProductos(props) {
                     key={props.id}
                     product={product}
                     addToCart={props.addToCart} 
-
-                 cart={cartItemsWithQuantities(props.cart)}
-                    
+                    cart={cartItemsWithQuantities(props.cart)}    
                 />)
         }
     </div>
 }
-
-
 
 function mapStateToProps(state) {
     return {
