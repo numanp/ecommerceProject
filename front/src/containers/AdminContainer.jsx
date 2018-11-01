@@ -1,14 +1,41 @@
-import React from 'react';
-//import store from '../store'; A IMPORTAR MAS TARDE
+
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
+//COMPONENTES
 import AdminComponent from '../components/AdminComponent';
 
-export default class AdminContainer extends React.Component {
+
+
+
+class AdminContainer extends Component {
     constructor() {
         super();
         this.state = {};
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+    handleSubmit(evt){
+        evt.preventDefault();
+        const formulario = this.state.valorInput;
+        if(formulario.length < 5){
+            console.log("ESTOY PUDIENDO SUBMITEAR")
+        }
+    }
+
+    pruebaFunc(){
+        console.log('ESTOY FUNCIONANDO')
     }
 
     render() {
-        return <AdminComponent/>;
+        return (
+            <div>
+                <AdminComponent pruebaFunc={this.pruebaFunc} handleSubmit={this.handleSubmit}/>
+            </div>   
+
+        )
     }
 }
+export default AdminContainer;
