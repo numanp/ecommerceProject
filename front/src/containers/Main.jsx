@@ -8,6 +8,7 @@ import axios from 'axios';
 import Productos from './ProductosContainer';
 import Carrito from './Carrito';
 import SingleProduct from './ContainerSingleProduct';
+import AdminContainer from './AdminContainer';
 
 class Main extends Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class Main extends Component {
         <Route exact path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
         <Route exact path="/singleProduct" component={SingleProduct} />
+        <Route exact path="/admin" component={AdminContainer} />
       </div>
     );
   }
