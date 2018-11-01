@@ -18,7 +18,7 @@ class Main extends Component {
     this.logout = this.logout.bind(this);
   }
   sign(object) {
-    axios.post('api/signup', object);
+    axios.post('api/user/signup', object);
   }
   logn(object) {
     axios.post('api/login', object).then(res => console.log(res.data));
@@ -26,11 +26,11 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  componentDidMount() {
-    // axios.get('/api/me')
-    //     .then((user) => { console.log('THIS IS ME ', user) })
-    //     .catch(console.log)
-  }
+  /*   componentDidMount() {
+      axios.get('/api/me')
+        .then(() => console.log('anda'))
+        .catch(console.log)
+    } */
   render() {
     return (
       <div>
