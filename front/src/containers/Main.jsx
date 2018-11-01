@@ -27,9 +27,7 @@ class Main extends Component {
         // axios.get('/api/me')
         //     .then((user) => { console.log('THIS IS ME ', user) })
         //     .catch(console.log)
-
     }
-
     render() {
         return (
             <div>
@@ -37,8 +35,9 @@ class Main extends Component {
                 < Route exact path="/" component={LandingPage} />
                 < Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
                 < Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
+                <Router />
             </div>
-        );
+        )
     }
 }
 
