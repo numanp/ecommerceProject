@@ -63,7 +63,7 @@ router.put('/:id', (req, res) => {
             producto.update(req.body, { fields: ['nombre', 'precio', 'descripcion', 'foto', 'disponibilidad', 'stock'] })
         })
         .then(() => {
-            res.status(200).send('producto modificado correctamente')
+            res.status(200).send('Producto modificado correctamente')
         })
 })
 
