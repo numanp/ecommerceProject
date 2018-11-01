@@ -1,5 +1,6 @@
 var db = require('./db');
 const Sequelize = require('sequelize');
+var crypto = require('crypto');
 
 const User = db.define('user', {
     nombre: {
@@ -46,5 +47,26 @@ const User = db.define('user', {
         type: Sequelize.INTEGER,
     }
 });
+
+
+User.pSalt = function () {
+    return crypto.randomBytes(20).toString('hex');
+}
+
+User.prototype.passHash = function (password, salt) {
+    var pass = crypto.createHmac('sha1', salt).update(password).digest('hex')
+    return pass
+}
+
+User.hook('beforeCreate', (user, options) => {
+    user.salt = User.pSalt();
+    user.password = user.passHash(user.password, user.salt)
+});
+
+User.prototype.checkPassword = function (password) {
+    var pass = crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+    if (pass == this.password) return true
+    return false
+}
 
 module.exports = User;
