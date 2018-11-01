@@ -30051,6 +30051,14 @@ var _axios = __webpack_require__(126);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _ProductosContainer = __webpack_require__(145);
+
+var _ProductosContainer2 = _interopRequireDefault(_ProductosContainer);
+
+var _Carrito = __webpack_require__(150);
+
+var _Carrito2 = _interopRequireDefault(_Carrito);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30115,7 +30123,8 @@ var Main = function (_Component) {
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render() {
                         return _react2.default.createElement(_Login2.default, { logout: _this2.logout, logn: _this2.logn });
                     } }),
-                _react2.default.createElement(Router, null)
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _Carrito2.default })
             );
         }
     }]);
@@ -32503,6 +32512,304 @@ module.exports = function spread(callback) {
   };
 };
 
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Homepage;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ProductosSubContainer = __webpack_require__(151);
+
+var _ProductosSubContainer2 = _interopRequireDefault(_ProductosSubContainer);
+
+var _products = __webpack_require__(149);
+
+var _products2 = _interopRequireDefault(_products);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Homepage(props) {
+    return _react2.default.createElement(
+        'div',
+        { style: { width: "800px", margin: "10px auto", padding: "32px", backgroundColor: "white" } },
+        _react2.default.createElement(
+            'h2',
+            null,
+            ' PRODUCTOS '
+        ),
+        _react2.default.createElement(_ProductosSubContainer2.default, { products: _products2.default.products })
+    );
+}
+
+/***/ }),
+/* 146 */,
+/* 147 */,
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.cartItemsWithQuantities = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(29);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cartItemsWithQuantities = exports.cartItemsWithQuantities = function cartItemsWithQuantities(cartItems) {
+    return cartItems.reduce(function (acc, item) {
+        var filteredItem = acc.filter(function (item2) {
+            return item2.id === item.id;
+        })[0];
+        filteredItem !== undefined ? filteredItem.quantity++ : acc.push(_extends({}, item, { quantity: 1 }));
+        return acc;
+    }, []);
+};
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports) {
+
+module.exports = {"products":[{"id":1,"name":"I am Groot","description":"This stuffed Groot makes an excellent toy for both youngsters due to it's soft nature and adorable design, to fans and collectors of 'The Guardians of the Galaxy' franchise.","keywords":["stuffed","plush","groot","guardians of the galaxy"],"image":"1-groot.jpg","age":["0","+"],"price":19.99},{"id":2,"name":"Buzz Lightyear Action Doll","description":"Buzz Lightyear is a favorite of youngsters. He has a ray-gun, wings that can be retracted or extended on the push of a button, and a grin that could make any alien get a chill up their spine - should they have one.","keywords":["action figure","toy story","posable","requires batteries"],"image":"2-buzz.jpg","age":["3","10"],"price":38.5},{"id":3,"name":"Minion Dave","description":"Dave is a two-eyed and medium-sized minion with nice combed hair. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"3-minion-dave.jpg","age":["0","10"],"price":12.99},{"id":4,"name":"Minion Kevin","description":"Kevin is a tall, two-eyed minion with sprout cut hair and is usually seen wearing his golf apparel. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"4-minion-kevin.jpg","age":["0","10"],"price":12.99},{"id":5,"name":"Minion Bob","description":"Bob is a short and bald minion with multi-colored eyes (green and brown). He often carries around a teddy bear that he owns called Tim, which is brown with yellow buttoned eyes. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"5-minion-bob.jpg","age":["0","10"],"price":12.99}]}
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(29);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        cart: state.cart
+    };
+}
+
+// function Carrito(props) {
+//     return <div>
+//                 <h2> My Cart </h2>
+//                 <div> {console.log(props.cart)}</div>
+//             </div>
+// }
+
+// import React, { Component } from 'react'
+
+var Carrito = function (_Component) {
+    _inherits(Carrito, _Component);
+
+    function Carrito(props) {
+        _classCallCheck(this, Carrito);
+
+        var _this = _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
+
+        _this.state = {
+            carrito: _this.props.cart
+        };
+        return _this;
+    }
+
+    _createClass(Carrito, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    ' My Cart '
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    ' ',
+                    console.log(this.props.cart)
+                )
+            );
+        }
+    }]);
+
+    return Carrito;
+}(_react.Component);
+
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         addToCart: (item) => {
+//             dispatch({ type: 'ADD', payload: item })
+//         },
+//         removeFromCart: (item) => {
+//             dispatch({ type: 'REMOVE', payload: item })
+//         }
+//     }
+// }
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(Carrito);
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ProductToMap = __webpack_require__(152);
+
+var _ProductToMap2 = _interopRequireDefault(_ProductToMap);
+
+var _reactRedux = __webpack_require__(29);
+
+var _cart = __webpack_require__(148);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ListadoProductos(props) {
+    return _react2.default.createElement(
+        'div',
+        null,
+        props.products.map(function (product) {
+            return _react2.default.createElement(_ProductToMap2.default, {
+                key: props.id,
+                product: product,
+                addToCart: props.addToCart,
+                cart: (0, _cart.cartItemsWithQuantities)(props.cart)
+            });
+        })
+    );
+}
+
+function mapStateToProps(state) {
+    return {
+        cart: state.cart
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToCart: function addToCart(item) {
+            dispatch({ type: 'ADD', payload: item });
+        },
+        removeFromCart: function removeFromCart(item) {
+            dispatch({ type: 'REMOVE', payload: item });
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ListadoProductos);
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = ProductListItem;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ProductListItem(props) {
+    console.log(props.cart);
+    var thisItemInCart = props.cart.filter(function (item) {
+        return item.id === props.product.id;
+    })[0];
+    return _react2.default.createElement(
+        'div',
+        { className: 'product-list-item', key: props.id },
+        _react2.default.createElement(
+            'h3',
+            null,
+            props.name
+        ),
+        _react2.default.createElement('img', {
+            height: 100,
+            title: props.product.name,
+            src: "https://img.europapress.es/fotoweb/fotonoticia_20180228142446_640.jpg"
+            // src={`/productos/${props.product.image}`}
+        }),
+        _react2.default.createElement(
+            'div',
+            null,
+            ' ',
+            props.product.description,
+            ' '
+        ),
+        _react2.default.createElement(
+            'div',
+            null,
+            ' $',
+            props.product.price,
+            ' '
+        ),
+        _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'button',
+                { onClick: function onClick() {
+                        return props.addToCart(props.product);
+                    } },
+                'Add to cart (',
+                thisItemInCart && thisItemInCart.quantity || 0,
+                ')'
+            )
+        )
+    );
+}
 
 /***/ })
 /******/ ]);

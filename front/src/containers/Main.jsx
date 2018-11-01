@@ -5,6 +5,9 @@ import LandingPage from './LandingPage'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp';
 import axios from 'axios';
+import Productos from './ProductosContainer'
+import Carrito from './Carrito'
+
 
 class Main extends Component {
     constructor(props) {
@@ -35,7 +38,8 @@ class Main extends Component {
                 < Route exact path="/" component={LandingPage} />
                 < Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
                 < Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
-                <Router />
+                < Route exact path="/productos" component={Productos} />
+                < Route exact path="/carrito" component={Carrito} />
             </div>
         )
     }

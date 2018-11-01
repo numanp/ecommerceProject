@@ -1,18 +1,18 @@
 import React from 'react'
-import ProductListItem from './producto-lista-item'
+import ProductListItem from '../components/ProductToMap'
 import { connect } from 'react-redux'
-import { cartItemsWithQuantities } from '../../redux/cart'
+import { cartItemsWithQuantities } from '../redux/cart'
 
 
 function ListadoProductos(props) {
     return <div>
         {
-            props.products.map( product => 
-                <ProductListItem 
+            props.products.map(product =>
+                <ProductListItem
                     key={props.id}
                     product={product}
-                    addToCart={props.addToCart} 
-                    cart={cartItemsWithQuantities(props.cart)}    
+                    addToCart={props.addToCart}
+                    cart={cartItemsWithQuantities(props.cart)}
                 />)
         }
     </div>
@@ -35,4 +35,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ListadoProductos)
+export default connect(mapStateToProps, mapDispatchToProps)(ListadoProductos)
