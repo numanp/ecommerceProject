@@ -29281,35 +29281,26 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(38);
 
-var _reducer = __webpack_require__(108);
+var _reducers = __webpack_require__(161);
 
-var _reducer2 = _interopRequireDefault(_reducer);
+var _reducers2 = _interopRequireDefault(_reducers);
 
 var _reduxThunk = __webpack_require__(160);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(161);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var rootReducer = (0, _redux.combineReducers)({
-    cart: _reducer2.default
-});
+// const rootReducer = combineReducers({
+//     cart: cartReducer
+// })
 
-var store = (0, _redux.createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+var store = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 exports.default = store;
 
 /***/ }),
-/* 108 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/gonzalo/Desktop/Bootcamp/Ecommerce/front/src/redux/reducer.js'");
-
-/***/ }),
+/* 108 */,
 /* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29352,9 +29343,9 @@ var _ProductosContainer = __webpack_require__(115);
 
 var _ProductosContainer2 = _interopRequireDefault(_ProductosContainer);
 
-var _Carrito = __webpack_require__(120);
+var _CarritoContainer = __webpack_require__(165);
 
-var _Carrito2 = _interopRequireDefault(_Carrito);
+var _CarritoContainer2 = _interopRequireDefault(_CarritoContainer);
 
 var _ContainerSingleProduct = __webpack_require__(129);
 
@@ -29437,7 +29428,7 @@ var Main = function (_Component) {
           }
         }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _Carrito2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _CarritoContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/singleProduct', component: _ContainerSingleProduct2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default })
       );
@@ -29552,223 +29543,225 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(15);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
   return _react2.default.createElement(
-    "div",
+    'div',
     null,
     _react2.default.createElement(
-      "div",
-      { id: "myCarousel", className: "carousel slide", "data-ride": "carousel" },
+      'div',
+      { id: 'myCarousel', className: 'carousel slide', 'data-ride': 'carousel' },
       _react2.default.createElement(
-        "ol",
-        { className: "carousel-indicators" },
-        _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "0", className: "active" }),
-        _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "1" }),
-        _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "2" })
+        'ol',
+        { className: 'carousel-indicators' },
+        _react2.default.createElement('li', { 'data-target': '#myCarousel', 'data-slide-to': '0', className: 'active' }),
+        _react2.default.createElement('li', { 'data-target': '#myCarousel', 'data-slide-to': '1' }),
+        _react2.default.createElement('li', { 'data-target': '#myCarousel', 'data-slide-to': '2' })
       ),
       _react2.default.createElement(
-        "div",
-        { className: "carousel-inner" },
+        'div',
+        { className: 'carousel-inner' },
         _react2.default.createElement(
-          "div",
-          { className: "item active" },
-          _react2.default.createElement("img", {
-            src: "https://images.pexels.com/photos/1304642/pexels-photo-1304642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-            alt: "imagen1"
+          'div',
+          { className: 'item active' },
+          _react2.default.createElement('img', {
+            src: 'https://images.pexels.com/photos/1304642/pexels-photo-1304642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            alt: 'imagen1'
           }),
           _react2.default.createElement(
-            "div",
-            { className: "carousel-caption" },
+            'div',
+            { className: 'carousel-caption' },
             _react2.default.createElement(
-              "h1",
-              { className: "margin-text", style: { fontSize: '5.9vw' } },
+              'h1',
+              { className: 'margin-text', style: { fontSize: '5.9vw' } },
               _react2.default.createElement(
-                "strong",
+                'strong',
                 null,
-                "Let's Get It Store (ha)"
+                'Let\'s Get It Store (ha)'
               )
             ),
             _react2.default.createElement(
-              "h3",
-              { className: "margin-text", style: { fontSize: '3vw' } },
-              "let's get it Store (in here!)"
+              'h3',
+              { className: 'margin-text', style: { fontSize: '3vw' } },
+              'let\'s get it Store (in here!)'
             ),
             _react2.default.createElement(
-              "p",
-              { className: "ingresa-link" },
+              'p',
+              { className: 'ingresa-link' },
               _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "Ingresa!"
+                _reactRouterDom.Link,
+                { to: '/productos' },
+                ' Ingresa!'
               )
             ),
             _react2.default.createElement(
-              "ul",
+              'ul',
               {
-                className: "ul-webstore-text ul-none",
+                className: 'ul-webstore-text ul-none',
                 style: { fontSize: '1vw' }
               },
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "M\xE1s de 90 millones de compradores"
+                'M\xE1s de 90 millones de compradores'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "en m\xE1s de 150 pa\xEDses del mundo"
+                'en m\xE1s de 150 pa\xEDses del mundo'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "con 50 medios de pago en Latinoam\xE9rica"
+                'con 50 medios de pago en Latinoam\xE9rica'
               )
             )
           )
         ),
         _react2.default.createElement(
-          "div",
-          { className: "item" },
-          _react2.default.createElement("img", {
-            src: "https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-            alt: "imagen2"
+          'div',
+          { className: 'item' },
+          _react2.default.createElement('img', {
+            src: 'https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            alt: 'imagen2'
           }),
           _react2.default.createElement(
-            "div",
-            { className: "carousel-caption" },
+            'div',
+            { className: 'carousel-caption' },
             _react2.default.createElement(
-              "h1",
-              { className: "margin-text", style: { fontSize: '5.9vw' } },
+              'h1',
+              { className: 'margin-text', style: { fontSize: '5.9vw' } },
               _react2.default.createElement(
-                "strong",
+                'strong',
                 null,
-                "Let's Get It Store (ha)"
+                'Let\'s Get It Store (ha)'
               )
             ),
             _react2.default.createElement(
-              "h3",
-              { className: "margin-text", style: { fontSize: '3vw' } },
-              "let's get it Store (in here!)"
+              'h3',
+              { className: 'margin-text', style: { fontSize: '3vw' } },
+              'let\'s get it Store (in here!)'
             ),
             _react2.default.createElement(
-              "p",
-              { className: "ingresa-link" },
+              'p',
+              { className: 'ingresa-link' },
               _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "Ingresa!"
+                'a',
+                { href: '#' },
+                'Ingresa!'
               )
             ),
             _react2.default.createElement(
-              "ul",
+              'ul',
               {
-                className: "ul-webstore-text ul-none",
+                className: 'ul-webstore-text ul-none',
                 style: { fontSize: '1vw' }
               },
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "M\xE1s de 90 millones de compradores"
+                'M\xE1s de 90 millones de compradores'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "en m\xE1s de 150 pa\xEDses del mundo"
+                'en m\xE1s de 150 pa\xEDses del mundo'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "con 50 medios de pago en Latinoam\xE9rica"
+                'con 50 medios de pago en Latinoam\xE9rica'
               )
             )
           )
         ),
         _react2.default.createElement(
-          "div",
-          { className: "item" },
-          _react2.default.createElement("img", {
-            src: "http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png",
-            alt: "imagen3"
+          'div',
+          { className: 'item' },
+          _react2.default.createElement('img', {
+            src: 'http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png',
+            alt: 'imagen3'
           }),
           _react2.default.createElement(
-            "div",
-            { className: "carousel-caption" },
+            'div',
+            { className: 'carousel-caption' },
             _react2.default.createElement(
-              "h1",
-              { className: "margin-text", style: { fontSize: '5.9vw' } },
+              'h1',
+              { className: 'margin-text', style: { fontSize: '5.9vw' } },
               _react2.default.createElement(
-                "strong",
+                'strong',
                 null,
-                "Let's Get It Store (ha)"
+                'Let\'s Get It Store (ha)'
               )
             ),
             _react2.default.createElement(
-              "h3",
-              { className: "margin-text", style: { fontSize: '3vw' } },
-              "let's get it Store (in here!)"
+              'h3',
+              { className: 'margin-text', style: { fontSize: '3vw' } },
+              'let\'s get it Store (in here!)'
             ),
             _react2.default.createElement(
-              "p",
-              { className: "ingresa-link" },
+              'p',
+              { className: 'ingresa-link' },
               _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "Ingresa!"
+                'a',
+                { href: '#' },
+                'Ingresa!'
               )
             ),
             _react2.default.createElement(
-              "ul",
+              'ul',
               {
-                className: "ul-webstore-text ul-none",
+                className: 'ul-webstore-text ul-none',
                 style: { fontSize: '1vw' }
               },
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "M\xE1s de 90 millones de compradores"
+                'M\xE1s de 90 millones de compradores'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "en m\xE1s de 150 pa\xEDses del mundo"
+                'en m\xE1s de 150 pa\xEDses del mundo'
               ),
               _react2.default.createElement(
-                "li",
+                'li',
                 null,
-                "con 50 medios de pago en Latinoam\xE9rica"
+                'con 50 medios de pago en Latinoam\xE9rica'
               )
             )
           )
         )
       ),
       _react2.default.createElement(
-        "a",
+        'a',
         {
-          className: "left carousel-control",
-          href: "#myCarousel",
-          "data-slide": "prev"
+          className: 'left carousel-control',
+          href: '#myCarousel',
+          'data-slide': 'prev'
         },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-chevron-left" }),
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-chevron-left' }),
         _react2.default.createElement(
-          "span",
-          { className: "sr-only" },
-          "Previous"
+          'span',
+          { className: 'sr-only' },
+          'Previous'
         )
       ),
       _react2.default.createElement(
-        "a",
+        'a',
         {
-          className: "right carousel-control",
-          href: "#myCarousel",
-          "data-slide": "next"
+          className: 'right carousel-control',
+          href: '#myCarousel',
+          'data-slide': 'next'
         },
-        _react2.default.createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
+        _react2.default.createElement('span', { className: 'glyphicon glyphicon-chevron-right' }),
         _react2.default.createElement(
-          "span",
-          { className: "sr-only" },
-          "Next"
+          'span',
+          { className: 'sr-only' },
+          'Next'
         )
       )
     )
@@ -30060,12 +30053,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Homepage(props) {
     return _react2.default.createElement(
         'div',
-        { style: { width: "800px", margin: "10px auto", padding: "32px", backgroundColor: "white" } },
-        _react2.default.createElement(
-            'h2',
-            null,
-            ' PRODUCTOS '
-        ),
+        null,
         _react2.default.createElement(_ProductosSubContainer2.default, { products: _products2.default.products })
     );
 }
@@ -30073,111 +30061,14 @@ function Homepage(props) {
 /***/ }),
 /* 116 */,
 /* 117 */,
-/* 118 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/gonzalo/Desktop/Bootcamp/Ecommerce/front/src/redux/cart.js'");
-
-/***/ }),
+/* 118 */,
 /* 119 */
 /***/ (function(module, exports) {
 
 module.exports = {"products":[{"id":1,"name":"I am Groot","description":"This stuffed Groot makes an excellent toy for both youngsters due to it's soft nature and adorable design, to fans and collectors of 'The Guardians of the Galaxy' franchise.","keywords":["stuffed","plush","groot","guardians of the galaxy"],"image":"1-groot.jpg","age":["0","+"],"price":19.99},{"id":2,"name":"Buzz Lightyear Action Doll","description":"Buzz Lightyear is a favorite of youngsters. He has a ray-gun, wings that can be retracted or extended on the push of a button, and a grin that could make any alien get a chill up their spine - should they have one.","keywords":["action figure","toy story","posable","requires batteries"],"image":"2-buzz.jpg","age":["3","10"],"price":38.5},{"id":3,"name":"Minion Dave","description":"Dave is a two-eyed and medium-sized minion with nice combed hair. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"3-minion-dave.jpg","age":["0","10"],"price":12.99},{"id":4,"name":"Minion Kevin","description":"Kevin is a tall, two-eyed minion with sprout cut hair and is usually seen wearing his golf apparel. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"4-minion-kevin.jpg","age":["0","10"],"price":12.99},{"id":5,"name":"Minion Bob","description":"Bob is a short and bald minion with multi-colored eyes (green and brown). He often carries around a teddy bear that he owns called Tim, which is brown with yellow buttoned eyes. This plush version of him is extremely huggable and makes a great best friend for your young child. He is stitched well and has no small parts to choke on.","keywords":["stuffed","plush","minions","Despicable Me"],"image":"5-minion-bob.jpg","age":["0","10"],"price":12.99}]}
 
 /***/ }),
-/* 120 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(8);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function mapStateToProps(state) {
-    return {
-        cart: state.cart
-    };
-}
-
-// function Carrito(props) {
-//     return <div>
-//                 <h2> My Cart </h2>
-//                 <div> {console.log(props.cart)}</div>
-//             </div>
-// }
-
-// import React, { Component } from 'react'
-
-var Carrito = function (_Component) {
-    _inherits(Carrito, _Component);
-
-    function Carrito(props) {
-        _classCallCheck(this, Carrito);
-
-        var _this = _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
-
-        _this.state = {
-            carrito: _this.props.cart
-        };
-        return _this;
-    }
-
-    _createClass(Carrito, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    ' My Cart '
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    ' ',
-                    console.log(this.props.cart)
-                )
-            );
-        }
-    }]);
-
-    return Carrito;
-}(_react.Component);
-
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         addToCart: (item) => {
-//             dispatch({ type: 'ADD', payload: item })
-//         },
-//         removeFromCart: (item) => {
-//             dispatch({ type: 'REMOVE', payload: item })
-//         }
-//     }
-// }
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(Carrito);
-
-/***/ }),
+/* 120 */,
 /* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31137,22 +31028,28 @@ var _ProductToMap2 = _interopRequireDefault(_ProductToMap);
 
 var _reactRedux = __webpack_require__(8);
 
-var _cart = __webpack_require__(118);
+var _constants = __webpack_require__(163);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import { cartItemsWithQuantities } from '../redux/cart'
+
 
 function ListadoProductos(props) {
     return _react2.default.createElement(
         'div',
-        null,
-        props.products.map(function (product) {
-            return _react2.default.createElement(_ProductToMap2.default, {
-                key: props.id,
-                product: product,
-                addToCart: props.addToCart,
-                cart: (0, _cart.cartItemsWithQuantities)(props.cart)
-            });
-        })
+        { className: 'container Group-Products-Container-Props' },
+        _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            props.products.map(function (product) {
+                return _react2.default.createElement(_ProductToMap2.default, {
+                    product: product,
+                    addToCart: props.addToCart
+                    // cart={cartItemsWithQuantities(props.cart)}
+                });
+            })
+        )
     );
 }
 
@@ -31164,12 +31061,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: function addToCart(item) {
-            dispatch({ type: 'ADD', payload: item });
-        },
-        removeFromCart: function removeFromCart(item) {
-            dispatch({ type: 'REMOVE', payload: item });
+        addToCart: function addToCart(producto) {
+            dispatch({ type: _constants.ADD_TO_CART, payload: producto });
         }
+        // removeFromCart: (item) => {
+        //     dispatch({ type: 'REMOVE', payload: item })
+        // }
     };
 }
 
@@ -31193,54 +31090,75 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import data from '../baseHarcodeada/products.json'
+
+
 function ProductListItem(props) {
-    console.log(props.cart);
-    var thisItemInCart = props.cart.filter(function (item) {
-        return item.id === props.product.id;
-    })[0];
+
+    // const thisItemInCart = props.cart.filter(item => item.id === props.product.id)[0]
     return _react2.default.createElement(
-        'div',
-        { className: 'product-list-item', key: props.id },
-        _react2.default.createElement(
-            'h3',
-            null,
-            props.name
-        ),
-        _react2.default.createElement('img', {
-            height: 100,
+        "div",
+        { className: "col-md-2 column productbox" },
+        _react2.default.createElement("img", {
+            className: "img-responsive",
             title: props.product.name,
-            src: "https://img.europapress.es/fotoweb/fotonoticia_20180228142446_640.jpg"
-            // src={`/productos/${props.product.image}`}
+            src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4"
         }),
         _react2.default.createElement(
-            'div',
+            "h3",
+            { className: "producttitle" },
+            props.name
+        ),
+        _react2.default.createElement(
+            "div",
             null,
-            ' ',
+            " ",
             props.product.description,
-            ' '
+            " "
         ),
         _react2.default.createElement(
-            'div',
-            null,
-            ' $',
-            props.product.price,
-            ' '
-        ),
-        _react2.default.createElement(
-            'div',
-            null,
+            "div",
+            { className: "productprice" },
             _react2.default.createElement(
-                'button',
-                { onClick: function onClick() {
-                        return props.addToCart(props.product);
-                    } },
-                'Add to cart (',
-                thisItemInCart && thisItemInCart.quantity || 0,
-                ')'
+                "div",
+                null,
+                _react2.default.createElement(
+                    "div",
+                    { className: "pricetext" },
+                    "$",
+                    props.product.price
+                ),
+                _react2.default.createElement(
+                    "a",
+                    { className: "glyphicon-props btn btn-success btn-sm", role: "button", onClick: function onClick() {
+                            return props.addToCart(props.product);
+                        } },
+                    _react2.default.createElement(
+                        "span",
+                        { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                        "CART"
+                    )
+                ),
+                _react2.default.createElement(
+                    "a",
+                    { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                    "BUY"
+                )
             )
-        )
+        ),
+        _react2.default.createElement("div", null)
     );
 }
+
+// export default function ProductListItem (props) {
+//     return (
+//             <div className="col-md-2 column productbox">
+//                 <img className="img-responsive" src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" />
+//                 <div className="producttitle">secador de pelo TurboPower</div>
+//                 <div className="productprice"><div ><div className="pricetext">£8.95</div><a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a><a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+//             </div>
+//     )
+// }
 
 /***/ }),
 /* 129 */
@@ -33411,15 +33329,270 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(38);
 
-var _lyricsReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./lyrics-reducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _cartReducer = __webpack_require__(162);
 
-var _lyricsReducer2 = _interopRequireDefault(_lyricsReducer);
+var _cartReducer2 = _interopRequireDefault(_cartReducer);
+
+var _productsReducer = __webpack_require__(164);
+
+var _productsReducer2 = _interopRequireDefault(_productsReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
-  cart: _lyricsReducer2.default
+  cart: _cartReducer2.default,
+  products: _productsReducer2.default
 });
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _constants = __webpack_require__(163);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var cartReducer = function cartReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _constants.ADD_TO_CART:
+            return [].concat(_toConsumableArray(state), [action.payload]);
+
+        // case REMOVE_FROM_CART:
+        //     const firstMatchIndex = state.indexOf(action.payload)
+        //     return state.filter( (item, index) => index !== firstMatchIndex)
+
+        default:
+            return state;
+    }
+};
+
+exports.default = cartReducer;
+
+// export const cartItemsWithQuantities = (cartItems) => {
+//     return cartItems.reduce((acc, item) => {
+//         const filteredItem = acc.filter(item2 => item2.id === item.id)[0]
+//         filteredItem !== undefined
+//             ? filteredItem.quantity++
+//             : acc.push({ ...item, quantity: 1})
+//         return acc 
+//     }, [])
+// }
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Cart
+var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
+var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
+
+// Productos
+var FETCH_PRODUCT = exports.FETCH_PRODUCT = 'FETCH_PRODUCTS';
+var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
+var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
+var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf 
+var UPDATE_PRODUCT = exports.UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _constants = __webpack_require__(163);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var productsReducer = function productsReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _constants.FETCH_PRODUCT:
+            return [].concat(_toConsumableArray(state), [action.payload]);
+        default:
+            return state;
+    }
+};
+
+exports.default = productsReducer;
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(8);
+
+var _CarritoItems = __webpack_require__(166);
+
+var _CarritoItems2 = _interopRequireDefault(_CarritoItems);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        cart: state.cart
+    };
+}
+
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         addToCart: (item) => {
+//             dispatch({ type: 'ADD', payload: item })
+//         },
+//         removeFromCart: (item) => {
+//             dispatch({ type: 'REMOVE', payload: item })
+//         }
+//     }
+// }
+
+var Carrito = function (_Component) {
+    _inherits(Carrito, _Component);
+
+    function Carrito(props) {
+        _classCallCheck(this, Carrito);
+
+        return _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
+        // this.state = {
+        //     cart: this.props.cart
+        // }
+    }
+
+    _createClass(Carrito, [{
+        key: 'render',
+        value: function render() {
+            {
+                console.log('props', this.props);
+            }
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    ' My Cart '
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    this.props.cart.map(function (item) {
+                        return _react2.default.createElement(_CarritoItems2.default, {
+                            product: item
+                        });
+                    })
+                )
+            );
+        }
+    }]);
+
+    return Carrito;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(Carrito);
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = CarritoItems;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function CarritoItems(props) {
+
+    return _react2.default.createElement(
+        "div",
+        { className: "col-md-2 column productbox" },
+        _react2.default.createElement("img", {
+            className: "img-responsive",
+            title: props.product.name,
+            src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4"
+        }),
+        _react2.default.createElement(
+            "h3",
+            { className: "producttitle" },
+            props.name
+        ),
+        _react2.default.createElement(
+            "div",
+            null,
+            " ",
+            props.product.description,
+            " "
+        ),
+        _react2.default.createElement(
+            "div",
+            { className: "productprice" },
+            _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "div",
+                    { className: "pricetext" },
+                    "$",
+                    props.product.price
+                ),
+                _react2.default.createElement(
+                    "a",
+                    { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                    "BUY"
+                )
+            )
+        ),
+        _react2.default.createElement("div", null)
+    );
+}
 
 /***/ })
 /******/ ]);

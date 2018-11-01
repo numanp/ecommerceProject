@@ -6,7 +6,7 @@ import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import axios from 'axios';
 import Productos from './ProductosContainer';
-import Carrito from './Carrito';
+import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 
