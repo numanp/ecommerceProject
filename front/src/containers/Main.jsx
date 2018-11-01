@@ -36,16 +36,8 @@ class Main extends Component {
       <div>
         <NavBar />
         <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/signup"
-          render={() => <SignUp sign={this.sign} />}
-        />
-        <Route
-          exact
-          path="/login"
-          render={() => <Login logout={this.logout} logn={this.logn} />}
-        />
+        <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
+        <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route exact path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
         <Route exact path="/singleProduct" component={SingleProduct} />
