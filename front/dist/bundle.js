@@ -29968,6 +29968,14 @@ var _reducer = __webpack_require__(115);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
+var _reduxThunk = __webpack_require__(156);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _reducers = __webpack_require__(157);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
@@ -29980,37 +29988,9 @@ exports.default = store;
 
 /***/ }),
 /* 115 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var cartReducer = function cartReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
-
-    switch (action.type) {
-        case 'ADD':
-            return [].concat(_toConsumableArray(state), [action.payload]);
-
-        case 'REMOVE':
-            var firstMatchIndex = state.indexOf(action.payload);
-            return state.filter(function (item, index) {
-                return index !== firstMatchIndex;
-            });
-
-        default:
-            return state;
-    }
-};
-
-exports.default = cartReducer;
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/numa/Desktop/ecommerce/Ecommerce/front/src/redux/reducer.js'");
 
 /***/ }),
 /* 116 */
@@ -32726,35 +32706,10 @@ function ProductListItem(props) {
 
 /***/ }),
 /* 148 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.cartItemsWithQuantities = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(9);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var cartItemsWithQuantities = exports.cartItemsWithQuantities = function cartItemsWithQuantities(cartItems) {
-    return cartItems.reduce(function (acc, item) {
-        var filteredItem = acc.filter(function (item2) {
-            return item2.id === item.id;
-        })[0];
-        filteredItem !== undefined ? filteredItem.quantity++ : acc.push(_extends({}, item, { quantity: 1 }));
-        return acc;
-    }, []);
-};
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/numa/Desktop/ecommerce/Ecommerce/front/src/redux/cart.js'");
 
 /***/ }),
 /* 149 */
@@ -33412,6 +33367,56 @@ exports.default = function () {
     ) //CIERRO CONTAINER-FLUID
     ;
 };
+
+/***/ }),
+/* 156 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function createThunkMiddleware(extraArgument) {
+  return function (_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+    return function (next) {
+      return function (action) {
+        if (typeof action === 'function') {
+          return action(dispatch, getState, extraArgument);
+        }
+
+        return next(action);
+      };
+    };
+  };
+}
+
+var thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+/* harmony default export */ __webpack_exports__["default"] = (thunk);
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(34);
+
+var _lyricsReducer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./lyrics-reducer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _lyricsReducer2 = _interopRequireDefault(_lyricsReducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  cart: _lyricsReducer2.default
+});
 
 /***/ })
 /******/ ]);
