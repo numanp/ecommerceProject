@@ -29464,6 +29464,10 @@ var _ContenidoInformativo = __webpack_require__(114);
 
 var _ContenidoInformativo2 = _interopRequireDefault(_ContenidoInformativo);
 
+var _GroupProducts = __webpack_require__(123);
+
+var _GroupProducts2 = _interopRequireDefault(_GroupProducts);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29491,6 +29495,7 @@ var LandingPage = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_WebStoreSlider2.default, null),
+                _react2.default.createElement(_GroupProducts2.default, null),
                 _react2.default.createElement(_ContenidoCelulares2.default, null),
                 _react2.default.createElement(_ContenidoInformativo2.default, null)
             );
@@ -29536,57 +29541,211 @@ exports.default = function () {
         null,
         _react2.default.createElement(
             "div",
-            { className: "content-webstore" },
+            { id: "myCarousel", className: "carousel slide", "data-ride": "carousel" },
+            _react2.default.createElement(
+                "ol",
+                { className: "carousel-indicators" },
+                _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "0", className: "active" }),
+                _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "1" }),
+                _react2.default.createElement("li", { "data-target": "#myCarousel", "data-slide-to": "2" })
+            ),
             _react2.default.createElement(
                 "div",
-                { className: "container" },
+                { className: "carousel-inner" },
                 _react2.default.createElement(
                     "div",
-                    { className: "webstore-text" },
+                    { className: "item active" },
+                    _react2.default.createElement("img", { src: "https://images.pexels.com/photos/1304642/pexels-photo-1304642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", alt: "imagen1" }),
                     _react2.default.createElement(
-                        "h1",
-                        { className: "margin-text", style: { fontSize: "5.9vw" } },
+                        "div",
+                        { className: "carousel-caption" },
                         _react2.default.createElement(
-                            "strong",
-                            null,
-                            "Webstore"
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "h3",
-                        { className: "margin-text", style: { fontSize: "3vw" } },
-                        "Compra online!"
-                    ),
-                    _react2.default.createElement("br", null),
-                    _react2.default.createElement(
-                        "a",
-                        { href: "/productos", style: { fontSize: "20px", border: "solid black 1px" } },
-                        " INGRESAR "
-                    ),
-                    _react2.default.createElement(
-                        "ul",
-                        { className: "ul-webstore-text ul-none", style: { fontSize: "1vw" } },
-                        _react2.default.createElement(
-                            "li",
-                            null,
-                            "M\xE1s de 90 millones de compradores"
+                            "h1",
+                            { className: "margin-text", style: { fontSize: "5.9vw" } },
+                            _react2.default.createElement(
+                                "strong",
+                                null,
+                                "Let's Get It Store (ha)"
+                            )
                         ),
                         _react2.default.createElement(
-                            "li",
-                            null,
-                            "en m\xE1s de 150 pa\xEDses del mundo"
+                            "h3",
+                            { className: "margin-text", style: { fontSize: "3vw" } },
+                            "let's get it Store (in here!)"
                         ),
                         _react2.default.createElement(
-                            "li",
-                            null,
-                            "con 50 medios de pago en Latinoam\xE9rica"
+                            "p",
+                            { className: "ingresa-link" },
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#" },
+                                "Ingresa!"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "ul",
+                            { className: "ul-webstore-text ul-none", style: { fontSize: "1vw" } },
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "M\xE1s de 90 millones de compradores"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "en m\xE1s de 150 pa\xEDses del mundo"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "con 50 medios de pago en Latinoam\xE9rica"
+                            )
                         )
                     )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "item" },
+                    _react2.default.createElement("img", { src: "https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", alt: "imagen2" }),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "carousel-caption" },
+                        _react2.default.createElement(
+                            "h1",
+                            { className: "margin-text", style: { fontSize: "5.9vw" } },
+                            _react2.default.createElement(
+                                "strong",
+                                null,
+                                "Let's Get It Store (ha)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "h3",
+                            { className: "margin-text", style: { fontSize: "3vw" } },
+                            "let's get it Store (in here!)"
+                        ),
+                        _react2.default.createElement(
+                            "p",
+                            { className: "ingresa-link" },
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#" },
+                                "Ingresa!"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "ul",
+                            { className: "ul-webstore-text ul-none", style: { fontSize: "1vw" } },
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "M\xE1s de 90 millones de compradores"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "en m\xE1s de 150 pa\xEDses del mundo"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "con 50 medios de pago en Latinoam\xE9rica"
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "item" },
+                    _react2.default.createElement("img", { src: "http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png", alt: "imagen3" }),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "carousel-caption" },
+                        _react2.default.createElement(
+                            "h1",
+                            { className: "margin-text", style: { fontSize: "5.9vw" } },
+                            _react2.default.createElement(
+                                "strong",
+                                null,
+                                "Let's Get It Store (ha)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "h3",
+                            { className: "margin-text", style: { fontSize: "3vw" } },
+                            "let's get it Store (in here!)"
+                        ),
+                        _react2.default.createElement(
+                            "p",
+                            { className: "ingresa-link" },
+                            _react2.default.createElement(
+                                "a",
+                                { href: "#" },
+                                "Ingresa!"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "ul",
+                            { className: "ul-webstore-text ul-none", style: { fontSize: "1vw" } },
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "M\xE1s de 90 millones de compradores"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "en m\xE1s de 150 pa\xEDses del mundo"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "con 50 medios de pago en Latinoam\xE9rica"
+                            )
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "a",
+                { className: "left carousel-control", href: "#myCarousel", "data-slide": "prev" },
+                _react2.default.createElement("span", { className: "glyphicon glyphicon-chevron-left" }),
+                _react2.default.createElement(
+                    "span",
+                    { className: "sr-only" },
+                    "Previous"
+                )
+            ),
+            _react2.default.createElement(
+                "a",
+                { className: "right carousel-control", href: "#myCarousel", "data-slide": "next" },
+                _react2.default.createElement("span", { className: "glyphicon glyphicon-chevron-right" }),
+                _react2.default.createElement(
+                    "span",
+                    { className: "sr-only" },
+                    "Next"
                 )
             )
         )
     );
 };
+
+{/* <div>
+    <div className="content-webstore">
+    <div className="container">
+       <div className="webstore-text">
+       <h1 className="margin-text" style={{fontSize:"5.9vw"}}><strong>Webstore</strong></h1>
+       <h3 className="margin-text" style={{fontSize:"3vw"}}>Compra online!</h3>
+       <p className='ingresa-link'><a href='#'>Ingresa!</a></p>
+       <ul className="ul-webstore-text ul-none" style={{fontSize:"1vw"}}>
+           <li>Más de 90 millones de compradores</li>
+           <li>en más de 150 países del mundo</li>
+           <li>con 50 medios de pago en Latinoamérica</li>
+       </ul>
+       </div>
+    </div>
+    </div>
+    </div> */}
 
 /***/ }),
 /* 113 */
@@ -30138,17 +30297,16 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(15);
 
+var _SearchBar = __webpack_require__(124);
+
+var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
     return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
-        _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/carrito' },
-            'CARRITO'
-        ),
         _react2.default.createElement(
             'div',
             { className: 'container' },
@@ -30171,14 +30329,19 @@ exports.default = function () {
                         _react2.default.createElement('span', { className: 'icon-bar' })
                     ),
                     _react2.default.createElement(
-                        'a',
-                        { href: '/', className: 'navbar-brand' },
+                        _reactRouterDom.Link,
+                        { to: '/', className: 'navbar-brand' },
                         _react2.default.createElement('img', { src: './images/mercadonuma.png' })
                     )
                 ),
                 _react2.default.createElement(
                     'div',
                     { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'nav navbar-nav navbar-left' },
+                        _react2.default.createElement(_SearchBar2.default, null)
+                    ),
                     _react2.default.createElement(
                         'ul',
                         { className: 'nav navbar-nav navbar-right' },
@@ -30203,7 +30366,13 @@ exports.default = function () {
                         _react2.default.createElement(
                             'li',
                             null,
-                            _react2.default.createElement('a', { className: 'glyphicon glyphicon-question-sign', href: 'https://www.mercadolibre.com.ar/ayuda', target: '_blank' })
+                            ' ',
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/carrito' },
+                                'Carrito'
+                            ),
+                            ' '
                         )
                     )
                 )
@@ -30211,6 +30380,607 @@ exports.default = function () {
         )
     );
 };
+
+// import React from 'react'
+
+// export default () => {
+//     return(
+//         <nav className="navbar navbar-default">
+//             <div className="container">
+//             <div className="container-fluid">
+//                 <div className="navbar-header">
+//                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+//                     <span className="sr-only">Toggle navigation</span>
+//                     <span className="icon-bar"></span>
+//                     <span className="icon-bar"></span>
+//                     <span className="icon-bar"></span>
+//                 </button>
+//                 <a href="ver-todo.html" className="navbar-brand"><img src="./images/mercadonuma.png"></img></a>
+//                 </div>
+
+//                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+//                 <ul className="nav navbar-nav navbar-right">
+//                     <li><a href="#">Regístrate</a></li>
+//                     <li><a href="#">Ingresa</a></li>
+//                     <li><a className="glyphicon glyphicon-question-sign" href="https://www.mercadolibre.com.ar/ayuda" target="_blank"></a></li>
+//                 </ul>
+//                 </div>
+//             </div>
+//             </div>
+//         </nav>
+//     )
+// }
+
+/***/ }),
+/* 122 */,
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
+
+exports.default = function (productos) {
+    return _react2.default.createElement(
+        "div",
+        { className: "container Group-Products-Container-Props" },
+        _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            )
+        ),
+        _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                "div",
+                { className: "col-md-2 column productbox" },
+                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "producttitle" },
+                    "secador de pelo TurboPower"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "productprice" },
+                    _react2.default.createElement(
+                        "div",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pricetext" },
+                            "\xA38.95"
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
+                                " (1)"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
+                            "BUY"
+                        )
+                    )
+                )
+            )
+        )
+    );
+};
+
+{/* <div className="container Group-Products-Container-Props">
+       <div className="row">
+            {productos.map(producto => (
+               <div className="col-md-2 column productbox">
+               <img className="img-responsive" src={producto.foto} />
+               <div className="producttitle">{producto.titulo}</div>
+               <div className="productprice">
+                   <div><div className="pricetext">{producto.precio}</div>
+                   <a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a>
+                   <a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+               </div>
+           ))}
+        </div>
+       <div className="row">
+           
+           {productos.map(producto => (
+               <div className="col-md-2 column productbox">
+               <img className="img-responsive" src={producto.foto} />
+               <div className="producttitle">{producto.titulo}</div>
+               <div className="productprice">
+                   <div><div className="pricetext">{producto.precio}</div>
+                   <a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a>
+                   <a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+               </div>
+           ))}
+        </div>
+    </div> */}
+
+/***/ }),
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchBar = function (_Component) {
+    _inherits(SearchBar, _Component);
+
+    function SearchBar(props) {
+        _classCallCheck(this, SearchBar);
+
+        var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+        _this.state = {};
+
+        return _this;
+    }
+
+    _createClass(SearchBar, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "col-md-12" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "input-group", id: "adv-search" },
+                    _react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "ingresa un snippet" }),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "input-group-btn" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "btn-group", role: "group" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "dropdown dropdown-lg" },
+                                _react2.default.createElement(
+                                    "button",
+                                    { type: "button", className: "btn btn-default dropdown-toggle", "data-toggle": "dropdown", "aria-expanded": "false" },
+                                    _react2.default.createElement("span", { className: "caret" })
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "dropdown-menu dropdown-menu-right", role: "menu" },
+                                    _react2.default.createElement(
+                                        "form",
+                                        { className: "form-horizontal", role: "form" },
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "form-group" },
+                                            _react2.default.createElement(
+                                                "label",
+                                                { htmlFor: "filter" },
+                                                "Filtralo por:"
+                                            ),
+                                            _react2.default.createElement(
+                                                "select",
+                                                { className: "form-control" },
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "0", defaultValue: true },
+                                                    "todos los Snippets"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "1" },
+                                                    "CategoriaTuVieja"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "2" },
+                                                    "CategoriaLancelot"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "3" },
+                                                    "CategoriaElBolson"
+                                                )
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "form-group" },
+                                            _react2.default.createElement(
+                                                "label",
+                                                { htmlFor: "contain" },
+                                                "busca"
+                                            ),
+                                            _react2.default.createElement("input", { className: "form-control", type: "text" })
+                                        ),
+                                        _react2.default.createElement(
+                                            "button",
+                                            { type: "submit", className: "btn btn-primary" },
+                                            _react2.default.createElement("span", { className: "glyphicon glyphicon-search", "aria-hidden": "true" })
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "button",
+                                { type: "button", className: "btn btn-primary" },
+                                _react2.default.createElement("span", { className: "glyphicon glyphicon-search", "aria-hidden": "true" })
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return SearchBar;
+}(_react.Component);
+
+//</div>
+
+
+//este es el que meti en la pagina
+
+exports.default = SearchBar;
+{} /* <div className="col-md-12">
+   <div className="input-group" id="adv-search">
+      <input type="text" className="form-control" placeholder="ingresa un snippet" />
+      <div className="input-group-btn">
+          <div className="btn-group" role="group">
+              <div className="dropdown dropdown-lg">
+                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span className="caret"></span></button>
+                  <div className="dropdown-menu dropdown-menu-right" role="menu">
+                      <form className="form-horizontal" role="form">
+                      <div className="form-group">
+                          <label htmlFor="filter">Filtralo por:</label>
+                          <select className="form-control">
+                              <option value="0" defaultValue>todos los Snippets</option>
+                              <option value="1">CategoriaTuVieja</option>
+                              <option value="2">CategoriaLancelot</option>
+                              <option value="3">CategoriaElBolson</option>
+                          </select>
+                      </div>
+                      <div className="form-group">
+                          <label For="contain">busca</label>
+                          <input className="form-control" type="text" />
+                      </div>
+                      <button type="submit" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      </form>
+                  </div>
+              </div>
+              <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </div>
+      </div>
+   </div>
+   </div> */
+
+//este es el original
+
+{/* <div class="col-md-12">
+               <div class="input-group" id="adv-search">
+                   <input type="text" class="form-control" placeholder="Search for snippets" />
+                   <div class="input-group-btn">
+                       <div class="btn-group" role="group">
+                           <div class="dropdown dropdown-lg">
+                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                               <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                   <form class="form-horizontal" role="form">
+                                     <div class="form-group">
+                                       <label for="filter">Filter by</label>
+                                       <select class="form-control">
+                                           <option value="0" selected>All Snippets</option>
+                                           <option value="1">Featured</option>
+                                           <option value="2">Most popular</option>
+                                           <option value="3">Top rated</option>
+                                           <option value="4">Most commented</option>
+                                       </select>
+                                     </div>
+                                     <div class="form-group">
+                                       <label for="contain">Author</label>
+                                       <input class="form-control" type="text" />
+                                     </div>
+                                     <div class="form-group">
+                                       <label for="contain">Contains the words</label>
+                                       <input class="form-control" type="text" />
+                                     </div>
+                                     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                   </form>
+                               </div>
+                           </div>
+                           <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                       </div>
+                   </div>
+               </div>
+             </div>
+           </div> */}
 
 /***/ })
 /******/ ]);

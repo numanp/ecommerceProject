@@ -8,5 +8,4 @@ export default function Homepage(props) {
         <h2> PRODUCTOS </h2>
         <ProductListing products={data.products}/>
     </div>
-
 }
