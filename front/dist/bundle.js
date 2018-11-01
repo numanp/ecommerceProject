@@ -29707,7 +29707,7 @@ var Main = function (_Component) {
   _createClass(Main, [{
     key: 'sign',
     value: function sign(object) {
-      _axios2.default.post('api/signup', object);
+      _axios2.default.post('api/user/signup', object);
     }
   }, {
     key: 'logn',
@@ -29723,13 +29723,12 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // axios.get('/api/me')
-      //     .then((user) => { console.log('THIS IS ME ', user) })
-      //     .catch(console.log)
-    }
+    /*   componentDidMount() {
+        axios.get('/api/me')
+          .then(() => console.log('anda'))
+          .catch(console.log)
+      } */
+
   }, {
     key: 'render',
     value: function render() {
