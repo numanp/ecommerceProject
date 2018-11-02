@@ -33,6 +33,11 @@ const updateUser = user => ({
   user,
 });
 
+const addCategory = category => ({
+  type: ADD_CATEGORY,
+  category,
+});
+
 const createCategory = category => ({
   type: CREATE_CATEGORY,
   category,

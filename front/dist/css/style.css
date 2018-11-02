@@ -39,6 +39,8 @@ body {
   padding-top: 20px;
 }
 
+/* -------------------------aca empieza ContainerSingleProduct-------------------------  */
+
 .pProducto {
   font-size: 2em;
 }
@@ -46,4 +48,26 @@ body {
   font-size: 3em;
   text-align: center;
 }
-/*Acá termina el Hakatón*/
+
+/* -------------------------aca empieza ContainerReview-------------------------------- */
+
+/* -------------------------aca empieza ReviewInput-------------------------------- */
+
+/* -------------------------aca termina ReviewInput-------------------------------- */
+
+/* -------------------------aca empieza ReviewInput-------------------------------- */
+
+.cajaopinionproducto {
+
+  margin: 3% 5%;
+
+}
+
+.opinionProducto {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+/* -------------------------aca termina ReviewInput-------------------------------- */
+
+/* -------------------------aca termina ContainerReview-------------------------------- */
+
