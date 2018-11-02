@@ -82,7 +82,7 @@ export const updateUser = (userId, user) => dispatch =>
     .then(user => dispatch(putUser(user)));
 
   export const addProduct = (producto)=> (dispatch)=>
-      axios.post('/api/productos',producto)
+      axios.post('/api/producto',producto)
       .then(res=>res.data)
       .then(data=>dispatch(postProduct(data)))
   

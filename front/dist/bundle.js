@@ -33559,7 +33559,7 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: 'admin/agregarCategoria', className: 'btn btn-primary' },
+                                { to: '/admin/agregarCategoria', className: 'btn btn-primary' },
                                 'Crear Categoria'
                             ),
                             _react2.default.createElement(
@@ -33586,7 +33586,7 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: 'admin/agregarCategoria', className: 'btn btn-primary' },
+                                { to: '/admin/agregarCategoria', className: 'btn btn-primary' },
                                 'Crear Categoria'
                             ),
                             _react2.default.createElement(
@@ -33613,7 +33613,7 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: 'admin/verOrdenes', className: 'btn btn-primary' },
+                                { to: '/admin/verOrdenes', className: 'btn btn-primary' },
                                 'Ver Ordenes'
                             ),
                             _react2.default.createElement(
@@ -33640,8 +33640,8 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
-                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Search' })
+                                { className: 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
                             ),
                             _react2.default.createElement(
                                 'p',
@@ -33677,8 +33677,8 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
-                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Promover' })
+                                { className: 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Promover' })
                             ),
                             _react2.default.createElement(
                                 'p',
@@ -33708,8 +33708,8 @@ exports.default = function () {
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
-                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Eliminar' })
+                                { className: 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Eliminar' })
                             ),
                             _react2.default.createElement(
                                 'p',
@@ -33782,7 +33782,14 @@ var AdminAddProductContainer = function (_Component) {
         value: function handleSubmit(evt) {
             evt.preventDefault();
             console.log(this.state);
-            this.props.addProduct(evt.target);
+            var productoAgregar = {
+                nombre: evt.target.nombreProducto.value,
+                descripcion: evt.target.descripcionProducto.value,
+                precio: evt.target.precioProducto.value,
+                foto: evt.target.imgProducto.value,
+                stock: evt.target.stockProducto.value
+            };
+            this.props.addProduct(productoAgregar);
         }
     }, {
         key: 'render',
@@ -33799,12 +33806,15 @@ var AdminAddProductContainer = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-    return { nuevoProducto: state.admin.product
+    return {
+        //nuevoProducto: state.admin.product
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
         addProduct: function addProduct(producto) {
+            console.log(producto);
+            console.log('Deberia estar dispatcheando');
             dispatch((0, _user.addProduct)(producto));
         }
     };
@@ -34073,7 +34083,7 @@ var updateUser = exports.updateUser = function updateUser(userId, user) {
 
 var addProduct = exports.addProduct = function addProduct(producto) {
   return function (dispatch) {
-    return _axios2.default.post('/api/productos', producto).then(function (res) {
+    return _axios2.default.post('/api/producto', producto).then(function (res) {
       return res.data;
     }).then(function (data) {
       return dispatch(postProduct(data));

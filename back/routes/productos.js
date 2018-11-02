@@ -40,6 +40,7 @@ router.get('/cat/:categoria', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    console.log(req.body)
     models.Producto.create({
         nombre: req.body.nombreProducto.value,
         descripcion: req.body.descripcionProducto.value,

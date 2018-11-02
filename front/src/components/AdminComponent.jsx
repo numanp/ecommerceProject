@@ -39,7 +39,7 @@ export default () => (
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Crear Categorias</h3>
-                        <Link to="admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
+                        <Link to="/admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@ export default () => (
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Manejar disponiblidad producto</h3>
-                        <Link to="admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
+                        <Link to="/admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@ export default () => (
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Ver lista ordenes</h3>
-                        <Link to="admin/verOrdenes" className="btn btn-primary">Ver Ordenes</Link><a href="#" className="btn ">Editar Producto</a>
+                        <Link to="/admin/verOrdenes" className="btn btn-primary">Ver Ordenes</Link><a href="#" className="btn ">Editar Producto</a>
                     </div>
                 </div>
             </div>
@@ -66,8 +66,8 @@ export default () => (
                     <div className="thumbnail">
                     <div className="caption">
                             <h3>Buscar por orden especifica</h3>
-                            <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" />
+                            <div className="form-group">
+                            <input type="text" className="form-control" placeholder="Search" />
                         </div>
                             <p><a href="#" className="btn btn-primary">Button</a> <a href="#" className="btn btn-default">Button</a></p>
                     </div>
@@ -78,8 +78,8 @@ export default () => (
                 <div className="thumbnail">
                     <div className="caption">
                             <h3>Promover Usuario</h3>
-                            <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Promover" />
+                            <div className="form-group">
+                            <input type="text" className="form-control" placeholder="Promover" />
                         </div>
                             <p><a href="#" className="btn btn-warning">Haceme admin</a></p>
                     </div>
@@ -89,8 +89,8 @@ export default () => (
                 <div className="thumbnail">
                     <div className="caption">
                             <h3>Eliminar Usuario</h3>
-                            <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Eliminar" />
+                            <div className="form-group">
+                            <input type="text" className="form-control" placeholder="Eliminar" />
                         </div>
                             <p><a href="#" className="btn btn-danger">Eliminar Usuario</a></p>
                     </div>

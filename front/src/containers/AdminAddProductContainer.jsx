@@ -14,7 +14,14 @@ class AdminAddProductContainer extends Component {
     handleSubmit(evt){
         evt.preventDefault();
         console.log(this.state)
-        this.props.addProduct(evt.target)         
+        const productoAgregar = {
+            nombre: evt.target.nombreProducto.value,
+            descripcion: evt.target.descripcionProducto.value,
+            precio: evt.target.precioProducto.value,
+            foto: evt.target.imgProducto.value,
+            stock: evt.target.stockProducto.value
+        }
+        this.props.addProduct(productoAgregar)         
     }    
     render() {
         return (
@@ -26,12 +33,15 @@ class AdminAddProductContainer extends Component {
     }
 }
 function mapStateToProps (state){
-    return{ nuevoProducto: state.admin.product
+    return{ 
+        //nuevoProducto: state.admin.product
     }
 }
 function mapDispatchToProps(dispatch){
     return{
         addProduct: function (producto){
+            console.log(producto)
+            console.log('Deberia estar dispatcheando')
             dispatch(addProduct(producto))
             }
         }
