@@ -1,6 +1,13 @@
-export const SET_LYRICS = 'SET_LYRICS';
-// Add_Review
-// Fetch_Orders_User
-// Login  
-// Logout
-// Sign_Up
+
+//SALE_REDUCER
+export const CREATE_SALE = 'CREATE_SALE';
+export const SEND_EMAIL_AFTER_CHECKOUT = 'SEND_EMAIL_AFTER_CHECKOUT'
+export const SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS'
+
+
+//USER_REDUCER
+export const ADD_REVIEW = 'ADD_REVIEW';
+export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const SIGN_UP = 'SIGN_UP';

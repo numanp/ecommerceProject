@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import cartReducer from './lyrics-reducer';
+import cartReducer from './cart-reducer';
 
 export default combineReducers({
-  cart: cartReducer
+  // cart: cartReducer
 });

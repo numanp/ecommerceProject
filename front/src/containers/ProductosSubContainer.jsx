@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductListItem from '../components/ProductToMap'
 import { connect } from 'react-redux'
-import { cartItemsWithQuantities } from '../redux/cart'
+//import { cartItemsWithQuantities } from '../redux/cart'
 
 
 function ListadoProductos(props) {
