@@ -30415,12 +30415,13 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-    /*   componentDidMount() {
-        axios.get('/api/me')
-          .then(() => console.log('anda'))
-          .catch(console.log)
-      } */
-
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _axios2.default.get('/api/user/me').then(function (data) {
+        return console.log(data);
+      }).catch(console.log);
+    }
   }, {
     key: 'render',
     value: function render() {

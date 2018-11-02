@@ -12,7 +12,7 @@ import Productos from './ProductosContainer';
 import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
-import AdminAddProductContainer   from '../containers/AdminAddProductContainer';
+import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminAddCategory from '../components/AdminAddCategory';
 import AdminOrdenes from '../components/AdminOrdenes';
 
@@ -33,11 +33,11 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  /*   componentDidMount() {
-      axios.get('/api/me')
-        .then(() => console.log('anda'))
-        .catch(console.log)
-    } */
+  componentDidMount() {
+    axios.get('/api/user/me')
+      .then((data) => console.log(data))
+      .catch(console.log)
+  }
   render() {
     return (
       <div>
