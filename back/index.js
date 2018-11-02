@@ -17,7 +17,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
 
-<<<<<<< HEAD
 passport.serializeUser(function (user, done) {
   console.log('serialize', user.id)
   done(null, user.id);
@@ -28,16 +27,6 @@ passport.deserializeUser(function (id, done) {
     .then((user) => {
       done(null, user);
     }).catch(err => done(err));
-=======
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  models.User.findById(id, function(err, user) {
-    done(err, user);
-  });
->>>>>>> 63d3627e8b4170bb74324eec95df7cd8f6626393
 });
 
 passport.use(
