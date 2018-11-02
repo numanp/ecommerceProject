@@ -1,24 +1,13 @@
-import { createStore, combineReducers } from 'redux';
-<<<<<<< HEAD
-//import cartReducer from './reducer'
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducers/index';
 import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
-const rootReducer = combineReducers({
-    // cart: cartReducer
-})
-=======
-import reducers from './reducers'
-import thunkMiddleware from 'redux-thunk';
-
-// const rootReducer = combineReducers({
-//     cart: cartReducer
-// })
->>>>>>> 4ba507a0f0c28892435ea6d9f6dcb1bd3e1a43a1
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+  rootReducer,
+  composeEnhancers(applyMiddleware(createLogger(), thunkMiddleware)),
+);
 
-export default store
-
+export default store;

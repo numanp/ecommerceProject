@@ -14,6 +14,9 @@ const Producto = db.define('producto', {
     foto: {
         type: Sequelize.TEXT,
     },
+    categoria: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+    },
     disponibilidad: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,

@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
-<<<<<<< HEAD
-import cartReducer from './cart-reducer';
-
-export default combineReducers({
-  // cart: cartReducer
-=======
-
-import cartReducer from './cart-reducer';
 import productsReducer from './products-reducer';
+import cartReducer from './cartReducer';
+import userAdminReducer from './user-admin-reducer';
+import adminReducer from './admin-reducer';
+import userReducer from './user-reducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   cart: cartReducer,
-  products: productsReducer
->>>>>>> 4ba507a0f0c28892435ea6d9f6dcb1bd3e1a43a1
+  products: productsReducer,
+  admin: adminReducer,
+  userAdmin: userAdminReducer,
+  user: userReducer,
 });
+
+export default rootReducer;
