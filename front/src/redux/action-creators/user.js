@@ -13,6 +13,8 @@ import {
   EDIT_CATEGORY,
 } from '../constants';
 
+
+//ACTION CREATORS ORI
 const fetchOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,
   orders,
@@ -33,16 +35,14 @@ const updateUser = user => ({
   user,
 });
 
-const addCategory = category => ({
-  type: ADD_CATEGORY,
-  category,
-});
 
 const createCategory = category => ({
   type: CREATE_CATEGORY,
   category,
 });
 
+
+//ACTION CREATORS DIEGO
 const createProduct = product => ({
   type: CREATE_PRODUCT,
   product,
@@ -55,6 +55,11 @@ const deleteUser = user => ({
 
 const editCategory = category => ({
   type: EDIT_CATEGORY,
+  category,
+});
+
+const addCategory = category => ({
+  type: ADD_CATEGORY,
   category,
 });
 
@@ -81,3 +86,13 @@ export const updateUser = (userId, user) => dispatch =>
     .put(`/api/user/${userId}`, user)
     .then(res => res.data)
     .then(user => dispatch(updateUser(user)));
+
+
+  
+  export const addProduct = (producto)=> (dispatch)=>{
+      console.log('producto',producto)
+      
+      axios.post('/api/productos',producto)
+      .then(res=>res.data)
+      .then(data=>dispatch(createProduct(data)))
+  }

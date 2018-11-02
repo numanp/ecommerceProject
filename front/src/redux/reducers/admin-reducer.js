@@ -1,4 +1,4 @@
-import { ADD_CATEGORY,CREATE_CATEGORY, EDIT_CATEGORY } from '../constants';
+import { ADD_CATEGORY,CREATE_CATEGORY, EDIT_CATEGORY ,CREATE_PRODUCT} from '../constants';
 
 const initialState = {
 
@@ -17,15 +17,14 @@ export default (state = initialState, action) => {
         case CREATE_CATEGORY:
             return {
                 //PEGARLE A LA RUTA PARA CREAR CATEGORIA
-            }
+            };
         
         case CREATE_PRODUCT:
-        //TOMA action.product == PRODUCTO QUE VA A AGREGAR A LA DB
             return Object.assign({}, state, {
                 product: action.product
             })
             
-        case DELETE_USER:
+        /*case DELETE_USER:
             return{
                 // PEGARLE A LA RUTA Y ELIMINAR USUARIO
             };
@@ -33,9 +32,9 @@ export default (state = initialState, action) => {
             return{
 
             }   
+            */
         default:
             return state;
     }
 };
-
 
