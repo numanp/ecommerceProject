@@ -48,7 +48,8 @@ class SignUp extends Component {
         this.setState(
             {
                 telefono: e.target.value
-            }
+            },
+            console.log(e.target.value)
         )
     }
 

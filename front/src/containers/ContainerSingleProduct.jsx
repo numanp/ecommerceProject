@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
+import ContainerReview from './ContainerReview';
 
 export default class SingleProduct extends Component {
   constructor(props) {
@@ -12,12 +13,6 @@ export default class SingleProduct extends Component {
         nombre: 'Led Tv Hd 32 " Lg',
         precio: 4999,
         descripcion: 'Tamaño de Pantalla Led 32 pulgadas, alta resolución, ',
-        reviews: {
-          estrellas: '',
-          opiniones: 1,
-          descripcion:
-            '  Buen producto. La calidad es buena. El software(interfaz) también, por lo que estoy bastante conforme. En mi caso, lo compré para usar con mi computadora y puedo decir que la resolución para esta función es bastante mala(hd). Como televisor la verdad muy recomendado. Antes de comprarlo recuerden que, no es smart y no es full hd. Igual, todo eso está aclarado en al descripción. Yo lo compré consciente de sus características. Saludos!.',
-        },
       },
     };
   }
@@ -40,7 +35,7 @@ export default class SingleProduct extends Component {
               <br />
               <p className="pProducto ">
                 <span className="glyphicon glyphicon-star " />
-                {this.state.fakeProduct.reviews.opiniones + ' opiniones'}
+                {/* {this.state.fakeProduct.reviews.opiniones + ' opiniones'} */}
               </p>
               <br />
 
@@ -81,7 +76,7 @@ export default class SingleProduct extends Component {
                 <Descripcion descripcion={this.state.fakeProduct.descripcion} />
               </div>
               <div className="reviews">
-                <Reviews reviews={this.state.fakeProduct.reviews} />
+                <ContainerReview />
               </div>
             </div>
           </div>

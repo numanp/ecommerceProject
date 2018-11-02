@@ -17,6 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
 
+<<<<<<< HEAD
 passport.serializeUser(function (user, done) {
   console.log('serialize', user.id)
   done(null, user.id);
@@ -27,6 +28,16 @@ passport.deserializeUser(function (id, done) {
     .then((user) => {
       done(null, user);
     }).catch(err => done(err));
+=======
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  models.User.findById(id, function(err, user) {
+    done(err, user);
+  });
+>>>>>>> 63d3627e8b4170bb74324eec95df7cd8f6626393
 });
 
 passport.use(
@@ -57,6 +68,24 @@ db.sync({ force: false }).then(function () {
   });
 });
 
+app.get('/api/me', (req, res) => {
+  console.log(req.user);
+  res.send(req.user);
+});
+
+app.post('/api/signup', (req, res) => {
+  models.User.create({
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    password: req.body.password,
+    telefono: req.body.telefono,
+  }).then(() => {
+    console.log('usuario creado');
+    /* res.redirect('/') */
+  });
+});
+
 app.post('/api/login', passport.authenticate('local'), function (req, res) {
   res.send(req.user);
 });
@@ -66,9 +95,6 @@ app.post('/api/logout', (req, res) => {
   console.log('DESloggeado correctamente');
   return res.send(req.user);
 });
-
-app.use('/api', require('./routes/index'));
-
 
 app.get('/*', function (req, res) {
   res.sendFile(path.resolve('../front/index.html'));

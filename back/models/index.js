@@ -11,7 +11,7 @@ const modelos = {
     User,
     Review,
     Venta,
-    Categoria
+    Categoria,
 };
 
 User.hasMany(Venta, { as: 'Compras' });

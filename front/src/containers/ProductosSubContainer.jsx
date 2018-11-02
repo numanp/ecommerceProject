@@ -2,8 +2,6 @@ import React from 'react'
 import ProductListItem from '../components/ProductToMap'
 import { connect } from 'react-redux'
 import { ADD_TO_CART } from '../redux/constants';
-// import { cartItemsWithQuantities } from '../redux/cart'
-
 
 function ListadoProductos(props) {
     return <div className="container Group-Products-Container-Props">

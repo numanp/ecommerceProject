@@ -20,30 +20,35 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/cat/:categoria', (req, res) => {
-    models.Categoria.findById(req.params.categoria)
+    models.Categoria.findOne({ where: { nombre: req.params.categoria } })
         .then((cat) => {
-            if (cat != null) {
-                cat.getProductos()
-                    .then((productos) => {
-                        res.send(productos)
-                    })
-            } else {
-                res.send('no existe la categoria')
-            }
+            var categ = cat.id
+            models.Producto.findAll({
+                include: [{
+                    model: models.Categoria,
+                    attributes: ['nombre'],
+                    through: { where: { categoriaId: categ } }
+                }]
+            })
+                .then((productos) => {
+                    res.status(200).send(productos)
+                })
+        })
+        .catch(() => {
+            res.send('algo salio mal')
         })
 })
 
 router.post('/', (req, res) => {
     models.Producto.create({
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: req.body.precio,
-        foto: req.body.foto,
-        disponibilidad: req.body.disponibilidad,
-        stock: req.body.stock
-    }).then(() => {
+        nombre: req.body.nombreProducto.value,
+        descripcion: req.body.descripcionProducto.value,
+        precio: req.body.precioProducto.value,
+        foto: req.body.imgProducto.value,
+        stock: req.body.stockProducto.value
+    }).then((producto) => {
         console.log('producto creado');
-        res.status(200).send('OK')
+        res.status(200).send(producto)
     });
 })
 
@@ -54,16 +59,6 @@ router.put('/addCategory/', (req, res) => {
         })
         .then(() => {
             res.status(200).send('categorias agregadas correctamente')
-        })
-})
-
-router.put('/:id', (req, res) => {
-    models.Producto.findById(req.params.id)
-        .then((producto) => {
-            producto.update(req.body, { fields: ['nombre', 'precio', 'descripcion', 'foto', 'disponibilidad', 'stock'] })
-        })
-        .then(() => {
-            res.status(200).send('Producto modificado correctamente')
         })
 })
 
