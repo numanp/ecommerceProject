@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import AdminAddProduct from '../components/AdminAddProduct'
 import {connect} from 'react-redux';
-import {addProduct} from '../redux/action-creators/action-product'
+import {addProduct} from '../redux/action-creators/user'
 
 class AdminAddProductContainer extends Component {
     constructor(props) {
