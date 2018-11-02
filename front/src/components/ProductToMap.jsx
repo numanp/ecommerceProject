@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // import data from '../baseHarcodeada/products.json'
+// import data from '../baseHarcodeada/productos/1-groot.jpg'
 
 
 
@@ -10,6 +12,7 @@ export default function ProductListItem(props) {
         <img
             className="img-responsive"
             title={ props.product.name }
+            // src="../baseHarcodeada/productos/1-groot.jpg"
             src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4"
         />
         <h3 className="producttitle">{ props.name }</h3>
@@ -21,6 +24,7 @@ export default function ProductListItem(props) {
             <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true">CART</span>
         </a>
 
+        <Link to="/singleProduct" className="glyphicon-props btn btn-secondary btn-sm" role="button"> Detalles</Link>
         <a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a>
 
         </div></div>

@@ -13,6 +13,7 @@ function ListadoProductos(props) {
                 <ProductListItem
                     product={product}
                     addToCart={props.addToCart}
+                    key={product.id}
                     // cart={cartItemsWithQuantities(props.cart)}
                 />)
         }
