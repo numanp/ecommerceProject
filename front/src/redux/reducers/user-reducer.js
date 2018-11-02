@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
     return {
 
     };
-    case LOGIN:
+    case LOGIN: 
     return {
 
     };
@@ -31,3 +31,15 @@ export default (state = initialState, action) => {
       return state;
   }
 }
+
+// export default (state = initialState, action) => {
+//   switch(action.type) {
+//     case RECEIVE_PLAYLISTS:
+//       return {
+//         ...state,
+//         reviews: action.playlists,
+//       };
+//     default:
+//       return state;
+//   }
+// };

@@ -30256,6 +30256,18 @@ exports.default = function () {
   }
 };
 
+// export default (state = initialState, action) => {
+//   switch(action.type) {
+//     case RECEIVE_PLAYLISTS:
+//       return {
+//         ...state,
+//         reviews: action.playlists,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
 /***/ }),
 /* 122 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
