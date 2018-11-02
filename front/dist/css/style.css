@@ -1,0 +1,73 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/*------------------------------Acá empieza el Hakatón------------------------------*/
+
+.imgcdbook {
+  width: 60%;
+  border: 0px;
+  margin-bottom: 3%;
+}
+
+.minheight {
+  min-height: 380px;
+}
+
+.ul-none {
+  list-style-type: none;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.minheightdisc {
+  min-height: 220px;
+}
+
+.imagenProducto {
+  width: 700px;
+  height: 500px;
+
+  margin: auto;
+}
+
+.carrito {
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+/* -------------------------aca empieza ContainerSingleProduct-------------------------  */
+
+.pProducto {
+  font-size: 2em;
+}
+.hProducto {
+  font-size: 3em;
+  text-align: center;
+}
+
+/* -------------------------aca empieza ContainerReview-------------------------------- */
+
+/* -------------------------aca empieza ReviewInput-------------------------------- */
+
+/* -------------------------aca termina ReviewInput-------------------------------- */
+
+/* -------------------------aca empieza ReviewInput-------------------------------- */
+
+.cajaopinionproducto {
+
+  margin: 3% 5%;
+
+}
+
+.opinionProducto {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+/* -------------------------aca termina ReviewInput-------------------------------- */
+
+/* -------------------------aca termina ContainerReview-------------------------------- */
+

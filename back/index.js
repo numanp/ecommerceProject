@@ -2,55 +2,86 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var path = require('path');
-const db = require('./models/index').db;
+const db = require('./models/db');
 const models = require('./models/index').modelos;
+var passport = require('passport');
+var session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy;
+var cookieParser = require('cookie-parser');
 
-models.User.sync({ force: true })
-    .then(function() {
-        return models.Producto.sync({ force: false });
-    })
-    .then(function() {
-        return models.Review.sync({ force: false });
-    })
-    .then(function() {
-        return models.Venta.sync({ force: false });
-    })
-    .then(function() {
-        return models.Categoria.sync({ force: false });
-    })
-    .then(function() {
-        app.listen('3000', function() {
-            console.log('listening at 3000');
-        });
-    })
-    .catch(console.error);
-
+app.use(cookieParser());
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('../front/dist'));
+app.use(session({ secret: 'anything' }));
 
-app.get('/', function(req, res) {
-    
-    models.Producto.create({
-        nombre: 'MAC BOOK PRO',
-        descripcion: 'Producto de mac sobrevalorado',
-        foto: 'https://store.storeimages.cdn-apple.com/4981/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp15touch/space/mbp15touch-space-select-201807?wid=904&hei=840&fmt=jpeg&qlt=95&.v=1529520056969m',
-        categoria: ['Pcs', 'Notebook'],
-        disponibilidad: true,
-    })
-    models.Producto.create({
-        nombre: 'Ipad',
-        descripcion: 'Un celu grande',
-        foto: 'https://http2.mlstatic.com/ipad-pro-129-64-gb-gris-ipad-pro-D_NQ_NP_967249-MLA26076837669_092017-F.webp',
-        categoria: ['Ipad', 'Notebook'],
-        disponibilidad: true,
-    })
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-    
-    .catch((error) => console.log(error))
-    .then(data => {
-        res.sendFile(path.resolve('../front/index.html'));
-    })
+passport.deserializeUser(function(id, done) {
+  models.User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    function(username, password, done) {
+      models.User.findOne({ where: { email: username } }).then(user => {
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        var salt = user.salt;
+        if (!user.checkPassword(password)) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    },
+  ),
+);
+
+db.sync({ force: false }).then(function() {
+  app.listen('3001', function() {
+    console.log('listening at 3001');
+  });
+});
+
+app.get('/api/me', (req, res) => {
+  console.log(req.user);
+  res.send(req.user);
+});
+
+app.post('/api/signup', (req, res) => {
+  models.User.create({
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    password: req.body.password,
+    telefono: req.body.telefono,
+  }).then(() => {
+    console.log('usuario creado');
+    /* res.redirect('/') */
+  });
+});
+
+app.post('/api/login', passport.authenticate('local'), function(req, res) {
+  res.send(req.user);
+});
+
+app.post('/api/logout', (req, res) => {
+  req.logout();
+  console.log('DESloggeado correctamente');
+  return res.send(req.user);
+});
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.resolve('../front/index.html'));
 });

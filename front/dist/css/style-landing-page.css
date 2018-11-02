@@ -1,0 +1,208 @@
+html{ height: 100%;
+}
+
+body{
+	font-family: 'Roboto', sans-serif;
+	font-size: 1em;
+	height: 100%;
+}
+
+/*------------------------------Acá empieza el nav-bar------------------------------*/
+
+.navbar{
+   padding: 0 !important;
+   margin: 0 !important;
+   width: 100%;
+   font-size: 1.4em;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 6%;
+  width: auto;
+}
+
+.navbar-left{
+    padding: 1%;
+}
+
+/*------------------------------Acá empieza el Search-bar------------------------------*/
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
+/*------------------------------Acá termina el Search-bar------------------------------*/
+
+/*------------------------------Acá termina el nav-bar------------------------------*/
+
+/*------------------------------Acá empieza el Web-store------------------------------*/
+
+/* .content-webstore{
+	background-image: url(../images/fondo-webstore.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 100vw;
+} */
+
+.ingresa-link{
+	margin-top: 1%;
+	font-size: 4em;
+}
+
+.ul-webstore-text{
+	margin: 2% 0px 0px 0px; 
+	padding: 0 !important;
+}
+
+.webstore-text{
+	color: black;
+	margin: 5% 0px 0px 0px;
+}
+
+.margin-text{
+	margin: 3% 0px 0px 0px;
+	/* Ul tiene propiedades únicas en el html para evitar otra clase*/
+}
+
+/*------------------------------Acá termina el Web-store------------------------------*/
+
+/*------------------------------Acá empieza el Group-Products------------------------------*/
+
+.Group-Products-Container-Props{
+	background-color: rgb(92, 206, 121);
+	width: 100%
+}
+
+.productbox {
+    background-color:#ffffff;
+	padding:10px;
+	margin:5% 5% 2% 3%;
+	-webkit-box-shadow: 0 8px 6px -6px  #999;
+	   -moz-box-shadow: 0 8px 6px -6px  #999;
+	        box-shadow: 0 8px 6px -6px #999;
+}
+
+.producttitle {
+	font-size: 1.8em;
+    font-weight:bold;
+	padding:5px 0 5px 0;
+}
+
+.productprice {
+	border-top:1px solid #dadada;
+	padding-top:5px;
+}
+
+.pricetext {
+	margin-top: 2%;
+	font-weight:bold;
+	font-size:2em;
+}
+
+.glyphicon-props{
+	margin-right: 5%;
+	margin-top: 4%
+}
+
+/*------------------------------Acá termina el Group-Products------------------------------*/
+
+/*------------------------------Acá empieza el Contenido celulares------------------------------*/
+
+.content-cellphone{
+	background-color: #4ab9e9;
+	height: 5vw;
+}
+
+.text-cellphone{
+	text-align: center;
+	color: white;
+	padding: 0 !important;
+	margin: 2.5%;
+	/*Se aplico el font-size por separado a cada tag*/
+}
+
+.button-cellphone{
+	max-width: 95%;
+	margin: 6% 0px 0px 0px;
+}
+/*------------------------------Acá termina el Contenido celulares------------------------------*/
+
+/*------------------------------Acá empieza el contenido informativo------------------------------*/
+
+.grey-background{
+	background-color: #ffffff;
+	min-height: 15vh;
+}
+
+.button-content{
+	width: 100%;
+}
+.text-content{
+	margin: 3% 0% 0% 0% ;
+	/*Se aplico el font-size por separado a cada tag*/
+}
+
+.text-content-2{
+	margin: 8% 0% 0% 0%;
+	/*Se aplico el font-size por separado a cada tag*/
+}
+
+.footer-margin{
+	margin: 0% 3% 0% 0%;
+}
+
+.footer{
+	margin: 3% 0px 0px 0px;
+}
+
+/*------------------------------Acá termina el contenido informativo------------------------------*/
+
+.ul-none{
+	list-style-type: none;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}

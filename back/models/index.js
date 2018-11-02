@@ -1,5 +1,4 @@
-const Sequelize = require('sequelize');
-const db = new Sequelize('postgres://localhost:5432/ecommerce');
+var db = require('./db');
 
 const Producto = require('./Producto');
 const User = require('./Users');
@@ -8,11 +7,11 @@ const Venta = require('./Ventas');
 const Categoria = require('./Categorias');
 
 const modelos = {
-  Producto,
-  User,
-  Review,
-  Venta,
-  Categoria,
+    Producto,
+    User,
+    Review,
+    Venta,
+    Categoria,
 };
 
 User.hasMany(Venta, { as: 'Compras' });
@@ -26,16 +25,9 @@ User.hasMany(Review, { as: 'userReviews' });
 Producto.belongsToMany(Venta, { through: 'ProductoVenta' });
 Venta.belongsToMany(Producto, { through: 'ProductoVenta' });
 
-Categoria.belongsToMany(Producto, { through: 'ProductoxCategoria' });
-Producto.belongsToMany(Categoria, { through: 'ProductoxCategoria' });
-
-
-
-
-
+Categoria.belongsToMany(Producto, { through: 'ProductoCategoria' });
+Producto.belongsToMany(Categoria, { through: 'ProductoCategoria' });
 
 module.exports = {
-  modelos,
-  db,
-  User,
+    modelos,
 };
