@@ -1,20 +1,23 @@
 import React from 'react'
 import ProductListItem from '../components/ProductToMap'
 import { connect } from 'react-redux'
-import { cartItemsWithQuantities } from '../redux/cart'
+import { ADD_TO_CART } from '../redux/constants';
+// import { cartItemsWithQuantities } from '../redux/cart'
 
 
 function ListadoProductos(props) {
-    return <div>
+    return <div className="container Group-Products-Container-Props">
+    <div className="row">
         {
             props.products.map(product =>
                 <ProductListItem
-                    key={props.id}
                     product={product}
                     addToCart={props.addToCart}
-                    cart={cartItemsWithQuantities(props.cart)}
+                    key={product.id}
+                    // cart={cartItemsWithQuantities(props.cart)}
                 />)
         }
+            </div>
     </div>
 }
 
@@ -26,12 +29,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (item) => {
-            dispatch({ type: 'ADD', payload: item })
+        addToCart: (producto) => {
+            dispatch({ type: ADD_TO_CART, payload: producto })
         },
-        removeFromCart: (item) => {
-            dispatch({ type: 'REMOVE', payload: item })
-        }
+        // removeFromCart: (item) => {
+        //     dispatch({ type: 'REMOVE', payload: item })
+        // }
     }
 }
 
