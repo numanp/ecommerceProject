@@ -34,7 +34,7 @@ router.post('/signup', (req, res) => {
         telefono: req.body.telefono,
     }).then(() => {
         console.log('usuario creado');
-        /* res.redirect('/') */
+        res.send('usuario creado correctamente')
     });
 });
 
