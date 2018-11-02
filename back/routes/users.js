@@ -5,7 +5,9 @@ const models = require('../models/index').modelos;
 
 
 router.get('/me', (req, res) => {
-    res.send(req.user);
+    console.log('ESTE', req.isAuthenticated())
+    console.log(req.session.passport, req.sessionID)
+    res.send(req.session.passport || 'no estas logeado');
 });
 
 router.delete('/:id', (req, res) => {
