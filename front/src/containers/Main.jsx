@@ -34,9 +34,10 @@ class Main extends Component {
     axios.post('api/logout').then(res => console.log(res.data));
   }
   componentDidMount() {
-    axios.get('/api/user/me')
-      .then((data) => console.log(data))
-      .catch(console.log)
+    axios.get('api/user/me')
+      .then((response) => {
+        console.log(response)
+      })
   }
   render() {
     return (
@@ -55,7 +56,7 @@ class Main extends Component {
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategory} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        
+
       </div>
     );
   }

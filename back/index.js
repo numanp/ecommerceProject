@@ -57,10 +57,6 @@ db.sync({ force: false }).then(function () {
   });
 });
 
-app.get('/api/me', (req, res) => {
-  console.log(req.user);
-  res.send(req.user);
-});
 
 app.post('/api/signup', (req, res) => {
   models.User.create({
@@ -84,6 +80,8 @@ app.post('/api/logout', (req, res) => {
   console.log('DESloggeado correctamente');
   return res.send(req.user);
 });
+
+app.use('/api', require('./routes/index'));
 
 app.get('/*', function (req, res) {
   res.sendFile(path.resolve('../front/index.html'));
