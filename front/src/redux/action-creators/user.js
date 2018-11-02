@@ -12,22 +12,22 @@ import {
   EDIT_CATEGORY,
 } from '../constants';
 
-const fetchOrders = orders => ({
+const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,
   orders,
 });
 
-const removeCategory = id => ({
+const deleteCategory = id => ({
   type: REMOVE_CATEGORY,
   id,
 });
 
-const updateOrders = order => ({
+const putOrders = order => ({
   type: UPDATE_ORDERS,
   order,
 });
 
-const updateUser = user => ({
+const putUser = user => ({
   type: UPDATE_USER,
   user,
 });
@@ -42,7 +42,7 @@ const createCategory = category => ({
   category,
 });
 
-const createProduct = product => ({
+const postProduct = product => ({
   type: CREATE_PRODUCT,
   product,
 });
@@ -61,27 +61,28 @@ export const fetchOrders = () => dispatch =>
   axios
     .get('/api/admin/orders')
     .then(res => res.data)
-    .then(orders => dispatch(fetchOrders(orders)));
+    .then(orders => dispatch(getOrders(orders)));
 
 export const removeCategory = categoryId => dispatch =>
   axios
     .delete(`/api/category/${categoryId}`)
     .then(res => res.data)
-    .then(id => dispatch(removeCategory(id)));
+    .then(id => dispatch(deleteCategory(id)));
 
 export const updateOrders = (orderId, order) => dispatch =>
   axios
     .put(`/api/orders/${orderId}`, order)
     .then(res => res.data)
-    .then(order => dispatch(updateOrders(order)));
+    .then(order => dispatch(putOrders(order)));
 
 export const updateUser = (userId, user) => dispatch =>
   axios
     .put(`/api/user/${userId}`, user)
     .then(res => res.data)
-    .then(user => dispatch(updateUser(user)));
+    .then(user => dispatch(putUser(user)));
+
   export const addProduct = (producto)=> (dispatch)=>
       axios.post('/api/productos',producto)
       .then(res=>res.data)
-      .then(data=>dispatch(createProduct(data)))
+      .then(data=>dispatch(postProduct(data)))
   
