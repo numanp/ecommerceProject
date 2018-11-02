@@ -43,7 +43,7 @@ class Main extends Component {
       <div>
         <NavBar />
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/signup" render={() => <SignUp sign={this.sign} />}/>
+        <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route exact path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
@@ -55,7 +55,7 @@ class Main extends Component {
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategory} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-
+        
       </div>
     );
   }

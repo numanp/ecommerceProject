@@ -1,69 +1,41 @@
 
 import React, { Component } from 'react';
 import AdminAddProduct from '../components/AdminAddProduct'
+import {connect} from 'react-redux';
+import {addProduct} from '../redux/action-creators/action-product'
 
-//COMPONENTES
-import AdminComponent from '../components/AdminComponent';
-
-class AdminContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-            nombreProducto: '',
-            precioProducto: '',
-            imgProducto: '',
-            stockProducto: '',
-            catProducto: '',
-            descripcionProducto: ''
-        };
-
-        this.handleInputChange = this.handleInputChange.bind(this);
+class AdminAddProductContainer extends Component {
+    constructor(props) {
+        super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
-
-    handleInputChange(event) {
-       /* const target = event.target.name;
-        const value = event.target.value;
-        
-        console.log("TARGET: " + target)
-        console.log(value)
-        
-        this.setState({
-            target: value
-        });
-        console.log(this.state)
-        */
-    }
 
     handleSubmit(evt){
         evt.preventDefault();
         console.log(this.state)
-        const nombreProducto = event.target.nombreProducto.value;
-        const precioProducto=  event.target.precioProducto.value;
-        const imgProducto=  event.target.imgProducto.value;
-        const stockProducto=  event.target.stockProducto.value;
-        const catProducto= 'CATEGORIA1';
-        const descripcionProducto= event.target.descripcionProducto.value;
-
-        this.setState({
-            nombreProducto: nombreProducto,
-            precioProducto: nombreProducto,
-            imgProducto: imgProducto,
-            stockProducto: stockProducto,
-            catProducto: catProducto,
-            descripcionProducto: descripcionProducto,
-
-        });
-       
-    }
+        this.props.addProduct(evt.target)         
+    }    
     render() {
         return (
-            <div>
-                <AdminAddProduct handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange}/>
+            <div>        
+                
+                <AdminAddProduct handleSubmit={this.handleSubmit} />
             </div>   
         )
     }
 }
-export default AdminContainer;
+function mapStateToProps (state){
+    return{ nuevoProducto: state.admin.product
+    }
+}
+function mapDispatchToProps(dispatch){
+    return{
+        addProduct: function (producto){
+            dispatch(addProduct(producto))
+            }
+        }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);

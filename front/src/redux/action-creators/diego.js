@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 import { ADD_CATEGORY, CREATE_CATEGORY, CREATE_PRODUCT,DELETE_USER,EDIT_CATEGORY,} from '../constants';
@@ -27,3 +26,8 @@ export const editCategory = category => ({
   type: EDIT_CATEGORY,
   category,
 });
+
+export const fetchAlbum = idwq951 => dispatch =>
+  axios.post(`/RUTA`,{PRODUCTO})
+    .then(res => res.data)
+    .then(producto => dispatch(createProduct(producto)));

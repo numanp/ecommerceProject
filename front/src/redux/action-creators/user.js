@@ -13,10 +13,7 @@ const createCategory = category => ({
   category,
 });
 
-const createProduct = product => ({
-  type: CREATE_PRODUCT,
-  product,
-});
+
 
 const deleteUser = user => ({
   type: DELETE_USER,
