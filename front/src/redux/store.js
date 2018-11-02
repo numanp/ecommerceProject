@@ -1,18 +1,13 @@
-import { createStore, applyMiddleware, combineReducers , compose} from 'redux';
-import cartReducer from './reducer'
-import adminReducer from './reducers/admin-reducer'
-import thunkMiddlewere from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducers/index';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer = combineReducers({
-    cart: cartReducer,
-    admin: adminReducer
-})
-
 const store = createStore(
-    rootReducer,composeEnhancers(applyMiddleware(thunkMiddlewere))
-    
-)
+  rootReducer,
+  composeEnhancers(applyMiddleware(createLogger(), thunkMiddleware)),
+);
 
-export default store
+export default store;
