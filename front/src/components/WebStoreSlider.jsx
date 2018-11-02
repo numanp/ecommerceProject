@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 export default () => {
   return (
@@ -26,7 +27,8 @@ export default () => {
                 let's get it Store (in here!)
               </h3>
               <p className="ingresa-link">
-                <a href="#">Ingresa!</a>
+                <Link to="/productos"> Ingresa!
+                </Link>
               </p>
               <ul
                 className="ul-webstore-text ul-none"
