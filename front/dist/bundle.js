@@ -1696,7 +1696,8 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// Cart
+// Carrito
+
 var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
 var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
@@ -1707,6 +1708,18 @@ var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRO
 var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
 var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf 
 var UPDATE_PRODUCT = exports.UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+
+// User admin
+var ADD_CATEGORY = exports.ADD_CATEGORY = 'ADD_CATEGORY';
+var CREATE_CATEGORY = exports.CREATE_CATEGORY = 'CREATE_CATEGORY';
+var CREATE_PRODUCT = exports.CREATE_PRODUCT = 'CREATE_PRODUCT';
+var DELETE_USER = exports.DELETE_USER = 'DELETE_USER';
+var EDIT_CATEGORY = exports.EDIT_CATEGORY = 'EDIT_CATEGORY';
+
+var FETCH_ORDERS_ADMIN = exports.FETCH_ORDERS_ADMIN = 'FETCH_ORDERS_ADMIN';
+var REMOVE_CATEGORY = exports.REMOVE_CATEGORY = 'REMOVE_CATEGORY';
+var UPDATE_ORDERS = exports.UPDATE_ORDERS = 'UPDATE_ORDERS';
+var UPDATE_USER = exports.UPDATE_USER = 'UPDATE_USER';
 
 /***/ }),
 /* 24 */
@@ -30187,13 +30200,29 @@ var _AdminContainer = __webpack_require__(158);
 
 var _AdminContainer2 = _interopRequireDefault(_AdminContainer);
 
+var _AdminAddProductContainer = __webpack_require__(160);
+
+var _AdminAddProductContainer2 = _interopRequireDefault(_AdminAddProductContainer);
+
+var _AdminAddCategory = __webpack_require__(162);
+
+var _AdminAddCategory2 = _interopRequireDefault(_AdminAddCategory);
+
+var _AdminOrdenes = __webpack_require__(163);
+
+var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //DEPENDENCIAS
+
+
+//COMPONENTES
+
 
 var Main = function (_Component) {
   _inherits(Main, _Component);
@@ -30212,7 +30241,7 @@ var Main = function (_Component) {
   _createClass(Main, [{
     key: 'sign',
     value: function sign(object) {
-      _axios2.default.post('api/signup', object);
+      _axios2.default.post('api/user/signup', object);
     }
   }, {
     key: 'logn',
@@ -30228,13 +30257,12 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // axios.get('/api/me')
-      //     .then((user) => { console.log('THIS IS ME ', user) })
-      //     .catch(console.log)
-    }
+    /*   componentDidMount() {
+        axios.get('/api/me')
+          .then(() => console.log('anda'))
+          .catch(console.log)
+      } */
+
   }, {
     key: 'render',
     value: function render() {
@@ -30245,24 +30273,19 @@ var Main = function (_Component) {
         null,
         _react2.default.createElement(_NavBar2.default, null),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, {
-          exact: true,
-          path: '/signup',
-          render: function render() {
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/signup', render: function render() {
             return _react2.default.createElement(_SignUp2.default, { sign: _this2.sign });
-          }
-        }),
-        _react2.default.createElement(_reactRouterDom.Route, {
-          exact: true,
-          path: '/login',
-          render: function render() {
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render() {
             return _react2.default.createElement(_Login2.default, { logout: _this2.logout, logn: _this2.logn });
-          }
-        }),
+          } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _CarritoContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/singleProduct', component: _ContainerSingleProduct2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarProducto', component: _AdminAddProductContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategory2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default })
       );
     }
   }]);
@@ -33143,6 +33166,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(6);
+
 var _AdminComponent = __webpack_require__(159);
 
 var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
@@ -33154,11 +33179,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import store from '../store'; A IMPORTAR MAS TARDE
+
+//COMPONENTES
 
 
-var AdminContainer = function (_React$Component) {
-    _inherits(AdminContainer, _React$Component);
+var AdminContainer = function (_Component) {
+    _inherits(AdminContainer, _Component);
 
     function AdminContainer() {
         _classCallCheck(this, AdminContainer);
@@ -33166,18 +33192,41 @@ var AdminContainer = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (AdminContainer.__proto__ || Object.getPrototypeOf(AdminContainer)).call(this));
 
         _this.state = {};
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
+    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+
+
     _createClass(AdminContainer, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(evt) {
+            evt.preventDefault();
+            var formulario = this.state.valorInput;
+            if (formulario.length < 5) {
+                console.log("ESTOY PUDIENDO SUBMITEAR");
+            }
+        }
+    }, {
+        key: 'pruebaFunc',
+        value: function pruebaFunc() {
+            console.log('ESTOY FUNCIONANDO');
+        }
+    }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_AdminComponent2.default, null);
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_AdminComponent2.default, { pruebaFunc: this.pruebaFunc, handleSubmit: this.handleSubmit })
+            );
         }
     }]);
 
     return AdminContainer;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = AdminContainer;
 
@@ -33196,255 +33245,811 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(6);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var componentesAdmin = [
+    /*{
+        nombre: 'Agregar/Editar Producto',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: 'Editar Producto'
+    },
+    {
+        nombre: 'Crear Categorias',
+        link: '/admin/agregarProducto"',
+        button1: 'Crear categoria',
+        button2: ''
+    },
+    {
+        nombre: 'Manejar disponiblidad producto',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: ''
+    },
+    {
+        nombre: 'Ver lista ordenes',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: ''
+    },
+    {
+        nombre: 'Buscar por orden especifica',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: ''
+    },
+    {
+        nombre: 'Promover Usuario',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: ''
+    },,
+    {
+        nombre: 'Eliminar Usuario',
+        link: '/admin/agregarProducto"',
+        button1: 'Agregar Producto',
+        button2: ''
+    },
+    */
+];
 
 exports.default = function () {
     return _react2.default.createElement(
-        "div",
-        { className: "container-fluid", id: "adminPanel" },
+        'div',
+        { className: 'container-fluid', id: 'adminPanel' },
         _react2.default.createElement(
-            "div",
-            { className: "container" },
+            'div',
+            { className: 'container' },
             _react2.default.createElement(
-                "h1",
+                'h1',
                 null,
-                "ADMIN PANEL"
+                'ADMIN PANEL'
             ),
             _react2.default.createElement(
-                "div",
-                { className: "row" },
+                'div',
+                { className: 'row' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
+                        'div',
+                        { className: 'thumbnail' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
+                            'div',
+                            { className: 'caption' },
                             _react2.default.createElement(
-                                "h3",
+                                'h3',
                                 null,
-                                "Agregar/Editar Producto"
+                                'Agregar/Editar Producto'
                             ),
                             _react2.default.createElement(
-                                "a",
-                                { href: "#", className: "btn btn-primary" },
-                                _react2.default.createElement(
-                                    "p",
-                                    null,
-                                    "Agregar"
-                                )
+                                _reactRouterDom.Link,
+                                { to: '/admin/agregarProducto', className: 'btn btn-primary' },
+                                'Agregar producto'
                             ),
                             _react2.default.createElement(
-                                "a",
-                                { href: "#", className: "btn " },
-                                "Editar Producto"
+                                'a',
+                                { href: '#', className: 'btn ' },
+                                'Editar Producto(TODAVIA NO ESTA LISTO)'
                             )
                         )
                     )
                 ),
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
+                        'div',
+                        { className: 'thumbnail' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
+                            'div',
+                            { className: 'caption' },
                             _react2.default.createElement(
-                                "h3",
+                                'h3',
                                 null,
-                                "Crear Categorias"
+                                'Crear Categorias'
                             ),
                             _react2.default.createElement(
-                                "p",
+                                _reactRouterDom.Link,
+                                { to: 'admin/agregarCategoria', className: 'btn btn-primary' },
+                                'Crear Categoria'
+                            ),
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#', className: 'btn ' },
+                                'Editar Producto'
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'thumbnail' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'caption' },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Manejar disponiblidad producto'
+                            ),
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: 'admin/agregarCategoria', className: 'btn btn-primary' },
+                                'Crear Categoria'
+                            ),
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#', className: 'btn ' },
+                                'Editar Producto'
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'thumbnail' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'caption' },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Ver lista ordenes'
+                            ),
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: 'admin/verOrdenes', className: 'btn btn-primary' },
+                                'Ver Ordenes'
+                            ),
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#', className: 'btn ' },
+                                'Editar Producto'
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'thumbnail' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'caption' },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Buscar por orden especifica'
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { 'class': 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Search' })
+                            ),
+                            _react2.default.createElement(
+                                'p',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-primary" },
-                                    "Button"
+                                    'a',
+                                    { href: '#', className: 'btn btn-primary' },
+                                    'Button'
                                 ),
-                                " ",
+                                ' ',
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-default" },
-                                    "Button"
+                                    'a',
+                                    { href: '#', className: 'btn btn-default' },
+                                    'Button'
                                 )
                             )
                         )
                     )
                 ),
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
+                        'div',
+                        { className: 'thumbnail' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
+                            'div',
+                            { className: 'caption' },
                             _react2.default.createElement(
-                                "h3",
+                                'h3',
                                 null,
-                                "Manejar disponiblidad producto"
+                                'Promover Usuario'
                             ),
                             _react2.default.createElement(
-                                "p",
+                                'div',
+                                { 'class': 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Promover' })
+                            ),
+                            _react2.default.createElement(
+                                'p',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-primary" },
-                                    "Button"
-                                ),
-                                " ",
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-default" },
-                                    "Button"
+                                    'a',
+                                    { href: '#', className: 'btn btn-warning' },
+                                    'Haceme admin'
                                 )
                             )
                         )
                     )
                 ),
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
+                    'div',
+                    { className: 'col-sm-6 col-md-4' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
+                        'div',
+                        { className: 'thumbnail' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
+                            'div',
+                            { className: 'caption' },
                             _react2.default.createElement(
-                                "h3",
+                                'h3',
                                 null,
-                                "Ver lista ordenes"
+                                'Eliminar Usuario'
                             ),
                             _react2.default.createElement(
-                                "p",
+                                'div',
+                                { 'class': 'form-group' },
+                                _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'Eliminar' })
+                            ),
+                            _react2.default.createElement(
+                                'p',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-primary" },
-                                    "Button"
-                                ),
-                                " ",
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-default" },
-                                    "Button"
-                                )
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
-                            _react2.default.createElement(
-                                "h3",
-                                null,
-                                "Buscar por orden especifica"
-                            ),
-                            _react2.default.createElement(
-                                "div",
-                                { "class": "form-group" },
-                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Search" })
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-primary" },
-                                    "Button"
-                                ),
-                                " ",
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-default" },
-                                    "Button"
-                                )
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
-                            _react2.default.createElement(
-                                "h3",
-                                null,
-                                "Promover Usuario"
-                            ),
-                            _react2.default.createElement(
-                                "div",
-                                { "class": "form-group" },
-                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Promover" })
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-warning" },
-                                    "Haceme admin"
-                                )
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6 col-md-4" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "thumbnail" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "caption" },
-                            _react2.default.createElement(
-                                "h3",
-                                null,
-                                "Eliminar Usuario"
-                            ),
-                            _react2.default.createElement(
-                                "div",
-                                { "class": "form-group" },
-                                _react2.default.createElement("input", { type: "text", "class": "form-control", placeholder: "Eliminar" })
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                _react2.default.createElement(
-                                    "a",
-                                    { href: "#", className: "btn btn-danger" },
-                                    "Eliminar Usuario"
+                                    'a',
+                                    { href: '#', className: 'btn btn-danger' },
+                                    'Eliminar Usuario'
                                 )
                             )
                         )
                     )
                 )
             ),
-            " "
+            ' '
         ),
-        "   "
+        '   '
     ) //CIERRO CONTAINER-FLUID
     ;
+};
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _AdminAddProduct = __webpack_require__(161);
+
+var _AdminAddProduct2 = _interopRequireDefault(_AdminAddProduct);
+
+var _AdminComponent = __webpack_require__(159);
+
+var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//COMPONENTES
+
+
+var AdminContainer = function (_Component) {
+    _inherits(AdminContainer, _Component);
+
+    function AdminContainer() {
+        _classCallCheck(this, AdminContainer);
+
+        var _this = _possibleConstructorReturn(this, (AdminContainer.__proto__ || Object.getPrototypeOf(AdminContainer)).call(this));
+
+        _this.state = {
+            nombreProducto: '',
+            precioProducto: '',
+            imgProducto: '',
+            stockProducto: '',
+            catProducto: '',
+            descripcionProducto: ''
+        };
+
+        _this.handleInputChange = _this.handleInputChange.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
+    }
+
+    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+
+    _createClass(AdminContainer, [{
+        key: 'handleInputChange',
+        value: function handleInputChange(event) {
+            /* const target = event.target.name;
+             const value = event.target.value;
+             
+             console.log("TARGET: " + target)
+             console.log(value)
+             
+             this.setState({
+                 target: value
+             });
+             console.log(this.state)
+             */
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(evt) {
+            evt.preventDefault();
+            console.log(this.state);
+            var nombreProducto = event.target.nombreProducto.value;
+            var precioProducto = event.target.precioProducto.value;
+            var imgProducto = event.target.imgProducto.value;
+            var stockProducto = event.target.stockProducto.value;
+            var catProducto = 'CATEGORIA1';
+            var descripcionProducto = event.target.descripcionProducto.value;
+
+            this.setState({
+                nombreProducto: nombreProducto,
+                precioProducto: nombreProducto,
+                imgProducto: imgProducto,
+                stockProducto: stockProducto,
+                catProducto: catProducto,
+                descripcionProducto: descripcionProducto
+
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit, handleInputChange: this.handleInputChange })
+            );
+        }
+    }]);
+
+    return AdminContainer;
+}(_react.Component);
+
+exports.default = AdminContainer;
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container', id: 'AdminAddCategory' },
+        _react2.default.createElement('h1', null),
+        _react2.default.createElement(
+            'h1',
+            null,
+            'Crear Producto'
+        ),
+        _react2.default.createElement(
+            'form',
+            { onSubmit: props.handleSubmit },
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'nombreProducto' },
+                    'Nombre Producto'
+                ),
+                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'precioProducto' },
+                    'Precio'
+                ),
+                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'imgProducto' },
+                    'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
+                ),
+                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'stockProducto' },
+                    'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
+                ),
+                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { onChange: props.handleInputChange, name: 'catProducto', 'for': 'catProducto' },
+                    'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
+                ),
+                _react2.default.createElement(
+                    'select',
+                    { className: 'form-control' },
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 1'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 2'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 3'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 4'
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        'Categoria 5'
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                    'label',
+                    { 'for': 'descripcionProducto' },
+                    'Descripcion'
+                ),
+                _react2.default.createElement('textarea', { onChange: props.handleInputChange, name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
+            ),
+            _react2.default.createElement(
+                'button',
+                { type: 'submit', className: 'btn  btn-lg btn-primary' },
+                'Agregar Producto'
+            )
+        ),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null)
+    );
+};
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//MAPEAR POR TODAS LAS CATEGORIAS HACER UN  DISPLAY
+//Agregarle un boton para elminar la categoria de la db
+// Y DEJAR UN BOTON PARA AGREGAR UNA NUEVA CATEGORIA
+
+exports.default = function () {
+	return _react2.default.createElement(
+		"div",
+		{ className: "container-fluid", id: "AdminAddCategory" },
+		_react2.default.createElement("br", null),
+		_react2.default.createElement("br", null),
+		_react2.default.createElement("br", null),
+		_react2.default.createElement(
+			"div",
+			{ "class": "row" },
+			_react2.default.createElement(
+				"div",
+				{ "class": "col-sm-6 col-md-offset-2 col-md-8" },
+				_react2.default.createElement(
+					"h1",
+					null,
+					"Editar Categorias"
+				),
+				_react2.default.createElement(
+					"div",
+					{ "class": "thumbnail edit" },
+					_react2.default.createElement(
+						"ul",
+						null,
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						" ",
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						"    ",
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"li",
+							null,
+							"Categoria 1 ",
+							_react2.default.createElement(
+								"button",
+								{ className: "btn btn-danger" },
+								_react2.default.createElement(
+									"span",
+									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
+									" "
+								),
+								" Eliminar categoria"
+							),
+							" "
+						),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement("input", { type: "text", "class": "form-control" }),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"button",
+							{ className: "btn btn-success" },
+							_react2.default.createElement(
+								"span",
+								{ "class": "glyphicon glyphicon-plus", "aria-hidden": "true" },
+								" "
+							),
+							" Agregar categoria"
+						)
+					)
+				)
+			)
+		)
+	);
+};
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var arregloCompras = [{
+    idVenta: 1,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'Completado',
+    linkProducto: '#'
+}, {
+    idVenta: 3,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+},, {
+    idVenta: 4,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+}];
+
+exports.default = function () {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid', id: '' },
+        _react2.default.createElement(
+            'h1',
+            null,
+            'Manejo de ordenes'
+        ),
+        _react2.default.createElement(
+            'div',
+            { 'class': 'btn-group' },
+            _react2.default.createElement(
+                'button',
+                { type: 'button', 'class': 'btn btn-default dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                'Filtrar por Status ',
+                _react2.default.createElement('span', { 'class': 'caret' })
+            ),
+            _react2.default.createElement(
+                'ul',
+                { 'class': 'dropdown-menu' },
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'CREADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'PROCESADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'CANCELADO'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        'a',
+                        { href: '#' },
+                        'COMPLETADO'
+                    )
+                )
+            )
+        ),
+        //MAPEO POR EL ARREGLO DE COMPRAS
+        arregloCompras.map(function (compra) {
+            return _react2.default.createElement(
+                'div',
+                { className: 'profile_compra', key: compra.idVenta },
+                _react2.default.createElement(
+                    'a',
+                    { href: compra.linkProducto },
+                    _react2.default.createElement('img', { src: 'https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg', alt: '' })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'INFO DE LA VENTA.'
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'ID VENTA: ',
+                    compra.idVenta
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Fecha: ',
+                    compra.fechaVenta
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Status: ',
+                    compra.status
+                ),
+                _react2.default.createElement(
+                    'p',
+                    { 'class': 'profile_celeste' },
+                    'Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { 'class': 'btn btn-primary' },
+                    'Cambiar el Status'
+                )
+            );
+        })
+    );
 };
 
 /***/ })
