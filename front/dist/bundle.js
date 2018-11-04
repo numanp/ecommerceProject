@@ -1696,6 +1696,18 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//SALE_REDUCER
+var CREATE_SALE = exports.CREATE_SALE = 'CREATE_SALE';
+var SEND_EMAIL_AFTER_CHECKOUT = exports.SEND_EMAIL_AFTER_CHECKOUT = 'SEND_EMAIL_AFTER_CHECKOUT';
+var SEND_EMAIL_STATUS = exports.SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS';
+
+//USER_REDUCER
+var ADD_REVIEW = exports.ADD_REVIEW = 'ADD_REVIEW';
+var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
+var LOGIN = exports.LOGIN = 'LOGIN';
+var LOGOUT = exports.LOGOUT = 'LOGOUT';
+var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
+
 // Carrito
 
 var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
@@ -1706,7 +1718,7 @@ var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
 var FETCH_PRODUCT = exports.FETCH_PRODUCT = 'FETCH_PRODUCTS';
 var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
 var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
-var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf 
+var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
 var UPDATE_PRODUCT = exports.UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 // User admin
@@ -29999,18 +30011,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(22);
 
+var _index = __webpack_require__(116);
+
+var _index2 = _interopRequireDefault(_index);
+
 var _reduxThunk = __webpack_require__(119);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(116);
-
-var _reducers2 = _interopRequireDefault(_reducers);
+var _reduxLogger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-logger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
-exports.default = (0, _redux.createStore)(_reducers2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
+
+var store = (0, _redux.createStore)(_index2.default, composeEnhancers((0, _redux.applyMiddleware)((0, _reduxLogger.createLogger)(), _reduxThunk2.default)));
+
+exports.default = store;
 
 /***/ }),
 /* 116 */
@@ -30025,20 +30042,32 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(22);
 
-var _cartReducer = __webpack_require__(117);
-
-var _cartReducer2 = _interopRequireDefault(_cartReducer);
-
 var _productsReducer = __webpack_require__(118);
 
 var _productsReducer2 = _interopRequireDefault(_productsReducer);
 
+var _cartReducer = __webpack_require__(117);
+
+var _cartReducer2 = _interopRequireDefault(_cartReducer);
+
+var _userAdminReducer = __webpack_require__(165);
+
+var _userAdminReducer2 = _interopRequireDefault(_userAdminReducer);
+
+var _userReducer = __webpack_require__(166);
+
+var _userReducer2 = _interopRequireDefault(_userReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _redux.combineReducers)({
+var rootReducer = (0, _redux.combineReducers)({
   cart: _cartReducer2.default,
-  products: _productsReducer2.default
+  products: _productsReducer2.default,
+  userAdmin: _userAdminReducer2.default,
+  user: _userReducer2.default
 });
+
+exports.default = rootReducer;
 
 /***/ }),
 /* 117 */
@@ -30241,12 +30270,13 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-    /*   componentDidMount() {
-        axios.get('/api/me')
-          .then(() => console.log('anda'))
-          .catch(console.log)
-      } */
-
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _axios2.default.get('api/user/me').then(function (response) {
+        console.log(response);
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -31593,7 +31623,7 @@ var SignUp = function (_Component) {
         value: function telefonoChange(e) {
             this.setState({
                 telefono: e.target.value
-            });
+            }, console.log(e.target.value));
         }
     }, {
         key: 'render',
@@ -32920,6 +32950,10 @@ var _Descripcion = __webpack_require__(157);
 
 var _Descripcion2 = _interopRequireDefault(_Descripcion);
 
+var _ContainerReview = __webpack_require__(167);
+
+var _ContainerReview2 = _interopRequireDefault(_ContainerReview);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32941,12 +32975,7 @@ var SingleProduct = function (_Component) {
         foto: 'https://http2.mlstatic.com/led-tv-hd-32-lg-32lj520b-D_NQ_NP_701663-MLA28517356912_102018-F.webp',
         nombre: 'Led Tv Hd 32 " Lg',
         precio: 4999,
-        descripcion: 'Tamaño de Pantalla Led 32 pulgadas, alta resolución, ',
-        reviews: {
-          estrellas: '',
-          opiniones: 1,
-          descripcion: '  Buen producto. La calidad es buena. El software(interfaz) también, por lo que estoy bastante conforme. En mi caso, lo compré para usar con mi computadora y puedo decir que la resolución para esta función es bastante mala(hd). Como televisor la verdad muy recomendado. Antes de comprarlo recuerden que, no es smart y no es full hd. Igual, todo eso está aclarado en al descripción. Yo lo compré consciente de sus características. Saludos!.'
-        }
+        descripcion: 'Tamaño de Pantalla Led 32 pulgadas, alta resolución, '
       }
     };
     return _this;
@@ -32988,8 +33017,7 @@ var SingleProduct = function (_Component) {
               _react2.default.createElement(
                 'p',
                 { className: 'pProducto ' },
-                _react2.default.createElement('span', { className: 'glyphicon glyphicon-star ' }),
-                this.state.fakeProduct.reviews.opiniones + ' opiniones'
+                _react2.default.createElement('span', { className: 'glyphicon glyphicon-star ' })
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -33049,7 +33077,7 @@ var SingleProduct = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'reviews' },
-                _react2.default.createElement(_Reviews2.default, { reviews: this.state.fakeProduct.reviews })
+                _react2.default.createElement(_ContainerReview2.default, null)
               )
             )
           )
@@ -33083,11 +33111,27 @@ exports.default = function (props) {
       null,
       "Opiniones sobre el producto"
     ),
-    _react2.default.createElement(
-      "p",
-      { className: "pProducto" },
-      props.reviews.descripcion
-    )
+    props.addReview.map(function (review) {
+      return _react2.default.createElement(
+        "div",
+        { className: "container" },
+        _react2.default.createElement(
+          "div",
+          { className: "row" },
+          _react2.default.createElement(
+            "div",
+            { className: "col-xs-8 col-sm-8 col-md-8 col-lg-8" },
+            _react2.default.createElement(
+              "p",
+              { className: "opinionProducto", key: review.id },
+              "- ",
+              review,
+              " "
+            )
+          )
+        )
+      );
+    })
   );
 };
 
@@ -33231,52 +33275,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouterDom = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var componentesAdmin = [
-    /*{
-        nombre: 'Agregar/Editar Producto',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: 'Editar Producto'
-    },
-    {
-        nombre: 'Crear Categorias',
-        link: '/admin/agregarProducto"',
-        button1: 'Crear categoria',
-        button2: ''
-    },
-    {
-        nombre: 'Manejar disponiblidad producto',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Ver lista ordenes',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Buscar por orden especifica',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Promover Usuario',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },,
-    {
-        nombre: 'Eliminar Usuario',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    */
-];
 
 exports.default = function () {
     return _react2.default.createElement(
@@ -33529,9 +33527,9 @@ var _AdminAddProduct = __webpack_require__(161);
 
 var _AdminAddProduct2 = _interopRequireDefault(_AdminAddProduct);
 
-var _AdminComponent = __webpack_require__(159);
+var _reactRedux = __webpack_require__(12);
 
-var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
+var _user = __webpack_require__(169);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33541,69 +33539,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//COMPONENTES
+var AdminAddProductContainer = function (_Component) {
+    _inherits(AdminAddProductContainer, _Component);
 
+    function AdminAddProductContainer(props) {
+        _classCallCheck(this, AdminAddProductContainer);
 
-var AdminContainer = function (_Component) {
-    _inherits(AdminContainer, _Component);
+        var _this = _possibleConstructorReturn(this, (AdminAddProductContainer.__proto__ || Object.getPrototypeOf(AdminAddProductContainer)).call(this, props));
 
-    function AdminContainer() {
-        _classCallCheck(this, AdminContainer);
-
-        var _this = _possibleConstructorReturn(this, (AdminContainer.__proto__ || Object.getPrototypeOf(AdminContainer)).call(this));
-
-        _this.state = {
-            nombreProducto: '',
-            precioProducto: '',
-            imgProducto: '',
-            stockProducto: '',
-            catProducto: '',
-            descripcionProducto: ''
-        };
-
-        _this.handleInputChange = _this.handleInputChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
-
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
-    _createClass(AdminContainer, [{
-        key: 'handleInputChange',
-        value: function handleInputChange(event) {
-            /* const target = event.target.name;
-             const value = event.target.value;
-             
-             console.log("TARGET: " + target)
-             console.log(value)
-             
-             this.setState({
-                 target: value
-             });
-             console.log(this.state)
-             */
-        }
-    }, {
+    _createClass(AdminAddProductContainer, [{
         key: 'handleSubmit',
         value: function handleSubmit(evt) {
             evt.preventDefault();
             console.log(this.state);
-            var nombreProducto = event.target.nombreProducto.value;
-            var precioProducto = event.target.precioProducto.value;
-            var imgProducto = event.target.imgProducto.value;
-            var stockProducto = event.target.stockProducto.value;
-            var catProducto = 'CATEGORIA1';
-            var descripcionProducto = event.target.descripcionProducto.value;
-
-            this.setState({
-                nombreProducto: nombreProducto,
-                precioProducto: nombreProducto,
-                imgProducto: imgProducto,
-                stockProducto: stockProducto,
-                catProducto: catProducto,
-                descripcionProducto: descripcionProducto
-
-            });
+            this.props.addProduct(evt.target);
         }
     }, {
         key: 'render',
@@ -33611,15 +33565,27 @@ var AdminContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit, handleInputChange: this.handleInputChange })
+                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit })
             );
         }
     }]);
 
-    return AdminContainer;
+    return AdminAddProductContainer;
 }(_react.Component);
 
-exports.default = AdminContainer;
+function mapStateToProps(state) {
+    return { nuevoProducto: state.admin.product
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        addProduct: function addProduct(producto) {
+            dispatch((0, _user.addProduct)(producto));
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
 
 /***/ }),
 /* 161 */
@@ -33659,7 +33625,7 @@ exports.default = function (props) {
                     { 'for': 'nombreProducto' },
                     'Nombre Producto'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
+                _react2.default.createElement('input', { name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33669,7 +33635,7 @@ exports.default = function (props) {
                     { 'for': 'precioProducto' },
                     'Precio'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
+                _react2.default.createElement('input', { name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33679,7 +33645,7 @@ exports.default = function (props) {
                     { 'for': 'imgProducto' },
                     'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
+                _react2.default.createElement('input', { name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33689,14 +33655,14 @@ exports.default = function (props) {
                     { 'for': 'stockProducto' },
                     'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
+                _react2.default.createElement('input', { name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
             ),
             _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
                 _react2.default.createElement(
                     'label',
-                    { onChange: props.handleInputChange, name: 'catProducto', 'for': 'catProducto' },
+                    { name: 'catProducto', 'for': 'catProducto' },
                     'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
                 ),
                 _react2.default.createElement(
@@ -33737,7 +33703,7 @@ exports.default = function (props) {
                     { 'for': 'descripcionProducto' },
                     'Descripcion'
                 ),
-                _react2.default.createElement('textarea', { onChange: props.handleInputChange, name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
+                _react2.default.createElement('textarea', { name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
             ),
             _react2.default.createElement(
                 'button',
@@ -34086,6 +34052,358 @@ var addToLocalStorage = exports.addToLocalStorage = function addToLocalStorage(p
 // var list = JSON.parse(localStorage.getItem('list')
 // list.push('<h2>David<h2>');
 // localStorage.setItem('list', JSON.stringify(list));
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _constants = __webpack_require__(23);
+
+var initialState = {};
+
+exports.default = function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _constants.FETCH_ORDERS_ADMIN:
+            return Object.assign({}, state, { orders: action.orders });
+        case _constants.UPDATE_ORDERS:
+            return Object.assign({}, state, { order: action.order });
+        case _constants.UPDATE_USER:
+            return Object.assign({}, state, { user: action.user });
+        case _constants.REMOVE_CATEGORY:
+            return Object.assign({}, state, { category: action.id });
+        case _constants.ADD_CATEGORY:
+            return Object.assign({}, state, { category: action.id });
+        default:
+            return state;
+    }
+};
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _constants = __webpack_require__(23);
+
+var initialState = {
+  reviews: []
+};
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _constants.ADD_REVIEW:
+      return _extends({}, state);
+    case _constants.FETCH_ORDERS_USER:
+      return {};
+    case _constants.LOGIN:
+      return {};
+    case _constants.LOGOUT:
+      return {};
+    case _constants.SIGN_UP:
+      return {};
+    default:
+      return state;
+  }
+};
+
+// export default (state = initialState, action) => {
+//   switch(action.type) {
+//     case RECEIVE_PLAYLISTS:
+//       return {
+//         ...state,
+//         reviews: action.playlists,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Reviews = __webpack_require__(156);
+
+var _Reviews2 = _interopRequireDefault(_Reviews);
+
+var _ReviewInput = __webpack_require__(168);
+
+var _ReviewInput2 = _interopRequireDefault(_ReviewInput);
+
+var _store = __webpack_require__(115);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContainerReview = function (_Component) {
+  _inherits(ContainerReview, _Component);
+
+  function ContainerReview(props) {
+    _classCallCheck(this, ContainerReview);
+
+    var _this = _possibleConstructorReturn(this, (ContainerReview.__proto__ || Object.getPrototypeOf(ContainerReview)).call(this, props));
+
+    _this.state = {
+      fakeReviews: {
+        estrellas: '',
+        opiniones: 1,
+        descripcion: '  Buen producto. La calidad es buena. El software(interfaz) también, por lo que estoy bastante conforme. En mi caso, lo compré para usar con mi computadora y puedo decir que la resolución para esta función es bastante mala(hd). Como televisor la verdad muy recomendado. Antes de comprarlo recuerden que, no es smart y no es full hd. Igual, todo eso está aclarado en al descripción. Yo lo compré consciente de sus características. Saludos!.'
+      },
+      value: '',
+      addReview: []
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(ContainerReview, [{
+    key: 'handleChange',
+    value: function handleChange(evt) {
+      var addReview = evt.target.value;
+      this.setState({
+        value: addReview
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(evt) {
+      evt.preventDefault();
+      this.setState({
+        addReview: [].concat(_toConsumableArray(this.state.addReview), [this.state.value])
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_ReviewInput2.default, { addreview: this.state.addreview, handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
+        _react2.default.createElement(_Reviews2.default, { addReview: this.state.addReview, fakeReviews: this.state.fakeReviews })
+      );
+    }
+  }]);
+
+  return ContainerReview;
+}(_react.Component);
+
+exports.default = ContainerReview;
+
+/***/ }),
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+    var handleChange = _ref.handleChange,
+        handleSubmit = _ref.handleSubmit,
+        addreview = _ref.addreview;
+
+    return _react2.default.createElement(
+        'form',
+        { className: 'form-horizontal', onSubmit: handleSubmit },
+        _react2.default.createElement(
+            'label',
+            { className: 'pProducto' },
+            'Dejanos tu review sobre este producto:'
+        ),
+        _react2.default.createElement('textarea', { type: 'text', name: 'addreview', addreview: addreview, onChange: handleChange, className: 'form-control custom-control' }),
+        _react2.default.createElement(
+            'button',
+            { type: 'submit', className: 'btn btn-success' },
+            'enviar!'
+        )
+    );
+};
+
+/***/ }),
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = undefined;
+
+var _axios = __webpack_require__(130);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _constants = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getOrders = function getOrders(orders) {
+  return {
+    type: _constants.FETCH_ORDERS_ADMIN,
+    orders: orders
+  };
+};
+
+var deleteCategory = function deleteCategory(id) {
+  return {
+    type: _constants.REMOVE_CATEGORY,
+    id: id
+  };
+};
+
+var putOrders = function putOrders(order) {
+  return {
+    type: _constants.UPDATE_ORDERS,
+    order: order
+  };
+};
+
+var putUser = function putUser(user) {
+  return {
+    type: _constants.UPDATE_USER,
+    user: user
+  };
+};
+
+var addCategory = function addCategory(category) {
+  return {
+    type: _constants.ADD_CATEGORY,
+    category: category
+  };
+};
+
+var createCategory = function createCategory(category) {
+  return {
+    type: _constants.CREATE_CATEGORY,
+    category: category
+  };
+};
+
+var postProduct = function postProduct(product) {
+  return {
+    type: _constants.CREATE_PRODUCT,
+    product: product
+  };
+};
+
+var deleteUser = function deleteUser(user) {
+  return {
+    type: _constants.DELETE_USER,
+    user: user
+  };
+};
+
+var editCategory = function editCategory(category) {
+  return {
+    type: _constants.EDIT_CATEGORY,
+    category: category
+  };
+};
+
+var fetchOrders = exports.fetchOrders = function fetchOrders() {
+  return function (dispatch) {
+    return _axios2.default.get('/api/admin/orders').then(function (res) {
+      return res.data;
+    }).then(function (orders) {
+      return dispatch(getOrders(orders));
+    });
+  };
+};
+
+var removeCategory = exports.removeCategory = function removeCategory(categoryId) {
+  return function (dispatch) {
+    return _axios2.default.delete('/api/category/' + categoryId).then(function (res) {
+      return res.data;
+    }).then(function (id) {
+      return dispatch(deleteCategory(id));
+    });
+  };
+};
+
+var updateOrders = exports.updateOrders = function updateOrders(orderId, order) {
+  return function (dispatch) {
+    return _axios2.default.put('/api/orders/' + orderId, order).then(function (res) {
+      return res.data;
+    }).then(function (order) {
+      return dispatch(putOrders(order));
+    });
+  };
+};
+
+var updateUser = exports.updateUser = function updateUser(userId, user) {
+  return function (dispatch) {
+    return _axios2.default.put('/api/user/' + userId, user).then(function (res) {
+      return res.data;
+    }).then(function (user) {
+      return dispatch(putUser(user));
+    });
+  };
+};
+
+var addProduct = exports.addProduct = function addProduct(producto) {
+  return function (dispatch) {
+    return _axios2.default.post('/api/productos', producto).then(function (res) {
+      return res.data;
+    }).then(function (data) {
+      return dispatch(postProduct(data));
+    });
+  };
+};
 
 /***/ })
 /******/ ]);

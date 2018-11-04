@@ -5,7 +5,8 @@ const models = require('../models/index').modelos;
 
 
 router.get('/me', (req, res) => {
-    res.send(req.user);
+    console.log('entra a la rutaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    res.send(req.user || 'no estas logeado');
 });
 
 router.delete('/:id', (req, res) => {
@@ -34,7 +35,7 @@ router.post('/signup', (req, res) => {
         telefono: req.body.telefono,
     }).then(() => {
         console.log('usuario creado');
-        /* res.redirect('/') */
+        res.send('usuario creado correctamente')
     });
 });
 
