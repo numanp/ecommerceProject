@@ -29994,28 +29994,23 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _redux = __webpack_require__(22);
-
-var _reducers = __webpack_require__(116);
-
-var _reducers2 = _interopRequireDefault(_reducers);
 
 var _reduxThunk = __webpack_require__(119);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _reducers = __webpack_require__(116);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const rootReducer = combineReducers({
-//     cart: cartReducer
-// })
-
-var store = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-exports.default = store;
+var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
+exports.default = (0, _redux.createStore)(_reducers2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
 
 /***/ }),
 /* 116 */
@@ -30067,7 +30062,6 @@ var cartReducer = function cartReducer() {
     switch (action.type) {
         case _constants.ADD_TO_CART:
             return [].concat(_toConsumableArray(state), [action.payload]);
-
         // case REMOVE_FROM_CART:
         //     const firstMatchIndex = state.indexOf(action.payload)
         //     return state.filter( (item, index) => index !== firstMatchIndex)
@@ -30078,16 +30072,6 @@ var cartReducer = function cartReducer() {
 };
 
 exports.default = cartReducer;
-
-// export const cartItemsWithQuantities = (cartItems) => {
-//     return cartItems.reduce((acc, item) => {
-//         const filteredItem = acc.filter(item2 => item2.id === item.id)[0]
-//         filteredItem !== undefined
-//             ? filteredItem.quantity++
-//             : acc.push({ ...item, quantity: 1})
-//         return acc 
-//     }, [])
-// }
 
 /***/ }),
 /* 118 */
@@ -32603,18 +32587,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(12);
+
 var _ProductToMap = __webpack_require__(151);
 
 var _ProductToMap2 = _interopRequireDefault(_ProductToMap);
 
-var _reactRedux = __webpack_require__(12);
-
-var _constants = __webpack_require__(23);
+var _cart = __webpack_require__(164);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import { cartItemsWithQuantities } from '../redux/cart'
-
 
 function ListadoProductos(props) {
     return _react2.default.createElement(
@@ -32628,7 +32609,6 @@ function ListadoProductos(props) {
                     product: product,
                     addToCart: props.addToCart,
                     key: product.id
-                    // cart={cartItemsWithQuantities(props.cart)}
                 });
             })
         )
@@ -32644,11 +32624,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         addToCart: function addToCart(producto) {
-            dispatch({ type: _constants.ADD_TO_CART, payload: producto });
+            dispatch((0, _cart.addToLocalStorage)(producto));
         }
-        // removeFromCart: (item) => {
-        //     dispatch({ type: 'REMOVE', payload: item })
-        // }
     };
 }
 
@@ -32793,7 +32770,6 @@ function mapStateToProps(state) {
         cart: state.cart
     };
 }
-
 // function mapDispatchToProps(dispatch) {
 //     return {
 //         addToCart: (item) => {
@@ -32811,18 +32787,26 @@ var Carrito = function (_Component) {
     function Carrito(props) {
         _classCallCheck(this, Carrito);
 
-        return _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
-        // this.state = {
-        //     cart: this.props.cart
-        // }
+        var _this = _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
+
+        _this.state = {
+            cartItems: ''
+        };
+        return _this;
     }
 
     _createClass(Carrito, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var itemsCarrito = JSON.parse(localStorage.getItem('carrito'));
+            this.setState({
+                cartItems: itemsCarrito
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            {
-                console.log('props', this.props);
-            }
+            // {console.log(this.state.cartItems)}
             return _react2.default.createElement(
                 'div',
                 null,
@@ -32868,7 +32852,6 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function CarritoItems(props) {
-
     return _react2.default.createElement(
         "div",
         { className: "col-md-2 column productbox" },
@@ -34051,6 +34034,58 @@ exports.default = function () {
         })
     );
 };
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addToLocalStorage = undefined;
+
+var _constants = __webpack_require__(23);
+
+var _store = __webpack_require__(115);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import axios from 'axios';
+var addToCart = function addToCart(producto) {
+  return {
+    type: _constants.ADD_TO_CART,
+    payload: producto
+  };
+};
+
+// export const createPlaylist = name => dispatch =>
+//   axios.post('/api/playlists', { name })
+//     .then(res => res.data)
+//     .then(playlist => {
+//       dispatch(addPlaylist(playlist));
+//       return playlist.id;
+//     });
+
+
+var addToLocalStorage = exports.addToLocalStorage = function addToLocalStorage(producto) {
+  return function (dispatch) {
+    // var productos = JSON.parse(localStorage.getItem('carrito'))
+    // console.log(localStorage.getItem('carrito'))
+    // productos += producto  
+    // localStorage.removeItem('carrito')
+    localStorage.setItem('carrito', JSON.stringify(producto));
+    dispatch(addToCart(producto));
+  };
+};
+
+// var list = JSON.parse(localStorage.getItem('list')
+// list.push('<h2>David<h2>');
+// localStorage.setItem('list', JSON.stringify(list));
 
 /***/ })
 /******/ ]);
