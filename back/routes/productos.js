@@ -41,11 +41,11 @@ router.get('/cat/:categoria', (req, res) => {
 
 router.post('/', (req, res) => {
     models.Producto.create({
-        nombre: req.body.nombreProducto.value,
-        descripcion: req.body.descripcionProducto.value,
-        precio: req.body.precioProducto.value,
-        foto: req.body.imgProducto.value,
-        stock: req.body.stockProducto.value
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        foto: req.body.foto,
+        stock: req.stock
     }).then((producto) => {
         console.log('producto creado');
         res.status(200).send(producto)
