@@ -1,4 +1,4 @@
-import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOG_OUT, SIGN_UP } from '../constants';
+import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOGOUT, SIGN_UP } from '../constants';
 
 const initialState = {
   reviews: [],
