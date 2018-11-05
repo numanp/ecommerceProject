@@ -5,7 +5,7 @@ export default function(props) {
     <div className="reviews">
       <h2>Opiniones sobre el producto</h2>
       {
-        props.addReview.map(review =>{
+        props.addReview && props.addReview.map(review =>{
           return(
             <div className="container">
             <div className='row'>

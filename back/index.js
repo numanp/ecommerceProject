@@ -8,7 +8,6 @@ var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,12 +15,10 @@ app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
-
 passport.serializeUser(function(user, done) {
   console.log('serialize', user.id);
   done(null, user.id);
 });
-
 passport.deserializeUser(function(id, done) {
   models.User.findById(id)
     .then(user => {
@@ -29,7 +26,6 @@ passport.deserializeUser(function(id, done) {
     })
     .catch(err => done(err));
 });
-
 passport.use(
   new LocalStrategy(
     {
@@ -51,13 +47,11 @@ passport.use(
     },
   ),
 );
-
 db.sync({ force: false }).then(function() {
   app.listen('3001', function() {
     console.log('listening at 3001');
   });
 });
-
 app.post('/api/signup', (req, res) => {
   models.User.create({
     nombre: req.body.nombre,
@@ -70,19 +64,16 @@ app.post('/api/signup', (req, res) => {
     /* res.redirect('/') */
   });
 });
-
 app.post('/api/login', passport.authenticate('local'), function(req, res) {
   res.send(req.user);
 });
-
 app.post('/api/logout', (req, res) => {
   req.logout();
   console.log('DESloggeado correctamente');
   return res.send(req.user);
 });
-
 app.use('/api', require('./routes/index'));
-
 app.get('/*', function(req, res) {
+  console.log('ruta html');
   res.sendFile(path.resolve('../front/index.html'));
 });

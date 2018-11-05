@@ -21,19 +21,13 @@ class AdminContainer extends Component {
     }
   }
 
-  pruebaFunc() {
-    console.log('ESTOY FUNCIONANDO');
-  }
-
   render() {
     return (
       <div>
-        <AdminComponent
-          pruebaFunc={this.pruebaFunc}
-          handleSubmit={this.handleSubmit}
-        />
+        <AdminComponent handleSubmit={this.handleSubmit} />
       </div>
     );
   }
 }
+
 export default AdminContainer;
