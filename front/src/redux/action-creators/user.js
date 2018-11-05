@@ -11,7 +11,9 @@ import {
   DELETE_USER,
   EDIT_CATEGORY,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  FETCH_CATEGORYS,
+  FETCH_PRODUCTS
 } from '../constants';
 
 // LOGIN & LOGOUT ACTIONS:
@@ -163,7 +165,3 @@ export const fetchCategorys = () => dispatch =>
         .then(data => dispatch(Fetch_categorys(data)))
     
     
-export const addProduct = (producto) => (dispatch) =>
-  axios.post('/api/productos', producto)
-    .then(res => res.data)
-    .then(data => dispatch(postProduct(data)))
