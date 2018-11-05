@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import {
   FETCH_ORDERS_ADMIN,
@@ -13,9 +12,14 @@ import {
   LOGIN_SUCCESS
 } from '../constants';
 
+// export const logginSucces = user => {
+//   console.log('hola')
+//   console.log(user)
+// }
+
 export const logginSuccess = user => ({
   type: LOGIN_SUCCESS,
-  payload: user
+  user
 })
 
 const getOrders = orders => ({

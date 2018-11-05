@@ -2,7 +2,8 @@ import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOGOUT, SIGN_UP } from '.
 
 const initialState = {
   reviews: [],
-  loggedIn: false
+  loggedIn: false,
+  user: {}
 };
 
 export default (state = initialState, action) => {
@@ -21,7 +22,7 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS: 
     return Object.assign({}, state, {
       loggedIn: true,
-      payload: action.user
+      user: action.user
     });
 
     case LOGOUT:

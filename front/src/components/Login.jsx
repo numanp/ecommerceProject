@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logginSucces: (user) => {
+        logginSuccess: (user) => {
             dispatch(logginSuccess(user))
         }
     }
@@ -44,12 +44,9 @@ class Login extends Component {
     }
 
     logn(object) {
-        console.log('logn: ',object)
         axios.post('api/login', object)
-        .then(console.log(logginSuccess))
         .then(res => logginSuccess(res.data))
-        .then(res => console.log('listo'))
-        // .then( loginStatus => logginSuccess(loginStatus))
+        .then(res => console.log('pasó x loggin'))
     }
     
 
