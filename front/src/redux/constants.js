@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 //SALE_REDUCER
 export const CREATE_SALE = 'CREATE_SALE';
@@ -12,7 +11,6 @@ export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
-=======
 // Carrito
 
 export const ADD_TO_CART = 'ADD_TO_CART';
@@ -40,4 +38,3 @@ export const FETCH_ORDERS_ADMIN = 'FETCH_ORDERS_ADMIN';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const UPDATE_ORDERS = 'UPDATE_ORDERS';
 export const UPDATE_USER = 'UPDATE_USER';
->>>>>>> 4ba507a0f0c28892435ea6d9f6dcb1bd3e1a43a1

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export default () => {
   return (
     <div>
+
       <div id="myCarousel" className="carousel slide" data-ride="carousel">
         {/* <!-- Indicators --> */}
         <ol className="carousel-indicators">
@@ -16,7 +17,7 @@ export default () => {
         <div className="carousel-inner">
           <div className="item active">
             <img
-              src="https://images.pexels.com/photos/1304642/pexels-photo-1304642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src="./images/gif1.gif"
               alt="imagen1"
             />
             <div className="carousel-caption">
@@ -43,7 +44,7 @@ export default () => {
 
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              src="./images/gif2.gif"
               alt="imagen2"
             />
             <div className="carousel-caption">
@@ -69,7 +70,7 @@ export default () => {
 
           <div className="item">
             <img
-              src="http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png"
+              src="./images/gif3.gif"
               alt="imagen3"
             />
             <div className="carousel-caption">
