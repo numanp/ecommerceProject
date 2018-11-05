@@ -3888,7 +3888,7 @@ module.exports = Cancel;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.logginSuccess = undefined;
+exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.logOut = exports.logginSuccess = undefined;
 
 var _axios = __webpack_require__(25);
 
@@ -3902,6 +3902,12 @@ var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
   return {
     type: _constants.LOGIN_SUCCESS,
     user: user
+  };
+};
+
+var logOut = exports.logOut = function logOut() {
+  return {
+    type: LOG_OUT
   };
 };
 
@@ -30397,14 +30403,17 @@ exports.default = function () {
       return {};
 
     case _constants.LOGIN_SUCCESS:
-      console.log('corriendo el REDUCEEEEEEEEEER', action);
       return Object.assign({}, state, {
         loggedIn: true,
         user: action.user
       });
 
-    case _constants.LOGOUT:
-      return {};
+    case LOG_OUT:
+      return Object.assign({}, state, {
+        loggedIn: false,
+        user: {}
+      });
+
     case _constants.SIGN_UP:
       return {};
     default:
@@ -30622,9 +30631,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _reactRouterDom = __webpack_require__(5);
 
@@ -30632,88 +30639,127 @@ var _SearchBar = __webpack_require__(127);
 
 var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(8);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (props) {
-    console.log('admin: ', props.admin);
-    return _react2.default.createElement(
-        'nav',
-        { className: 'navbar navbar-default' },
-        _react2.default.createElement(
-            'div',
-            { className: 'container' },
-            _react2.default.createElement(
-                'div',
-                { className: 'container-fluid' },
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.loggedIn
+    };
+}
+
+function mapDispatchToProps(state) {
+
+    return {};
+}
+
+var NavBar = function (_Component) {
+    _inherits(NavBar, _Component);
+
+    function NavBar(props) {
+        _classCallCheck(this, NavBar);
+
+        return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+    }
+
+    _createClass(NavBar, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'nav',
+                { className: 'navbar navbar-default' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'navbar-header' },
+                    { className: 'container' },
                     _react2.default.createElement(
-                        'button',
-                        { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+                        'div',
+                        { className: 'container-fluid' },
                         _react2.default.createElement(
-                            'span',
-                            { className: 'sr-only' },
-                            'Toggle navigation'
-                        ),
-                        _react2.default.createElement('span', { className: 'icon-bar' }),
-                        _react2.default.createElement('span', { className: 'icon-bar' }),
-                        _react2.default.createElement('span', { className: 'icon-bar' })
-                    ),
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        { to: '/', className: 'navbar-brand' },
-                        _react2.default.createElement('img', { src: './images/mercadonuma.png' })
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-                    _react2.default.createElement(
-                        'ul',
-                        { className: 'nav navbar-nav navbar-left' },
-                        _react2.default.createElement(_SearchBar2.default, null)
-                    ),
-                    _react2.default.createElement(
-                        'ul',
-                        { className: 'nav navbar-nav navbar-right' },
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            ' ',
+                            'div',
+                            { className: 'navbar-header' },
                             _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/signup' },
-                                'Registrates'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            ' ',
-                            _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/login' },
-                                'Login'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            ' ',
-                            _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/carrito' },
-                                'Carrito'
+                                'button',
+                                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'sr-only' },
+                                    'Toggle navigation'
+                                ),
+                                _react2.default.createElement('span', { className: 'icon-bar' }),
+                                _react2.default.createElement('span', { className: 'icon-bar' }),
+                                _react2.default.createElement('span', { className: 'icon-bar' })
                             ),
-                            ' '
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/', className: 'navbar-brand' },
+                                _react2.default.createElement('img', { src: './images/mercadonuma.png' })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+                            _react2.default.createElement(
+                                'ul',
+                                { className: 'nav navbar-nav navbar-left' },
+                                _react2.default.createElement(_SearchBar2.default, null)
+                            ),
+                            _react2.default.createElement(
+                                'ul',
+                                { className: 'nav navbar-nav navbar-right' },
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/signup' },
+                                        'Registrates'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login' },
+                                        'Login'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/carrito' },
+                                        'Carrito'
+                                    ),
+                                    ' '
+                                )
+                            )
                         )
                     )
                 )
-            )
-        )
-    );
-};
+            );
+        }
+    }]);
+
+    return NavBar;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(NavBar);
 
 // import React from 'react'
 
@@ -31788,7 +31834,6 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
     return {
         logginSuccess: function logginSuccess(user) {
-            console.log('CORRE LA FUNCION', user);
             dispatch((0, _user.logginSuccess)(user));
         }
     };

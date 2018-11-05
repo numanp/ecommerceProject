@@ -20,16 +20,17 @@ export default (state = initialState, action) => {
       };
 
     case LOGIN_SUCCESS:
-      console.log('corriendo el REDUCEEEEEEEEEER', action)
       return Object.assign({}, state, {
         loggedIn: true,
         user: action.user
       });
 
-    case LOGOUT:
-      return {
+    case LOG_OUT:
+      return Object.assign({}, state, {
+        loggedIn: false,
+        user: {}
+      });
 
-      };
     case SIGN_UP:
       return {
 

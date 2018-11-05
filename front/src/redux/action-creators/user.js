@@ -16,6 +16,10 @@ import {
 export const logginSuccess = user => ({
   type: LOGIN_SUCCESS,
   user: user
+});
+
+export const logOut = () => ({
+  type: LOG_OUT
 })
 
 const getOrders = orders => ({
