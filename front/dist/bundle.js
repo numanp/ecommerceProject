@@ -850,51 +850,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//SALE_REDUCER
-var CREATE_SALE = exports.CREATE_SALE = 'CREATE_SALE';
-var SEND_EMAIL_AFTER_CHECKOUT = exports.SEND_EMAIL_AFTER_CHECKOUT = 'SEND_EMAIL_AFTER_CHECKOUT';
-var SEND_EMAIL_STATUS = exports.SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS';
-
-//USER_REDUCER
-var ADD_REVIEW = exports.ADD_REVIEW = 'ADD_REVIEW';
-var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
-var LOGIN = exports.LOGIN = 'LOGIN';
-var LOGOUT = exports.LOGOUT = 'LOGOUT';
-var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
-var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-
-// Carrito
-
-var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
-var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
-
-// Productos
-var FETCH_PRODUCT = exports.FETCH_PRODUCT = 'FETCH_PRODUCTS';
-var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
-var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
-var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
-var UPDATE_PRODUCT = exports.UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-
-// User admin
-var ADD_CATEGORY = exports.ADD_CATEGORY = 'ADD_CATEGORY';
-var CREATE_CATEGORY = exports.CREATE_CATEGORY = 'CREATE_CATEGORY';
-var CREATE_PRODUCT = exports.CREATE_PRODUCT = 'CREATE_PRODUCT';
-var DELETE_USER = exports.DELETE_USER = 'DELETE_USER';
-var EDIT_CATEGORY = exports.EDIT_CATEGORY = 'EDIT_CATEGORY';
-
-var FETCH_ORDERS_ADMIN = exports.FETCH_ORDERS_ADMIN = 'FETCH_ORDERS_ADMIN';
-var REMOVE_CATEGORY = exports.REMOVE_CATEGORY = 'REMOVE_CATEGORY';
-var UPDATE_ORDERS = exports.UPDATE_ORDERS = 'UPDATE_ORDERS';
-var UPDATE_USER = exports.UPDATE_USER = 'UPDATE_USER';
+throw new Error("Module build failed: SyntaxError: Unexpected token (12:1)\n\n\u001b[0m \u001b[90m 10 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m \u001b[33mLOGOUT\u001b[39m \u001b[33m=\u001b[39m \u001b[32m'LOGOUT'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 11 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m \u001b[33mSIGN_UP\u001b[39m \u001b[33m=\u001b[39m \u001b[32m'SIGN_UP'\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m \u001b[33mLOGIN_SUCCESS\u001b[39m \u001b[33m=\u001b[39m \u001b[32m'LOGIN_SUCCESS'\u001b[39m\n \u001b[90m 14 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 15 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m \u001b[33mLOGIN_SUCCESS\u001b[39m \u001b[33m=\u001b[39m \u001b[32m'LOGGIN_SUCCESS'\u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 10 */
@@ -4044,7 +4002,7 @@ exports.default = function (props) {
       null,
       "Opiniones sobre el producto"
     ),
-    props.addReview.map(function (review) {
+    props.addReview && props.addReview.map(function (review) {
       return _react2.default.createElement(
         "div",
         { className: "container" },
@@ -30262,13 +30220,18 @@ var _userReducer = __webpack_require__(123);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
+var _reviewReducer = __webpack_require__(170);
+
+var _reviewReducer2 = _interopRequireDefault(_reviewReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
   cart: _cartReducer2.default,
   products: _productsReducer2.default,
   userAdmin: _userAdminReducer2.default,
-  user: _userReducer2.default
+  user: _userReducer2.default,
+  review: _reviewReducer2.default
 });
 
 exports.default = rootReducer;
@@ -30295,6 +30258,10 @@ var productsReducer = function productsReducer() {
     switch (action.type) {
         case _constants.FETCH_PRODUCT:
             return [].concat(_toConsumableArray(state), [action.payload]);
+        case _constants.FETCH_SINGLE_PRODUCT:
+            return Object.assign({}, state, {
+                product: product
+            });
         default:
             return state;
     }
@@ -31130,7 +31097,7 @@ exports.default = function () {
           'div',
           { className: 'item active' },
           _react2.default.createElement('img', {
-            src: 'https://images.pexels.com/photos/1304642/pexels-photo-1304642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            src: './images/gif1.gif',
             alt: 'imagen1'
           }),
           _react2.default.createElement(
@@ -31187,7 +31154,7 @@ exports.default = function () {
           'div',
           { className: 'item' },
           _react2.default.createElement('img', {
-            src: 'https://images.pexels.com/photos/316681/pexels-photo-316681.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            src: './images/gif2.gif',
             alt: 'imagen2'
           }),
           _react2.default.createElement(
@@ -31244,7 +31211,7 @@ exports.default = function () {
           'div',
           { className: 'item' },
           _react2.default.createElement('img', {
-            src: 'http://wallpaperlepi.com/wp-content/uploads/2014/11/Black-Anonymous-Wallpaper-HD.png',
+            src: './images/gif3.gif',
             alt: 'imagen3'
           }),
           _react2.default.createElement(
@@ -32956,31 +32923,88 @@ exports.default = SignUp;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = Homepage;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(8);
+
+var _axios = __webpack_require__(25);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _products = __webpack_require__(171);
+
 var _ProductosSubContainer = __webpack_require__(154);
 
 var _ProductosSubContainer2 = _interopRequireDefault(_ProductosSubContainer);
 
-var _products = __webpack_require__(157);
+var _products2 = __webpack_require__(157);
 
-var _products2 = _interopRequireDefault(_products);
+var _products3 = _interopRequireDefault(_products2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Homepage(props) {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_ProductosSubContainer2.default, { products: _products2.default.products
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-        })
-    );
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        product: state.product,
+        productos: state.productos
+    };
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getSingleProduct: function getSingleProduct(producto) {
+            dispatch((0, _products.fetchSingleProduct)(producto));
+        },
+        getProducts: function getProducts(productos) {
+            dispatch((0, _products.fetchProducts)(productos));
+        }
+    };
+}
+
+var ProductosContainer = function (_Component) {
+    _inherits(ProductosContainer, _Component);
+
+    function ProductosContainer(props) {
+        _classCallCheck(this, ProductosContainer);
+
+        return _possibleConstructorReturn(this, (ProductosContainer.__proto__ || Object.getPrototypeOf(ProductosContainer)).call(this, props));
+    }
+
+    _createClass(ProductosContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            _axios2.default.get('api/productos').then(function (data) {
+                return dispatch(_this2.props.getProducts(data));
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_ProductosSubContainer2.default, { products: this.props.productos })
+            );
+        }
+    }]);
+
+    return ProductosContainer;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductosContainer);
 
 /***/ }),
 /* 154 */
@@ -33364,15 +33388,17 @@ function CarritoItems(props) {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(25);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRedux = __webpack_require__(8);
 
 var _Reviews = __webpack_require__(52);
 
@@ -33400,17 +33426,7 @@ var SingleProduct = function (_Component) {
   function SingleProduct(props) {
     _classCallCheck(this, SingleProduct);
 
-    var _this = _possibleConstructorReturn(this, (SingleProduct.__proto__ || Object.getPrototypeOf(SingleProduct)).call(this, props));
-
-    _this.state = {
-      fakeProduct: {
-        foto: 'https://http2.mlstatic.com/led-tv-hd-32-lg-32lj520b-D_NQ_NP_701663-MLA28517356912_102018-F.webp',
-        nombre: 'Led Tv Hd 32 " Lg',
-        precio: 4999,
-        descripcion: 'Tamaño de Pantalla Led 32 pulgadas, alta resolución, '
-      }
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (SingleProduct.__proto__ || Object.getPrototypeOf(SingleProduct)).call(this, props));
   }
 
   _createClass(SingleProduct, [{
@@ -33430,7 +33446,7 @@ var SingleProduct = function (_Component) {
               { className: 'col-md-8' },
               _react2.default.createElement('img', {
                 className: 'imagenProducto',
-                src: this.state.fakeProduct.foto
+                src: this.state.product.foto
               })
             ),
             _react2.default.createElement(
@@ -33442,7 +33458,7 @@ var SingleProduct = function (_Component) {
                 _react2.default.createElement(
                   'strong',
                   null,
-                  this.state.fakeProduct.nombre
+                  this.state.product.nombre
                 )
               ),
               _react2.default.createElement('br', null),
@@ -33470,7 +33486,7 @@ var SingleProduct = function (_Component) {
               _react2.default.createElement(
                 'p',
                 { className: 'pProducto', style: { textAlign: 'left' } },
-                '$ ' + this.state.fakeProduct.precio
+                '$ ' + this.state.product.precio
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement(
@@ -33504,7 +33520,7 @@ var SingleProduct = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'descripcion' },
-                _react2.default.createElement(_Descripcion2.default, { descripcion: this.state.fakeProduct.descripcion })
+                _react2.default.createElement(_Descripcion2.default, { descripcion: this.state.product.descripcion })
               ),
               _react2.default.createElement(
                 'div',
@@ -33521,7 +33537,7 @@ var SingleProduct = function (_Component) {
   return SingleProduct;
 }(_react.Component);
 
-exports.default = SingleProduct;
+// export default connect(mapStateToProps, mapDispatchToProps)(ContainerSingleProduct)
 
 /***/ }),
 /* 161 */
@@ -33583,13 +33599,11 @@ var _ReviewInput = __webpack_require__(163);
 
 var _ReviewInput2 = _interopRequireDefault(_ReviewInput);
 
-var _store = __webpack_require__(24);
+var _reactRedux = __webpack_require__(8);
 
-var _store2 = _interopRequireDefault(_store);
+var _reviewAction = __webpack_require__(172);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -33612,7 +33626,8 @@ var ContainerReview = function (_Component) {
         descripcion: '  Buen producto. La calidad es buena. El software(interfaz) también, por lo que estoy bastante conforme. En mi caso, lo compré para usar con mi computadora y puedo decir que la resolución para esta función es bastante mala(hd). Como televisor la verdad muy recomendado. Antes de comprarlo recuerden que, no es smart y no es full hd. Igual, todo eso está aclarado en al descripción. Yo lo compré consciente de sus características. Saludos!.'
       },
       value: '',
-      addReview: []
+      addReview: [],
+      currentProduct: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -33622,27 +33637,27 @@ var ContainerReview = function (_Component) {
   _createClass(ContainerReview, [{
     key: 'handleChange',
     value: function handleChange(evt) {
-      var addReview = evt.target.value;
       this.setState({
-        value: addReview
+        value: evt.target.value
       });
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
       evt.preventDefault();
-      this.setState({
-        addReview: [].concat(_toConsumableArray(this.state.addReview), [this.state.value])
-      });
+      this.props.addReview(this.state.value);
     }
+  }, {
+    key: 'fechReviews',
+    value: function fechReviews(reviews) {}
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_ReviewInput2.default, { addreview: this.state.addreview, handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
-        _react2.default.createElement(_Reviews2.default, { addReview: this.state.addReview, fakeReviews: this.state.fakeReviews })
+        _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
+        _react2.default.createElement(_Reviews2.default, { user: this.props.user, addReview: this.props.rev, fakeReviews: this.state.fakeReviews })
       );
     }
   }]);
@@ -33650,7 +33665,22 @@ var ContainerReview = function (_Component) {
   return ContainerReview;
 }(_react.Component);
 
-exports.default = ContainerReview;
+function mapStateToProps(state) {
+  return {
+    rev: state.review,
+    user: state.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addReview: function addReview(value) {
+      dispatch((0, _reviewAction.addReview)(value));
+    }
+  };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerReview);
 
 /***/ }),
 /* 163 */
@@ -34514,6 +34544,93 @@ exports.default = function () {
             );
         })
     );
+};
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _constants = __webpack_require__(9);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reviewReducer = function reviewReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+
+    switch (action.type) {
+        case _constants.ADD_REVIEW:
+            return [].concat(_toConsumableArray(state), [action.review]);
+
+        default:
+            return state;
+
+    }
+};
+
+exports.default = reviewReducer;
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.fetchProducts = exports.fetchSingleProduct = undefined;
+
+var _constants = __webpack_require__(9);
+
+var fetchSingleProduct = exports.fetchSingleProduct = function fetchSingleProduct(product) {
+    return {
+        type: _constants.FETCH_SINGLE_PRODUCT,
+        product: product
+    };
+};
+
+var fetchProducts = exports.fetchProducts = function fetchProducts(products) {
+    return {
+        type: _constants.FETCH_PRODUCTS,
+        products: products
+    };
+};
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.addReview = undefined;
+
+var _constants = __webpack_require__(9);
+
+var saveReview = function saveReview(review) {
+    return {
+        type: _constants.ADD_REVIEW,
+        review: review
+    };
+};
+
+var addReview = exports.addReview = function addReview(value) {
+    return function (dispatch) {
+        dispatch(saveReview(value));
+    };
 };
 
 /***/ })

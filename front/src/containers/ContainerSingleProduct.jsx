@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import { connect } from 'react-redux'
+
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 
-export default class SingleProduct extends Component {
+
+class SingleProduct extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fakeProduct: {
-        foto:
-          'https://http2.mlstatic.com/led-tv-hd-32-lg-32lj520b-D_NQ_NP_701663-MLA28517356912_102018-F.webp',
-        nombre: 'Led Tv Hd 32 " Lg',
-        precio: 4999,
-        descripcion: 'Tamaño de Pantalla Led 32 pulgadas, alta resolución, ',
-      },
-    };
+    
   }
+
+
   render() {
     return (
       <div className="container">
@@ -24,12 +22,12 @@ export default class SingleProduct extends Component {
             <div className="col-md-8">
               <img
                 className="imagenProducto"
-                src={this.state.fakeProduct.foto}
+                src={this.state.product.foto}
               />
             </div>
             <div className="col-md-4">
               <h2 className="hProducto">
-                <strong>{this.state.fakeProduct.nombre}</strong>
+                <strong>{this.state.product.nombre}</strong>
               </h2>
 
               <br />
@@ -47,7 +45,7 @@ export default class SingleProduct extends Component {
                 </span>
               </p>
               <p className="pProducto" style={{ textAlign: 'left' }}>
-                {'$ ' + this.state.fakeProduct.precio}
+                {'$ ' + this.state.product.precio}
               </p>
               <br />
               <button
@@ -73,7 +71,7 @@ export default class SingleProduct extends Component {
           <div className="row">
             <div className="col-md-8">
               <div className="descripcion">
-                <Descripcion descripcion={this.state.fakeProduct.descripcion} />
+                <Descripcion descripcion={this.state.product.descripcion} />
               </div>
               <div className="reviews">
                 <ContainerReview />
@@ -85,3 +83,5 @@ export default class SingleProduct extends Component {
     );
   }
 }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ContainerSingleProduct)

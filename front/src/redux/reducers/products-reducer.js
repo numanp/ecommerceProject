@@ -10,6 +10,10 @@ const productsReducer = (state = [], action) => {
     switch(action.type) {
         case FETCH_PRODUCT:
             return [...state, action.payload]
+        case FETCH_SINGLE_PRODUCT:
+            return Object.assign({}, state, {
+                product
+            })
         default:
             return state
     }
