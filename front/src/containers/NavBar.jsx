@@ -82,13 +82,6 @@ class NavBar extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 
-// this.props.loggedIn.user.loggedIn
-
-// Object.keys(this.state.logueado).length === 0
-
-
-
-
 
 
 

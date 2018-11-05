@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { Redirect } from ''
 import {
   FETCH_ORDERS_ADMIN,
   UPDATE_ORDERS,
@@ -28,6 +29,7 @@ export const addLoginToLocalStorage = producto => dispatch => {
   axios.post('api/login', producto)
   .then(res => dispatch(logginSuccess(res.data)))
   .then(res => localStorage.setItem('login', JSON.stringify(res.user)))
+  // .then( )
 }
 
 export const removeLoginFromLocalStorage = () => dispatch => {

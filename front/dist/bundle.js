@@ -3905,7 +3905,7 @@ var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
     user: user
   };
 };
-
+// import { Redirect } from ''
 var logout = exports.logout = function logout(user) {
   return {
     type: _constants.LOGOUT,
@@ -3920,6 +3920,7 @@ var addLoginToLocalStorage = exports.addLoginToLocalStorage = function addLoginT
     }).then(function (res) {
       return localStorage.setItem('login', JSON.stringify(res.user));
     });
+    // .then( )
   };
 };
 
@@ -30808,11 +30809,6 @@ var NavBar = function (_Component) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
 
-// this.props.loggedIn.user.loggedIn
-
-// Object.keys(this.state.logueado).length === 0
-
-
 // import React from 'react'
 
 // export default () => {
@@ -31863,10 +31859,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _axios = __webpack_require__(25);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _user = __webpack_require__(51);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31876,12 +31868,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function mapStateToProps(state) {
-    return {
-        loggedIn: state.loggedIn
-    };
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -31903,7 +31889,6 @@ var Login = function (_Component) {
             email: '',
             password: ''
         };
-        _this.logn = _this.logn.bind(_this);
         return _this;
     }
 
@@ -31920,11 +31905,6 @@ var Login = function (_Component) {
             this.setState({
                 password: e.target.value
             });
-        }
-    }, {
-        key: 'logn',
-        value: function logn(object) {
-            this.props.logginSuccess(object);
         }
     }, {
         key: 'render',
@@ -31964,7 +31944,7 @@ var Login = function (_Component) {
     return Login;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 134 */
