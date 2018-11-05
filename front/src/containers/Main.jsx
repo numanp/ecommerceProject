@@ -20,6 +20,10 @@ import AdminOrdenes from '../components/AdminOrdenes';
 class Main extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      admin: false,
+      logueado: false
+    }
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
     this.logout = this.logout.bind(this);
@@ -28,27 +32,31 @@ class Main extends Component {
     axios.post('api/user/signup', object);
   }
   logn(object) {
-    axios.post('api/login', object).then(res => console.log(res.data));
+    axios.post('api/login', object)
+      .then(res => console.log(res.data))
   }
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
   componentDidMount() {
-    axios.get('api/user/me')
-      .then((response) => {
-        console.log(response)
-      })
+    // axios.get('api/user/me')
+    //   .then((response) => {
+    //     this.setState({
+    //       login: response.admin
+    //     })
+    //     console.log(response)
+    //   })
   }
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar admin={this.state.admin} />
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
-        <Route exact path="/productos" component={Productos} />
+        <Route path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
-        <Route exact path="/singleProduct" component={SingleProduct} />
+        {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
 
         {//RUTAS DEL ADMIN
         }

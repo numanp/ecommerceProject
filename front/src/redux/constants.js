@@ -9,6 +9,7 @@ export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
 // Carrito
 
@@ -17,7 +18,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const SAVE_CART = 'SAVE_CART';
 
 // Productos
-export const FETCH_PRODUCT = 'FETCH_PRODUCTS';
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
 export const FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
 export const PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf

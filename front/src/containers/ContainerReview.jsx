@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Reviews from '../components/Reviews'
 import ReviewInput from '../components/ReviewInput'
-import store from '../redux/store';
+import { connect } from 'react-redux';
+import { addReview } from '../redux/action-creators/review-action'
 
-export default class ContainerReview extends Component {
+class ContainerReview extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -15,31 +16,50 @@ export default class ContainerReview extends Component {
                   },
                 value: '',
                 addReview: [],
+                currentProduct: 0,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(evt){
-        const addReview = evt.target.value
         this.setState({
-            value: addReview
+            value: evt.target.value
         })
     }
 
     handleSubmit(evt) {
         evt.preventDefault();
-        this.setState({
-          addReview: [...this.state.addReview, this.state.value],
-        });
+        this.props.addReview(this.state.value)
       }
+
+    fechReviews(reviews){
+
+    }
 
   render() {
     return (
       <div>
-        <ReviewInput addreview={this.state.addreview} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Reviews addReview={this.state.addReview} fakeReviews={this.state.fakeReviews}/>
+        <ReviewInput handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <Reviews user={this.props.user} addReview={this.props.rev} fakeReviews={this.state.fakeReviews}/>
       </div>
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+    rev: state.review,
+    user: state.user,
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    addReview: function(value){
+      dispatch(addReview(value))
+    }
+  }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(ContainerReview)
