@@ -1,22 +1,20 @@
-
 import React, { Component } from 'react';
-import AdminAddProduct from '../components/AdminAddProduct'
 import {connect} from 'react-redux';
-import {addProduct, fetchCategorys} from '../redux/action-creators/user'
+import { fetchCategorys} from '../redux/action-creators/user'
+import AdminEditProduct from '../components/AdminEditProduct'
 
-class AdminAddProductContainer extends Component {
+class AdminEditProductContainer extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount(){
         this.props.fetchCategorys();
+
     }
-    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
     handleSubmit(evt){
         evt.preventDefault();
-        console.log(evt.target)
         const productoAgregar = {
             nombre: evt.target.nombreProducto.value,
             descripcion: evt.target.descripcionProducto.value,
@@ -24,15 +22,12 @@ class AdminAddProductContainer extends Component {
             foto: evt.target.imgProducto.value,
             stock: evt.target.stockProducto.value
         }
-        console.log("PRODUCTO AGREGAR: ");
-        
-        console.log(productoAgregar)
-        this.props.addProduct(productoAgregar)         
     }    
+
     render() {
         return (
             <div>        
-                <AdminAddProduct handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias}/>
+                <AdminEditProduct handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias}/>
             </div>   
         )
     }
@@ -45,14 +40,14 @@ function mapStateToProps (state){
 
 function mapDispatchToProps(dispatch){
     return{
-        addProduct: function (producto){
-            dispatch(addProduct(producto))
-            },
         fetchCategorys: function (categorias){
             dispatch(fetchCategorys(categorias))
-            },
+        },
+        fetchDataProducto: function(producto){
+            dispatch(fetchDataProducto(producto))
         }
+    }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEditProductContainer);
