@@ -6,12 +6,13 @@ export default (props) => (
     <h1>DISPLAY ALL PRODUCTOS</h1>
     <div className='container' >
             <div className="listaProductos">
-                {
-                    
+                {       
                     props.listaProductos.map(producto => 
                         <div className="listaProductoIndividual" key={producto.id}>
                             <h1>{producto.nombre }</h1>
-                                <Link exact path="/admin"><button className="btn btn-primary"> Editar Product</button> </Link>
+                               <Link to={`/admin/EditarProducto/${producto.id}`}>
+                                    <button className="btn btn-primary"> Editar Product</button>
+                                </Link>
                         </div>
                     )    
                 }

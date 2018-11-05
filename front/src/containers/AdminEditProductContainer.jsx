@@ -1,8 +1,7 @@
-
 import React, { Component } from 'react';
-import AdminAddProduct from '../components/AdminAddProduct'
 import {connect} from 'react-redux';
-import {addProduct, fetchCategorys} from '../redux/action-creators/user'
+import { fetchCategorys} from '../redux/action-creators/user'
+import AdminEditProduct from '../components/AdminEditProduct'
 
 class AdminEditProductContainer extends Component {
     constructor(props) {
@@ -11,6 +10,7 @@ class AdminEditProductContainer extends Component {
     }
     componentDidMount(){
         this.props.fetchCategorys();
+
     }
 
     handleSubmit(evt){
@@ -34,13 +34,18 @@ class AdminEditProductContainer extends Component {
 }
 function mapStateToProps (state){
     return{ 
-        
+        listaCategorias: state.userAdmin.listaCategorias
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-
+        fetchCategorys: function (categorias){
+            dispatch(fetchCategorys(categorias))
+        },
+        fetchDataProducto: function(producto){
+            dispatch(fetchDataProducto(producto))
+        }
     }
 }
 

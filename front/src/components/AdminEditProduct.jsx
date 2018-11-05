@@ -34,7 +34,7 @@ export default (props) => (
                        
                    </label>
 
-                )}
+            )}
         </div>
 
         <div className="form-group">
