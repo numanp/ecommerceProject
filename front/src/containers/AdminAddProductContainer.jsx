@@ -13,7 +13,7 @@ class AdminAddProductContainer extends Component {
 
     handleSubmit(evt){
         evt.preventDefault();
-        console.log(this.state)
+        //console.log(this.state)
         const productoAgregar = {
             nombre: evt.target.nombreProducto.value,
             descripcion: evt.target.descripcionProducto.value,
@@ -21,12 +21,14 @@ class AdminAddProductContainer extends Component {
             foto: evt.target.imgProducto.value,
             stock: evt.target.stockProducto.value
         }
+        console.log("PRODUCTO AGREGAR: ");
+        
+        console.log(productoAgregar)
         this.props.addProduct(productoAgregar)         
     }    
     render() {
         return (
             <div>        
-                
                 <AdminAddProduct handleSubmit={this.handleSubmit} />
             </div>   
         )
@@ -34,14 +36,13 @@ class AdminAddProductContainer extends Component {
 }
 function mapStateToProps (state){
     return{ 
-        //nuevoProducto: state.admin.product
+
     }
 }
+
 function mapDispatchToProps(dispatch){
     return{
         addProduct: function (producto){
-            console.log(producto)
-            console.log('Deberia estar dispatcheando')
             dispatch(addProduct(producto))
             }
         }

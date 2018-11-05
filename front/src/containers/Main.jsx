@@ -13,8 +13,10 @@ import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-import AdminAddCategory from '../components/AdminAddCategory';
 import AdminOrdenes from '../components/AdminOrdenes';
+import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+import AdminProductos from '../components/AdminProductos';
+import AdminManejarProductos from './AdminManejarProductos';
 
 
 class Main extends Component {
@@ -33,11 +35,11 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  componentDidMount() {
-    axios.get('/api/user/me')
-      .then((data) => console.log(data))
-      .catch(console.log)
-  }
+  // componentDidMount() {
+  //   axios.get('/api/user/me')
+  //     .then((data) => console.log(data))
+  //     .catch(console.log)
+  // }
   render() {
     return (
       <div>
@@ -53,8 +55,9 @@ class Main extends Component {
         }
         <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
-        <Route exact path="/admin/agregarCategoria" component={AdminAddCategory} />
+        <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
+        <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
         
       </div>
     );

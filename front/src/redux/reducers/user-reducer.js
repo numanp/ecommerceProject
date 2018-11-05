@@ -9,7 +9,6 @@ export default (state = initialState, action) => {
     case ADD_REVIEW:
     return {
       ...state,
-      //reviews: action.
     };
     case FETCH_ORDERS_USER:
     return {
@@ -31,15 +30,3 @@ export default (state = initialState, action) => {
       return state;
   }
 }
-
-// export default (state = initialState, action) => {
-//   switch(action.type) {
-//     case RECEIVE_PLAYLISTS:
-//       return {
-//         ...state,
-//         reviews: action.playlists,
-//       };
-//     default:
-//       return state;
-//   }
-// };

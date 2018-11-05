@@ -32,3 +32,11 @@ router.delete('/:nombre', (req, res) => {
                 })
         })
 });
+
+//(RUTA CREADA POR DIEGO) Necesito esta ruta necesito acceder a todas las cateogiras para poder editar y/o eliminar categorias
+router.get('/', (req, res) => {
+    models.Categoria.findAll()
+        .then((categorias) => {
+            res.status(200).send(categorias)
+        })
+})

@@ -6,54 +6,36 @@ export default () => (
     <div className='container' >
         <h1>ADMIN PANEL</h1>
 
-
-        {
-           /*
-            MAPEAR CUANDO TERMINE
-           componentesAdmin.map(componente =>
-                <div className="col-sm-6 col-md-4">
-                    <div className="thumbnail">
-                         <div className="caption">
-                         <h3>{componente.nombre}</h3>
-                         { componente.input ? true :}
-                         <Link to={componente.link} className="btn btn-primary">{componente.button1}</Link><a href="#" className="btn ">{componente.button2}</a>
-                         </div>
-                    </div>
-                </div>
-            )
-            */
-        }
         <div className="row">
+        
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Agregar/Editar Producto</h3>
-                        <Link to="/admin/agregarProducto"  className="btn btn-primary">Agregar producto</Link><a href="#" className="btn ">Editar Producto(TODAVIA NO ESTA LISTO)</a>
+                        <Link to="/admin/agregarProducto"  className="btn btn-primary">Agregar producto</Link>
                     </div>
                 </div>
             </div>
             
-
-
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Crear Categorias</h3>
-                        <Link to="/admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
+                        <Link to="/admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Categoria</a>
                     </div>
                 </div>
             </div>
-
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
-                        <h3>Manejar disponiblidad producto</h3>
-                        <Link to="/admin/agregarCategoria" className="btn btn-primary">Crear Categoria</Link><a href="#" className="btn ">Editar Producto</a>
+                        <h3>Manejar productos</h3>
+                        <Link to="/admin/adminListaProductos" className="btn btn-primary">Editar Producto</Link>
                     </div>
                 </div>
             </div>
+<div className="clearfix"></div>
 
-               <div className="col-sm-6 col-md-4">
+            <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
                         <h3>Ver lista ordenes</h3>

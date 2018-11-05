@@ -1045,7 +1045,7 @@ var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
 
 // Productos
-var FETCH_PRODUCT = exports.FETCH_PRODUCT = 'FETCH_PRODUCTS';
+var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
 var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
 var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
@@ -30195,7 +30195,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _constants = __webpack_require__(11);
 
-var initialState = {};
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = {
+    listaProductos: []
+};
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -30211,7 +30215,13 @@ exports.default = function () {
         case _constants.REMOVE_CATEGORY:
             return Object.assign({}, state, { category: action.id });
         case _constants.ADD_CATEGORY:
+            //Esto asigna una categoria a un prodducto. No crea categoria
             return Object.assign({}, state, { category: action.id });
+        case _constants.CREATE_CATEGORY:
+            //Esto crea una categoria.
+            return Object.assign({}, state, { category: action.id });
+        case _constants.FETCH_PRODUCTS:
+            return Object.assign({}, state, { listaProductos: [].concat(_toConsumableArray(action.data)) });
         default:
             return state;
     }
@@ -30255,18 +30265,6 @@ exports.default = function () {
       return state;
   }
 };
-
-// export default (state = initialState, action) => {
-//   switch(action.type) {
-//     case RECEIVE_PLAYLISTS:
-//       return {
-//         ...state,
-//         reviews: action.playlists,
-//       };
-//     default:
-//       return state;
-//   }
-// };
 
 /***/ }),
 /* 122 */
@@ -30362,13 +30360,21 @@ var _AdminAddProductContainer = __webpack_require__(165);
 
 var _AdminAddProductContainer2 = _interopRequireDefault(_AdminAddProductContainer);
 
-var _AdminAddCategory = __webpack_require__(168);
-
-var _AdminAddCategory2 = _interopRequireDefault(_AdminAddCategory);
-
 var _AdminOrdenes = __webpack_require__(169);
 
 var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
+
+var _AdminAddCategoryContainer = __webpack_require__(170);
+
+var _AdminAddCategoryContainer2 = _interopRequireDefault(_AdminAddCategoryContainer);
+
+var _AdminProductos = __webpack_require__(171);
+
+var _AdminProductos2 = _interopRequireDefault(_AdminProductos);
+
+var _AdminManejarProductos = __webpack_require__(172);
+
+var _AdminManejarProductos2 = _interopRequireDefault(_AdminManejarProductos);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30415,13 +30421,12 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _axios2.default.get('/api/user/me').then(function (data) {
-        return console.log(data);
-      }).catch(console.log);
-    }
+    // componentDidMount() {
+    //   axios.get('/api/user/me')
+    //     .then((data) => console.log(data))
+    //     .catch(console.log)
+    // }
+
   }, {
     key: 'render',
     value: function render() {
@@ -30443,8 +30448,9 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/singleProduct', component: _ContainerSingleProduct2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarProducto', component: _AdminAddProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategory2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/adminListaProductos', component: _AdminManejarProductos2.default })
       );
     }
   }]);
@@ -33463,17 +33469,12 @@ var AdminContainer = function (_Component) {
             }
         }
     }, {
-        key: 'pruebaFunc',
-        value: function pruebaFunc() {
-            console.log('ESTOY FUNCIONANDO');
-        }
-    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_AdminComponent2.default, { pruebaFunc: this.pruebaFunc, handleSubmit: this.handleSubmit })
+                _react2.default.createElement(_AdminComponent2.default, { handleSubmit: this.handleSubmit })
             );
         }
     }]);
@@ -33535,11 +33536,6 @@ exports.default = function () {
                                 _reactRouterDom.Link,
                                 { to: '/admin/agregarProducto', className: 'btn btn-primary' },
                                 'Agregar producto'
-                            ),
-                            _react2.default.createElement(
-                                'a',
-                                { href: '#', className: 'btn ' },
-                                'Editar Producto(TODAVIA NO ESTA LISTO)'
                             )
                         )
                     )
@@ -33566,7 +33562,7 @@ exports.default = function () {
                             _react2.default.createElement(
                                 'a',
                                 { href: '#', className: 'btn ' },
-                                'Editar Producto'
+                                'Editar Categoria'
                             )
                         )
                     )
@@ -33583,21 +33579,17 @@ exports.default = function () {
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                'Manejar disponiblidad producto'
+                                'Manejar productos'
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: '/admin/agregarCategoria', className: 'btn btn-primary' },
-                                'Crear Categoria'
-                            ),
-                            _react2.default.createElement(
-                                'a',
-                                { href: '#', className: 'btn ' },
+                                { to: '/admin/adminListaProductos', className: 'btn btn-primary' },
                                 'Editar Producto'
                             )
                         )
                     )
                 ),
+                _react2.default.createElement('div', { className: 'clearfix' }),
                 _react2.default.createElement(
                     'div',
                     { className: 'col-sm-6 col-md-4' },
@@ -33782,7 +33774,7 @@ var AdminAddProductContainer = function (_Component) {
         key: 'handleSubmit',
         value: function handleSubmit(evt) {
             evt.preventDefault();
-            console.log(this.state);
+            //console.log(this.state)
             var productoAgregar = {
                 nombre: evt.target.nombreProducto.value,
                 descripcion: evt.target.descripcionProducto.value,
@@ -33790,6 +33782,9 @@ var AdminAddProductContainer = function (_Component) {
                 foto: evt.target.imgProducto.value,
                 stock: evt.target.stockProducto.value
             };
+            console.log("PRODUCTO AGREGAR: ");
+
+            console.log(productoAgregar);
             this.props.addProduct(productoAgregar);
         }
     }, {
@@ -33807,15 +33802,12 @@ var AdminAddProductContainer = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-    return {
-        //nuevoProducto: state.admin.product
-    };
+    return {};
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         addProduct: function addProduct(producto) {
-            console.log(producto);
-            console.log('Deberia estar dispatcheando');
             dispatch((0, _user.addProduct)(producto));
         }
     };
@@ -33838,124 +33830,141 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(5);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
     return _react2.default.createElement(
         'div',
-        { className: 'container', id: 'AdminAddCategory' },
-        _react2.default.createElement('h1', null),
+        { className: 'container-fluid', id: 'AdminAddCategory' },
         _react2.default.createElement(
-            'h1',
-            null,
-            'Crear Producto'
-        ),
-        _react2.default.createElement(
-            'form',
-            { onSubmit: props.handleSubmit },
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { 'for': 'nombreProducto' },
-                    'Nombre Producto'
-                ),
-                _react2.default.createElement('input', { name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { 'for': 'precioProducto' },
-                    'Precio'
-                ),
-                _react2.default.createElement('input', { name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { 'for': 'imgProducto' },
-                    'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
-                ),
-                _react2.default.createElement('input', { name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { 'for': 'stockProducto' },
-                    'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
-                ),
-                _react2.default.createElement('input', { name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { name: 'catProducto', 'for': 'catProducto' },
-                    'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
-                ),
-                _react2.default.createElement(
-                    'select',
-                    { className: 'form-control' },
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        'Categoria 1'
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        'Categoria 2'
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        'Categoria 3'
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        'Categoria 4'
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        'Categoria 5'
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                    'label',
-                    { 'for': 'descripcionProducto' },
-                    'Descripcion'
-                ),
-                _react2.default.createElement('textarea', { name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
-            ),
+            'div',
+            { className: 'container' },
             _react2.default.createElement(
                 'button',
-                { type: 'submit', className: 'btn  btn-lg btn-primary' },
-                'Agregar Producto'
-            )
-        ),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null),
-        _react2.default.createElement('br', null)
+                null,
+                '  ',
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/admin/' },
+                    'Volver'
+                ),
+                ' '
+            ),
+            _react2.default.createElement('h1', null),
+            _react2.default.createElement(
+                'h1',
+                null,
+                'Crear Producto'
+            ),
+            _react2.default.createElement(
+                'form',
+                { onSubmit: props.handleSubmit },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'nombreProducto' },
+                        'Nombre Producto'
+                    ),
+                    _react2.default.createElement('input', { name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'precioProducto' },
+                        'Precio'
+                    ),
+                    _react2.default.createElement('input', { name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'imgProducto' },
+                        'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
+                    ),
+                    _react2.default.createElement('input', { name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'stockProducto' },
+                        'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
+                    ),
+                    _react2.default.createElement('input', { name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { name: 'catProducto', htmlFor: 'catProducto' },
+                        'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
+                    ),
+                    _react2.default.createElement(
+                        'select',
+                        { className: 'form-control' },
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            'Categoria 1'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            'Categoria 2'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            'Categoria 3'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            'Categoria 4'
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            'Categoria 5'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'descripcionProducto' },
+                        'Descripcion'
+                    ),
+                    _react2.default.createElement('textarea', { name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { type: 'submit', className: 'btn  btn-lg btn-primary' },
+                    'Agregar Producto'
+                )
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null)
+        )
     );
 };
 
@@ -33967,9 +33976,9 @@ exports.default = function (props) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = undefined;
+exports.fetchProducts = exports.addProduct = exports.updateUser = exports.removeCategory = exports.createCategory = exports.updateOrders = exports.fetchOrders = undefined;
 
 var _axios = __webpack_require__(134);
 
@@ -33979,117 +33988,155 @@ var _constants = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//ACTION CREATORS VENTAS
 var getOrders = function getOrders(orders) {
-  return {
-    type: _constants.FETCH_ORDERS_ADMIN,
-    orders: orders
-  };
-};
-
-var deleteCategory = function deleteCategory(id) {
-  return {
-    type: _constants.REMOVE_CATEGORY,
-    id: id
-  };
+    return {
+        type: _constants.FETCH_ORDERS_ADMIN,
+        orders: orders
+    };
 };
 
 var putOrders = function putOrders(order) {
-  return {
-    type: _constants.UPDATE_ORDERS,
-    order: order
-  };
-};
-
-var putUser = function putUser(user) {
-  return {
-    type: _constants.UPDATE_USER,
-    user: user
-  };
-};
-
-var addCategory = function addCategory(category) {
-  return {
-    type: _constants.ADD_CATEGORY,
-    category: category
-  };
-};
-
-var createCategory = function createCategory(category) {
-  return {
-    type: _constants.CREATE_CATEGORY,
-    category: category
-  };
+    return {
+        type: _constants.UPDATE_ORDERS,
+        order: order
+    };
 };
 
 var postProduct = function postProduct(product) {
-  return {
-    type: _constants.CREATE_PRODUCT,
-    product: product
-  };
+    return {
+        type: _constants.CREATE_PRODUCT,
+        product: product
+    };
 };
 
-var deleteUser = function deleteUser(user) {
-  return {
-    type: _constants.DELETE_USER,
-    user: user
-  };
+//ACTION CREATORS CATEGORIAS
+var addCategory = function addCategory(category) {
+    return {
+        //ESTE ADD CATEGORY ASSIGNA UNA CATEGORIA A UN PRODUCTO
+        type: _constants.ADD_CATEGORY,
+        category: category
+    };
+};
+
+var postCategory = function postCategory(category) {
+    return {
+        //ESTE postCategory CREA UNA NUEVA CATEGORIA
+        type: _constants.CREATE_CATEGORY,
+        category: category
+    };
+};
+
+var deleteCategory = function deleteCategory(id) {
+    return {
+        type: _constants.REMOVE_CATEGORY,
+        id: id
+    };
 };
 
 var editCategory = function editCategory(category) {
-  return {
-    type: _constants.EDIT_CATEGORY,
-    category: category
-  };
+    return {
+        type: _constants.EDIT_CATEGORY,
+        category: category
+    };
 };
 
+//ACTION CREATORS USERS
+var putUser = function putUser(user) {
+    return {
+        type: _constants.UPDATE_USER,
+        user: user
+    };
+};
+
+var deleteUser = function deleteUser(user) {
+    return {
+        type: _constants.DELETE_USER,
+        user: user
+    };
+};
+
+//ACTIONS VENTAS
 var fetchOrders = exports.fetchOrders = function fetchOrders() {
-  return function (dispatch) {
-    return _axios2.default.get('/api/admin/orders').then(function (res) {
-      return res.data;
-    }).then(function (orders) {
-      return dispatch(getOrders(orders));
-    });
-  };
-};
-
-var removeCategory = exports.removeCategory = function removeCategory(categoryId) {
-  return function (dispatch) {
-    return _axios2.default.delete('/api/category/' + categoryId).then(function (res) {
-      return res.data;
-    }).then(function (id) {
-      return dispatch(deleteCategory(id));
-    });
-  };
+    return function (dispatch) {
+        return _axios2.default.get('/api/admin/orders').then(function (res) {
+            return res.data;
+        }).then(function (orders) {
+            return dispatch(getOrders(orders));
+        });
+    };
 };
 
 var updateOrders = exports.updateOrders = function updateOrders(orderId, order) {
-  return function (dispatch) {
-    return _axios2.default.put('/api/orders/' + orderId, order).then(function (res) {
-      return res.data;
-    }).then(function (order) {
-      return dispatch(putOrders(order));
-    });
-  };
+    return function (dispatch) {
+        return _axios2.default.put('/api/orders/' + orderId, order).then(function (res) {
+            return res.data;
+        }).then(function (order) {
+            return dispatch(putOrders(order));
+        });
+    };
 };
 
+//ACTIONS CATEGORYS
+var createCategory = exports.createCategory = function createCategory(categoria) {
+    return function (dispatch) {
+        return _axios2.default.post('/api/categorias/', categoria).then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return dispatch(postCategory(data));
+        });
+    };
+};
+
+//export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
+
+var removeCategory = exports.removeCategory = function removeCategory(categoryId) {
+    return function (dispatch) {
+        return _axios2.default.delete('/api/category/' + categoryId).then(function (res) {
+            return res.data;
+        }).then(function (id) {
+            return dispatch(deleteCategory(id));
+        });
+    };
+};
+
+//ACTION USERS
 var updateUser = exports.updateUser = function updateUser(userId, user) {
-  return function (dispatch) {
-    return _axios2.default.put('/api/user/' + userId, user).then(function (res) {
-      return res.data;
-    }).then(function (user) {
-      return dispatch(putUser(user));
-    });
-  };
+    return function (dispatch) {
+        return _axios2.default.put('/api/user/' + userId, user).then(function (res) {
+            return res.data;
+        }).then(function (user) {
+            return dispatch(putUser(user));
+        });
+    };
 };
 
 var addProduct = exports.addProduct = function addProduct(producto) {
-  return function (dispatch) {
-    return _axios2.default.post('/api/producto', producto).then(function (res) {
-      return res.data;
-    }).then(function (data) {
-      return dispatch(postProduct(data));
-    });
-  };
+    return function (dispatch) {
+        return _axios2.default.post('/api/productos/', producto).then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return dispatch(postProduct(data));
+        });
+    };
+};
+
+//PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
+var Fetch_Products = function Fetch_Products(data) {
+    return {
+        type: _constants.FETCH_PRODUCTS,
+        data: data
+    };
+};
+
+var fetchProducts = exports.fetchProducts = function fetchProducts() {
+    return function (dispatch) {
+        return _axios2.default.get('/api/productos').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return dispatch(Fetch_Products(data));
+        });
+    };
 };
 
 /***/ }),
@@ -34107,121 +34154,157 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(5);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //MAPEAR POR TODAS LAS CATEGORIAS HACER UN  DISPLAY
 //Agregarle un boton para elminar la categoria de la db
 // Y DEJAR UN BOTON PARA AGREGAR UNA NUEVA CATEGORIA
 
-exports.default = function () {
+
+exports.default = function (props) {
 	return _react2.default.createElement(
-		"div",
-		{ className: "container-fluid", id: "AdminAddCategory" },
-		_react2.default.createElement("br", null),
-		_react2.default.createElement("br", null),
-		_react2.default.createElement("br", null),
+		'div',
+		{ className: 'container-fluid', id: 'AdminAddCategory' },
 		_react2.default.createElement(
-			"div",
-			{ "class": "row" },
+			'div',
+			{ className: 'container' },
 			_react2.default.createElement(
-				"div",
-				{ "class": "col-sm-6 col-md-offset-2 col-md-8" },
+				'button',
+				null,
+				'  ',
 				_react2.default.createElement(
-					"h1",
-					null,
-					"Editar Categorias"
+					_reactRouterDom.Link,
+					{ to: '/admin/' },
+					'Volver'
 				),
+				' '
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement(
+				'div',
+				{ 'class': 'row' },
 				_react2.default.createElement(
-					"div",
-					{ "class": "thumbnail edit" },
+					'div',
+					{ 'class': 'col-sm-6 col-md-offset-2 col-md-8' },
 					_react2.default.createElement(
-						"ul",
+						'h1',
 						null,
+						'Editar Categorias'
+					),
+					_react2.default.createElement(
+						'div',
+						{ 'class': 'thumbnail edit' },
 						_react2.default.createElement(
-							"li",
+							'ul',
 							null,
-							"Categoria 1 ",
 							_react2.default.createElement(
-								"button",
-								{ className: "btn btn-danger" },
+								'li',
+								null,
+								'Categoria 1 ',
 								_react2.default.createElement(
-									"span",
-									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
-									" "
+									'button',
+									{ className: 'btn btn-danger' },
+									_react2.default.createElement(
+										'span',
+										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
+										' '
+									),
+									' Eliminar categoria'
 								),
-								" Eliminar categoria"
+								' '
 							),
-							" "
-						),
-						" ",
-						_react2.default.createElement("br", null),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Categoria 1 ",
+							' ',
+							_react2.default.createElement('br', null),
 							_react2.default.createElement(
-								"button",
-								{ className: "btn btn-danger" },
+								'li',
+								null,
+								'Categoria 1 ',
 								_react2.default.createElement(
-									"span",
-									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
-									" "
+									'button',
+									{ className: 'btn btn-danger' },
+									_react2.default.createElement(
+										'span',
+										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
+										' '
+									),
+									' Eliminar categoria'
 								),
-								" Eliminar categoria"
+								' '
 							),
-							" "
-						),
-						"    ",
-						_react2.default.createElement("br", null),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Categoria 1 ",
+							'    ',
+							_react2.default.createElement('br', null),
 							_react2.default.createElement(
-								"button",
-								{ className: "btn btn-danger" },
+								'li',
+								null,
+								'Categoria 1 ',
 								_react2.default.createElement(
-									"span",
-									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
-									" "
+									'button',
+									{ className: 'btn btn-danger' },
+									_react2.default.createElement(
+										'span',
+										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
+										' '
+									),
+									' Eliminar categoria'
 								),
-								" Eliminar categoria"
+								' '
 							),
-							" "
-						),
-						_react2.default.createElement("br", null),
-						_react2.default.createElement(
-							"li",
-							null,
-							"Categoria 1 ",
+							_react2.default.createElement('br', null),
 							_react2.default.createElement(
-								"button",
-								{ className: "btn btn-danger" },
+								'li',
+								null,
+								'Categoria 1 ',
 								_react2.default.createElement(
-									"span",
-									{ "class": "glyphicon glyphicon-remove", "aria-hidden": "true" },
-									" "
+									'button',
+									{ className: 'btn btn-danger' },
+									_react2.default.createElement(
+										'span',
+										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
+										' '
+									),
+									' Eliminar categoria'
 								),
-								" Eliminar categoria"
+								' '
 							),
-							" "
-						),
-						_react2.default.createElement("br", null),
-						_react2.default.createElement("input", { type: "text", "class": "form-control" }),
-						_react2.default.createElement("br", null),
-						_react2.default.createElement(
-							"button",
-							{ className: "btn btn-success" },
+							_react2.default.createElement('br', null),
 							_react2.default.createElement(
-								"span",
-								{ "class": "glyphicon glyphicon-plus", "aria-hidden": "true" },
-								" "
-							),
-							" Agregar categoria"
+								'form',
+								{ action: '', onSubmit: props.handleSubmit },
+								_react2.default.createElement('input', { type: 'text', 'class': 'form-control', name: 'categoriaNueva' }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-success', type: 'submit', onClick: function onClick() {
+											return props.handleSubmit;
+										} },
+									_react2.default.createElement(
+										'span',
+										{ 'class': 'glyphicon glyphicon-plus', 'aria-hidden': 'true' },
+										' '
+									),
+									' Agregar categoria'
+								)
+							)
 						)
 					)
 				)
-			)
+			),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null),
+			_react2.default.createElement('br', null)
 		)
 	);
 };
@@ -34369,6 +34452,228 @@ exports.default = function () {
         })
     );
 };
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _AdminAddCategory = __webpack_require__(168);
+
+var _AdminAddCategory2 = _interopRequireDefault(_AdminAddCategory);
+
+var _reactRedux = __webpack_require__(10);
+
+var _user = __webpack_require__(167);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminAddCategoryContainer = function (_Component) {
+    _inherits(AdminAddCategoryContainer, _Component);
+
+    function AdminAddCategoryContainer(props) {
+        _classCallCheck(this, AdminAddCategoryContainer);
+
+        var _this = _possibleConstructorReturn(this, (AdminAddCategoryContainer.__proto__ || Object.getPrototypeOf(AdminAddCategoryContainer)).call(this, props));
+
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
+    }
+
+    _createClass(AdminAddCategoryContainer, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(evt) {
+            //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+            //LA RUTA PIDE UN OBJ.nombre que se agrega a la db.
+            evt.preventDefault();
+            var categoria = {
+                nombre: evt.target.categoriaNueva.value
+            };
+            this.props.createCategory(categoria);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_AdminAddCategory2.default, { handleSubmit: this.handleSubmit })
+            );
+        }
+    }]);
+
+    return AdminAddCategoryContainer;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createCategory: function createCategory(categoria) {
+            dispatch((0, _user.createCategory)(categoria));
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminAddCategoryContainer);
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid', id: 'adminListaProductos' },
+        _react2.default.createElement(
+            'h1',
+            null,
+            'DISPLAY ALL PRODUCTOS'
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'container' },
+            _react2.default.createElement(
+                'div',
+                { className: 'listaProductos' },
+                props.listaProductos.map(function (producto) {
+                    return _react2.default.createElement(
+                        'div',
+                        { className: 'listaProductoIndividual', key: producto.id },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            producto.nombre
+                        ),
+                        _react2.default.createElement(
+                            _reactRouterDom.Link,
+                            { to: '/producto/id' },
+                            _react2.default.createElement(
+                                'button',
+                                { className: 'btn btn-primary' },
+                                ' Editar Product'
+                            ),
+                            ' '
+                        )
+                    );
+                })
+            )
+        )
+    ) //CIERRO CONTAINER-FLUID
+    ;
+};
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(10);
+
+var _AdminProductos = __webpack_require__(171);
+
+var _AdminProductos2 = _interopRequireDefault(_AdminProductos);
+
+var _user = __webpack_require__(167);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminManejarProductos = function (_Component) {
+    _inherits(AdminManejarProductos, _Component);
+
+    function AdminManejarProductos(props) {
+        _classCallCheck(this, AdminManejarProductos);
+
+        return _possibleConstructorReturn(this, (AdminManejarProductos.__proto__ || Object.getPrototypeOf(AdminManejarProductos)).call(this, props));
+    }
+
+    _createClass(AdminManejarProductos, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.props.fetchProducts();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_AdminProductos2.default, { listaProductos: this.props.listaProductos })
+            );
+        }
+    }]);
+
+    return AdminManejarProductos;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {
+        listaProductos: state.userAdmin.listaProductos
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchProducts: function fetchProducts(productos) {
+            dispatch((0, _user.fetchProducts)(productos));
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminManejarProductos);
 
 /***/ })
 /******/ ]);
