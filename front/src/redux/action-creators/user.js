@@ -1,20 +1,46 @@
 import axios from 'axios';
+
 import {
-    FETCH_ORDERS_ADMIN,
-    UPDATE_ORDERS,
-    UPDATE_USER,
-    REMOVE_CATEGORY,
-    ADD_CATEGORY,
-    CREATE_CATEGORY,
-    CREATE_PRODUCT,
-    DELETE_USER,
-    EDIT_CATEGORY,
-    FETCH_ORDERS_USER,
-    FETCH_PRODUCTS,
-    FETCH_CATEGORYS
+  FETCH_ORDERS_ADMIN,
+  UPDATE_ORDERS,
+  UPDATE_USER,
+  REMOVE_CATEGORY,
+  ADD_CATEGORY,
+  CREATE_CATEGORY,
+  CREATE_PRODUCT,
+  DELETE_USER,
+  EDIT_CATEGORY,
+  LOGIN_SUCCESS,
+  LOGOUT
 } from '../constants';
 
-//ACTION CREATORS VENTAS
+// LOGIN & LOGOUT ACTIONS:
+export const logginSuccess = user => ({
+  type: LOGIN_SUCCESS,
+  user
+})
+
+export const logout = user => ({
+  type: LOGOUT,
+  user
+})
+
+export const addLoginToLocalStorage = user => dispatch => {
+  axios.post('api/login', user)
+    .then(res => dispatch(logginSuccess(res.data)))
+    .then(res => localStorage.setItem('login', JSON.stringify(res.user)))
+
+}
+
+export const removeLoginFromLocalStorage = () => dispatch => {
+  localStorage.removeItem('login')
+  dispatch(logout())
+  location.reload(); // refresca la página para que el login se pase a logout
+}
+
+
+// OTRAS ACCIONES:
+
 const getOrders = orders => ({
     type: FETCH_ORDERS_ADMIN,
     orders,
@@ -137,3 +163,7 @@ export const fetchCategorys = () => dispatch =>
         .then(data => dispatch(Fetch_categorys(data)))
     
     
+export const addProduct = (producto) => (dispatch) =>
+  axios.post('/api/productos', producto)
+    .then(res => res.data)
+    .then(data => dispatch(postProduct(data)))

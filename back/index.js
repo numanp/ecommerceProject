@@ -73,5 +73,6 @@ app.post('/api/logout', (req, res) => {
 });
 app.use('/api', require('./routes/index'));
 app.get('/*', function (req, res) {
+  console.log('ruta html')
   res.sendFile(path.resolve('../front/index.html'));
 })
