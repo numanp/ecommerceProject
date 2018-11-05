@@ -35,11 +35,9 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  // componentDidMount() {
-  //   axios.get('/api/user/me')
-  //     .then((data) => console.log(data))
-  //     .catch(console.log)
-  // }
+  componentDidMount() {
+   localStorage.setItem('hola','man')
+  }
   render() {
     return (
       <div>

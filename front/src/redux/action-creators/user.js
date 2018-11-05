@@ -10,7 +10,8 @@ import {
     DELETE_USER,
     EDIT_CATEGORY,
     FETCH_ORDERS_USER,
-    FETCH_PRODUCTS
+    FETCH_PRODUCTS,
+    FETCH_CATEGORYS
 } from '../constants';
 
 //ACTION CREATORS VENTAS
@@ -52,6 +53,11 @@ const editCategory = category => ({
     category,
 });
 
+const getCategory = category => ({
+    type: FETCH_CATEGORY,
+    category,
+});
+
 //ACTION CREATORS USERS
 const putUser = user => ({
     type: UPDATE_USER,
@@ -83,12 +89,13 @@ export const createCategory = categoria => dispatch =>
     axios.post('/api/categorias/', categoria)
     .then(res =>res.data)
     .then(data => dispatch(postCategory(data)))
+    //SET CATGORIES
 
 //export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
 
 export const removeCategory = categoryId => dispatch =>
     axios
-        .delete(`/api/category/${categoryId}`)
+        .delete(`/api/categorias/${categoryId}`)
         .then(res => res.data)
         .then(id => dispatch(deleteCategory(id)));
 
@@ -117,3 +124,16 @@ export const fetchProducts = () => dispatch =>
         .get('/api/productos')
         .then(res =>res.data)
         .then(data => dispatch(Fetch_Products(data)))
+
+const Fetch_categorys = (data) => ({
+    type: FETCH_CATEGORYS,
+    data
+});
+
+export const fetchCategorys = () => dispatch =>
+    axios
+        .get('/api/categorias')
+        .then(res =>res.data)
+        .then(data => dispatch(Fetch_categorys(data)))
+    
+    

@@ -9,12 +9,15 @@ import {
     DELETE_USER,
     EDIT_CATEGORY,
     FETCH_PRODUCTS,
+    FETCH_CATEGORYS
 
 } from '../constants';
 
 const initialState = {
-    listaProductos: []
+    listaProductos: [],
+    listaCategorias: []
 };
+
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_ORDERS_ADMIN:
@@ -24,13 +27,19 @@ export default (state = initialState, action) => {
         case UPDATE_USER:
             return Object.assign({}, state, { user: action.user });
         case REMOVE_CATEGORY:
-            return Object.assign({}, state, { category: action.id });
+            return Object.assign({}, state, { listaCategorias: action.id });
         case ADD_CATEGORY:
             //Esto asigna una categoria a un prodducto. No crea categoria
             return Object.assign({}, state, { category: action.id });
         case CREATE_CATEGORY:
             //Esto crea una categoria.
-            return Object.assign({}, state, { category: action.id }); 
+            return {
+                ...state,
+                list: [...state.listaProductos, action.category],
+            }
+        case FETCH_CATEGORYS:
+            //Accedo a todas las categorias
+            return Object.assign({}, state, { listaCategorias: [...action.data]});
         case FETCH_PRODUCTS:
             return  Object.assign({}, state, { listaProductos:  [...action.data]}); 
         default:

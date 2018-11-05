@@ -26,14 +26,15 @@ export default (props) => (
             <input name="stockProducto" type="text" className="form-control" placeholder="Cantidad a agregar"></input>
         </div>
         <div className="form-group">
-        <label name="catProducto" htmlFor="catProducto">Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)</label> 
-            <select className="form-control">
-                <option>Categoria 1</option>
-                <option>Categoria 2</option>
-                <option>Categoria 3</option>
-                <option>Categoria 4</option>
-                <option>Categoria 5</option>
-            </select>
+      
+            { props.listaCategorias.map(categoria => 
+                   <label key={categoria.id}>
+                        {categoria.nombre}
+                       <input type="checkbox" name={categoria.nombre} /> 
+                       
+                   </label>
+
+                )}
         </div>
 
         <div className="form-group">

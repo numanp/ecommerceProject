@@ -23,8 +23,8 @@ router.put('/:nombre', (req, res) => {
         })
 });
 
-router.delete('/:nombre', (req, res) => {
-    models.Categoria.destroy({ where: { nombre: req.params.nombre } })
+router.delete('/:id', (req, res) => {
+    models.Categoria.destroy({ where: { id: req.params.id } })
         .then(() => {
             models.Categoria.findAll()
                 .then((cats) => {

@@ -48,7 +48,6 @@ router.post('/', (req, res) => {
         foto: req.body.foto,
         stock: req.body.stock
     }).then((producto) => {
-        console.log('producto creado');
         res.status(200).send(producto)
     });
 })

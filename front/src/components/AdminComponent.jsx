@@ -11,7 +11,7 @@ export default () => (
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
-                        <h3>Agregar/Editar Producto</h3>
+                        <h3>Crear Producto</h3>
                         <Link to="/admin/agregarProducto"  className="btn btn-primary">Agregar producto</Link>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ export default () => (
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
-                        <h3>Manejar productos</h3>
+                        <h3>Editar productos</h3>
                         <Link to="/admin/adminListaProductos" className="btn btn-primary">Editar Producto</Link>
                     </div>
                 </div>

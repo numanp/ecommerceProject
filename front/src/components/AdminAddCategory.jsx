@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom';
 
 
 export default (props) => (
-<div  className="container-fluid" id="AdminAddCategory">
+
+	<div  className="container-fluid" id="AdminAddCategory">
 	<div  className="container" >
+	
 		<button>  <Link to="/admin/">Volver</Link> </button>
 		<br/><br/><br/>
 		<div class="row">
@@ -16,10 +18,19 @@ export default (props) => (
 			<h1>Editar Categorias</h1>
 				<div class="thumbnail edit" >
 					<ul>
-						<li>Categoria 1 <button className="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Eliminar categoria</button> </li> <br/>
-						<li>Categoria 1 <button className="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Eliminar categoria</button> </li>    <br/>
-						<li>Categoria 1 <button className="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Eliminar categoria</button> </li><br/>
-						<li>Categoria 1 <button className="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Eliminar categoria</button> </li><br/>
+					{
+						props.listaCategorias.map(categoria => {
+							return (
+							<li key={categoria.id}>{categoria.nombre} 
+								<button className="btn btn-danger" onClick={() => props.removeCategory(categoria.id)}>
+	
+									<span class="glyphicon glyphicon-remove" aria-hidden="true">
+									</span> Eliminar categoria
+								</button> 
+							</li>)
+						})
+						
+					}
 						<form action="" onSubmit={props.handleSubmit}>
 							<input type="text" class="form-control" name="categoriaNueva"/>
 							<br/>

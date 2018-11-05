@@ -1057,7 +1057,8 @@ var CREATE_CATEGORY = exports.CREATE_CATEGORY = 'CREATE_CATEGORY';
 var CREATE_PRODUCT = exports.CREATE_PRODUCT = 'CREATE_PRODUCT';
 var DELETE_USER = exports.DELETE_USER = 'DELETE_USER';
 var EDIT_CATEGORY = exports.EDIT_CATEGORY = 'EDIT_CATEGORY';
-
+FETCH_CATEGORYS;
+var FETCH_CATEGORYS = exports.FETCH_CATEGORYS = 'FETCH_CATEGORYS';
 var FETCH_ORDERS_ADMIN = exports.FETCH_ORDERS_ADMIN = 'FETCH_ORDERS_ADMIN';
 var REMOVE_CATEGORY = exports.REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 var UPDATE_ORDERS = exports.UPDATE_ORDERS = 'UPDATE_ORDERS';
@@ -30193,12 +30194,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _constants = __webpack_require__(11);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var initialState = {
-    listaProductos: []
+    listaProductos: [],
+    listaCategorias: []
 };
 
 exports.default = function () {
@@ -30213,13 +30217,18 @@ exports.default = function () {
         case _constants.UPDATE_USER:
             return Object.assign({}, state, { user: action.user });
         case _constants.REMOVE_CATEGORY:
-            return Object.assign({}, state, { category: action.id });
+            return Object.assign({}, state, { listaCategorias: action.id });
         case _constants.ADD_CATEGORY:
             //Esto asigna una categoria a un prodducto. No crea categoria
             return Object.assign({}, state, { category: action.id });
         case _constants.CREATE_CATEGORY:
             //Esto crea una categoria.
-            return Object.assign({}, state, { category: action.id });
+            return _extends({}, state, {
+                list: [].concat(_toConsumableArray(state.listaProductos), [action.category])
+            });
+        case _constants.FETCH_CATEGORYS:
+            //Accedo a todas las categorias
+            return Object.assign({}, state, { listaCategorias: [].concat(_toConsumableArray(action.data)) });
         case _constants.FETCH_PRODUCTS:
             return Object.assign({}, state, { listaProductos: [].concat(_toConsumableArray(action.data)) });
         default:
@@ -30421,12 +30430,11 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-    // componentDidMount() {
-    //   axios.get('/api/user/me')
-    //     .then((data) => console.log(data))
-    //     .catch(console.log)
-    // }
-
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      localStorage.setItem('hola', 'man');
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -33530,7 +33538,7 @@ exports.default = function () {
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                'Agregar/Editar Producto'
+                                'Crear Producto'
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
@@ -33579,7 +33587,7 @@ exports.default = function () {
                             _react2.default.createElement(
                                 'h3',
                                 null,
-                                'Manejar productos'
+                                'Editar productos'
                             ),
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
@@ -33768,13 +33776,19 @@ var AdminAddProductContainer = function (_Component) {
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
-    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
     _createClass(AdminAddProductContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchCategorys();
+        }
+        //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+
+    }, {
         key: 'handleSubmit',
         value: function handleSubmit(evt) {
             evt.preventDefault();
-            //console.log(this.state)
+            console.log(evt.target);
             var productoAgregar = {
                 nombre: evt.target.nombreProducto.value,
                 descripcion: evt.target.descripcionProducto.value,
@@ -33793,7 +33807,7 @@ var AdminAddProductContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit })
+                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit, listaCategorias: this.props.listaCategorias })
             );
         }
     }]);
@@ -33802,13 +33816,18 @@ var AdminAddProductContainer = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        listaCategorias: state.userAdmin.listaCategorias
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         addProduct: function addProduct(producto) {
             dispatch((0, _user.addProduct)(producto));
+        },
+        fetchCategorys: function fetchCategorys(categorias) {
+            dispatch((0, _user.fetchCategorys)(categorias));
         }
     };
 }
@@ -33904,40 +33923,14 @@ exports.default = function (props) {
                 _react2.default.createElement(
                     'div',
                     { className: 'form-group' },
-                    _react2.default.createElement(
-                        'label',
-                        { name: 'catProducto', htmlFor: 'catProducto' },
-                        'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
-                    ),
-                    _react2.default.createElement(
-                        'select',
-                        { className: 'form-control' },
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            'Categoria 1'
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            'Categoria 2'
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            'Categoria 3'
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            'Categoria 4'
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            'Categoria 5'
-                        )
-                    )
+                    props.listaCategorias.map(function (categoria) {
+                        return _react2.default.createElement(
+                            'label',
+                            { key: categoria.id },
+                            categoria.nombre,
+                            _react2.default.createElement('input', { type: 'checkbox', name: categoria.nombre })
+                        );
+                    })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -33978,7 +33971,7 @@ exports.default = function (props) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.fetchProducts = exports.addProduct = exports.updateUser = exports.removeCategory = exports.createCategory = exports.updateOrders = exports.fetchOrders = undefined;
+exports.fetchCategorys = exports.fetchProducts = exports.addProduct = exports.updateUser = exports.removeCategory = exports.createCategory = exports.updateOrders = exports.fetchOrders = undefined;
 
 var _axios = __webpack_require__(134);
 
@@ -34041,6 +34034,13 @@ var editCategory = function editCategory(category) {
     };
 };
 
+var getCategory = function getCategory(category) {
+    return {
+        type: FETCH_CATEGORY,
+        category: category
+    };
+};
+
 //ACTION CREATORS USERS
 var putUser = function putUser(user) {
     return {
@@ -34087,12 +34087,13 @@ var createCategory = exports.createCategory = function createCategory(categoria)
         });
     };
 };
+//SET CATGORIES
 
 //export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
 
 var removeCategory = exports.removeCategory = function removeCategory(categoryId) {
     return function (dispatch) {
-        return _axios2.default.delete('/api/category/' + categoryId).then(function (res) {
+        return _axios2.default.delete('/api/categorias/' + categoryId).then(function (res) {
             return res.data;
         }).then(function (id) {
             return dispatch(deleteCategory(id));
@@ -34135,6 +34136,23 @@ var fetchProducts = exports.fetchProducts = function fetchProducts() {
             return res.data;
         }).then(function (data) {
             return dispatch(Fetch_Products(data));
+        });
+    };
+};
+
+var Fetch_categorys = function Fetch_categorys(data) {
+    return {
+        type: _constants.FETCH_CATEGORYS,
+        data: data
+    };
+};
+
+var fetchCategorys = exports.fetchCategorys = function fetchCategorys() {
+    return function (dispatch) {
+        return _axios2.default.get('/api/categorias').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return dispatch(Fetch_categorys(data));
         });
     };
 };
@@ -34201,76 +34219,21 @@ exports.default = function (props) {
 						_react2.default.createElement(
 							'ul',
 							null,
-							_react2.default.createElement(
-								'li',
-								null,
-								'Categoria 1 ',
-								_react2.default.createElement(
-									'button',
-									{ className: 'btn btn-danger' },
+							props.listaCategorias.map(function (categoria) {
+								return _react2.default.createElement(
+									'li',
+									{ key: categoria.id },
+									categoria.nombre,
 									_react2.default.createElement(
-										'span',
-										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
-										' '
-									),
-									' Eliminar categoria'
-								),
-								' '
-							),
-							' ',
-							_react2.default.createElement('br', null),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Categoria 1 ',
-								_react2.default.createElement(
-									'button',
-									{ className: 'btn btn-danger' },
-									_react2.default.createElement(
-										'span',
-										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
-										' '
-									),
-									' Eliminar categoria'
-								),
-								' '
-							),
-							'    ',
-							_react2.default.createElement('br', null),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Categoria 1 ',
-								_react2.default.createElement(
-									'button',
-									{ className: 'btn btn-danger' },
-									_react2.default.createElement(
-										'span',
-										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
-										' '
-									),
-									' Eliminar categoria'
-								),
-								' '
-							),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Categoria 1 ',
-								_react2.default.createElement(
-									'button',
-									{ className: 'btn btn-danger' },
-									_react2.default.createElement(
-										'span',
-										{ 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' },
-										' '
-									),
-									' Eliminar categoria'
-								),
-								' '
-							),
-							_react2.default.createElement('br', null),
+										'button',
+										{ className: 'btn btn-danger', onClick: function onClick() {
+												return props.removeCategory(categoria.id);
+											} },
+										_react2.default.createElement('span', { 'class': 'glyphicon glyphicon-remove', 'aria-hidden': 'true' }),
+										' Eliminar categoria'
+									)
+								);
+							}),
 							_react2.default.createElement(
 								'form',
 								{ action: '', onSubmit: props.handleSubmit },
@@ -34499,6 +34462,16 @@ var AdminAddCategoryContainer = function (_Component) {
     }
 
     _createClass(AdminAddCategoryContainer, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.props.fetchCategorys();
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchCategorys();
+        }
+    }, {
         key: 'handleSubmit',
         value: function handleSubmit(evt) {
             //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
@@ -34508,6 +34481,7 @@ var AdminAddCategoryContainer = function (_Component) {
                 nombre: evt.target.categoriaNueva.value
             };
             this.props.createCategory(categoria);
+            this.props.fetchCategorys();
         }
     }, {
         key: 'render',
@@ -34515,7 +34489,7 @@ var AdminAddCategoryContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_AdminAddCategory2.default, { handleSubmit: this.handleSubmit })
+                _react2.default.createElement(_AdminAddCategory2.default, { removeCategory: this.props.removeCategory, handleSubmit: this.handleSubmit, listaCategorias: this.props.listaCategorias })
             );
         }
     }]);
@@ -34524,13 +34498,21 @@ var AdminAddCategoryContainer = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        listaCategorias: state.userAdmin.listaCategorias
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         createCategory: function createCategory(categoria) {
             dispatch((0, _user.createCategory)(categoria));
+        },
+        fetchCategorys: function fetchCategorys(categorias) {
+            dispatch((0, _user.fetchCategorys)(categorias));
+        },
+        removeCategory: function removeCategory(categoriaId) {
+            dispatch((0, _user.removeCategory)(categoriaId));
         }
     };
 }
@@ -34582,7 +34564,7 @@ exports.default = function (props) {
                         ),
                         _react2.default.createElement(
                             _reactRouterDom.Link,
-                            { to: '/producto/id' },
+                            { exact: true, path: '/admin' },
                             _react2.default.createElement(
                                 'button',
                                 { className: 'btn btn-primary' },

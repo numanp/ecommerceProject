@@ -11,7 +11,7 @@ export default (props) => (
                     props.listaProductos.map(producto => 
                         <div className="listaProductoIndividual" key={producto.id}>
                             <h1>{producto.nombre }</h1>
-                            <Link to='/producto/id'><button className="btn btn-primary"> Editar Product</button> </Link>
+                                <Link exact path="/admin"><button className="btn btn-primary"> Editar Product</button> </Link>
                         </div>
                     )    
                 }
