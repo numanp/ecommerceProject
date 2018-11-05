@@ -7,5 +7,5 @@ export const fetchSingleProduct = product => ({
 
 export const fetchProducts = products => ({
     type: FETCH_PRODUCTS,
-    products,
+    products
 })

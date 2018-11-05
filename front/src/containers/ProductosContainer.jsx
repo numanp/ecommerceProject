@@ -7,40 +7,42 @@ import ListadoProductos from './ProductosSubContainer'
 
 import data from '../baseHarcodeada/products.json'
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-      product: state.product,
-      productos: state.productos,
+        product: state.product,
+        productos: state.products,
     }
-  }
-  
-  function mapDispatchToProps(dispatch){
+}
+
+function mapDispatchToProps(dispatch) {
     return {
-      getSingleProduct: (producto) => {
-        dispatch(fetchSingleProduct(producto))
-      },
-      getProducts: (productos) => {
-          dispatch(fetchProducts(productos))
-      }
+        getSingleProduct: (producto) => {
+            dispatch(fetchSingleProduct(producto))
+        },
+        getProducts: (productos) => {
+            dispatch(fetchProducts(productos))
+        }
     }
-  }
+}
 
 class ProductosContainer extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get('api/productos')
-        .then(data => dispatch(this.props.getProducts(data)))
+            .then(data => this.props.getProducts(data))
     }
 
-    render(){
-        <div>
-            <ListadoProductos products={this.props.productos}/>
-        </div>
+    render() {
+        return (
+            <div>
+                {/*  <ListadoProductos products={this.props.productos} /> */}
+            </div>
+        )
     }
 }
 
 
-export default connect (mapStateToProps, mapDispatchToProps)(ProductosContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductosContainer)

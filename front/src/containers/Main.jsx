@@ -33,7 +33,7 @@ class Main extends Component {
   }
   logn(object) {
     axios.post('api/login', object)
-    .then(res => console.log(res.data))
+      .then(res => console.log(res.data))
   }
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
@@ -50,13 +50,13 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <NavBar admin={this.state.admin}/>
+        <NavBar admin={this.state.admin} />
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route exact path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
-        <Route exact path="/singleProduct" component={SingleProduct} />
+        {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
 
         {//RUTAS DEL ADMIN
         }

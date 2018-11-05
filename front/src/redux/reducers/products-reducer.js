@@ -1,5 +1,5 @@
 import {
-    FETCH_PRODUCT,
+    FETCH_PRODUCTS,
     FETCH_PRODUCTS_BY_CATEGORY,
     FETCH_SINGLE_PRODUCT,
     PRODUCT_AMOUNT,
@@ -7,9 +7,11 @@ import {
 } from '../constants';
 
 const productsReducer = (state = [], action) => {
-    switch(action.type) {
-        case FETCH_PRODUCT:
-            return [...state, action.payload]
+    switch (action.type) {
+        case FETCH_PRODUCTS:
+            return Object.assign({}, state, {
+                products
+            })
         case FETCH_SINGLE_PRODUCT:
             return Object.assign({}, state, {
                 product
