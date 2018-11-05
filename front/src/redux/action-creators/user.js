@@ -86,6 +86,11 @@ const getCategory = category => ({
     category,
 });
 
+export const fetchOrders = () => dispatch =>
+  axios
+    .get('/api/ventas')
+    .then(res => res.data)
+    .then(orders => dispatch(getOrders(orders)));
 //ACTION CREATORS USERS
 const putUser = user => ({
     type: UPDATE_USER,
@@ -147,6 +152,17 @@ const Fetch_Products = (data) => ({
     data
 });
 
+export const addProduct = producto => dispatch =>
+  axios
+    .post('/api/productos', producto)
+    .then(res => res.data)
+    .then(data => dispatch(postProduct(data)));
+
+export const removeUser = user => dispatch =>
+  axios
+    .delete(`/api/user/${user}`)
+    .then(res => res.data)
+    .then(user => dispatch(deleteUser(user)));
 export const fetchProducts = () => dispatch =>
     axios
         .get('/api/productos')

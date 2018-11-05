@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { connect } from 'react-redux'
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 
 function mapStateToProps(state, ownProps) {
-  return {
-
-  }
+  return {};
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  return {}
+  return {};
 }
 
 class ContainerSingleProduct extends Component {
@@ -21,7 +19,7 @@ class ContainerSingleProduct extends Component {
     super(props);
   }
   render() {
-    console.log('PROPS DEL HIJOOOOOOOOOOOOOOO', this.props)
+    console.log('PROPS DEL HIJOOOOOOOOOOOOOOO', this.props);
     return (
       <div>
         <h1>{this.props.product.nombre}</h1>
@@ -30,4 +28,4 @@ class ContainerSingleProduct extends Component {
   }
 }
 
-export default ContainerSingleProduct
+export default ContainerSingleProduct;
