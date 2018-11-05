@@ -3905,7 +3905,7 @@ var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
     user: user
   };
 };
-// import { Redirect } from ''
+
 var logout = exports.logout = function logout(user) {
   return {
     type: _constants.LOGOUT,
@@ -3913,14 +3913,13 @@ var logout = exports.logout = function logout(user) {
   };
 };
 
-var addLoginToLocalStorage = exports.addLoginToLocalStorage = function addLoginToLocalStorage(producto) {
+var addLoginToLocalStorage = exports.addLoginToLocalStorage = function addLoginToLocalStorage(user) {
   return function (dispatch) {
-    _axios2.default.post('api/login', producto).then(function (res) {
+    _axios2.default.post('api/login', user).then(function (res) {
       return dispatch(logginSuccess(res.data));
     }).then(function (res) {
       return localStorage.setItem('login', JSON.stringify(res.user));
     });
-    // .then( )
   };
 };
 
@@ -31869,6 +31868,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.loggedIn
+    };
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         login: function login(user) {
@@ -31889,6 +31894,7 @@ var Login = function (_Component) {
             email: '',
             password: ''
         };
+        _this.logn = _this.logn.bind(_this);
         return _this;
     }
 
@@ -31907,6 +31913,11 @@ var Login = function (_Component) {
             });
         }
     }, {
+        key: 'logn',
+        value: function logn(object) {
+            this.props.logginSuccess(object);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -31917,7 +31928,7 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: function onSubmit(e) {
-                            _this2.props.login(_this2.state);
+                            e.preventDefault();_this2.props.login(_this2.state);
                         } },
                     _react2.default.createElement('input', { onChange: function onChange(e) {
                             return _this2.emailChange(e);
@@ -31944,7 +31955,7 @@ var Login = function (_Component) {
     return Login;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 134 */

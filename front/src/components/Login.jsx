@@ -3,6 +3,12 @@ import { connect } from 'react-redux'
 
 import { addLoginToLocalStorage } from '../redux/action-creators/user'
 
+function mapStateToProps(state) {	
+    return {	
+        loggedIn: state.loggedIn	
+    }	
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         login: (user) => {
@@ -18,6 +24,7 @@ class Login extends Component {
             email: '',
             password: ''
         }
+        this.logn = this.logn.bind(this)
     }
     emailChange(e) {
         this.setState(
@@ -34,10 +41,14 @@ class Login extends Component {
         )
     }
 
+    logn(object) {	
+        this.props.logginSuccess(object)	
+    }
+
     render() {
         return (
             <div>
-                <form onSubmit={(e) => { this.props.login(this.state) }}>
+                <form onSubmit={(e) => { e.preventDefault(); this.props.login(this.state) }}>
                     <input onChange={(e) => this.emailChange(e)} type="text" name="email" placeholder="email" /><br /><br />
                     <input onChange={(e) => this.passwordChange(e)} type="text" name="password" placeholder="password" /><br /><br />
                     <button type="submit">Login</button><br /><br />
@@ -47,8 +58,7 @@ class Login extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
-
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
 
 
 
