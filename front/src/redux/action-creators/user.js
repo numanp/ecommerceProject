@@ -35,6 +35,7 @@ export const addLoginToLocalStorage = user => dispatch => {
 export const removeLoginFromLocalStorage = () => dispatch => {
   localStorage.removeItem('login')
   dispatch(logout())
+  location.reload(); // refresca la página para que el login se pase a logout
 }
 
 

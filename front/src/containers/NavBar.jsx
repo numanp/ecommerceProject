@@ -41,7 +41,7 @@ class NavBar extends Component {
     }
 
     render() {
-        console.log(this.state.logueado)
+        // console.log(this.state.logueado)
     return (
         <nav className="navbar navbar-default">
         <div className="container">

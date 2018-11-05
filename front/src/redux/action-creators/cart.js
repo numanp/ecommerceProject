@@ -10,7 +10,6 @@ const addToCart = producto => ({
 
 
 export const addToLocalStorage = producto => dispatch => {
-
   localStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
 }
