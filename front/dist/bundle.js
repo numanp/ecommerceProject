@@ -851,6 +851,7 @@ var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
 var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
+var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 // Carrito
 
@@ -1781,13 +1782,14 @@ var _reduxThunk = __webpack_require__(123);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxLogger = __webpack_require__(124);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import { createLogger } from 'redux-logger';
+
 
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 
-var store = (0, _redux.createStore)(_index2.default, composeEnhancers((0, _redux.applyMiddleware)((0, _reduxLogger.createLogger)(), _reduxThunk2.default)));
+var store = (0, _redux.createStore)(_index2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
 
 exports.default = store;
 
@@ -3894,52 +3896,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouterDom = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var componentesAdmin = [
-  /*{
-        nombre: 'Agregar/Editar Producto',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: 'Editar Producto'
-    },
-    {
-        nombre: 'Crear Categorias',
-        link: '/admin/agregarProducto"',
-        button1: 'Crear categoria',
-        button2: ''
-    },
-    {
-        nombre: 'Manejar disponiblidad producto',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Ver lista ordenes',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Buscar por orden especifica',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    {
-        nombre: 'Promover Usuario',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },,
-    {
-        nombre: 'Eliminar Usuario',
-        link: '/admin/agregarProducto"',
-        button1: 'Agregar Producto',
-        button2: ''
-    },
-    */
-];
 
 exports.default = function () {
   return _react2.default.createElement(
@@ -30424,7 +30380,6 @@ var cartReducer = function cartReducer() {
     switch (action.type) {
         case _constants.ADD_TO_CART:
             return [].concat(_toConsumableArray(state), [action.payload]);
-
         // case REMOVE_FROM_CART:
         //     const firstMatchIndex = state.indexOf(action.payload)
         //     return state.filter( (item, index) => index !== firstMatchIndex)
@@ -30444,7 +30399,7 @@ exports.default = cartReducer;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _constants = __webpack_require__(8);
@@ -30452,21 +30407,23 @@ var _constants = __webpack_require__(8);
 var initialState = {};
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
 
-  switch (action.type) {
-    case _constants.FETCH_ORDERS_ADMIN:
-      return Object.assign({}, state, { orders: action.orders });
-    case _constants.UPDATE_ORDERS:
-      return Object.assign({}, state, { order: action.order });
-    case _constants.UPDATE_USER:
-      return Object.assign({}, state, { user: action.user });
-    case _constants.REMOVE_CATEGORY:
-      return Object.assign({}, state, { category: action.id });
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case _constants.FETCH_ORDERS_ADMIN:
+            return Object.assign({}, state, { orders: action.orders });
+        case _constants.UPDATE_ORDERS:
+            return Object.assign({}, state, { order: action.order });
+        case _constants.UPDATE_USER:
+            return Object.assign({}, state, { user: action.user });
+        case _constants.REMOVE_CATEGORY:
+            return Object.assign({}, state, { category: action.id });
+        case _constants.ADD_CATEGORY:
+            return Object.assign({}, state, { category: action.id });
+        default:
+            return state;
+    }
 };
 
 /***/ }),
@@ -30485,20 +30442,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _constants = __webpack_require__(8);
 
 var initialState = {
-  reviews: []
+  reviews: [],
+  loggedIn: false,
+  user: {}
 };
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
+  console.log('user-reducer: ', action);
   switch (action.type) {
     case _constants.ADD_REVIEW:
       return _extends({}, state);
     case _constants.FETCH_ORDERS_USER:
       return {};
-    case _constants.LOGIN:
-      return {};
+
+    case _constants.LOGIN_SUCCESS:
+      console.log('corriendo el REDUCEEEEEEEEEER', action);
+      return Object.assign({}, state, {
+        loggedIn: true,
+        user: action.user
+      });
+
     case _constants.LOGOUT:
       return {};
     case _constants.SIGN_UP:
@@ -30548,14 +30514,7 @@ thunk.withExtraArgument = createThunkMiddleware;
 /* harmony default export */ __webpack_exports__["default"] = (thunk);
 
 /***/ }),
-/* 124 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {!function(e,t){ true?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t(e.reduxLogger=e.reduxLogger||{})}(this,function(e){"use strict";function t(e,t){e.super_=t,e.prototype=Object.create(t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}})}function r(e,t){Object.defineProperty(this,"kind",{value:e,enumerable:!0}),t&&t.length&&Object.defineProperty(this,"path",{value:t,enumerable:!0})}function n(e,t,r){n.super_.call(this,"E",e),Object.defineProperty(this,"lhs",{value:t,enumerable:!0}),Object.defineProperty(this,"rhs",{value:r,enumerable:!0})}function o(e,t){o.super_.call(this,"N",e),Object.defineProperty(this,"rhs",{value:t,enumerable:!0})}function i(e,t){i.super_.call(this,"D",e),Object.defineProperty(this,"lhs",{value:t,enumerable:!0})}function a(e,t,r){a.super_.call(this,"A",e),Object.defineProperty(this,"index",{value:t,enumerable:!0}),Object.defineProperty(this,"item",{value:r,enumerable:!0})}function f(e,t,r){var n=e.slice((r||t)+1||e.length);return e.length=t<0?e.length+t:t,e.push.apply(e,n),e}function u(e){var t="undefined"==typeof e?"undefined":N(e);return"object"!==t?t:e===Math?"math":null===e?"null":Array.isArray(e)?"array":"[object Date]"===Object.prototype.toString.call(e)?"date":"function"==typeof e.toString&&/^\/.*\//.test(e.toString())?"regexp":"object"}function l(e,t,r,c,s,d,p){s=s||[],p=p||[];var g=s.slice(0);if("undefined"!=typeof d){if(c){if("function"==typeof c&&c(g,d))return;if("object"===("undefined"==typeof c?"undefined":N(c))){if(c.prefilter&&c.prefilter(g,d))return;if(c.normalize){var h=c.normalize(g,d,e,t);h&&(e=h[0],t=h[1])}}}g.push(d)}"regexp"===u(e)&&"regexp"===u(t)&&(e=e.toString(),t=t.toString());var y="undefined"==typeof e?"undefined":N(e),v="undefined"==typeof t?"undefined":N(t),b="undefined"!==y||p&&p[p.length-1].lhs&&p[p.length-1].lhs.hasOwnProperty(d),m="undefined"!==v||p&&p[p.length-1].rhs&&p[p.length-1].rhs.hasOwnProperty(d);if(!b&&m)r(new o(g,t));else if(!m&&b)r(new i(g,e));else if(u(e)!==u(t))r(new n(g,e,t));else if("date"===u(e)&&e-t!==0)r(new n(g,e,t));else if("object"===y&&null!==e&&null!==t)if(p.filter(function(t){return t.lhs===e}).length)e!==t&&r(new n(g,e,t));else{if(p.push({lhs:e,rhs:t}),Array.isArray(e)){var w;e.length;for(w=0;w<e.length;w++)w>=t.length?r(new a(g,w,new i(void 0,e[w]))):l(e[w],t[w],r,c,g,w,p);for(;w<t.length;)r(new a(g,w,new o(void 0,t[w++])))}else{var x=Object.keys(e),S=Object.keys(t);x.forEach(function(n,o){var i=S.indexOf(n);i>=0?(l(e[n],t[n],r,c,g,n,p),S=f(S,i)):l(e[n],void 0,r,c,g,n,p)}),S.forEach(function(e){l(void 0,t[e],r,c,g,e,p)})}p.length=p.length-1}else e!==t&&("number"===y&&isNaN(e)&&isNaN(t)||r(new n(g,e,t)))}function c(e,t,r,n){return n=n||[],l(e,t,function(e){e&&n.push(e)},r),n.length?n:void 0}function s(e,t,r){if(r.path&&r.path.length){var n,o=e[t],i=r.path.length-1;for(n=0;n<i;n++)o=o[r.path[n]];switch(r.kind){case"A":s(o[r.path[n]],r.index,r.item);break;case"D":delete o[r.path[n]];break;case"E":case"N":o[r.path[n]]=r.rhs}}else switch(r.kind){case"A":s(e[t],r.index,r.item);break;case"D":e=f(e,t);break;case"E":case"N":e[t]=r.rhs}return e}function d(e,t,r){if(e&&t&&r&&r.kind){for(var n=e,o=-1,i=r.path?r.path.length-1:0;++o<i;)"undefined"==typeof n[r.path[o]]&&(n[r.path[o]]="number"==typeof r.path[o]?[]:{}),n=n[r.path[o]];switch(r.kind){case"A":s(r.path?n[r.path[o]]:n,r.index,r.item);break;case"D":delete n[r.path[o]];break;case"E":case"N":n[r.path[o]]=r.rhs}}}function p(e,t,r){if(r.path&&r.path.length){var n,o=e[t],i=r.path.length-1;for(n=0;n<i;n++)o=o[r.path[n]];switch(r.kind){case"A":p(o[r.path[n]],r.index,r.item);break;case"D":o[r.path[n]]=r.lhs;break;case"E":o[r.path[n]]=r.lhs;break;case"N":delete o[r.path[n]]}}else switch(r.kind){case"A":p(e[t],r.index,r.item);break;case"D":e[t]=r.lhs;break;case"E":e[t]=r.lhs;break;case"N":e=f(e,t)}return e}function g(e,t,r){if(e&&t&&r&&r.kind){var n,o,i=e;for(o=r.path.length-1,n=0;n<o;n++)"undefined"==typeof i[r.path[n]]&&(i[r.path[n]]={}),i=i[r.path[n]];switch(r.kind){case"A":p(i[r.path[n]],r.index,r.item);break;case"D":i[r.path[n]]=r.lhs;break;case"E":i[r.path[n]]=r.lhs;break;case"N":delete i[r.path[n]]}}}function h(e,t,r){if(e&&t){var n=function(n){r&&!r(e,t,n)||d(e,t,n)};l(e,t,n)}}function y(e){return"color: "+F[e].color+"; font-weight: bold"}function v(e){var t=e.kind,r=e.path,n=e.lhs,o=e.rhs,i=e.index,a=e.item;switch(t){case"E":return[r.join("."),n,"→",o];case"N":return[r.join("."),o];case"D":return[r.join(".")];case"A":return[r.join(".")+"["+i+"]",a];default:return[]}}function b(e,t,r,n){var o=c(e,t);try{n?r.groupCollapsed("diff"):r.group("diff")}catch(e){r.log("diff")}o?o.forEach(function(e){var t=e.kind,n=v(e);r.log.apply(r,["%c "+F[t].text,y(t)].concat(P(n)))}):r.log("—— no diff ——");try{r.groupEnd()}catch(e){r.log("—— diff end —— ")}}function m(e,t,r,n){switch("undefined"==typeof e?"undefined":N(e)){case"object":return"function"==typeof e[n]?e[n].apply(e,P(r)):e[n];case"function":return e(t);default:return e}}function w(e){var t=e.timestamp,r=e.duration;return function(e,n,o){var i=["action"];return i.push("%c"+String(e.type)),t&&i.push("%c@ "+n),r&&i.push("%c(in "+o.toFixed(2)+" ms)"),i.join(" ")}}function x(e,t){var r=t.logger,n=t.actionTransformer,o=t.titleFormatter,i=void 0===o?w(t):o,a=t.collapsed,f=t.colors,u=t.level,l=t.diff,c="undefined"==typeof t.titleFormatter;e.forEach(function(o,s){var d=o.started,p=o.startedTime,g=o.action,h=o.prevState,y=o.error,v=o.took,w=o.nextState,x=e[s+1];x&&(w=x.prevState,v=x.started-d);var S=n(g),k="function"==typeof a?a(function(){return w},g,o):a,j=D(p),E=f.title?"color: "+f.title(S)+";":"",A=["color: gray; font-weight: lighter;"];A.push(E),t.timestamp&&A.push("color: gray; font-weight: lighter;"),t.duration&&A.push("color: gray; font-weight: lighter;");var O=i(S,j,v);try{k?f.title&&c?r.groupCollapsed.apply(r,["%c "+O].concat(A)):r.groupCollapsed(O):f.title&&c?r.group.apply(r,["%c "+O].concat(A)):r.group(O)}catch(e){r.log(O)}var N=m(u,S,[h],"prevState"),P=m(u,S,[S],"action"),C=m(u,S,[y,h],"error"),F=m(u,S,[w],"nextState");if(N)if(f.prevState){var L="color: "+f.prevState(h)+"; font-weight: bold";r[N]("%c prev state",L,h)}else r[N]("prev state",h);if(P)if(f.action){var T="color: "+f.action(S)+"; font-weight: bold";r[P]("%c action    ",T,S)}else r[P]("action    ",S);if(y&&C)if(f.error){var M="color: "+f.error(y,h)+"; font-weight: bold;";r[C]("%c error     ",M,y)}else r[C]("error     ",y);if(F)if(f.nextState){var _="color: "+f.nextState(w)+"; font-weight: bold";r[F]("%c next state",_,w)}else r[F]("next state",w);l&&b(h,w,r,k);try{r.groupEnd()}catch(e){r.log("—— log end ——")}})}function S(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=Object.assign({},L,e),r=t.logger,n=t.stateTransformer,o=t.errorTransformer,i=t.predicate,a=t.logErrors,f=t.diffPredicate;if("undefined"==typeof r)return function(){return function(e){return function(t){return e(t)}}};if(e.getState&&e.dispatch)return console.error("[redux-logger] redux-logger not installed. Make sure to pass logger instance as middleware:\n// Logger with default options\nimport { logger } from 'redux-logger'\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n// Or you can create your own logger with custom options http://bit.ly/redux-logger-options\nimport createLogger from 'redux-logger'\nconst logger = createLogger({\n  // ...options\n});\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n"),function(){return function(e){return function(t){return e(t)}}};var u=[];return function(e){var r=e.getState;return function(e){return function(l){if("function"==typeof i&&!i(r,l))return e(l);var c={};u.push(c),c.started=O.now(),c.startedTime=new Date,c.prevState=n(r()),c.action=l;var s=void 0;if(a)try{s=e(l)}catch(e){c.error=o(e)}else s=e(l);c.took=O.now()-c.started,c.nextState=n(r());var d=t.diff&&"function"==typeof f?f(r,l):t.diff;if(x(u,Object.assign({},t,{diff:d})),u.length=0,c.error)throw c.error;return s}}}}var k,j,E=function(e,t){return new Array(t+1).join(e)},A=function(e,t){return E("0",t-e.toString().length)+e},D=function(e){return A(e.getHours(),2)+":"+A(e.getMinutes(),2)+":"+A(e.getSeconds(),2)+"."+A(e.getMilliseconds(),3)},O="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance:Date,N="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},P=function(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)},C=[];k="object"===("undefined"==typeof global?"undefined":N(global))&&global?global:"undefined"!=typeof window?window:{},j=k.DeepDiff,j&&C.push(function(){"undefined"!=typeof j&&k.DeepDiff===c&&(k.DeepDiff=j,j=void 0)}),t(n,r),t(o,r),t(i,r),t(a,r),Object.defineProperties(c,{diff:{value:c,enumerable:!0},observableDiff:{value:l,enumerable:!0},applyDiff:{value:h,enumerable:!0},applyChange:{value:d,enumerable:!0},revertChange:{value:g,enumerable:!0},isConflict:{value:function(){return"undefined"!=typeof j},enumerable:!0},noConflict:{value:function(){return C&&(C.forEach(function(e){e()}),C=null),c},enumerable:!0}});var F={E:{color:"#2196F3",text:"CHANGED:"},N:{color:"#4CAF50",text:"ADDED:"},D:{color:"#F44336",text:"DELETED:"},A:{color:"#2196F3",text:"ARRAY:"}},L={level:"log",logger:console,logErrors:!0,collapsed:void 0,predicate:void 0,duration:!1,timestamp:!0,stateTransformer:function(e){return e},actionTransformer:function(e){return e},errorTransformer:function(e){return e},colors:{title:function(){return"inherit"},prevState:function(){return"#9E9E9E"},action:function(){return"#03A9F4"},nextState:function(){return"#4CAF50"},error:function(){return"#F20404"}},diff:!1,diffPredicate:void 0,transformer:void 0},T=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.dispatch,r=e.getState;return"function"==typeof t||"function"==typeof r?S()({dispatch:t,getState:r}):void console.error("\n[redux-logger v3] BREAKING CHANGE\n[redux-logger v3] Since 3.0.0 redux-logger exports by default logger with default settings.\n[redux-logger v3] Change\n[redux-logger v3] import createLogger from 'redux-logger'\n[redux-logger v3] to\n[redux-logger v3] import { createLogger } from 'redux-logger'\n")};e.defaults=L,e.createLogger=S,e.logger=T,e.default=T,Object.defineProperty(e,"__esModule",{value:!0})});
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
-
-/***/ }),
+/* 124 */,
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30646,6 +30605,10 @@ var Main = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
+    _this.state = {
+      admin: false,
+      logueado: false
+    };
     _this.sign = _this.sign.bind(_this);
     _this.logn = _this.logn.bind(_this);
     _this.logout = _this.logout.bind(_this);
@@ -30671,34 +30634,40 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-    /*   componentDidMount() {
-        axios.get('/api/me')
-          .then(() => console.log('anda'))
-          .catch(console.log)
-      } */
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
+      _axios2.default.get('api/user/me').then(function (response) {
+        _this2.setState({
+          login: response.admin
+        });
+        console.log(response);
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_NavBar2.default, null),
+        _react2.default.createElement(_NavBar2.default, { admin: this.state.admin }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
         _react2.default.createElement(_reactRouterDom.Route, {
           exact: true,
           path: '/signup',
           render: function render() {
-            return _react2.default.createElement(_SignUp2.default, { sign: _this2.sign });
+            return _react2.default.createElement(_SignUp2.default, { sign: _this3.sign });
           }
         }),
         _react2.default.createElement(_reactRouterDom.Route, {
           exact: true,
           path: '/login',
           render: function render() {
-            return _react2.default.createElement(_Login2.default, { logout: _this2.logout, logn: _this2.logn });
+            return _react2.default.createElement(_Login2.default, { logout: _this3.logout, logn: _this3.logn });
           }
         }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
@@ -30749,7 +30718,8 @@ var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+exports.default = function (props) {
+    console.log('admin: ', props.admin);
     return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
@@ -30794,19 +30764,21 @@ exports.default = function () {
                         _react2.default.createElement(
                             'li',
                             null,
+                            ' ',
                             _react2.default.createElement(
-                                'a',
-                                { href: '#' },
-                                'Reg\xEDstrate'
+                                _reactRouterDom.Link,
+                                { to: '/signup' },
+                                'Registrates'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             null,
+                            ' ',
                             _react2.default.createElement(
-                                'a',
-                                { href: '#' },
-                                'Ingresa'
+                                _reactRouterDom.Link,
+                                { to: '/login' },
+                                'Login'
                             )
                         ),
                         _react2.default.createElement(
@@ -31875,6 +31847,14 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(13);
+
+var _axios = __webpack_require__(45);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _user = __webpack_require__(171);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31882,6 +31862,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        loggedIn: state.loggedIn
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        logginSuccess: function logginSuccess(user) {
+            console.log('CORRE LA FUNCION', user);
+            dispatch((0, _user.logginSuccess)(user));
+        }
+    };
+}
 
 var Login = function (_Component) {
     _inherits(Login, _Component);
@@ -31895,6 +31890,7 @@ var Login = function (_Component) {
             email: '',
             password: ''
         };
+        _this.logn = _this.logn.bind(_this);
         return _this;
     }
 
@@ -31913,9 +31909,21 @@ var Login = function (_Component) {
             });
         }
     }, {
+        key: 'logn',
+        value: function logn(object) {
+            var _this2 = this;
+
+            _axios2.default.post('api/login', object).then(function (res) {
+                return _this2.props.logginSuccess(res.data);
+            }).then(function (res) {
+                return console.log('listo');
+            });
+            // .then( loginStatus => logginSuccess(loginStatus))
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             return _react2.default.createElement(
                 'div',
@@ -31923,15 +31931,15 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: function onSubmit(e) {
-                            e.preventDefault();_this2.props.logn(_this2.state);
+                            e.preventDefault();_this3.logn(_this3.state);
                         } },
                     _react2.default.createElement('input', { onChange: function onChange(e) {
-                            return _this2.emailChange(e);
-                        }, type: 'text', name: 'email', placeholder: 'nombre' }),
+                            return _this3.emailChange(e);
+                        }, type: 'text', name: 'email', placeholder: 'email' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('input', { onChange: function onChange(e) {
-                            return _this2.passwordChange(e);
+                            return _this3.passwordChange(e);
                         }, type: 'text', name: 'password', placeholder: 'password' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
@@ -31946,7 +31954,7 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                            _this2.props.logout();
+                            _this3.props.logout();
                         } },
                     'Logout'
                 )
@@ -31957,7 +31965,7 @@ var Login = function (_Component) {
     return Login;
 }(_react.Component);
 
-exports.default = Login;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 134 */
@@ -33028,17 +33036,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(13);
+
 var _ProductToMap = __webpack_require__(155);
 
 var _ProductToMap2 = _interopRequireDefault(_ProductToMap);
 
-var _reactRedux = __webpack_require__(13);
-
-var _constants = __webpack_require__(8);
+var _cart = __webpack_require__(172);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import { cartItemsWithQuantities } from '../redux/cart'
 
 function ListadoProductos(props) {
   return _react2.default.createElement(
@@ -33052,7 +33058,6 @@ function ListadoProductos(props) {
           product: product,
           addToCart: props.addToCart,
           key: product.id
-          // cart={cartItemsWithQuantities(props.cart)}
         });
       })
     )
@@ -33068,11 +33073,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addToCart: function addToCart(producto) {
-      dispatch({ type: _constants.ADD_TO_CART, payload: producto });
+      dispatch((0, _cart.addToLocalStorage)(producto));
     }
-    // removeFromCart: (item) => {
-    //     dispatch({ type: 'REMOVE', payload: item })
-    // }
   };
 }
 
@@ -33217,7 +33219,6 @@ function mapStateToProps(state) {
         cart: state.cart
     };
 }
-
 // function mapDispatchToProps(dispatch) {
 //     return {
 //         addToCart: (item) => {
@@ -33235,18 +33236,26 @@ var Carrito = function (_Component) {
     function Carrito(props) {
         _classCallCheck(this, Carrito);
 
-        return _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
-        // this.state = {
-        //     cart: this.props.cart
-        // }
+        var _this = _possibleConstructorReturn(this, (Carrito.__proto__ || Object.getPrototypeOf(Carrito)).call(this, props));
+
+        _this.state = {
+            cartItems: ''
+        };
+        return _this;
     }
 
     _createClass(Carrito, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var itemsCarrito = JSON.parse(localStorage.getItem('carrito'));
+            this.setState({
+                cartItems: itemsCarrito
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            {
-                console.log('props', this.props);
-            }
+            // {console.log(this.state.cartItems)}
             return _react2.default.createElement(
                 'div',
                 null,
@@ -33292,7 +33301,6 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function CarritoItems(props) {
-
     return _react2.default.createElement(
         "div",
         { className: "col-md-2 column productbox" },
@@ -33821,9 +33829,9 @@ var _AdminAddProduct = __webpack_require__(166);
 
 var _AdminAddProduct2 = _interopRequireDefault(_AdminAddProduct);
 
-var _AdminComponent = __webpack_require__(51);
+var _reactRedux = __webpack_require__(13);
 
-var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
+var _user = __webpack_require__(171);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33833,69 +33841,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//COMPONENTES
+var AdminAddProductContainer = function (_Component) {
+    _inherits(AdminAddProductContainer, _Component);
 
+    function AdminAddProductContainer(props) {
+        _classCallCheck(this, AdminAddProductContainer);
 
-var AdminContainer = function (_Component) {
-    _inherits(AdminContainer, _Component);
+        var _this = _possibleConstructorReturn(this, (AdminAddProductContainer.__proto__ || Object.getPrototypeOf(AdminAddProductContainer)).call(this, props));
 
-    function AdminContainer() {
-        _classCallCheck(this, AdminContainer);
-
-        var _this = _possibleConstructorReturn(this, (AdminContainer.__proto__ || Object.getPrototypeOf(AdminContainer)).call(this));
-
-        _this.state = {
-            nombreProducto: '',
-            precioProducto: '',
-            imgProducto: '',
-            stockProducto: '',
-            catProducto: '',
-            descripcionProducto: ''
-        };
-
-        _this.handleInputChange = _this.handleInputChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
-
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
-    _createClass(AdminContainer, [{
-        key: 'handleInputChange',
-        value: function handleInputChange(event) {
-            /* const target = event.target.name;
-             const value = event.target.value;
-             
-             console.log("TARGET: " + target)
-             console.log(value)
-             
-             this.setState({
-                 target: value
-             });
-             console.log(this.state)
-             */
-        }
-    }, {
+    _createClass(AdminAddProductContainer, [{
         key: 'handleSubmit',
         value: function handleSubmit(evt) {
             evt.preventDefault();
             console.log(this.state);
-            var nombreProducto = event.target.nombreProducto.value;
-            var precioProducto = event.target.precioProducto.value;
-            var imgProducto = event.target.imgProducto.value;
-            var stockProducto = event.target.stockProducto.value;
-            var catProducto = 'CATEGORIA1';
-            var descripcionProducto = event.target.descripcionProducto.value;
-
-            this.setState({
-                nombreProducto: nombreProducto,
-                precioProducto: nombreProducto,
-                imgProducto: imgProducto,
-                stockProducto: stockProducto,
-                catProducto: catProducto,
-                descripcionProducto: descripcionProducto
-
-            });
+            this.props.addProduct(evt.target);
         }
     }, {
         key: 'render',
@@ -33903,15 +33867,27 @@ var AdminContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit, handleInputChange: this.handleInputChange })
+                _react2.default.createElement(_AdminAddProduct2.default, { handleSubmit: this.handleSubmit })
             );
         }
     }]);
 
-    return AdminContainer;
+    return AdminAddProductContainer;
 }(_react.Component);
 
-exports.default = AdminContainer;
+function mapStateToProps(state) {
+    return { nuevoProducto: state.admin.product
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        addProduct: function addProduct(producto) {
+            dispatch((0, _user.addProduct)(producto));
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
 
 /***/ }),
 /* 166 */
@@ -33951,7 +33927,7 @@ exports.default = function (props) {
                     { 'for': 'nombreProducto' },
                     'Nombre Producto'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
+                _react2.default.createElement('input', { name: 'nombreProducto', type: 'text', className: 'form-control', placeholder: 'Nombre Porducto' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33961,7 +33937,7 @@ exports.default = function (props) {
                     { 'for': 'precioProducto' },
                     'Precio'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
+                _react2.default.createElement('input', { name: 'precioProducto', type: 'text', className: 'form-control', placeholder: 'Precio' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33971,7 +33947,7 @@ exports.default = function (props) {
                     { 'for': 'imgProducto' },
                     'Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
+                _react2.default.createElement('input', { name: 'imgProducto', type: 'text', className: 'form-control', placeholder: 'Separar imagenes por ,' })
             ),
             _react2.default.createElement(
                 'div',
@@ -33981,14 +33957,14 @@ exports.default = function (props) {
                     { 'for': 'stockProducto' },
                     'Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK'
                 ),
-                _react2.default.createElement('input', { onChange: props.handleInputChange, name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
+                _react2.default.createElement('input', { name: 'stockProducto', type: 'text', className: 'form-control', placeholder: 'Cantidad a agregar' })
             ),
             _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
                 _react2.default.createElement(
                     'label',
-                    { onChange: props.handleInputChange, name: 'catProducto', 'for': 'catProducto' },
+                    { name: 'catProducto', 'for': 'catProducto' },
                     'Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)'
                 ),
                 _react2.default.createElement(
@@ -34029,7 +34005,7 @@ exports.default = function (props) {
                     { 'for': 'descripcionProducto' },
                     'Descripcion'
                 ),
-                _react2.default.createElement('textarea', { onChange: props.handleInputChange, name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
+                _react2.default.createElement('textarea', { name: 'descripcionProducto', type: 'textarea', className: 'form-control', placeholder: 'descripcion', rows: '5' })
             ),
             _react2.default.createElement(
                 'button',
@@ -34514,7 +34490,7 @@ exports.default = function (props) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = undefined;
+exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.logginSuccess = undefined;
 
 var _axios = __webpack_require__(45);
 
@@ -34523,6 +34499,13 @@ var _axios2 = _interopRequireDefault(_axios);
 var _constants = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
+  return {
+    type: _constants.LOGIN_SUCCESS,
+    user: user
+  };
+};
 
 var getOrders = function getOrders(orders) {
   return {
@@ -34636,6 +34619,58 @@ var addProduct = exports.addProduct = function addProduct(producto) {
     });
   };
 };
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addToLocalStorage = undefined;
+
+var _constants = __webpack_require__(8);
+
+var _store = __webpack_require__(25);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import axios from 'axios';
+var addToCart = function addToCart(producto) {
+  return {
+    type: _constants.ADD_TO_CART,
+    payload: producto
+  };
+};
+
+// export const createPlaylist = name => dispatch =>
+//   axios.post('/api/playlists', { name })
+//     .then(res => res.data)
+//     .then(playlist => {
+//       dispatch(addPlaylist(playlist));
+//       return playlist.id;
+//     });
+
+
+var addToLocalStorage = exports.addToLocalStorage = function addToLocalStorage(producto) {
+  return function (dispatch) {
+    // var productos = JSON.parse(localStorage.getItem('carrito'))
+    // console.log(localStorage.getItem('carrito'))
+    // productos += producto  
+    // localStorage.removeItem('carrito')
+    localStorage.setItem('carrito', JSON.stringify(producto));
+    dispatch(addToCart(producto));
+  };
+};
+
+// var list = JSON.parse(localStorage.getItem('list')
+// list.push('<h2>David<h2>');
+// localStorage.setItem('list', JSON.stringify(list));
 
 /***/ })
 /******/ ]);

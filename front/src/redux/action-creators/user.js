@@ -9,7 +9,13 @@ import {
   CREATE_PRODUCT,
   DELETE_USER,
   EDIT_CATEGORY,
+  LOGIN_SUCCESS,
 } from '../constants';
+
+export const logginSuccess = user => ({
+  type: LOGIN_SUCCESS,
+  user: user,
+});
 
 const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,

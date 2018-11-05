@@ -7,7 +7,6 @@ function mapStateToProps(state) {
         cart: state.cart
     }
 }
-
 // function mapDispatchToProps(dispatch) {
 //     return {
 //         addToCart: (item) => {
@@ -18,16 +17,23 @@ function mapStateToProps(state) {
 //         }
 //     }
 // }
-
 class Carrito extends Component {
     constructor(props) {
         super(props)
-            // this.state = {
-            //     cart: this.props.cart
-            // }
+            this.state = {
+                cartItems: ''
+            }
     }
+
+    componentDidMount () {
+        let itemsCarrito = JSON.parse(localStorage.getItem('carrito'))
+        this.setState({
+            cartItems: itemsCarrito
+        })
+    }
+
     render() {
-        {console.log('props',this.props)}
+        // {console.log(this.state.cartItems)}
         return (
             <div>
                 <h2> My Cart </h2>

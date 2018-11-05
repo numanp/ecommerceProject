@@ -23,9 +23,7 @@ router.put('/:nombre', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  models.Categoria.destroy({ where: { id: req.params.id } }).then(
-    deletedCategory => {
-      res.send(deletedCategory);
-    },
-  );
+  models.Categoria.destroy({ where: { id: req.params.id } }).then(data => {
+    res.send(data);
+  });
 });

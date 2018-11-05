@@ -1,4 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import axios from 'axios'
+
+import { logginSuccess } from '../redux/action-creators/user'
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        loggedIn: state.loggedIn
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        logginSuccess: (user) => {
+            console.log('CORRE LA FUNCION', user)
+            dispatch(logginSuccess(user))
+        }
+    }
+}
 
 class Login extends Component {
     constructor(props) {
@@ -7,6 +27,7 @@ class Login extends Component {
             email: '',
             password: ''
         }
+        this.logn = this.logn.bind(this)
     }
     emailChange(e) {
         this.setState(
@@ -23,11 +44,19 @@ class Login extends Component {
         )
     }
 
+    logn(object) {
+        axios.post('api/login', object)
+            .then(res => this.props.logginSuccess(res.data))
+            .then(res => console.log('listo'))
+        // .then( loginStatus => logginSuccess(loginStatus))
+    }
+
+
     render() {
         return (
             <div>
-                <form onSubmit={(e) => { e.preventDefault(); this.props.logn(this.state) }}>
-                    <input onChange={(e) => this.emailChange(e)} type="text" name="email" placeholder="nombre" /><br /><br />
+                <form onSubmit={(e) => { e.preventDefault(); this.logn(this.state) }}>
+                    <input onChange={(e) => this.emailChange(e)} type="text" name="email" placeholder="email" /><br /><br />
                     <input onChange={(e) => this.passwordChange(e)} type="text" name="password" placeholder="password" /><br /><br />
                     <button type="submit">Login</button><br /><br />
                 </form>
@@ -37,4 +66,10 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
+
+
+
+
+
+

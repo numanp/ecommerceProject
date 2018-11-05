@@ -20,6 +20,10 @@ import PromoveUser from './ContainerAdminPromoveUser';
 class Main extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      admin: false,
+      logueado: false,
+    };
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
     this.logout = this.logout.bind(this);
@@ -33,15 +37,18 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  /*   componentDidMount() {
-      axios.get('/api/me')
-        .then(() => console.log('anda'))
-        .catch(console.log)
-    } */
+  componentDidMount() {
+    axios.get('api/user/me').then(response => {
+      this.setState({
+        login: response.admin,
+      });
+      console.log(response);
+    });
+  }
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar admin={this.state.admin} />
         <Route exact path="/" component={LandingPage} />
         <Route
           exact

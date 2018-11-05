@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar'
 
-export default () => {
+export default (props) => {
+    console.log('admin: ',props.admin)
     return(
         <nav className="navbar navbar-default">
             <div className="container">
@@ -24,8 +25,8 @@ export default () => {
                             <SearchBar />    
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="#">Regístrate</a></li>
-                            <li><a href="#">Ingresa</a></li>
+                            <li> <Link to="/signup">Registrates</Link></li>
+                            <li> <Link to="/login">Login</Link></li>
                             <li> <Link to="/carrito">Carrito</Link> </li>
                         </ul>
                     </div>
