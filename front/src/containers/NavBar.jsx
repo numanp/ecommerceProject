@@ -1,28 +1,47 @@
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar'
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import SearchBar from './SearchBar'
+import {  removeLoginFromLocalStorage } from '../redux/action-creators/user'
 
 function mapStateToProps(state) {
     return {
-        loggedIn: state.loggedIn
-    };
+        loggedIn: state
+    }
 }
 
-function mapDispatchToProps(state) {
-
+function mapDispatchToProps(dispatch, ownProps) {
     return {
-
-    };
+        logout: () => {
+            dispatch(removeLoginFromLocalStorage())
+        }
+    }
 }
 
 class NavBar extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+        this.state = {
+            logueado: {}
+        }
+    }
 
+    componentDidMount() {
+        var objeto = localStorage.getItem('login')
+        if (!!objeto) {
+            this.setState({
+                logueado: true
+            })
+        } else {
+            this.setState({
+                logueado: false
+            })
+        }
     }
 
     render() {
+        // console.log(this.state.logueado)
         return (
             <nav className="navbar navbar-default">
                 <div className="container">
@@ -35,7 +54,7 @@ class NavBar extends Component {
                                 <span className="icon-bar"></span>
                             </button>
                             <Link to="/" className="navbar-brand">
-                                <img src="/images/mercadonuma.png"></img>
+                                <img src="./images/mercadonuma.png"></img>
                             </Link>
                         </div>
 
@@ -44,8 +63,13 @@ class NavBar extends Component {
                                 <SearchBar />
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li> <Link to="/signup">Registrates</Link></li>
-                                <li> <Link to="/login">Login</Link></li>
+                                <li> <Link to="/signup">Registrate</Link></li>
+                                {
+                                    this.state.logueado === true ?
+                                        <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
+                                        :
+                                        <li> <Link to="/login">Login</Link></li>
+                                }
                                 <li> <Link to="/carrito">Carrito</Link> </li>
                             </ul>
                         </div>
@@ -56,15 +80,7 @@ class NavBar extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(NavBar);
-
-
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 
 
 

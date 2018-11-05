@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
         descripcion: req.body.descripcion,
         precio: req.body.precio,
         foto: req.body.foto,
-        stock: req.stock
+        stock: req.body.stock
     }).then((producto) => {
         console.log('producto creado');
         res.status(200).send(producto)

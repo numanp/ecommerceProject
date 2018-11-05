@@ -1,5 +1,5 @@
-
 import axios from 'axios';
+
 import {
   FETCH_ORDERS_ADMIN,
   UPDATE_ORDERS,
@@ -10,17 +10,36 @@ import {
   CREATE_PRODUCT,
   DELETE_USER,
   EDIT_CATEGORY,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT
 } from '../constants';
 
+// LOGIN & LOGOUT ACTIONS:
 export const logginSuccess = user => ({
   type: LOGIN_SUCCESS,
-  user: user
-});
-
-export const logOut = () => ({
-  type: LOG_OUT
+  user
 })
+
+export const logout = user => ({
+  type: LOGOUT,
+  user
+})
+
+export const addLoginToLocalStorage = user => dispatch => {
+  axios.post('api/login', user)
+    .then(res => dispatch(logginSuccess(res.data)))
+    .then(res => localStorage.setItem('login', JSON.stringify(res.user)))
+
+}
+
+export const removeLoginFromLocalStorage = () => dispatch => {
+  localStorage.removeItem('login')
+  dispatch(logout())
+  location.reload(); // refresca la página para que el login se pase a logout
+}
+
+
+// OTRAS ACCIONES:
 
 const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,

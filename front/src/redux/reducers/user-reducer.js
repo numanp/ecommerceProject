@@ -7,7 +7,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('user-reducer: ', action)
   switch (action.type) {
     case ADD_REVIEW:
       return {
@@ -25,29 +24,18 @@ export default (state = initialState, action) => {
         user: action.user
       });
 
-    case LOG_OUT:
+    case LOGOUT:
       return Object.assign({}, state, {
         loggedIn: false,
-        user: {}
+        user: action.user
       });
 
     case SIGN_UP:
       return {
 
       };
+
     default:
       return state;
   }
 }
-
-// export default (state = initialState, action) => {
-//   switch(action.type) {
-//     case RECEIVE_PLAYLISTS:
-//       return {
-//         ...state,
-//         reviews: action.playlists,
-//       };
-//     default:
-//       return state;
-//   }
-// };

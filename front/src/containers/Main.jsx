@@ -38,15 +38,15 @@ class Main extends Component {
   logout() {
     axios.post('api/logout').then(res => console.log(res.data));
   }
-  // componentDidMount() {
-  //   axios.get('api/user/me')
-  //     .then((response) => {
-  //       this.setState({
-  //         login: response.admin
-  //       })
-  //       console.log(response)
-  //     })
-  // }
+  componentDidMount() {
+    // axios.get('api/user/me')
+    //   .then((response) => {
+    //     this.setState({
+    //       login: response.admin
+    //     })
+    //     console.log(response)
+    //   })
+  }
   render() {
     return (
       <div>
