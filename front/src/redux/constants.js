@@ -9,6 +9,7 @@ export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
+export const LOGGIN_SUCCESS = 'LOGGIN_SUCCESS'
 
 // Carrito
 

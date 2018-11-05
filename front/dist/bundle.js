@@ -1707,6 +1707,7 @@ var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
 var SIGN_UP = exports.SIGN_UP = 'SIGN_UP';
+var LOGGIN_SUCCESS = exports.LOGGIN_SUCCESS = 'LOGGIN_SUCCESS';
 
 // Carrito
 
@@ -30019,13 +30020,14 @@ var _reduxThunk = __webpack_require__(119);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reduxLogger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-logger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import { createLogger } from 'redux-logger';
+
 
 var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 
-var store = (0, _redux.createStore)(_index2.default, composeEnhancers((0, _redux.applyMiddleware)((0, _reduxLogger.createLogger)(), _reduxThunk2.default)));
+var store = (0, _redux.createStore)(_index2.default, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default)));
 
 exports.default = store;
 
@@ -30245,6 +30247,10 @@ var Main = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
+    _this.state = {
+      admin: false,
+      logueado: false
+    };
     _this.sign = _this.sign.bind(_this);
     _this.logn = _this.logn.bind(_this);
     _this.logout = _this.logout.bind(_this);
@@ -30273,25 +30279,30 @@ var Main = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       _axios2.default.get('api/user/me').then(function (response) {
+        _this2.setState({
+          login: response.admin
+        });
         console.log(response);
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_NavBar2.default, null),
+        _react2.default.createElement(_NavBar2.default, { admin: this.state.admin }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/signup', render: function render() {
-            return _react2.default.createElement(_SignUp2.default, { sign: _this2.sign });
+            return _react2.default.createElement(_SignUp2.default, { sign: _this3.sign });
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render() {
-            return _react2.default.createElement(_Login2.default, { logout: _this2.logout, logn: _this2.logn });
+            return _react2.default.createElement(_Login2.default, { logout: _this3.logout, logn: _this3.logn });
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/productos', component: _ProductosContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/carrito', component: _CarritoContainer2.default }),
@@ -30332,7 +30343,8 @@ var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+exports.default = function (props) {
+    console.log('admin: ', props.admin);
     return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
@@ -30377,19 +30389,21 @@ exports.default = function () {
                         _react2.default.createElement(
                             'li',
                             null,
+                            ' ',
                             _react2.default.createElement(
-                                'a',
-                                { href: '#' },
-                                'Reg\xEDstrate'
+                                _reactRouterDom.Link,
+                                { to: '/signup' },
+                                'Registrates'
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             null,
+                            ' ',
                             _react2.default.createElement(
-                                'a',
-                                { href: '#' },
-                                'Ingresa'
+                                _reactRouterDom.Link,
+                                { to: '/login' },
+                                'Login'
                             )
                         ),
                         _react2.default.createElement(
@@ -31458,6 +31472,14 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(12);
+
+var _axios = __webpack_require__(130);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _user = __webpack_require__(169);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31465,6 +31487,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.loggedIn
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        logginSucces: function logginSucces(user) {
+            dispatch((0, _user.logginSuccess)(user));
+        }
+    };
+}
 
 var Login = function (_Component) {
     _inherits(Login, _Component);
@@ -31478,6 +31514,7 @@ var Login = function (_Component) {
             email: '',
             password: ''
         };
+        _this.logn = _this.logn.bind(_this);
         return _this;
     }
 
@@ -31496,6 +31533,17 @@ var Login = function (_Component) {
             });
         }
     }, {
+        key: 'logn',
+        value: function logn(object) {
+            console.log('logn: ', object);
+            _axios2.default.post('api/login', object).then(console.log(_user.logginSuccess)).then(function (res) {
+                return (0, _user.logginSuccess)(res.data);
+            }).then(function (res) {
+                return console.log('listo');
+            });
+            // .then( loginStatus => logginSuccess(loginStatus))
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -31506,11 +31554,11 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: function onSubmit(e) {
-                            e.preventDefault();_this2.props.logn(_this2.state);
+                            e.preventDefault();_this2.logn(_this2.state);
                         } },
                     _react2.default.createElement('input', { onChange: function onChange(e) {
                             return _this2.emailChange(e);
-                        }, type: 'text', name: 'email', placeholder: 'nombre' }),
+                        }, type: 'text', name: 'email', placeholder: 'email' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('input', { onChange: function onChange(e) {
@@ -31540,7 +31588,7 @@ var Login = function (_Component) {
     return Login;
 }(_react.Component);
 
-exports.default = Login;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 129 */
@@ -34104,20 +34152,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _constants = __webpack_require__(23);
 
 var initialState = {
-  reviews: []
+  reviews: [],
+  loggedIn: false
 };
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
+  console.log('user-reducer: ', action);
   switch (action.type) {
     case _constants.ADD_REVIEW:
       return _extends({}, state);
     case _constants.FETCH_ORDERS_USER:
       return {};
-    case _constants.LOGIN:
-      return {};
+
+    case _constants.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        loggedIn: true,
+        payload: action.user
+      });
+
     case _constants.LOGOUT:
       return {};
     case _constants.SIGN_UP:
@@ -34282,7 +34337,7 @@ exports.default = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = undefined;
+exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.logginSuccess = undefined;
 
 var _axios = __webpack_require__(130);
 
@@ -34291,6 +34346,13 @@ var _axios2 = _interopRequireDefault(_axios);
 var _constants = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
+  return {
+    type: _constants.LOGIN_SUCCESS,
+    payload: user
+  };
+};
 
 var getOrders = function getOrders(orders) {
   return {

@@ -1,10 +1,12 @@
-import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN, LOGOUT, SIGN_UP } from '../constants';
+import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOGOUT, SIGN_UP } from '../constants';
 
 const initialState = {
   reviews: [],
+  loggedIn: false
 };
 
 export default (state = initialState, action) => {
+  console.log('user-reducer: ',action)
   switch(action.type) {
     case ADD_REVIEW:
     return {
@@ -15,10 +17,13 @@ export default (state = initialState, action) => {
     return {
 
     };
-    case LOGIN: 
-    return {
 
-    };
+    case LOGIN_SUCCESS: 
+    return Object.assign({}, state, {
+      loggedIn: true,
+      payload: action.user
+    });
+
     case LOGOUT:
     return {
 

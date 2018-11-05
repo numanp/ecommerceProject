@@ -10,7 +10,13 @@ import {
   CREATE_PRODUCT,
   DELETE_USER,
   EDIT_CATEGORY,
+  LOGIN_SUCCESS
 } from '../constants';
+
+export const logginSuccess = user => ({
+  type: LOGIN_SUCCESS,
+  payload: user
+})
 
 const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,
@@ -81,8 +87,8 @@ export const updateUser = (userId, user) => dispatch =>
     .then(res => res.data)
     .then(user => dispatch(putUser(user)));
 
-  export const addProduct = (producto)=> (dispatch)=>
-      axios.post('/api/productos',producto)
-      .then(res=>res.data)
-      .then(data=>dispatch(postProduct(data)))
+export const addProduct = (producto)=> (dispatch)=>
+    axios.post('/api/productos',producto)
+    .then(res=>res.data)
+    .then(data=>dispatch(postProduct(data)))
   
