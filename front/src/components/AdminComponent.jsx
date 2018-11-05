@@ -104,7 +104,7 @@ export default () => (
             <div className="caption">
               <h3>Promover Usuario</h3>
               <p>
-                <Link to="/admin/PromoveUser" className="btn btn-warning">
+                <Link to="/admin/promoveUser" className="btn btn-warning">
                   Haceme admin
                 </Link>
               </p>
@@ -115,17 +115,10 @@ export default () => (
           <div className="thumbnail">
             <div className="caption">
               <h3>Eliminar Usuario</h3>
-              <div class="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eliminar"
-                />
-              </div>
               <p>
-                <a href="#" className="btn btn-danger">
-                  Eliminar Usuario
-                </a>
+                <Link to="/admin/deleteUser" className="btn btn-warning">
+                  Eliminar usuario
+                </Link>
               </p>
             </div>
           </div>

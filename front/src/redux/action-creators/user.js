@@ -82,7 +82,7 @@ export const updateOrders = (orderId, order) => dispatch =>
 
 export const updateUser = (userId, user) => dispatch =>
   axios
-    .put(`/api/users/${userId}`, user)
+    .put(`/api/user/${userId}`, user)
     .then(res => res.data)
     .then(user => dispatch(putUser(user)));
 
@@ -91,3 +91,9 @@ export const addProduct = producto => dispatch =>
     .post('/api/productos', producto)
     .then(res => res.data)
     .then(data => dispatch(postProduct(data)));
+
+export const removeUser = user => dispatch =>
+  axios
+    .delete(`/api/user/${user}`)
+    .then(res => res.data)
+    .then(user => dispatch(deleteUser(user)));

@@ -1,7 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import store from '../redux/store';
+import { removeUser } from '../redux/action-creators/user';
+import { connect } from 'react-redux';
 
-export default class PromoveUser extends React.Component {
+class DeleteUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,24 +23,23 @@ export default class PromoveUser extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     var user = this.state.user;
-    this.editUser(user);
+    this.props.removeUser(user);
     this.setState({
       user: '',
     });
   }
 
-  editUser(user) {
-    axios.put(`/api/user/admin/${user}`);
-    console.log(this.state.user, 'userfront');
-    // store.dispatch(updateUser(id));
-  }
+  //   removeUser(user) {
+  //     console.log(this.state.user, 'userfront');
+  //     store.dispatch(removeUser(user));
+  //   }
 
   render() {
     return (
       <div className="well">
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <fieldset>
-            <legend>Promover Usuario</legend>
+            <legend>Eliminar Usuario</legend>
             <div className="form-group">
               <label className="col-xs-2 control-label">User</label>
               <div className="col-xs-10">
@@ -54,7 +55,7 @@ export default class PromoveUser extends React.Component {
             <div className="form-group">
               <div className="col-xs-10 col-xs-offset-2">
                 <button type="submit" className="btn btn-success">
-                  Haceme admin
+                  Eliminar usuario
                 </button>
               </div>
             </div>
@@ -64,3 +65,20 @@ export default class PromoveUser extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    removeUser: user => {
+      dispatch(removeUser(user));
+    },
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(DeleteUser);

@@ -7,8 +7,9 @@ router.get('/me', (req, res) => {
   res.send(req.user || 'no estas logeado');
 });
 
-router.delete('/:id', (req, res) => {
-  models.User.destroy({ where: { id: req.params.id } }).then(() => {
+router.delete('/:user', (req, res) => {
+  console.log('userBack', req.params.user);
+  models.User.destroy({ where: { email: req.params.user } }).then(() => {
     res.status(200).send('OK');
   });
 });
@@ -21,6 +22,12 @@ router.put('/:id', (req, res) => {
     .then(() => {
       res.status(200).send('usuario modificado exitosamente');
     });
+});
+
+router.put('/admin/:user', (req, res) => {
+  models.User.findAll({ where: { email: req.params.user } }).then(user =>
+    user[0].update({ admin: true }),
+  );
 });
 
 router.post('/signup', (req, res) => {

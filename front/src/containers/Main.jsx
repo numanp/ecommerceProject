@@ -16,6 +16,7 @@ import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminAddCategory from '../components/AdminAddCategory';
 import AdminOrdenes from '../components/AdminOrdenes';
 import PromoveUser from './ContainerAdminPromoveUser';
+import DeleteUser from './ContainerAdminDeleteUser';
 
 class Main extends Component {
   constructor(props) {
@@ -79,7 +80,8 @@ class Main extends Component {
           component={AdminAddCategory}
         />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        <Route exact path="/admin/PromoveUser" component={PromoveUser} />
+        <Route exact path="/admin/promoveUser" component={PromoveUser} />
+        <Route exact path="/admin/deleteUser" component={DeleteUser} />
       </div>
     );
   }
