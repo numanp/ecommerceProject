@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> da42474a0334014a57e8398dcc6069c1b2560b5f
 //SALE_REDUCER
 export const CREATE_SALE = 'CREATE_SALE';
 export const SEND_EMAIL_AFTER_CHECKOUT = 'SEND_EMAIL_AFTER_CHECKOUT';
@@ -13,11 +9,8 @@ export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGN_UP = 'SIGN_UP';
-<<<<<<< HEAD
-=======
-export const LOGGIN_SUCCESS = 'LOGGIN_SUCCESS'
+export const LOGIN_SUCCESS = 'LOGGIN_SUCCESS'
 
->>>>>>> da42474a0334014a57e8398dcc6069c1b2560b5f
 // Carrito
 
 export const ADD_TO_CART = 'ADD_TO_CART';

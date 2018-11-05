@@ -16,6 +16,7 @@ class ContainerReview extends Component {
                   },
                 value: '',
                 addReview: [],
+                currentProduct: 0,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,11 +33,15 @@ class ContainerReview extends Component {
         this.props.addReview(this.state.value)
       }
 
+    fechReviews(reviews){
+
+    }
+
   render() {
     return (
       <div>
         <ReviewInput handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Reviews addReview={this.props.numa} fakeReviews={this.state.fakeReviews}/>
+        <Reviews user={this.props.user} addReview={this.props.rev} fakeReviews={this.state.fakeReviews}/>
       </div>
     )
   }
@@ -44,7 +49,8 @@ class ContainerReview extends Component {
 
 function mapStateToProps(state){
   return {
-    numa: state.reviews
+    rev: state.review,
+    user: state.user,
   }
 }
 

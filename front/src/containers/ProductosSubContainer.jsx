@@ -1,13 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import { ADD_TO_CART } from '../redux/constants';
-// import { cartItemsWithQuantities } from '../redux/cart'
-=======
 
 import ProductListItem from '../components/ProductToMap'
 import { addToLocalStorage } from '../redux/action-creators/cart'
->>>>>>> da42474a0334014a57e8398dcc6069c1b2560b5f
 
 
 function ListadoProductos(props) {
