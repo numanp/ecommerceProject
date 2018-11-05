@@ -2,36 +2,38 @@ import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOGOUT, SIGN_UP } from '.
 
 const initialState = {
   reviews: [],
-  loggedIn: false
+  loggedIn: false,
+  user: {}
 };
 
 export default (state = initialState, action) => {
-  console.log('user-reducer: ',action)
-  switch(action.type) {
+  console.log('user-reducer: ', action)
+  switch (action.type) {
     case ADD_REVIEW:
-    return {
-      ...state,
-      //reviews: action.
-    };
+      return {
+        ...state,
+        //reviews: action.
+      };
     case FETCH_ORDERS_USER:
-    return {
+      return {
 
-    };
+      };
 
-    case LOGIN_SUCCESS: 
-    return Object.assign({}, state, {
-      loggedIn: true,
-      payload: action.user
-    });
+    case LOGIN_SUCCESS:
+      console.log('corriendo el REDUCEEEEEEEEEER', action)
+      return Object.assign({}, state, {
+        loggedIn: true,
+        user: action.user
+      });
 
     case LOGOUT:
-    return {
+      return {
 
-    };
+      };
     case SIGN_UP:
-    return {
+      return {
 
-    };
+      };
     default:
       return state;
   }

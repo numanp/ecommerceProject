@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import axios from 'axios'
 
 import { logginSuccess } from '../redux/action-creators/user'
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     return {
         loggedIn: state.loggedIn
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
     return {
-        logginSucces: (user) => {
+        logginSuccess: (user) => {
+            console.log('CORRE LA FUNCION', user)
             dispatch(logginSuccess(user))
         }
     }
@@ -44,14 +45,12 @@ class Login extends Component {
     }
 
     logn(object) {
-        console.log('logn: ',object)
         axios.post('api/login', object)
-        .then(console.log(logginSuccess))
-        .then(res => logginSuccess(res.data))
-        .then(res => console.log('listo'))
+            .then(res => this.props.logginSuccess(res.data))
+            .then(res => console.log('listo'))
         // .then( loginStatus => logginSuccess(loginStatus))
     }
-    
+
 
     render() {
         return (

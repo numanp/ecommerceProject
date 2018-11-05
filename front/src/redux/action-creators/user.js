@@ -15,7 +15,7 @@ import {
 
 export const logginSuccess = user => ({
   type: LOGIN_SUCCESS,
-  payload: user
+  user: user
 })
 
 const getOrders = orders => ({
@@ -87,8 +87,7 @@ export const updateUser = (userId, user) => dispatch =>
     .then(res => res.data)
     .then(user => dispatch(putUser(user)));
 
-export const addProduct = (producto)=> (dispatch)=>
-    axios.post('/api/productos',producto)
-    .then(res=>res.data)
-    .then(data=>dispatch(postProduct(data)))
-  
+export const addProduct = (producto) => (dispatch) =>
+  axios.post('/api/productos', producto)
+    .then(res => res.data)
+    .then(data => dispatch(postProduct(data)))
