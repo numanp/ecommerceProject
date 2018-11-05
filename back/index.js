@@ -12,19 +12,21 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
-app.use(session({ secret: 'anything' }));
 
 passport.serializeUser(function (user, done) {
+  console.log('serialize', user.id)
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  models.User.findById(id, function (err, user) {
-    done(err, user);
-  });
+  models.User.findById(id)
+    .then((user) => {
+      done(null, user);
+    }).catch(err => done(err));
 });
 
 passport.use(
@@ -42,6 +44,7 @@ passport.use(
         if (!user.checkPassword(password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
+        console.log('user', user)
         return done(null, user);
       });
     },
@@ -51,6 +54,20 @@ passport.use(
 db.sync({ force: false }).then(function () {
   app.listen('3001', function () {
     console.log('listening at 3001');
+  });
+});
+
+
+app.post('/api/signup', (req, res) => {
+  models.User.create({
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    password: req.body.password,
+    telefono: req.body.telefono,
+  }).then(() => {
+    console.log('usuario creado');
+    /* res.redirect('/') */
   });
 });
 
@@ -65,7 +82,6 @@ app.post('/api/logout', (req, res) => {
 });
 
 app.use('/api', require('./routes/index'));
-
 
 app.get('/*', function (req, res) {
   res.sendFile(path.resolve('../front/index.html'));
