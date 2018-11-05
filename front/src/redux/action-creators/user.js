@@ -9,18 +9,34 @@ import {
   CREATE_PRODUCT,
   DELETE_USER,
   EDIT_CATEGORY,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT
 } from '../constants';
 
-// export const logginSucces = user => {
-//   console.log('hola')
-//   console.log(user)
-// }
-
+// LOGIN & LOGOUT ACTIONS:
 export const logginSuccess = user => ({
   type: LOGIN_SUCCESS,
   user
 })
+
+export const logout = user => ({
+  type: LOGOUT,
+  user
+})
+
+export const addLoginToLocalStorage = producto => dispatch => {
+  axios.post('api/login', producto)
+  .then(res => dispatch(logginSuccess(res.data)))
+  .then(res => localStorage.setItem('login', JSON.stringify(res.user)))
+}
+
+export const removeLoginFromLocalStorage = () => dispatch => {
+  localStorage.removeItem('login')
+  dispatch(logout())
+}
+
+
+// OTRAS ACCIONES:
 
 const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,
@@ -91,8 +107,7 @@ export const updateUser = (userId, user) => dispatch =>
     .then(res => res.data)
     .then(user => dispatch(putUser(user)));
 
-export const addProduct = (producto)=> (dispatch)=>
-    axios.post('/api/productos',producto)
-    .then(res=>res.data)
-    .then(data=>dispatch(postProduct(data)))
-  
+export const addProduct = (producto) => (dispatch) =>
+  axios.post('/api/productos', producto)
+    .then(res => res.data)
+    .then(data => dispatch(postProduct(data)))

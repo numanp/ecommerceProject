@@ -7,45 +7,35 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log('user-reducer: ',action)
-  switch(action.type) {
+  switch (action.type) {
     case ADD_REVIEW:
-    return {
-      ...state,
-      //reviews: action.
-    };
+      return {
+        ...state,
+        //reviews: action.
+      };
     case FETCH_ORDERS_USER:
-    return {
+      return {
 
-    };
+      };
 
-    case LOGIN_SUCCESS: 
-    return Object.assign({}, state, {
-      loggedIn: true,
-      user: action.user
+    case LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        loggedIn: true,
+        user: action.user
     });
 
     case LOGOUT:
-    return {
-
-    };
+      return Object.assign({}, state, {
+        loggedIn: false,
+        user: action.user
+    });
+   
     case SIGN_UP:
-    return {
+      return {
 
-    };
+      };
+      
     default:
       return state;
   }
 }
-
-// export default (state = initialState, action) => {
-//   switch(action.type) {
-//     case RECEIVE_PLAYLISTS:
-//       return {
-//         ...state,
-//         reviews: action.playlists,
-//       };
-//     default:
-//       return state;
-//   }
-// };
