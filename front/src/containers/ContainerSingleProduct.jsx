@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 

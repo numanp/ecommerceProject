@@ -1,34 +1,34 @@
-import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN, LOGOUT, SIGN_UP } from '../constants';
+import {
+  ADD_REVIEW,
+  FETCH_ORDERS_USER,
+  LOGIN,
+  LOGOUT,
+  SIGN_UP,
+} from '../constants';
 
 const initialState = {
   reviews: [],
 };
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_REVIEW:
-    return {
-      ...state,
-      //reviews: action.
-    };
+      return {
+        ...state,
+        //reviews: action.
+      };
     case FETCH_ORDERS_USER:
-    return {
-
-    };
+      return {};
     case LOGIN:
-    return {
-
-    };
+      return {};
     case LOGOUT:
-    return {
-
-    };
+      return {};
     case SIGN_UP:
-    return {
-
-    };
+      return {};
+    default:
+      return state;
   }
-}
+};
 
 // export default (state = initialState, action) => {
 //   switch(action.type) {
