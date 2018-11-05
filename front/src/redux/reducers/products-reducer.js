@@ -10,7 +10,7 @@ const productsReducer = (state = [], action) => {
     switch (action.type) {
         case FETCH_PRODUCTS:
             return Object.assign({}, state, {
-                products
+                products:action.products
             })
         case FETCH_SINGLE_PRODUCT:
             return Object.assign({}, state, {

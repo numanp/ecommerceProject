@@ -32,6 +32,7 @@ class ProductosContainer extends Component {
 
     componentDidMount() {
         axios.get('api/productos')
+            .then(data => console.log(data))
             .then(data => this.props.getProducts(data))
     }
 

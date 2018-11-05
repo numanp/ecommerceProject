@@ -32703,6 +32703,8 @@ var ProductosContainer = function (_Component) {
             var _this2 = this;
 
             _axios2.default.get('api/productos').then(function (data) {
+                return console.log(data);
+            }).then(function (data) {
                 return _this2.props.getProducts(data);
             });
         }
@@ -34275,7 +34277,7 @@ var productsReducer = function productsReducer() {
     switch (action.type) {
         case _constants.FETCH_PRODUCTS:
             return Object.assign({}, state, {
-                products: products
+                products: action.products
             });
         case _constants.FETCH_SINGLE_PRODUCT:
             return Object.assign({}, state, {
