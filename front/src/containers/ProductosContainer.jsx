@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios'
-
-import { fetchSingleProduct, fetchProducts } from '../redux/action-creators/products'
+import * as ProductsActions from '../redux/action-creators/products'
 import ListadoProductos from './ProductosSubContainer'
+import ContainerSingleProduct from './ContainerSingleProduct'
+import { Route, Switch } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
-import data from '../baseHarcodeada/products.json'
+
 
 function mapStateToProps(state) {
     return {
-        product: state.product,
-        productos: state.products,
+        product: state.products.product,
+        productos: state.products.products,
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        getSingleProduct: (producto) => {
-            dispatch(fetchSingleProduct(producto))
-        },
-        getProducts: (productos) => {
-            dispatch(fetchProducts(productos))
-        }
-    }
+    return bindActionCreators(ProductsActions, dispatch)
 }
+
 
 class ProductosContainer extends Component {
     constructor(props) {
@@ -31,14 +27,18 @@ class ProductosContainer extends Component {
     }
 
     componentDidMount() {
-        axios.get('api/productos')
-            .then(data => this.props.getProducts(data))
+        this.props.getProducts()
     }
 
+
     render() {
+        const { match } = this.props
         return (
             <div>
-                {/*  <ListadoProductos products={this.props.productos} /> */}
+                <Switch>
+                    <Route path={`${match.path}/singleProduct`} render={() => <ContainerSingleProduct product={this.props.product} />} />
+                    <Route render={() => <ListadoProductos selectProduct={this.props.getSingleProduct} products={this.props.productos} />} />
+                </Switch>
             </div>
         )
     }

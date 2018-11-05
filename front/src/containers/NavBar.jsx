@@ -35,7 +35,7 @@ class NavBar extends Component {
                                 <span className="icon-bar"></span>
                             </button>
                             <Link to="/" className="navbar-brand">
-                                <img src="./images/mercadonuma.png"></img>
+                                <img src="/images/mercadonuma.png"></img>
                             </Link>
                         </div>
 
