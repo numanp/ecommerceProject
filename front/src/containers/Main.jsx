@@ -42,7 +42,7 @@ class Main extends Component {
     axios.post('api/logout').then(res => console.log(res.data));
   }
   componentDidMount() {
-    localStorage.getItem('carrito')
+    sessionStorage.setItem('wachoo', 'wacho')
   }
   render() {
     return (

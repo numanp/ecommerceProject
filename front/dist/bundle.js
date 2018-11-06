@@ -31021,7 +31021,7 @@ var Main = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      localStorage.getItem('carrito');
+      sessionStorage.setItem('wachoo', 'wacho');
     }
   }, {
     key: 'render',
