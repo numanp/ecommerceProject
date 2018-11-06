@@ -6,82 +6,89 @@ import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 
+function mapStateToProps(state, ownProps) {
+  return {
 
-class SingleProduct extends Component {
+  }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {}
+}
+
+class ContainerSingleProduct extends Component {
   constructor(props) {
     super(props);
-    
   }
-
-
   render() {
+    console.log('PROPS DEL HIJOOOOOOOOOOOOOOO', this.props)
     return (
-      <div className="container">
-        <div className="product">
-          <div className="row">
-            <div className="col-md-8">
-              <img
-                className="imagenProducto"
-                src={this.state.product.foto}
-              />
+        <div>
+            <div className="container">
+                    <div className="card">
+                        <div className="container-fliud">
+                            <div className="wrapper row">
+                                <div className="preview col-md-6">
+                                    <div className="preview-pic tab-content">
+                                        <div className="tab-pane img-resp active" id="pic-1">
+                                            <img src={this.props.product.foto} />
+                                        </div>
+                                        <div className="tab-pane img-resp" id="pic-2">
+                                            <img src="https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg" />
+                                        </div>
+                                        <div className="tab-pane img-resp" id="pic-3">
+                                            <img src="https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$" />
+                                        </div>
+                                        <div className="tab-pane img-resp" id="pic-4">
+                                            <img src="https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg" />
+                                        </div>
+                                        <div className="tab-pane img-resp" id="pic-5">
+                                            <img src="https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg" />
+                                        </div>
+                                    </div>
+                                    <ul className="preview-thumbnail nav nav-tabs">
+                                        <li className="active"><a data-target="#pic-1" data-toggle="tab"><img src={this.props.product.foto} /></a></li>
+                                        <li><a data-target="#pic-2" data-toggle="tab"><img src="https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$" /></a></li>
+                                        <li><a data-target="#pic-3" data-toggle="tab"><img src="https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg" /></a></li>
+                                        <li><a data-target="#pic-4" data-toggle="tab"><img src="https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg" /></a></li>
+                                        <li><a data-target="#pic-5" data-toggle="tab"><img src="https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg" /></a></li>
+                                    </ul>
+                                </div>
+                                <div className="details col-md-6">
+                                    <h3 className="product-title">{this.props.product.nombre}</h3>
+                                    <div className="rating">
+                                        <div className="stars">
+                                            <span className="fa fa-star checked"></span>
+                                            <span className="fa fa-star checked"></span>
+                                            <span className="fa fa-star checked"></span>
+                                            <span className="fa fa-star"></span>
+                                            <span className="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                    <div className="container-description">
+                                        <p className="product-description">{this.props.product.descripcion}</p>
+                                    </div>
+                                    <h4>
+                                        <span className="margin-price-text"> Stock Disponible : </span>
+                                        <span>{this.props.product.stock}</span>
+                                    </h4>
+                                    <h4 className="price">
+                                        <span className="margin-price-text"> Precio Actual : </span>
+                                        <span>{this.props.product.precio}</span>
+                                    </h4>
+                                    <div className="action">
+                                        <button className="add-to-cart btn btn-success" type="button">add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <div className="col-md-4">
-              <h2 className="hProducto">
-                <strong>{this.state.product.nombre}</strong>
-              </h2>
-
-              <br />
-              <p className="pProducto ">
-                <span className="glyphicon glyphicon-star " />
-                {/* {this.state.fakeProduct.reviews.opiniones + ' opiniones'} */}
-              </p>
-              <br />
-
-              <p className="pProducto ">
-                <span className="glyphicon glyphicon-credit-card" />
-                Paga en hasta
-                <span>
-                  <strong>12 cuotas</strong>
-                </span>
-              </p>
-              <p className="pProducto" style={{ textAlign: 'left' }}>
-                {'$ ' + this.state.product.precio}
-              </p>
-              <br />
-              <button
-                type="button"
-                className="btn btn-default btn-lg"
-                disabled="disabled"
-                style={{ marginLeft: '50%' }}
-              >
-                Add to cart
-              </button>
-
-              <img src="https://png.icons8.com/metro/30/000000/shopping-cart.png" />
-
-              <button
-                style={{ marginTop: '3%' }}
-                type="button"
-                className="btn btn-primary btn-lg btn-block"
-              >
-                Comprar Ahora
-              </button>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-8">
-              <div className="descripcion">
-                <Descripcion descripcion={this.state.product.descripcion} />
-              </div>
-              <div className="reviews">
-                <ContainerReview />
-              </div>
-            </div>
-          </div>
+            <ContainerReview />
         </div>
-      </div>
+
     );
   }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ContainerSingleProduct)
+export default ContainerSingleProduct

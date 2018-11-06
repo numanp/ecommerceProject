@@ -6,15 +6,18 @@ import {
     UPDATE_PRODUCT
 } from '../constants';
 
-const productsReducer = (state = [], action) => {
+const productsReducer = (state = {
+    products: [],
+    product: {}
+}, action) => {
     switch (action.type) {
         case FETCH_PRODUCTS:
             return Object.assign({}, state, {
-                products:action.products
+                products: action.products
             })
         case FETCH_SINGLE_PRODUCT:
             return Object.assign({}, state, {
-                product
+                product: action.product
             })
         default:
             return state

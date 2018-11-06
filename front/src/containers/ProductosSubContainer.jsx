@@ -1,39 +1,65 @@
-import React from 'react'
-import { connect } from 'react-redux'
-
-import ProductListItem from '../components/ProductToMap'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { addToLocalStorage } from '../redux/action-creators/cart'
-
-
-function ListadoProductos(props) {
-    return <div className="container Group-Products-Container-Props">
-                <div className="row">
-                {
-                    props.products.map(product =>
-                        <ProductListItem
-                            product={product}
-                            addToCart={props.addToCart}
-                            key={product.id}
-                        />)
-                }
-                </div>
-            </div>
-}
+import { Link } from 'react-router-dom'
 
 function mapStateToProps(state) {
-    return {
-        cart: state.cart
-    }
+    return {}
+}
+function mapDispatchToProps(state) {
+    return {}
 }
 
 
+class ProductosSubContainer extends Component {
+    constructor(props) {
+        super(props);
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addToCart: (producto) => {
-            dispatch(addToLocalStorage(producto))
-        }
+    }
+    render() {
+        console.log('render', this.props.products)
+        var selectProduct = this.props.selectProduct
+        return (
+            <div className="container productbox"> 
+                <div className="row">
+                    {
+                        this.props.products && this.props.products.map(product => {
+                            return(
+                            <div key={product.id} className="col-md-3 col-sm-6">
+                                <span className="thumbnail">
+                                    <img className="img-size" src={product.foto} alt="..." />
+                                    <h4 className="h4-productos">{product.nombre}</h4>
+                                    <div className="ratings">
+                                        <span className="glyphicon glyphicon-star"></span>
+                                        <span className="glyphicon glyphicon-star"></span>
+                                        <span className="glyphicon glyphicon-star"></span>
+                                        <span className="glyphicon glyphicon-star"></span>
+                                        <span className="glyphicon glyphicon-star-empty"></span>
+                                    </div>
+                                    <p className="p-productos">{product.descripcion}</p>
+                                    <hr className="line" />
+                                    <div className="row">
+                                        <div className="col-md-6 col-sm-6">
+                                            <p className="price">$ {product.precio}</p>
+                                        </div>
+                                        <div className="col-md-6 col-sm-6">
+                                            <a href="" target="_blank" ><button className="glyphicon glyphicon-shopping-cart btn btn-info right" > </button></a>
+                                            <Link to={`/productos/singleProduct`} className="glyphicon glyphicon-zoom-in btn btn-info right" role="button" onClick={() => selectProduct(product.id)}></Link>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListadoProductos)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductosSubContainer);
+
+
+
+
