@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToLocalStorage } from '../redux/action-creators/cart'
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'react-router-dom'
+// import * as ProductsActions from '../redux/action-creators/products'
+// import * as CartActions from '../redux/action-creators/cart'
+import { addToLocalStorage } from '../redux/action-creators/cart'
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        cart: state.cart
+    }
 }
-function mapDispatchToProps(state) {
-    return {}
+function mapDispatchToProps(dispatch) {
+    return {
+        addToCart: (producto) => {
+            dispatch(addToLocalStorage(producto))
+        }
+    }
+    // return bindActionCreators(...ProductsActions, ...CartActions, dispatch)
 }
 
 
 class ProductosSubContainer extends Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -38,7 +47,7 @@ class ProductosSubContainer extends Component {
                                 <div className="productprice"><div>
                                     <div className="pricetext">${product.precio}</div>
 
-                                    <a className="glyphicon-props btn btn-success btn-sm" role="button" /* onClick={() => props.addToCart(props.product)} */>
+                                    <a className="glyphicon-props btn btn-success btn-sm" role="button" onClick={() => this.props.addToCart(product)}>
                                         <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true">CART</span>
                                     </a>
 
