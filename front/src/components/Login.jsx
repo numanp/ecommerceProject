@@ -25,6 +25,9 @@ class Login extends Component {
         }
         this.logn = this.logn.bind(this)
     }
+    componentDidMount() {
+        console.log(this.props.usuario)
+    }
     emailChange(e) {
         this.setState(
             {

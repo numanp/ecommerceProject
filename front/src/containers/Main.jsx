@@ -52,10 +52,8 @@ class Main extends Component {
   componentDidMount() {
     axios.get('api/user/me')
       .then((response) => {
-        console.log('response: ', response)
         this.props.logginSuccess(response.data)
       })
-
   }
   render() {
     return (

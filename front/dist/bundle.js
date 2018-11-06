@@ -30807,7 +30807,6 @@ var Main = function (_Component) {
       var _this2 = this;
 
       _axios2.default.get('api/user/me').then(function (response) {
-        console.log('response: ', response);
         _this2.props.logginSuccess(response.data);
       });
     }
@@ -32994,6 +32993,11 @@ var Login = function (_Component) {
     }
 
     _createClass(Login, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log(this.props.usuario);
+        }
+    }, {
         key: 'emailChange',
         value: function emailChange(e) {
             this.setState({
