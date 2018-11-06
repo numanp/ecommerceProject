@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-
+import { connect } from 'react-redux';
 import { addLoginToLocalStorage } from '../redux/action-creators/user'
 
 function mapStateToProps(state) {
+    console.log(state)
     return {
         loggedIn: state.loggedIn
     }

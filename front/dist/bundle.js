@@ -779,6 +779,8 @@ var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
 var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
+var ADD_Q_TO_PRODUCTO = exports.ADD_Q_TO_PRODUCTO = 'ADD_Q_TO_PRODUCTO';
+var LESS_Q_TO_PRODUCTO = exports.LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
 
 // Productos
 var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -30438,9 +30440,33 @@ var cartReducer = function cartReducer() {
 
     switch (action.type) {
         case _constants.ADD_TO_CART:
-            return [].concat(_toConsumableArray(state), [action.payload]);
+            var index = -1;
+            for (var i = 0; i < state.length; i++) {
+                if (state[0].id == action.payload.id) {
+                    index = i;
+                }
+            }
+            if (index == -1) return [].concat(_toConsumableArray(state), [action.payload]);
+        case _constants.ADD_Q_TO_PRODUCTO:
+            var obj = state.find(function (i) {
+                return i.id == action.payload;
+            }).q++;
+            return Object.assign([], state, { cart: obj });
+        case _constants.LESS_Q_TO_PRODUCTO:
+            var obj = state.find(function (i) {
+                return i.id == action.payload;
+            }).q--;
+            return Object.assign([], state, { cart: obj });
         case _constants.REMOVE_FROM_CART:
-            return [].concat(_toConsumableArray(state), [action.payload]);
+            var index = -1;
+            for (var i = 0; i < state.length; i++) {
+                if (state[0].id == action.payload) {
+                    index = i;
+                }
+            }
+            if (index !== -1) {
+                return state = [].concat(_toConsumableArray(state.slice(0, index)), _toConsumableArray(state.slice(index + 1)));
+            }
         default:
             return state;
     }
@@ -32867,6 +32893,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
         loggedIn: state.loggedIn
     };
@@ -33393,33 +33420,44 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
+
 var _constants = __webpack_require__(7);
 
-var addToCart = function addToCart(producto) {
+var _store = __webpack_require__(119);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import axios from 'axios';
+var addToCart = exports.addToCart = function addToCart(producto) {
   return {
     type: _constants.ADD_TO_CART,
     payload: producto
   };
 };
 
-var removeFromCart = function removeFromCart(producto) {
+var removeFromCart = exports.removeFromCart = function removeFromCart(productoId) {
   return {
-    type: _constants.DELETE_PRODUCT,
-    payload: producto
+    type: _constants.REMOVE_FROM_CART,
+    payload: productoId
   };
 };
 
-var increaseCart = function increaseCart(producto) {
+var addQtoProduct = exports.addQtoProduct = function addQtoProduct(productoId) {
   return {
-    type: _constants.INCREASE_PRODUCT,
-    payload: producto
+    type: _constants.ADD_Q_TO_PRODUCTO,
+    payload: productoId
   };
 };
 
-var decreaseCart = function decreaseCart(producto) {
+var lessQtoProduct = function lessQtoProduct(productoId) {
   return {
-    type: _constants.DECREASE_PRODUCT,
-    payload: producto
+    type: _constants.LESS_Q_TO_PRODUCTO
   };
 };
 

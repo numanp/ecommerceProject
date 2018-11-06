@@ -1,24 +1,25 @@
-import { ADD_TO_CART, DELETE_PRODUCT, DECREASE_PRODUCT, INCREASE_PRODUCT } from '../constants';
+// import axios from 'axios';
+import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO } from '../constants';
+import store from '../store'
 
-const addToCart = producto => ({
+export const addToCart = (producto) => ({
   type: ADD_TO_CART,
   payload: producto
 })
 
-const removeFromCart = producto => ({
-  type: DELETE_PRODUCT,
-  payload: producto
+export const removeFromCart = productoId => ({
+  type: REMOVE_FROM_CART,
+  payload: productoId
 })
 
-const increaseCart = producto => ({
-  type: INCREASE_PRODUCT,
-  payload: producto
+export const addQtoProduct = (productoId) => ({
+  type: ADD_Q_TO_PRODUCTO,
+  payload: productoId
 })
 
-
-const decreaseCart = producto => ({
-  type: DECREASE_PRODUCT,
-  payload: producto
+const lessQtoProduct = (productoId) => ({
+  type: LESS_Q_TO_PRODUCTO
 })
+
 
 
