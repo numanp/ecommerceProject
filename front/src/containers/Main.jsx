@@ -14,6 +14,9 @@ import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
+import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
+import AdminManejarProductos from '../containers/AdminManejarProductos';
+import AdminEditProductContainer from '../containers/AdminEditProductContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
 import { logginSuccess } from '../redux/action-creators/user'
 

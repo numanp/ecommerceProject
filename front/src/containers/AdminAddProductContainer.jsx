@@ -37,6 +37,7 @@ class AdminAddProductContainer extends Component {
         )
     }
 }
+
 function mapStateToProps (state){
     return{ 
         listaCategorias: state.userAdmin.listaCategorias
@@ -51,9 +52,9 @@ function mapDispatchToProps(dispatch){
         fetchCategorys: function (categorias){
             dispatch(fetchCategorys(categorias))
             },
-        }
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
