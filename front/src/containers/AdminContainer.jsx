@@ -5,9 +5,6 @@ import { Route } from 'react-router-dom';
 //COMPONENTES
 import AdminComponent from '../components/AdminComponent';
 
-
-
-
 class AdminContainer extends Component {
     constructor() {
         super();

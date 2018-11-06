@@ -49,35 +49,3 @@ router.post('/', (req, res) => {
         }).then((a) => res.send(a));
 });
 
-router.get('/', (req, res) => {
-    var usuario = {};
-    var sale = {};
-    models.User.findById(1)
-        .then((us) => {
-            return models.Venta.create({
-                status: 'completado',
-                fecha: '02/11/2018',
-                importe: 500,
-                direccion: 'Azcuenaga 956',
-                email: 'diego@gmail.com',
-                productoXcantidad: [
-                {
-                    producto: 'Pantalon',
-                    cantidad: 1
-                },
-                {
-                    producto: 'Remera',
-                    cantidad: 4
-                }]
-            })
-            .then((venta) => {
-                venta.setProductos(req.body.productos)
-                return venta
-            })
-            .then((venta) => {
-                us.setCompras(venta.id)
-            })
-        })
-        .then((a) => res.send(a));
-});
-

@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import AdminAddCategory from '../components/AdminAddCategory'
 import { connect } from 'react-redux';
-import { fetchCategorys, createCategory,removeCategory } from '../redux/action-creators/user'
-
+import * as actionCreators from '../redux/action-creators/user'
+import {bindActionCreators} from 'redux'
 class AdminAddCategoryContainer extends Component {
     constructor(props) {
         super(props);
@@ -25,8 +25,9 @@ class AdminAddCategoryContainer extends Component {
         const categoria = {
             nombre: evt.target.categoriaNueva.value
         }
-        this.props.createCategory(categoria);      
-        this.props.fetchCategorys(); 
+        this.props.createCategory(categoria)
+        .then(this.props.fetchCategorys)  
+         
 
     }  
     
@@ -46,17 +47,18 @@ function mapStateToProps (state){
 }
 
 function mapDispatchToProps(dispatch){
-    return{
-        createCategory: function(categoria){
-            dispatch(createCategory(categoria))
-        },
-        fetchCategorys: function (categorias){
-           dispatch(fetchCategorys(categorias))
-        },
-        removeCategory: function(categoriaId){
-            dispatch(removeCategory(categoriaId))
-        }
-    }
+    return bindActionCreators(actionCreators,dispatch )
+    // {
+    //     createCategory: function(categoria){
+    //         dispatch(createCategory(categoria))
+    //     },
+    //     fetchCategorys: function (categorias){
+    //        dispatch(fetchCategorys(categorias))
+    //     },
+    //     removeCategory: function(categoriaId){
+    //         dispatch(removeCategory(categoriaId))
+    //     }
+    // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminAddCategoryContainer);

@@ -38,8 +38,8 @@ export default () => (
             <div className="col-sm-6 col-md-4">
                 <div className="thumbnail">
                     <div className="caption">
-                        <h3>Ver lista ordenes</h3>
-                        <Link to="/admin/verOrdenes" className="btn btn-primary">Ver Ordenes</Link><a href="#" className="btn ">Editar Producto</a>
+                        <h3>Ver ordenes</h3>
+                        <Link to="/admin/verOrdenes" className="btn btn-primary">Ver Ordenes</Link>
                     </div>
                 </div>
             </div>

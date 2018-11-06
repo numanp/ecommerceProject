@@ -115,8 +115,7 @@ axios
 //ACTIONS CATEGORYS
 export const createCategory = categoria => dispatch =>
     axios.post('/api/categorias/', categoria)
-    .then(res =>res.data)
-    .then(data => dispatch(postCategory(data)))
+
     //SET CATGORIES
 
 //export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO

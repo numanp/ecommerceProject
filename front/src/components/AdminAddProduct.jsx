@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 export default (props) => (
 <div className='container-fluid' id="AdminAddCategory" >
     <div className='container' >
-    <button>  <Link to="/admin/">Volver</Link> </button>
+    <Link to='/admin'>
+        <button className='btn btn-primary'>
+        <span className="
+            glyphicon glyphicon-chevron-left">
+                Back
+            </span>
+        </button>
+    </Link>
 
     <h1></h1>
     <h1>Crear Producto</h1>
@@ -22,11 +29,12 @@ export default (props) => (
             <input name="imgProducto" type="text" className="form-control" placeholder="Separar imagenes por ,"></input>
         </div>
         <div className="form-group">
-            <label htmlFor="stockProducto">Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK</label>
+            <label htmlFor="stockProducto">Stock</label>
             <input name="stockProducto" type="text" className="form-control" placeholder="Cantidad a agregar"></input>
         </div>
         <div className="form-group">
-      
+            <label htmlFor="categorias" id="addProductCategories">Categorias</label>
+            <br/>
             { props.listaCategorias.map(categoria => 
                    <label key={categoria.id}>
                         {categoria.nombre}
