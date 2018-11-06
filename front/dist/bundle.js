@@ -779,6 +779,8 @@ var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 var ADD_TO_CART = exports.ADD_TO_CART = 'ADD_TO_CART';
 var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
+var ADD_Q_TO_PRODUCTO = exports.ADD_Q_TO_PRODUCTO = 'ADD_Q_TO_PRODUCTO';
+var LESS_Q_TO_PRODUCTO = exports.LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
 
 // Productos
 var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -3888,7 +3890,7 @@ module.exports = Cancel;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.logOut = exports.logginSuccess = undefined;
+exports.addProduct = exports.updateUser = exports.updateOrders = exports.removeCategory = exports.fetchOrders = exports.removeLoginFromLocalStorage = exports.addLoginToLocalStorage = exports.logout = exports.logginSuccess = undefined;
 
 var _axios = __webpack_require__(10);
 
@@ -3898,6 +3900,7 @@ var _constants = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// LOGIN & LOGOUT ACTIONS:
 var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
   return {
     type: _constants.LOGIN_SUCCESS,
@@ -3905,11 +3908,32 @@ var logginSuccess = exports.logginSuccess = function logginSuccess(user) {
   };
 };
 
-var logOut = exports.logOut = function logOut() {
+var logout = exports.logout = function logout(user) {
   return {
-    type: LOG_OUT
+    type: _constants.LOGOUT,
+    user: user
   };
 };
+
+var addLoginToLocalStorage = exports.addLoginToLocalStorage = function addLoginToLocalStorage(user) {
+  return function (dispatch) {
+    _axios2.default.post('api/login', user).then(function (res) {
+      return dispatch(logginSuccess(res.data));
+    }).then(function (res) {
+      return localStorage.setItem('login', JSON.stringify(res.user));
+    });
+  };
+};
+
+var removeLoginFromLocalStorage = exports.removeLoginFromLocalStorage = function removeLoginFromLocalStorage() {
+  return function (dispatch) {
+    localStorage.removeItem('login');
+    dispatch(logout());
+    location.reload(); // refresca la página para que el login se pase a logout
+  };
+};
+
+// OTRAS ACCIONES:
 
 var getOrders = function getOrders(orders) {
   return {
@@ -30578,11 +30602,33 @@ var cartReducer = function cartReducer() {
 
     switch (action.type) {
         case _constants.ADD_TO_CART:
-            return [].concat(_toConsumableArray(state), [action.payload]);
-        // case REMOVE_FROM_CART:
-        //     const firstMatchIndex = state.indexOf(action.payload)
-        //     return state.filter( (item, index) => index !== firstMatchIndex)
-
+            var index = -1;
+            for (var i = 0; i < state.length; i++) {
+                if (state[0].id == action.payload.id) {
+                    index = i;
+                }
+            }
+            if (index == -1) return [].concat(_toConsumableArray(state), [action.payload]);
+        case _constants.ADD_Q_TO_PRODUCTO:
+            var obj = state.find(function (i) {
+                return i.id == action.payload;
+            }).q++;
+            return Object.assign([], state, { cart: obj });
+        case _constants.LESS_Q_TO_PRODUCTO:
+            var obj = state.find(function (i) {
+                return i.id == action.payload;
+            }).q--;
+            return Object.assign([], state, { cart: obj });
+        case _constants.REMOVE_FROM_CART:
+            var index = -1;
+            for (var i = 0; i < state.length; i++) {
+                if (state[0].id == action.payload) {
+                    index = i;
+                }
+            }
+            if (index !== -1) {
+                return state = [].concat(_toConsumableArray(state.slice(0, index)), _toConsumableArray(state.slice(index + 1)));
+            }
         default:
             return state;
     }
@@ -30650,7 +30696,6 @@ exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  console.log('user-reducer: ', action);
   switch (action.type) {
     case _constants.ADD_REVIEW:
       return _extends({}, state);
@@ -30663,30 +30708,19 @@ exports.default = function () {
         user: action.user
       });
 
-    case _constants.LOG_OUT:
+    case _constants.LOGOUT:
       return Object.assign({}, state, {
         loggedIn: false,
-        user: {}
+        user: action.user
       });
 
     case _constants.SIGN_UP:
       return {};
+
     default:
       return state;
   }
 };
-
-// export default (state = initialState, action) => {
-//   switch(action.type) {
-//     case RECEIVE_PLAYLISTS:
-//       return {
-//         ...state,
-//         reviews: action.playlists,
-//       };
-//     default:
-//       return state;
-//   }
-// };
 
 /***/ }),
 /* 125 */
@@ -30872,16 +30906,17 @@ var Main = function (_Component) {
         return console.log(res.data);
       });
     }
-    // componentDidMount() {
-    //   axios.get('api/user/me')
-    //     .then((response) => {
-    //       this.setState({
-    //         login: response.admin
-    //       })
-    //       console.log(response)
-    //     })
-    // }
-
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // axios.get('api/user/me')
+      //   .then((response) => {
+      //     this.setState({
+      //       login: response.admin
+      //     })
+      //     console.log(response)
+      //   })
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -30926,17 +30961,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
 var _reactRouterDom = __webpack_require__(6);
+
+var _reactRedux = __webpack_require__(5);
 
 var _SearchBar = __webpack_require__(129);
 
 var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(5);
+var _user = __webpack_require__(51);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30948,13 +30985,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        loggedIn: state.loggedIn
+        loggedIn: state
     };
 }
 
-function mapDispatchToProps(state) {
-
-    return {};
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        logout: function logout() {
+            dispatch((0, _user.removeLoginFromLocalStorage)());
+        }
+    };
 }
 
 var NavBar = function (_Component) {
@@ -30963,13 +31003,34 @@ var NavBar = function (_Component) {
     function NavBar(props) {
         _classCallCheck(this, NavBar);
 
-        return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+
+        _this.state = {
+            logueado: {}
+        };
+        return _this;
     }
 
     _createClass(NavBar, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var objeto = localStorage.getItem('login');
+            if (!!objeto) {
+                this.setState({
+                    logueado: true
+                });
+            } else {
+                this.setState({
+                    logueado: false
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            console.log(this.props);
+            var _this2 = this;
+
+            // console.log(this.state.logueado)
             return _react2.default.createElement(
                 'nav',
                 { className: 'navbar navbar-default' },
@@ -30997,7 +31058,7 @@ var NavBar = function (_Component) {
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
                                 { to: '/', className: 'navbar-brand' },
-                                _react2.default.createElement('img', { src: '/images/skereeteam.png' })
+                                _react2.default.createElement('img', { src: './images/mercadonuma.png' })
                             )
                         ),
                         _react2.default.createElement(
@@ -31021,7 +31082,18 @@ var NavBar = function (_Component) {
                                         'Registrate'
                                     )
                                 ),
-                                _react2.default.createElement(
+                                this.state.logueado === true ? _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login', onClick: function onClick() {
+                                                return _this2.props.logout();
+                                            } },
+                                        'Logout'
+                                    )
+                                ) : _react2.default.createElement(
                                     'li',
                                     null,
                                     ' ',
@@ -32150,10 +32222,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(5);
 
-var _axios = __webpack_require__(10);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _user = __webpack_require__(51);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -32164,16 +32232,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
+    console.log(state);
     return {
         loggedIn: state.loggedIn
     };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
     return {
-        logginSuccess: function logginSuccess(user) {
-            dispatch((0, _user.logginSuccess)(user));
+        login: function login(user) {
+            dispatch((0, _user.addLoginToLocalStorage)(user));
         }
     };
 }
@@ -32211,19 +32280,12 @@ var Login = function (_Component) {
     }, {
         key: 'logn',
         value: function logn(object) {
-            var _this2 = this;
-
-            _axios2.default.post('api/login', object).then(function (res) {
-                return _this2.props.logginSuccess(res.data);
-            }).then(function (res) {
-                return console.log('listo');
-            });
-            // .then( loginStatus => logginSuccess(loginStatus))
+            this.props.logginSuccess(object);
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             return _react2.default.createElement(
                 'div',
@@ -32231,15 +32293,15 @@ var Login = function (_Component) {
                 _react2.default.createElement(
                     'form',
                     { onSubmit: function onSubmit(e) {
-                            e.preventDefault();_this3.logn(_this3.state);
+                            _this2.props.login(_this2.state);
                         } },
                     _react2.default.createElement('input', { onChange: function onChange(e) {
-                            return _this3.emailChange(e);
+                            return _this2.emailChange(e);
                         }, type: 'text', name: 'email', placeholder: 'email' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('input', { onChange: function onChange(e) {
-                            return _this3.passwordChange(e);
+                            return _this2.passwordChange(e);
                         }, type: 'text', name: 'password', placeholder: 'password' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null),
@@ -32250,13 +32312,6 @@ var Login = function (_Component) {
                     ),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('br', null)
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                            _this3.props.logout();
-                        } },
-                    'Logout'
                 )
             );
         }
@@ -33578,7 +33633,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addToLocalStorage = undefined;
+exports.addToLocalStorage = exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
 
 var _constants = __webpack_require__(7);
 
@@ -33589,36 +33644,39 @@ var _store2 = _interopRequireDefault(_store);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import axios from 'axios';
-var addToCart = function addToCart(producto) {
+var addToCart = exports.addToCart = function addToCart(producto) {
   return {
     type: _constants.ADD_TO_CART,
     payload: producto
   };
 };
 
-// export const createPlaylist = name => dispatch =>
-//   axios.post('/api/playlists', { name })
-//     .then(res => res.data)
-//     .then(playlist => {
-//       dispatch(addPlaylist(playlist));
-//       return playlist.id;
-//     });
+var removeFromCart = exports.removeFromCart = function removeFromCart(productoId) {
+  return {
+    type: _constants.REMOVE_FROM_CART,
+    payload: productoId
+  };
+};
 
+var addQtoProduct = exports.addQtoProduct = function addQtoProduct(productoId) {
+  return {
+    type: _constants.ADD_Q_TO_PRODUCTO,
+    payload: productoId
+  };
+};
+
+var lessQtoProduct = function lessQtoProduct(productoId) {
+  return {
+    type: _constants.LESS_Q_TO_PRODUCTO
+  };
+};
 
 var addToLocalStorage = exports.addToLocalStorage = function addToLocalStorage(producto) {
   return function (dispatch) {
-    // var productos = JSON.parse(localStorage.getItem('carrito'))
-    // console.log(localStorage.getItem('carrito'))
-    // productos += producto  
-    // localStorage.removeItem('carrito')
     localStorage.setItem('carrito', JSON.stringify(producto));
     dispatch(addToCart(producto));
   };
 };
-
-// var list = JSON.parse(localStorage.getItem('list')
-// list.push('<h2>David<h2>');
-// localStorage.setItem('list', JSON.stringify(list));
 
 /***/ }),
 /* 159 */
