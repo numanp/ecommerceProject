@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import CarritoItems from '../components/CarritoItems'
+import { connect } from 'react-redux';
+import CarritoItems from '../components/CarritoItems';
+import * as cartActions from '../redux/action-creators/cart';
+import { bindActionCreators } from 'redux';
 
 function mapStateToProps(state) {
     return {
-        cart: state.cart
+        cart: state.cart,
+        user: state.user
     }
 }
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         addToCart: (item) => {
-//             dispatch({ type: 'ADD', payload: item })
-//         },
-//         removeFromCart: (item) => {
-//             dispatch({ type: 'REMOVE', payload: item })
-//         }
-//     }
-// }
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(cartActions, dispatch)
+}
+
 class Carrito extends Component {
     constructor(props) {
         super(props)
-            this.state = {
-                cartItems: ''
-            }
+
     }
 
-    componentDidMount () {
-        let itemsCarrito = JSON.parse(localStorage.getItem('carrito'))
-        this.setState({
-            cartItems: itemsCarrito
-        })
+    componentDidMount() {
+        console.log(this.props.user)
     }
 
     render() {
@@ -39,8 +32,8 @@ class Carrito extends Component {
                 <h2> My Cart </h2>
                 <div className="row">
                     {
-                        this.props.cart.map( item => 
-                            <CarritoItems 
+                        this.props.cart.map(item =>
+                            <CarritoItems
                                 product={item}
                             />
                         )
@@ -51,4 +44,4 @@ class Carrito extends Component {
     }
 }
 
-export default connect(mapStateToProps,null)(Carrito)
+export default connect(mapStateToProps, mapDispatchToProps)(Carrito)

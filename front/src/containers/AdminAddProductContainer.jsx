@@ -14,7 +14,7 @@ class AdminAddProductContainer extends Component {
     }
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
-    handleSubmit(evt){
+    handleSubmit(evt) {
         evt.preventDefault();
         console.log(evt.target)
         const productoAgregar = {
@@ -52,6 +52,7 @@ function mapDispatchToProps(dispatch){
             dispatch(fetchCategorys(categorias))
             },
         }
+    }
 }
 
 

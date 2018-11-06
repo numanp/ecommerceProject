@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { addLoginToLocalStorage } from '../redux/action-creators/user'
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         loggedIn: state.loggedIn
     }
@@ -52,7 +51,7 @@ class Login extends Component {
                     <div className="col-md-4 col-md-offset-4">
                     <h1>Sign In</h1>
                         <div className="loginForm">
-                            <form onSubmit={(e) => { this.props.login(this.state) }}>
+                            <form onSubmit={(e) => { e.preventDefault(); this.props.login(this.state) }}>
                             <div className="form-group">
                                 <label htmlFor="email">Email address</label>
                                 <input onChange={(e) => this.emailChange(e)} type="text" name="email" placeholder="Email"  className="form-control"/><br /><br />

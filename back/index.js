@@ -16,7 +16,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
 passport.serializeUser(function (user, done) {
-  console.log('serialize', user.id)
   done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
@@ -40,7 +39,6 @@ passport.use(
         if (!user.checkPassword(password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log('user', user)
         return done(null, user);
       });
     },
@@ -67,12 +65,13 @@ app.post('/api/login', passport.authenticate('local'), function (req, res) {
   res.send(req.user);
 });
 app.post('/api/logout', (req, res) => {
-  req.logout();
-  console.log('DESloggeado correctamente');
-  return res.send(req.user);
+  req.session.destroy(function () {
+    res.clearCookie('connect.sid').send('bien');
+
+  });
+  /* return res.send('deslogeado') */;
 });
 app.use('/api', require('./routes/index'));
 app.get('/*', function (req, res) {
-  console.log('ruta html')
   res.sendFile(path.resolve('../front/index.html'));
 })

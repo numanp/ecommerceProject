@@ -1,6 +1,7 @@
 //DEPENDENCIAS
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 //COMPONENTES
 import NavBar from './NavBar';
@@ -14,11 +15,21 @@ import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-import AdminProductos from '../components/AdminProductos';
-import AdminManejarProductos from './AdminManejarProductos';
-import AdminEditProductContainer from './AdminEditProductContainer';
+import { logginSuccess } from '../redux/action-creators/user'
 
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logginSuccess: (user) => {
+      dispatch(logginSuccess(user))
+    }
+  }
+}
 
 class Main extends Component {
   constructor(props) {
@@ -29,7 +40,6 @@ class Main extends Component {
     }
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
-    this.logout = this.logout.bind(this);
   }
   sign(object) {
     axios.post('api/user/signup', object);
@@ -38,11 +48,13 @@ class Main extends Component {
     axios.post('api/login', object)
       .then(res => console.log(res.data))
   }
-  logout() {
-    axios.post('api/logout').then(res => console.log(res.data));
-  }
   componentDidMount() {
-    sessionStorage.setItem('wachoo', 'wacho')
+    axios.get('api/user/me')
+      .then((response) => {
+        console.log('response: ', response)
+        this.props.logginSuccess(response.data)
+      })
+
   }
   render() {
     return (
@@ -69,4 +81,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
