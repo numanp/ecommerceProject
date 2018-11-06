@@ -18,14 +18,12 @@ class ProductosSubContainer extends Component {
     }
 
     render() {
-        console.log('render', this.props.products)
         var selectProduct = this.props.selectProduct
         return (
             <div className="container Group-Products-Container-Props">
                 <div className="row">
                     {
                         this.props.products && this.props.products.map(product => {
-                            console.log(product)
                             return <div key={product.id} className="col-md-2 column productbox">
                                 <img
                                     className="img-responsive"

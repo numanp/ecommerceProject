@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
 import AdminAddProduct from '../components/AdminAddProduct'
-import {connect} from 'react-redux';
-import {addProduct} from '../redux/action-creators/user'
+import { connect } from 'react-redux';
+import { addProduct } from '../redux/action-creators/user'
 
 class AdminAddProductContainer extends Component {
     constructor(props) {
@@ -11,30 +11,30 @@ class AdminAddProductContainer extends Component {
     }
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
-    handleSubmit(evt){
+    handleSubmit(evt) {
         evt.preventDefault();
-        console.log(this.state)
-        this.props.addProduct(evt.target)         
-    }    
+        this.props.addProduct(evt.target)
+    }
     render() {
         return (
-            <div>        
-                
+            <div>
+
                 <AdminAddProduct handleSubmit={this.handleSubmit} />
-            </div>   
+            </div>
         )
     }
 }
-function mapStateToProps (state){
-    return{ nuevoProducto: state.admin.product
+function mapStateToProps(state) {
+    return {
+        nuevoProducto: state.admin.product
     }
 }
-function mapDispatchToProps(dispatch){
-    return{
-        addProduct: function (producto){
+function mapDispatchToProps(dispatch) {
+    return {
+        addProduct: function (producto) {
             dispatch(addProduct(producto))
-            }
         }
+    }
 }
 
 

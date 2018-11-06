@@ -28,14 +28,15 @@ export const logout = user => ({
 export const addLoginToLocalStorage = user => dispatch => {
   axios.post('api/login', user)
     .then(res => dispatch(logginSuccess(res.data)))
-    .then(res => localStorage.setItem('login', JSON.stringify(res.user)))
-
+    .then(res => sessionStorage.setItem('login', JSON.stringify(res.user)))
+    .then(() => location.reload())
 }
 
 export const removeLoginFromLocalStorage = () => dispatch => {
-  localStorage.removeItem('login')
+  sessionStorage.removeItem('login')
   dispatch(logout())
-  location.reload(); // refresca la página para que el login se pase a logout
+  axios.post('api/logout').then(res => console.log(res.data));
+  location.reload();  /// refresca la página para que el login se pase a logout
 }
 
 

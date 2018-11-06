@@ -21,7 +21,6 @@ class ContainerSingleProduct extends Component {
     super(props);
   }
   render() {
-    console.log('PROPS DEL HIJOOOOOOOOOOOOOOO', this.props)
     return (
       <div>
         <h1>{this.props.product.nombre}</h1>

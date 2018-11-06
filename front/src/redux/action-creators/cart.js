@@ -17,13 +17,12 @@ export const addQtoProduct = (productoId) => ({
   payload: productoId
 })
 
-const lessQtoProduct = (productoId) => ({
-  type: LESS_Q_TO_PRODUCTO
+export const lessQtoProduct = (productoId) => ({
+  type: LESS_Q_TO_PRODUCTO,
+  payload: productoId
 })
 
-
-
 export const addToLocalStorage = producto => dispatch => {
-  localStorage.setItem('carrito', JSON.stringify(producto))
+  sessionStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
 }

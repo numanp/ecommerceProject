@@ -17,23 +17,21 @@ class AdminContainer extends Component {
     }
 
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
-    handleSubmit(evt){
+    handleSubmit(evt) {
         evt.preventDefault();
         const formulario = this.state.valorInput;
-        if(formulario.length < 5){
-            console.log("ESTOY PUDIENDO SUBMITEAR")
+        if (formulario.length < 5) {
         }
     }
 
-    pruebaFunc(){
-        console.log('ESTOY FUNCIONANDO')
+    pruebaFunc() {
     }
 
     render() {
         return (
             <div>
-                <AdminComponent pruebaFunc={this.pruebaFunc} handleSubmit={this.handleSubmit}/>
-            </div>   
+                <AdminComponent pruebaFunc={this.pruebaFunc} handleSubmit={this.handleSubmit} />
+            </div>
 
         )
     }

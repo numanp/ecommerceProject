@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import SearchBar from './SearchBar'
-import {  removeLoginFromLocalStorage } from '../redux/action-creators/user'
+import { removeLoginFromLocalStorage } from '../redux/action-creators/user'
 
 function mapStateToProps(state) {
     return {
-        loggedIn: state
+        user: state.user
     }
 }
 
@@ -26,9 +25,8 @@ class NavBar extends Component {
             logueado: {}
         }
     }
-
     componentDidMount() {
-        var objeto = localStorage.getItem('login')
+        var objeto = sessionStorage.getItem('login')
         if (!!objeto) {
             this.setState({
                 logueado: true
