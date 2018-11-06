@@ -1,42 +1,52 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default (props) => (
-    
-    
-    <div className='container' id="AdminAddCategory" >
-    
+<div className='container-fluid' id="AdminAddCategory" >
+    <div className='container' >
+    <Link to='/admin'>
+        <button className='btn btn-primary'>
+        <span className="
+            glyphicon glyphicon-chevron-left">
+                Back
+            </span>
+        </button>
+    </Link>
+
     <h1></h1>
     <h1>Crear Producto</h1>
     <form onSubmit={props.handleSubmit}>
         <div className="form-group">
-            <label for="nombreProducto">Nombre Producto</label>
+            <label htmlFor="nombreProducto">Nombre Producto</label>
             <input name="nombreProducto" type="text" className="form-control" placeholder="Nombre Porducto"></input>
         </div>
         <div className="form-group">
-            <label for="precioProducto">Precio</label>
+            <label htmlFor="precioProducto">Precio</label>
             <input name="precioProducto" type="text" className="form-control" placeholder="Precio"></input>
         </div>
         <div className="form-group">
-            <label for="imgProducto">Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT</label>
+            <label htmlFor="imgProducto">Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , ) APLICAR SPLIT</label>
             <input name="imgProducto" type="text" className="form-control" placeholder="Separar imagenes por ,"></input>
         </div>
         <div className="form-group">
-            <label for="stockProducto">Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK</label>
+            <label htmlFor="stockProducto">Stock</label>
             <input name="stockProducto" type="text" className="form-control" placeholder="Cantidad a agregar"></input>
         </div>
         <div className="form-group">
-        <label name="catProducto" for="catProducto">Categoria (ESTO SE DEBERIA HACER DE OTRO LADO)</label> 
-            <select className="form-control">
-                <option>Categoria 1</option>
-                <option>Categoria 2</option>
-                <option>Categoria 3</option>
-                <option>Categoria 4</option>
-                <option>Categoria 5</option>
-            </select>
+            <label htmlFor="categorias" id="addProductCategories">Categorias</label>
+            <br/>
+            { props.listaCategorias.map(categoria => 
+                   <label key={categoria.id}>
+                        {categoria.nombre}
+                       <input type="checkbox" name={categoria.nombre} /> 
+                       
+                   </label>
+
+                )}
         </div>
 
         <div className="form-group">
-            <label for="descripcionProducto">Descripcion</label>
+            <label htmlFor="descripcionProducto">Descripcion</label>
             <textarea name="descripcionProducto" type="textarea" className="form-control" placeholder="descripcion" rows='5'></textarea>
         </div>
         <button type="submit" className="btn  btn-lg btn-primary" >Agregar Producto</button>
@@ -44,6 +54,8 @@ export default (props) => (
 
     <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
+
+</div>
 
 </div>
 );

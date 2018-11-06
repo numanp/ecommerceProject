@@ -40,6 +40,7 @@ router.get('/cat/:categoria', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    //TOMA DESDE ADMIN EL FORMULARIO CON EL BUTTON 
     models.Producto.create({
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
@@ -47,7 +48,6 @@ router.post('/', (req, res) => {
         foto: req.body.foto,
         stock: req.body.stock
     }).then((producto) => {
-        console.log('producto creado');
         res.status(200).send(producto)
     });
 })
