@@ -31205,7 +31205,7 @@ var NavBar = function (_Component) {
         var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
 
         _this.state = {
-            logueado: {}
+            logueado: false
         };
         return _this;
     }
