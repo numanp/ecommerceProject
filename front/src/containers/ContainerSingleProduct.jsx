@@ -19,6 +19,7 @@ class ContainerSingleProduct extends Component {
         super(props);
     }
     render() {
+
         return (
             <div>
                 <div className="container-productos">
@@ -74,7 +75,7 @@ class ContainerSingleProduct extends Component {
                                         <span>{this.props.product.precio}</span>
                                     </h4>
                                     <div className="action">
-                                        <button className="add-to-cart btn btn-success" type="button">add to cart</button>
+                                        <button className="add-to-cart btn btn-success" type="button" onClick={(e) => { e.preventDefault(); console.log(this.props); var obj = { q: 1, id: this.props.product.id }; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }}>add to cart</button>
                                     </div>
                                 </div>
                             </div>
