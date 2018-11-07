@@ -62,3 +62,23 @@ router.put('/addCategory/', (req, res) => {
       res.status(200).send('categorias agregadas correctamente');
     });
 });
+
+router.put('/:id/', (req, res) => {
+  console.log(req.body), 'req.body';
+  models.Producto.findOne({ where: { id: req.body.id } })
+    .then(producto => producto.updateAttributes(req.body))
+    .then(updated => {
+      console.log(updated);
+      res.status(200).send('producto modificado correctamente');
+    });
+});
+
+router.delete('/:productId/', (req, res) => {
+  console.log(req.params.productId, 'REQ PARAMS BACK');
+  models.Producto.destroy({ where: { id: req.params.productId } }).then(
+    updated => {
+      console.log(updated);
+      res.status(200).send('producto eliminado correctamente');
+    },
+  );
+});

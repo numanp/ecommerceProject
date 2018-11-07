@@ -4,44 +4,40 @@ import AdminAddCategory from '../components/AdminAddCategory'
 import { connect } from 'react-redux';
 import * as actionCreators from '../redux/action-creators/user'
 import {bindActionCreators} from 'redux'
+
 class AdminAddCategoryContainer extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    componentWillMount() {
-        this.props.fetchCategorys();
-    }
     componentDidMount() {
         this.props.fetchCategorys();
     }
-    
-
+    componentWillMount() {
+        this.props.fetchCategorys();
+    }
 
     handleSubmit(evt){
         //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
         //LA RUTA PIDE UN OBJ.nombre que se agrega a la db.
         evt.preventDefault();
-        const categoria = {
-            nombre: evt.target.categoriaNueva.value
-        }
+        const categoria = evt.target.categoriaNueva.value;
         this.props.createCategory(categoria)
-        .then(this.props.fetchCategorys)  
-         
+    }
 
-    }  
-    
     render() {
         return (
-            <div>        
-                <AdminAddCategory removeCategory={this.props.removeCategory} handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias} />
-            </div>   
+            <div>
+            {
+               <AdminAddCategory removeCategory={this.props.removeCategory} handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias} />
+            }
+            </div>
         )
     }
 }
 
 function mapStateToProps (state){
-    return{ 
+    return{
         listaCategorias: state.userAdmin.listaCategorias
     }
 }
