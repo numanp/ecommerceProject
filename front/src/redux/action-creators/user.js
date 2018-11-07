@@ -121,9 +121,6 @@ export const createCategory = categoria => dispatch =>
         .then(res => res.data)
         .then(data => dispatch(postCategory(data)))
         
-//SET CATGORIES
-
-//export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
 
 export const removeCategory = categoryId => dispatch =>
     axios
@@ -137,14 +134,6 @@ export const updateUser = (userId, user) => dispatch =>
         .put(`/api/user/${userId}`, user)
         .then(res => res.data)
         .then(user => dispatch(putUser(user)));
-
-/* export const addProduct = producto => dispatch =>
-    axios
-        .post('/api/productos/', producto)
-        .then(res => res.data)
-        .then(data => dispatch(postProduct(data))); */
-
-//PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
 
 
 export const addProduct = producto => dispatch =>

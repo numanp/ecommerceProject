@@ -2022,10 +2022,6 @@ var createCategory = exports.createCategory = function createCategory(categoria)
     };
 };
 
-//SET CATGORIES
-
-//export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
-
 var removeCategory = exports.removeCategory = function removeCategory(categoryId) {
     return function (dispatch) {
         return _axios2.default.delete('/api/categorias/' + categoryId).then(function (res) {
@@ -2046,15 +2042,6 @@ var updateUser = exports.updateUser = function updateUser(userId, user) {
         });
     };
 };
-
-/* export const addProduct = producto => dispatch =>
-    axios
-        .post('/api/productos/', producto)
-        .then(res => res.data)
-        .then(data => dispatch(postProduct(data))); */
-
-//PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
-
 
 var addProduct = exports.addProduct = function addProduct(producto) {
     return function (dispatch) {
@@ -31692,13 +31679,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _constants = __webpack_require__(6);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var initialState = {};
+var initialState = {
+    listaCategorias: []
+};
 
 exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -31718,9 +31705,9 @@ exports.default = function () {
             return Object.assign({}, state, { category: action.id });
         case _constants.CREATE_CATEGORY:
             //Esto crea una categoria.
-            return _extends({}, state, {
-                list: [].concat(_toConsumableArray(state.listaProductos), [action.category])
-            });
+            console.log("LE PEGO ACA");
+            console.log('action.category', action.category);
+            return Object.assign({}, state, { listaCategorias: [].concat(_toConsumableArray(state.listaCategorias), [action.category]) });
         case _constants.FETCH_CATEGORYS:
             //Accedo a todas las categorias
             return Object.assign({}, state, { listaCategorias: [].concat(_toConsumableArray(action.data)) });
@@ -35973,11 +35960,6 @@ var AdminManejarProductos = function (_Component) {
     _createClass(AdminManejarProductos, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            this.props.fetchProducts();
-        }
-    }, {
-        key: 'componentDidlMount',
-        value: function componentDidlMount() {
             this.props.fetchProducts();
         }
     }, {

@@ -10,9 +10,6 @@ class AdminManejarProductos extends Component {
     componentWillMount() {
         this.props.fetchProducts();
     }
-    componentDidlMount() {
-        this.props.fetchProducts();
-    }
 
     render() {
         return (

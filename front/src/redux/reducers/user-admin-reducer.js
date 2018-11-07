@@ -13,7 +13,9 @@ import {
 
 } from '../constants';
 
-const initialState = {};
+const initialState = {
+    listaCategorias: []
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -30,10 +32,10 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, { category: action.id });
         case CREATE_CATEGORY:
             //Esto crea una categoria.
-            return {
-                ...state,
-                list: [...state.listaProductos, action.category],
-            }
+            console.log("LE PEGO ACA")
+            console.log('action.category', action.category)
+            return Object.assign({}, state, 
+                {listaCategorias: [ ...state.listaCategorias, action.category]});
         case FETCH_CATEGORYS:
             //Accedo a todas las categorias
             return Object.assign({}, state, { listaCategorias: [...action.data] });
