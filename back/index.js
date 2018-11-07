@@ -41,10 +41,6 @@ passport.use(
         if (!user.checkPassword(password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-<<<<<<< HEAD
-=======
-        console.log('user', user);
->>>>>>> dd3058515a2b4e87e94359baaba311ad4dc56f2a
         return done(null, user);
       });
     },
@@ -78,12 +74,7 @@ app.post('/api/logout', (req, res) => {
   /* return res.send('deslogeado') */;
 });
 app.use('/api', require('./routes/index'));
-<<<<<<< HEAD
 
 app.get('/*', function (req, res) {
-=======
-app.get('/*', function(req, res) {
-  console.log('ruta html');
->>>>>>> dd3058515a2b4e87e94359baaba311ad4dc56f2a
   res.sendFile(path.resolve('../front/index.html'));
 });
