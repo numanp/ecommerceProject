@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 export default props => (
   <div className="container-fluid" id="AdminAddCategory">
     <div className="container">
-      <button>
-        <Link to="/admin/">Volver</Link>
-      </button>
+      <Link to="/admin">
+        <button className="btn btn-primary">
+          <span
+            className="
+            glyphicon glyphicon-chevron-left"
+          >
+            Back
+          </span>
+        </button>
+      </Link>
 
       <h1 />
       <h1>Crear Producto</h1>
@@ -43,9 +50,7 @@ export default props => (
         </div>
 
         <div className="form-group">
-          <label htmlFor="stockProducto">
-            Stock(SI QUEDA TIEMPO AGREGAR BOTON + O - PRODUCTOS AL STOCK
-          </label>
+          <label htmlFor="stockProducto">Stock</label>
           <input
             name="stockProducto"
             type="text"
@@ -53,14 +58,18 @@ export default props => (
             placeholder="Cantidad a agregar"
           />
         </div>
+        {/* props.listaCategorias.map(categoria =>
         <div className="form-group">
-          {props.listaCategorias.map(categoria => (
-            <label key={categoria.id}>
-              {categoria.nombre}
-              <input type="checkbox" name={categoria.nombre} />
-            </label>
-          ))}
+            <label htmlFor="categorias" id="addProductCategories">Categorias</label>
+            <br/>
+                   <label key={categoria.id}>
+                        {categoria.nombre}
+                       <input type="checkbox" name={categoria.nombre} />
+
+                   </label>
+
         </div>
+                ) */}
 
         <div className="form-group">
           <label htmlFor="descripcionProducto">Descripcion</label>

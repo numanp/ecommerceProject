@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { addLoginToLocalStorage } from '../redux/action-creators/user';
 
 function mapStateToProps(state) {
@@ -26,6 +25,9 @@ class Login extends Component {
     };
     this.logn = this.logn.bind(this);
   }
+  componentDidMount() {
+    console.log(this.props.usuario);
+  }
   emailChange(e) {
     this.setState({
       email: e.target.value,
@@ -43,33 +45,51 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            this.props.login(this.state);
-          }}
-        >
-          <input
-            onChange={e => this.emailChange(e)}
-            type="text"
-            name="email"
-            placeholder="email"
-          />
-          <br />
-          <br />
-          <input
-            onChange={e => this.passwordChange(e)}
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <br />
-          <br />
-          <button type="submit">Login</button>
-          <br />
-          <br />
-        </form>
+      <div className="container-fluid" id="loginFormulario">
+        <div className="container">
+          <div className="col-md-4 col-md-offset-4">
+            <h1>Sign In</h1>
+            <div className="loginForm">
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  this.props.login(this.state);
+                }}
+              >
+                <div className="form-group">
+                  <label htmlFor="email">Email address</label>
+                  <input
+                    onChange={e => this.emailChange(e)}
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    className="form-control"
+                  />
+                  <br />
+                  <br />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Password</label>
+                  <input
+                    onChange={e => this.passwordChange(e)}
+                    type="text"
+                    name="password"
+                    placeholder="Password"
+                    className="form-control"
+                  />
+                  <br />
+                  <br />
+                </div>
+
+                <button className="btn btn-primary btn-block" type="submit">
+                  Login
+                </button>
+                <br />
+                <br />
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//DEBE RECIBIR UN ARREGLO DE OBJETOS DE TODOS LOS PRODUCTOS Y HACE UN DISPLAY DE CADA UNO
+
 export default props => (
   <div className="container-fluid" id="AdminAddCategory">
     <div className="container">

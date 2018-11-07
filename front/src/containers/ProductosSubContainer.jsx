@@ -4,80 +4,60 @@ import { addToLocalStorage } from '../redux/action-creators/cart';
 import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
-  return {};
+    return {
+    }
 }
 function mapDispatchToProps(state) {
-  return {};
+    return {};
 }
 
 class ProductosSubContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    console.log('render', this.props.products);
-    var selectProduct = this.props.selectProduct;
-    return (
-      <div className="container Group-Products-Container-Props">
-        <div className="row">
-          {this.props.products &&
-            this.props.products.map(product => {
-              console.log(product);
-              return (
-                <div key={product.id} className="col-md-2 column productbox">
-                  <img
-                    className="img-responsive"
-                    title={product.nombre}
-                    // src="../baseHarcodeada/productos/1-groot.jpg"
-                    src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4"
-                  />
-                  <h3 className="producttitle">{product.nombre}</h3>
-                  <div> {product.descripcion} </div>
-                  <div className="productprice">
-                    <div>
-                      <div className="pricetext">${product.precio}</div>
-
-                      <a
-                        className="glyphicon-props btn btn-success btn-sm"
-                        role="button" /* onClick={() => props.addToCart(props.product)} */
-                      >
-                        <span
-                          className="glyphicon glyphicon-shopping-cart"
-                          aria-hidden="true"
-                        >
-                          CART
-                        </span>
-                      </a>
-
-                      <Link
-                        to={`/productos/singleProduct`}
-                        className="glyphicon-props btn btn-secondary btn-sm"
-                        role="button"
-                        onClick={() => selectProduct(product.id)}
-                      >
-                        {' '}
-                        Detalles
-                      </Link>
-                      <a
-                        href="#"
-                        className="glyphicon-props btn btn-danger btn-sm"
-                        role="button"
-                      >
-                        BUY
-                      </a>
-                    </div>
-                  </div>
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        var selectProduct = this.props.selectProduct
+        return (
+            <div className="container productbox">
+                <div className="row-productos">
+                    {
+                        this.props.products && this.props.products.map(product => {
+                            return (
+                                <div key={product.id} className="col-md-3 col-sm-6">
+                                    <span className="thumbnail">
+                                        <img className="img-size" src={product.foto} alt="..." />
+                                        <h4 className="h4-productos">{product.nombre}</h4>
+                                        <div className="ratings">
+                                            <span className="glyphicon glyphicon-star"></span>
+                                            <span className="glyphicon glyphicon-star"></span>
+                                            <span className="glyphicon glyphicon-star"></span>
+                                            <span className="glyphicon glyphicon-star"></span>
+                                            <span className="glyphicon glyphicon-star-empty"></span>
+                                        </div>
+                                        <p className="p-productos">{product.descripcion}</p>
+                                        <hr className="line" />
+                                        <div className="row">
+                                            <div className="col-md-6 col-sm-6">
+                                                <p className="price">$ {product.precio}</p>
+                                            </div>
+                                            <div className="col-md-6 col-sm-6">
+                                                <a href="" target="_blank" ><button className="glyphicon glyphicon-shopping-cart btn btn-info right" onClick={(e) => { e.preventDefault(); var obj = { q: 1, id: product.id }; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }} > </button></a>
+                                                <Link to={`/productos/singleProduct`} className="glyphicon glyphicon-zoom-in btn btn-info right" role="button" onClick={() => selectProduct(product.id)}></Link>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-              );
-            })}
-        </div>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProductosSubContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductosSubContainer);
+
+
+
+

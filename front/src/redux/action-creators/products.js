@@ -1,6 +1,6 @@
 import {
   FETCH_SINGLE_PRODUCT,
-  FETCH_PRODUCTS,
+  FETCH_PRODUCTS_USER,
   DELETE_PRODUCT,
 } from '../constants';
 import axios from 'axios';
@@ -10,14 +10,16 @@ export const fetchSingleProduct = product => ({
   product,
 });
 
-export const fetchProducts = products => ({
-  type: FETCH_PRODUCTS,
+export const fetchProductsUser = products => ({
+  type: FETCH_PRODUCTS_USER,
   products,
 });
 
 export const getProducts = () => {
   return dispatch =>
-    axios.get('/api/productos').then(res => dispatch(fetchProducts(res.data)));
+    axios
+      .get('/api/productos')
+      .then(res => dispatch(fetchProductsUser(res.data)));
 };
 
 export const getSingleProduct = idProducto => {

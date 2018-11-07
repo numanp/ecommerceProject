@@ -8,6 +8,7 @@ import {
   ADD_CATEGORY,
   CREATE_CATEGORY,
   CREATE_PRODUCT,
+  DELETE_USER,
   EDIT_CATEGORY,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -22,6 +23,45 @@ export const logginSuccess = user => ({
   user,
 });
 
+// export const logout = user => ({
+//   type: LOGOUT,
+//   user,
+// });
+
+// export const addLoginToLocalStorage = user => dispatch => {
+//   axios
+//     .post('api/login', user)
+//     .then(res => dispatch(logginSuccess(res.data)))
+//     .then(res => localStorage.setItem('login', JSON.stringify(res.user)));
+// };
+
+// export const removeLoginFromLocalStorage = () => dispatch => {
+//   localStorage.removeItem('login');
+//   dispatch(logout());
+//   location.reload(); // refresca la página para que el login se pase a logout
+// };
+
+// // OTRAS ACCIONES:
+
+// const editProduct = product => ({
+//   type: UPDATE_PRODUCT,
+//   product,
+// });
+
+// const getOrders = orders => ({
+//   type: FETCH_ORDERS_ADMIN,
+//   orders,
+// });
+
+// const putOrders = order => ({
+//   type: UPDATE_ORDERS,
+//   order,
+// });
+
+// const postProduct = product => ({
+//   type: CREATE_PRODUCT,
+//   product,
+
 export const logout = user => ({
   type: LOGOUT,
   user,
@@ -31,85 +71,145 @@ export const addLoginToLocalStorage = user => dispatch => {
   axios
     .post('api/login', user)
     .then(res => dispatch(logginSuccess(res.data)))
-    .then(res => localStorage.setItem('login', JSON.stringify(res.user)));
+    .then(res => sessionStorage.setItem('login', JSON.stringify(res.user)))
+    .then(() => location.reload());
 };
 
 export const removeLoginFromLocalStorage = () => dispatch => {
-  localStorage.removeItem('login');
+  sessionStorage.removeItem('login');
   dispatch(logout());
-  location.reload(); // refresca la página para que el login se pase a logout
+  axios.post('api/logout').then(res => console.log(res.data));
+  location.reload(); /// refresca la página para que el login se pase a logout
 };
 
 // OTRAS ACCIONES:
 
-const editProduct = product => ({
-  type: UPDATE_PRODUCT,
-  product,
-});
-
-const getOrders = orders => ({
+export const getOrders = orders => ({
   type: FETCH_ORDERS_ADMIN,
   orders,
 });
 
-const putOrders = order => ({
+export const putOrders = order => ({
   type: UPDATE_ORDERS,
   order,
 });
 
-const postProduct = product => ({
+export const postProduct = product => ({
   type: CREATE_PRODUCT,
   product,
 });
+export const Fetch_Products = data => ({
+  type: FETCH_PRODUCTS,
+  data,
+});
 
-//ACTION CREATORS CATEGORIAS
-const addCategory = category => ({
-  //ESTE ADD CATEGORY ASSIGNA UNA CATEGORIA A UN PRODUCTO
+// //ACTION CREATORS CATEGORIAS
+// const addCategory = category => ({
+//   //ESTE ADD CATEGORY ASSIGNA UNA CATEGORIA A UN PRODUCTO
+//   type: ADD_CATEGORY,
+//   category,
+// });
+
+// const postCategory = category => ({
+//   //ESTE postCategory CREA UNA NUEVA CATEGORIA
+//   type: CREATE_CATEGORY,
+//   category,
+// });
+
+// const deleteCategory = id => ({
+//   type: REMOVE_CATEGORY,
+//   id,
+// });
+
+// const editCategory = category => ({
+//   type: EDIT_CATEGORY,
+//   category,
+// });
+
+// const getCategory = category => ({
+//   type: FETCH_CATEGORY,
+//   category,
+// });
+
+// //ACTION CREATORS USERS
+// // const putUser = user => ({
+// //   type: UPDATE_USER,
+// //   user,
+// // });
+
+// // const deleteUser = user => ({
+// //   type: DELETE_USER,
+// //   user,
+// // });
+
+// const Fetch_categorys = data => ({
+//   type: FETCH_CATEGORYS,
+//   data,
+export const addCategory = category => ({
   type: ADD_CATEGORY,
   category,
 });
 
-const postCategory = category => ({
-  //ESTE postCategory CREA UNA NUEVA CATEGORIA
+export const postCategory = category => ({
   type: CREATE_CATEGORY,
   category,
 });
 
-const deleteCategory = id => ({
+export const deleteCategory = id => ({
   type: REMOVE_CATEGORY,
   id,
 });
 
-const editCategory = category => ({
+export const editCategory = category => ({
   type: EDIT_CATEGORY,
   category,
 });
 
-const getCategory = category => ({
+export const getCategory = category => ({
   type: FETCH_CATEGORY,
   category,
 });
 
 //ACTION CREATORS USERS
-// const putUser = user => ({
-//   type: UPDATE_USER,
-//   user,
-// });
+export const putUser = user => ({
+  type: UPDATE_USER,
+  user,
+});
 
-// const deleteUser = user => ({
-//   type: DELETE_USER,
-//   user,
-// });
-
-const Fetch_categorys = data => ({
+export const deleteUser = user => ({
+  type: DELETE_USER,
+  user,
+});
+export const Fetch_categorys = data => ({
   type: FETCH_CATEGORYS,
   data,
 });
 
 //ACTIONS VENTAS
+// export const fetchOrders = () => dispatch =>
+//   axios
+//     .get('/api/admin/orders')
+//     .then(res => res.data)
+//     .then(orders => dispatch(getOrders(orders)));
+
+// export const updateOrders = (orderId, order) => dispatch =>
+//   axios
+//     .put(`/api/orders/${orderId}`, order)
+//     .then(res => res.data)
+//     .then(order => dispatch(putOrders(order)));
+
+// //ACTIONS CATEGORYS
+// export const createCategory = categoria => dispatch =>
+//   axios
+//     .post('/api/categorias/', categoria)
+//     .then(res => res.data)
+//     .then(data => dispatch(postCategory(data)));
+// //SET CATGORIES
+
+// //export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
 export const fetchOrders = () => dispatch =>
   axios
-    .get('/api/admin/orders')
+    .get('/api/ventas')
     .then(res => res.data)
     .then(orders => dispatch(getOrders(orders)));
 
@@ -122,12 +222,9 @@ export const updateOrders = (orderId, order) => dispatch =>
 //ACTIONS CATEGORYS
 export const createCategory = categoria => dispatch =>
   axios
-    .post('/api/categorias/', categoria)
+    .post('/api/categorias/', { nombre: categoria })
     .then(res => res.data)
     .then(data => dispatch(postCategory(data)));
-//SET CATGORIES
-
-//export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
 
 export const removeCategory = categoryId => dispatch =>
   axios
@@ -143,29 +240,51 @@ export const removeCategory = categoryId => dispatch =>
 //     .then(user => dispatch(putUser(user)));
 
 export const addProduct = producto => dispatch =>
+  //   axios
+  //     .post('/api/productos/', producto)
+  //     .then(res => res.data)
+  //     .then(data => dispatch(postProduct(data)));
+
+  // export const updateProduct = product => dispatch =>
+  //   axios
+  //     .put(`/api/productos/${product.id}`, product)
+  //     .then(res => res.data)
+  //     .then(console.log)
+  //     .then(product => dispatch(editProduct(product)));
+
+  // //PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
+  // const Fetch_Products = data => ({
+  //   type: FETCH_PRODUCTS,
+  //   data,
+  // });
+
+  // // export const removeUser = user => dispatch =>
+  // //   axios
+  // //     .delete(`/api/user/${user}`)
+  // //     .then(res => res.data)
+  // //     .then(user => dispatch(deleteUser(user)));
+  // export const fetchProducts = () => dispatch =>
+  //   axios
+  //     .get('/api/productos')
+  //     .then(res => res.data)
+  //     .then(data => dispatch(Fetch_Products(data)));
+
+  // export const fetchCategorys = () => dispatch =>
+  //   axios
+  //     .get('/api/categorias')
+  //     .then(res => res.data)
+  //     .then(data => dispatch(Fetch_categorys(data)));
   axios
-    .post('/api/productos/', producto)
+    .post('/api/productos', producto)
     .then(res => res.data)
     .then(data => dispatch(postProduct(data)));
 
-export const updateProduct = product => dispatch =>
+export const removeUser = user => dispatch =>
   axios
-    .put(`/api/productos/${product.id}`, product)
+    .delete(`/api/user/${user}`)
     .then(res => res.data)
-    .then(console.log)
-    .then(product => dispatch(editProduct(product)));
+    .then(user => dispatch(deleteUser(user)));
 
-//PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
-const Fetch_Products = data => ({
-  type: FETCH_PRODUCTS,
-  data,
-});
-
-// export const removeUser = user => dispatch =>
-//   axios
-//     .delete(`/api/user/${user}`)
-//     .then(res => res.data)
-//     .then(user => dispatch(deleteUser(user)));
 export const fetchProducts = () => dispatch =>
   axios
     .get('/api/productos')

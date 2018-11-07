@@ -11,7 +11,6 @@ router.get('/:userId', (req, res) => {
 });
 
 router.get('/me', (req, res) => {
-  console.log('entra a la rutaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
   res.send(req.user || 'no estas logeado');
 });
 
