@@ -34991,16 +34991,42 @@ var CarritoSlider = function (_Component) {
                     { className: 'wrapper-sidebar' },
                     _react2.default.createElement(
                         'nav',
-                        { id: 'sidebar-skeree' },
+                        { id: 'sidebar-skeree', className: 'active' },
                         _react2.default.createElement(
                             'div',
                             { className: 'sidebar-header' },
                             _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                        ),
+                        _react2.default.createElement(
+                            'ul',
+                            { 'class': 'list-unstyled components' },
+                            _react2.default.createElement(
+                                'li',
+                                { 'class': 'active' },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#homeSubmenu', 'data-toggle': 'collapse', 'class': 'dropdown-toggle' },
+                                    'Carrito'
+                                ),
+                                _react2.default.createElement(
+                                    'ul',
+                                    { 'class': 'collapse list-unstyled', id: 'homeSubmenu' },
+                                    _react2.default.createElement(
+                                        'li',
+                                        { className: 'li-sidebarSkeree' },
+                                        _react2.default.createElement(
+                                            'a',
+                                            { className: 'a-carritoSlider', href: '#' },
+                                            'COMPRA CARRITO1'
+                                        )
+                                    )
+                                )
+                            )
                         )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { id: 'content' },
+                        { id: 'content-carrito' },
                         _react2.default.createElement(
                             'nav',
                             { className: 'navbar-sidebar navbar-default' },
@@ -35012,7 +35038,7 @@ var CarritoSlider = function (_Component) {
                                     { className: 'navbar-header' },
                                     _react2.default.createElement(
                                         'button',
-                                        { type: 'button', id: 'sidebarCollapse', className: 'navbar-btn' },
+                                        { type: 'button', id: 'sidebarCollapse', className: 'navbar-btn active' },
                                         _react2.default.createElement('span', null),
                                         _react2.default.createElement('span', null),
                                         _react2.default.createElement('span', null)
