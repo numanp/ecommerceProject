@@ -8,7 +8,6 @@ var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,14 +19,13 @@ app.use(express.static('../front/dist'));
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
-
 passport.deserializeUser(function (id, done) {
   models.User.findById(id)
-    .then((user) => {
+    .then(user => {
       done(null, user);
-    }).catch(err => done(err));
+    })
+    .catch(err => done(err));
 });
-
 passport.use(
   new LocalStrategy(
     {
@@ -43,19 +41,20 @@ passport.use(
         if (!user.checkPassword(password)) {
           return done(null, false, { message: 'Incorrect password.' });
         }
+<<<<<<< HEAD
+=======
+        console.log('user', user);
+>>>>>>> dd3058515a2b4e87e94359baaba311ad4dc56f2a
         return done(null, user);
       });
     },
   ),
 );
-
 db.sync({ force: false }).then(function () {
   app.listen('3001', function () {
     console.log('listening at 3001');
   });
 });
-
-
 app.post('/api/signup', (req, res) => {
   models.User.create({
     nombre: req.body.nombre,
@@ -68,11 +67,9 @@ app.post('/api/signup', (req, res) => {
     /* res.redirect('/') */
   });
 });
-
 app.post('/api/login', passport.authenticate('local'), function (req, res) {
   res.send(req.user);
 });
-
 app.post('/api/logout', (req, res) => {
   req.session.destroy(function () {
     res.clearCookie('connect.sid').send('bien');
@@ -80,9 +77,13 @@ app.post('/api/logout', (req, res) => {
   });
   /* return res.send('deslogeado') */;
 });
-
 app.use('/api', require('./routes/index'));
+<<<<<<< HEAD
 
 app.get('/*', function (req, res) {
+=======
+app.get('/*', function(req, res) {
+  console.log('ruta html');
+>>>>>>> dd3058515a2b4e87e94359baaba311ad4dc56f2a
   res.sendFile(path.resolve('../front/index.html'));
 });

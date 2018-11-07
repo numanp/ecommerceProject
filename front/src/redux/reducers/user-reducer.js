@@ -1,4 +1,10 @@
-import { ADD_REVIEW, FETCH_ORDERS_USER, LOGIN_SUCCESS, LOGOUT, SIGN_UP } from '../constants';
+import {
+  ADD_REVIEW,
+  FETCH_ORDERS_USER,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  SIGN_UP,
+} from '../constants';
 
 const initialState = {};
 
@@ -10,9 +16,7 @@ export default (state = initialState, action) => {
         //reviews: action.
       };
     case FETCH_ORDERS_USER:
-      return {
-
-      };
+      return {};
 
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
@@ -27,11 +31,9 @@ export default (state = initialState, action) => {
       });
 
     case SIGN_UP:
-      return {
-
-      };
+      return {};
 
     default:
       return state;
   }
-}
+};

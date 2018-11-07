@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToLocalStorage } from '../redux/action-creators/cart'
-import { Link } from 'react-router-dom'
+import { addToLocalStorage } from '../redux/action-creators/cart';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {
     }
 }
 function mapDispatchToProps(state) {
-    return {}
+    return {};
 }
-
 
 class ProductosSubContainer extends Component {
     constructor(props) {
@@ -53,8 +52,10 @@ class ProductosSubContainer extends Component {
                         })
                     }
                 </div>
-            </div>
-        )
+                );
+              })}
+        </div>
+        );
     }
 }
 

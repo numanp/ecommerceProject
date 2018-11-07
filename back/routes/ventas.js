@@ -5,47 +5,78 @@ const models = require('../models/index').modelos;
 module.exports = router;
 
 router.get('/', (req, res) => {
-    models.Venta.findAll()
-        .then((ventas) => {
-            res.status(200).send(ventas)
-        })
+  models.Venta.findAll().then(ventas => {
+    res.status(200).send(ventas);
+  });
 });
 
 router.get('/:id', (req, res) => {
-    models.User.findById(req.params.id)
-        .then((usuario) => {
-            usuario.getCompras()
-                .then((compras) => {
-                    res.status(200).send(compras)
-                })
-        })
+  models.User.findById(req.params.id).then(usuario => {
+    usuario.getCompras().then(compras => {
+      res.status(200).send(compras);
+    });
+  });
 });
 
 router.put('/:id', (req, res) => {
-    models.Venta.findById(req.params.id)
-        .then((venta) => {
-            venta.update(req.body, { fields: ['status'] })
-        })
+  models.Venta.findById(req.params.id).then(venta => {
+    venta.update(req.body, { fields: ['status'] });
+  });
 });
 
 router.post('/', (req, res) => {
-    var usuario = {};
-    var sale = {};
-    models.User.findById(req.body.user)
-        .then((us) => {
-            return models.Venta.create({
-                status: req.body.status,
-                fecha: req.body.fecha,
-                importe: req.body.importe,
-                direccion: req.body.direccion,
-                email: req.body.email,
-                productoXcantidad: req.body.productoXcantidad
-            }).then((venta) => {
-                venta.setProductos(req.body.productos)
-                return venta
-            }).then((venta) => {
-                us.setCompras(venta.id)
-            })
-        }).then((a) => res.send(a));
+  var usuario = {};
+  var sale = {};
+  models.User.findById(req.body.user)
+    .then(us => {
+      return models.Venta.create({
+        status: req.body.status,
+        fecha: req.body.fecha,
+        importe: req.body.importe,
+        direccion: req.body.direccion,
+        email: req.body.email,
+        productoXcantidad: req.body.productoXcantidad,
+      })
+        .then(venta => {
+          venta.setProductos(req.body.productos);
+          return venta;
+        })
+        .then(venta => {
+          us.setCompras(venta.id);
+        });
+    })
+    .then(a => res.send(a));
 });
 
+router.get('/', (req, res) => {
+  var usuario = {};
+  var sale = {};
+  models.User.findById(1)
+    .then(us => {
+      return models.Venta.create({
+        status: 'completado',
+        fecha: '02/11/2018',
+        importe: 500,
+        direccion: 'Azcuenaga 956',
+        email: 'diego@gmail.com',
+        productoXcantidad: [
+          {
+            producto: 'Pantalon',
+            cantidad: 1,
+          },
+          {
+            producto: 'Remera',
+            cantidad: 4,
+          },
+        ],
+      })
+        .then(venta => {
+          venta.setProductos(req.body.productos);
+          return venta;
+        })
+        .then(venta => {
+          us.setCompras(venta.id);
+        });
+    })
+    .then(a => res.send(a));
+});

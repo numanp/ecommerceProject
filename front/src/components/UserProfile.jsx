@@ -15,7 +15,7 @@ export default ({userPerfil, arregloCompras, misReviews}) => (
                         <p>ID: {compra.idVenta}</p>
                         <p>Fecha: {compra.fechaVenta}</p>
                         <p>Status: {compra.status}</p>    
-                        <p class="profile_celeste">Ver Detalle</p>
+                        <p className="profile_celeste">Ver Detalle</p>
                     </div>
                 ))
             }
