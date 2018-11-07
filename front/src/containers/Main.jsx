@@ -14,6 +14,7 @@ import CarritoSlider from '../containers/CarritoSliderContainer'
 import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
+import CheckoutContainer from './CheckoutContainer';
 // import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 // import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
 // import AdminManejarProductos from '../containers/AdminManejarProductos';
@@ -70,7 +71,9 @@ class Main extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
+        <Route exact path="/checkout" component={CheckoutContainer} />
         <Route path="/productos" component={Productos} />
+
 
 
         {/* <Route exact path="/admin" component={AdminContainer} />

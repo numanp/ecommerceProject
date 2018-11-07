@@ -29704,6 +29704,10 @@ var _AdminContainer = __webpack_require__(166);
 
 var _AdminContainer2 = _interopRequireDefault(_AdminContainer);
 
+var _CheckoutContainer = __webpack_require__(168);
+
+var _CheckoutContainer2 = _interopRequireDefault(_CheckoutContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29796,6 +29800,7 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render() {
             return _react2.default.createElement(_Login2.default, { logout: _this3.logout, logn: _this3.logn });
           } }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout', component: _CheckoutContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/productos', component: _ProductosContainer2.default })
       );
     }
@@ -34564,6 +34569,185 @@ exports.default = function () {
     ' '
   );
 };
+
+/***/ }),
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(79);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
+var arregloCompras = [{
+    idVenta: 1,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'Completado',
+    linkProducto: '#'
+}, {
+    idVenta: 3,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+},, {
+    idVenta: 4,
+    productos: [10, 20, 30],
+    fechaVenta: '10:25PM',
+    status: 'incompleto',
+    linkProducto: '#'
+}];
+
+var CheckoutContainer = function (_Component) {
+    _inherits(CheckoutContainer, _Component);
+
+    function CheckoutContainer() {
+        _classCallCheck(this, CheckoutContainer);
+
+        return _possibleConstructorReturn(this, (CheckoutContainer.__proto__ || Object.getPrototypeOf(CheckoutContainer)).apply(this, arguments));
+    }
+
+    _createClass(CheckoutContainer, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'container-fluid container', id: '' },
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Manejo de ordenes'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { 'class': 'btn-group' },
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'button', 'class': 'btn btn-default dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                        'Filtrar por Status ',
+                        _react2.default.createElement('span', { 'class': 'caret' })
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { 'class': 'dropdown-menu' },
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'CREADO'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'PROCESADO'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'CANCELADO'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'COMPLETADO'
+                            )
+                        )
+                    )
+                ),
+                //MAPEO POR EL ARREGLO DE COMPRAS
+                arregloCompras.map(function (compra) {
+                    return _react2.default.createElement(
+                        'div',
+                        { className: 'profile_compra', key: compra.idVenta },
+                        _react2.default.createElement(
+                            'a',
+                            { href: compra.linkProducto },
+                            _react2.default.createElement('img', { src: 'https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg', alt: '' })
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'INFO DE LA VENTA.'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'ID VENTA: ',
+                            compra.idVenta
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Fecha: ',
+                            compra.fechaVenta
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Status: ',
+                            compra.status
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { 'class': 'profile_celeste' },
+                            'Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)'
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { 'class': 'btn btn-primary' },
+                            'Cambiar el Status'
+                        )
+                    );
+                })
+            );
+        }
+    }]);
+
+    return CheckoutContainer;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
 
 /***/ })
 /******/ ]);
