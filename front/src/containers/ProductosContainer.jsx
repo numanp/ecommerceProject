@@ -51,12 +51,10 @@ class ProductosContainer extends Component {
 
     componentDidMount() {
         this.props.getProducts()
-        console.log(this.props)
     }
 
 
     render() {
-        console.log(this.props)
         const { match } = this.props
         return (
             <div>
