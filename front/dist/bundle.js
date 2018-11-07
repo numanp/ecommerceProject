@@ -31899,6 +31899,10 @@ var _AdminEditProductContainer = __webpack_require__(173);
 
 var _AdminEditProductContainer2 = _interopRequireDefault(_AdminEditProductContainer);
 
+var _checkOutContainer = __webpack_require__(175);
+
+var _checkOutContainer2 = _interopRequireDefault(_checkOutContainer);
+
 var _AdminOrdenes = __webpack_require__(172);
 
 var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
@@ -31996,7 +32000,8 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/adminListaProductos', component: _AdminManejarProductos2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkoutContainer/', component: _checkOutContainer2.default })
       );
     }
   }]);
@@ -36556,6 +36561,164 @@ exports.default = function (props) {
         )
     );
 };
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var checkOutContainer = function (_Component) {
+    _inherits(checkOutContainer, _Component);
+
+    function checkOutContainer(props) {
+        _classCallCheck(this, checkOutContainer);
+
+        return _possibleConstructorReturn(this, (checkOutContainer.__proto__ || Object.getPrototypeOf(checkOutContainer)).call(this, props));
+    }
+
+    _createClass(checkOutContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+        //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'container', id: 'checkOutContaier' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'contenedorCheckout' },
+                    _react2.default.createElement('div', { className: 'col-md-4 IMGCHECKOUT' }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-md-4 checkoutForm' },
+                        _react2.default.createElement(
+                            'h2',
+                            null,
+                            'Total a pagar: 100'
+                        ),
+                        _react2.default.createElement(
+                            'form',
+                            null,
+                            _react2.default.createElement(
+                                'div',
+                                { 'class': 'form-group' },
+                                _react2.default.createElement(
+                                    'label',
+                                    { 'for': 'email' },
+                                    'Nombre de tarjeta'
+                                ),
+                                _react2.default.createElement('input', { type: 'email', 'class': 'form-control', id: 'email', name: 'email', placeholder: 'Email' })
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { 'class': 'form-group' },
+                                _react2.default.createElement(
+                                    'label',
+                                    { 'for': 'tarjeta' },
+                                    'Tarjeta'
+                                ),
+                                _react2.default.createElement('input', { type: 'password', 'class': 'form-control', id: 'tarjeta', placeholder: 'Password' })
+                            ),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'datos' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { 'class': 'form-group' },
+                                    _react2.default.createElement(
+                                        'label',
+                                        { 'for': 'tarjeta' },
+                                        'Expiration Date'
+                                    ),
+                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control checkoutExpiracion', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { 'class': 'form-group cvvcheckout' },
+                                    _react2.default.createElement(
+                                        'label',
+                                        { 'for': 'tarjeta' },
+                                        'CVV'
+                                    ),
+                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control ', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'button',
+                                { type: 'submit', 'class': 'btn btn-success btn-block btn-lg' },
+                                'Submit'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return checkOutContainer;
+}(_react.Component);
+
+function mapStateToProps(state) {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addProduct: function (_addProduct) {
+            function addProduct(_x) {
+                return _addProduct.apply(this, arguments);
+            }
+
+            addProduct.toString = function () {
+                return _addProduct.toString();
+            };
+
+            return addProduct;
+        }(function (producto) {
+            dispatch(addProduct(producto));
+        }),
+        fetchCategorys: function (_fetchCategorys) {
+            function fetchCategorys(_x2) {
+                return _fetchCategorys.apply(this, arguments);
+            }
+
+            fetchCategorys.toString = function () {
+                return _fetchCategorys.toString();
+            };
+
+            return fetchCategorys;
+        }(function (categorias) {
+            dispatch(fetchCategorys(categorias));
+        })
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(checkOutContainer);
 
 /***/ })
 /******/ ]);

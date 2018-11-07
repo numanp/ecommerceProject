@@ -18,6 +18,7 @@ import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
 import AdminManejarProductos from '../containers/AdminManejarProductos';
 import AdminEditProductContainer from '../containers/AdminEditProductContainer';
+import checkOutContainer from '../containers/checkOutContainer';
  import AdminOrdenes from '../components/AdminOrdenes';
 // import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 // import AdminProductos from '../components/AdminProductos';
@@ -78,7 +79,9 @@ class Main extends Component {
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> 
-
+        
+        <Route exact path="/checkoutContainer/" component={checkOutContainer} /> 
+        
         {
           /* 
           <Route exact path="/admin/deleteUser" component={DeleteUser} />
