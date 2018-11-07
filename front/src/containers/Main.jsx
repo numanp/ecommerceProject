@@ -14,12 +14,11 @@ import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import PromoveUser from './ContainerAdminPromoveUser';
-import DeleteUser from './ContainerAdminDeleteUser';
 import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 import AdminProductos from '../components/AdminProductos';
 import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
+import AdminUsersContainer from './AdminUsersContainer';
 
 class Main extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class Main extends Component {
     this.logout = this.logout.bind(this);
   }
   sign(object) {
-    axios.post('api/user/signup', object);
+    return axios.post('api/user/signup', object);
   }
   logn(object) {
     axios.post('api/login', object).then(res => console.log(res.data));
@@ -58,7 +57,7 @@ class Main extends Component {
         <Route
           exact
           path="/signup"
-          render={() => <SignUp sign={this.sign} />}
+          render={props => <SignUp {...props} sign={this.sign} />}
         />
         <Route
           exact
@@ -68,24 +67,19 @@ class Main extends Component {
         <Route path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
         {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
-
         {
           //RUTAS DEL ADMIN
         }
         <Route exact path="/admin" component={AdminContainer} />
         <Route
           exact
-          path="/admin/agregarProducto"
-          component={AdminAddProductContainer}
-        />
-        <Route
-          exact
           path="/admin/agregarCategoria"
-          component={AdminAddCategory}
+          component={AdminAddCategoryContainer}
         />
+
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        <Route exact path="/admin/promoveUser" component={PromoveUser} />
-        <Route exact path="/admin/deleteUser" component={DeleteUser} />
+        {/* <Route exact path="/admin/promoveUser" component={PromoveUser} />
+        <Route exact path="/admin/deleteUser" component={DeleteUser} /> */}
         <Route
           exact
           path="/admin/agregarProducto"
@@ -107,6 +101,7 @@ class Main extends Component {
           path="/admin/EditarProducto/:id"
           component={AdminEditProductContainer}
         />
+        <Route exact path="/admin/users/" component={AdminUsersContainer} />
       </div>
     );
   }

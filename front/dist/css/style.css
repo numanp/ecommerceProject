@@ -27,6 +27,45 @@ body {
   min-height: 220px;
 }
 
+#users-table {
+  background-color: transparent;
+  border: 1px solid #d2d2d2;
+  border-spacing: 10px;
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+}
+#users-table .btn-danger {
+  color: #de5454;
+  background-color: white;
+  transition-duration: 0.2s;
+}
+
+#users-table .btn-danger:hover {
+  color: white;
+  background-color: #de5454;
+  transition-duration: 0.2s;
+}
+#users-table button span {
+  margin-right: 3px;
+}
+#users-table .btn-warning {
+  color: #f0b765;
+  background-color: white;
+  transition: 0.2s;
+  margin-left: 10px;
+}
+
+#users-table .btn-warning:hover {
+  color: white;
+  background-color: #f0b765;
+  transition-duration: 0.2s;
+}
+#users-table tr th {
+  text-align: center;
+  padding: 10px;
+}
 .imagenProducto {
   width: 700px;
   height: 500px;
@@ -58,9 +97,7 @@ body {
 /* -------------------------aca empieza ReviewInput-------------------------------- */
 
 .cajaopinionproducto {
-
   margin: 3% 5%;
-
 }
 
 .opinionProducto {
@@ -70,4 +107,3 @@ body {
 /* -------------------------aca termina ReviewInput-------------------------------- */
 
 /* -------------------------aca termina ContainerReview-------------------------------- */
-
