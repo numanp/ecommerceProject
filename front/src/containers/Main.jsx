@@ -21,7 +21,7 @@ import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
 import AdminUsersContainer from './AdminUsersContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import EditCategoriaDeProducto from './EditCategoriaDeProducto'; 
+// import EditCategoriaDeProducto from './EditCategoriaDeProducto'; 
 
 function mapStateToProps(state) {
   return {
@@ -70,7 +70,6 @@ class Main extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
-        <Route exact path="/checkout" component={CheckoutContainer} />
         <Route path="/productos" component={Productos} />
 
         <Route exact path="/admin" component={AdminContainer} />

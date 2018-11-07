@@ -29778,10 +29778,6 @@ var _AdminOrdenes = __webpack_require__(180);
 
 var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
 
-var _EditCategoriaDeProducto = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./EditCategoriaDeProducto\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _EditCategoriaDeProducto2 = _interopRequireDefault(_EditCategoriaDeProducto);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29793,6 +29789,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 //COMPONENTES
 
+
+// import EditCategoriaDeProducto from './EditCategoriaDeProducto'; 
 
 function mapStateToProps(state) {
   return {
@@ -29863,7 +29861,6 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render() {
             return _react2.default.createElement(_Login2.default, { logout: _this3.logout, logn: _this3.logn });
           } }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout', component: CheckoutContainer }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/productos', component: _ProductosContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarProducto', component: _AdminAddProductContainer2.default }),
@@ -32297,12 +32294,12 @@ var NavBar = function (_Component) {
                             { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
                             _react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-left', key: '1' },
+                                { className: 'nav navbar-nav navbar-left' },
                                 _react2.default.createElement(_SearchBar2.default, null)
                             ),
                             this.state.logueado === true ? [_react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-right' },
+                                { key: '1', className: 'nav navbar-nav navbar-right' },
                                 _react2.default.createElement(
                                     'li',
                                     null,
@@ -32328,7 +32325,7 @@ var NavBar = function (_Component) {
                                 )
                             )] : [_react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-right' },
+                                { key: '2', className: 'nav navbar-nav navbar-right' },
                                 _react2.default.createElement(
                                     'li',
                                     null,
@@ -32644,15 +32641,8 @@ var LandingPage = function (_Component) {
     function LandingPage(props) {
         _classCallCheck(this, LandingPage);
 
-        var _this = _possibleConstructorReturn(this, (LandingPage.__proto__ || Object.getPrototypeOf(LandingPage)).call(this, props));
-
-        console.log('props', props);
-        return _this;
+        return _possibleConstructorReturn(this, (LandingPage.__proto__ || Object.getPrototypeOf(LandingPage)).call(this, props));
     }
-
-    // componentDidMount() {
-    //     this.props.getProducts()
-    // }
 
     _createClass(LandingPage, [{
         key: 'render',
@@ -33189,7 +33179,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
 
 exports.default = function (productos) {
-    console.log(productos);
     return _react2.default.createElement(
         "div",
         { className: "container" },
@@ -33922,7 +33911,6 @@ var CarritoSlider = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log('PROPS DE CARRITO', this.props.cart);
             return _react2.default.createElement(
                 'div',
                 null,
@@ -33939,16 +33927,16 @@ var CarritoSlider = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'ul',
-                            { 'class': 'list-unstyled components' },
+                            { className: 'list-unstyled components' },
                             _react2.default.createElement(
                                 'li',
-                                { 'class': 'active' },
+                                { className: 'active' },
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '#homeSubmenu', 'data-toggle': 'collapse', 'class': 'dropdown-toggle' },
+                                    { href: '#homeSubmenu', 'data-toggle': 'collapse', className: 'dropdown-toggle' },
                                     'Carrito'
                                 ),
-                                _react2.default.createElement('ul', { 'class': 'collapse list-unstyled', id: 'homeSubmenu' })
+                                _react2.default.createElement('ul', { className: 'collapse list-unstyled', id: 'homeSubmenu' })
                             )
                         )
                     ),
