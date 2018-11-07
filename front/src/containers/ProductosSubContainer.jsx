@@ -21,7 +21,7 @@ class ProductosSubContainer extends Component {
         var selectProduct = this.props.selectProduct
         return (
             <div className="container productbox"> 
-                <div className="row">
+                <div className="row-productos">
                     {
                         this.props.products && this.props.products.map(product => {
                             return(

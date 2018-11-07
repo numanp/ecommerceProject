@@ -24,10 +24,10 @@ class ContainerSingleProduct extends Component {
     console.log('PROPS DEL HIJOOOOOOOOOOOOOOO', this.props)
     return (
         <div>
-            <div className="container">
-                    <div className="card">
+            <div className="container-productos">
+                    <div className="card-SingleProduct">
                         <div className="container-fliud">
-                            <div className="wrapper row">
+                            <div className="wrapper-ContainerSingleProduct row">
                                 <div className="preview col-md-6">
                                     <div className="preview-pic tab-content">
                                         <div className="tab-pane img-resp active" id="pic-1">
@@ -72,7 +72,7 @@ class ContainerSingleProduct extends Component {
                                         <span className="margin-price-text"> Stock Disponible : </span>
                                         <span>{this.props.product.stock}</span>
                                     </h4>
-                                    <h4 className="price">
+                                    <h4 className="price-singleProduct">
                                         <span className="margin-price-text"> Precio Actual : </span>
                                         <span>{this.props.product.precio}</span>
                                     </h4>

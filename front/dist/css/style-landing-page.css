@@ -6,6 +6,132 @@ body{
 	font-size: 1em;
 	height: 100%;
 }
+/*------------------------------Acá empieza el CarritoSliderContainer------------------------------*/
+
+
+.navbar-sidebar {
+    border: none;
+    border-radius: 0;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+/* ------------estilos del sidebar------------ */
+.wrapper-sidebar {
+    display: flex;
+    align-items: stretch;
+    perspective: 1500px;
+    position: fixed;
+    margin-left: -5%;
+    z-index: +1;
+}
+
+#sidebar-skeree {
+    min-width: 300px;
+    max-width: 300px;
+    background: #0f96be;
+    color: #fff;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar-skeree.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+#sidebar-skeree .sidebar-header {
+    padding:1% ;
+    background: #09627e;
+}
+
+.sidebar-header>img {
+    width: 100%;
+    padding: 5%;
+  }
+
+/* ------------estilos del contenido------------ */
+
+#content {
+
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #555;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+        transform: rotateY(90deg);
+    }
+    #sidebar.active {
+        margin-left: 0;
+        transform: none;
+    }
+    #sidebarCollapse span:first-of-type,
+    #sidebarCollapse span:nth-of-type(2),
+    #sidebarCollapse span:last-of-type {
+        transform: none;
+        opacity: 1;
+        margin: 5px auto;
+    }
+    #sidebarCollapse.active span {
+        margin: 0 auto;
+    }
+    #sidebarCollapse.active span:first-of-type {
+        transform: rotate(45deg) translate(2px, 2px);
+    }
+    #sidebarCollapse.active span:nth-of-type(2) {
+        opacity: 0;
+    }
+    #sidebarCollapse.active span:last-of-type {
+        transform: rotate(-45deg) translate(1px, -1px);
+    }
+
+}
+
+/*------------------------------Acá termina el CarritoSliderContainer------------------------------*/
 
 /*------------------------------Acá empieza el nav-bar------------------------------*/
 
@@ -113,37 +239,7 @@ body{
     padding: 25px;
     overflow: hidden
 }
-.team_columns_carousel_control_left,
-.team_columns_carousel_control_right {
-    top: 26px;
-    z-index: 2;
-    opacity: 1;
-    width: 35px;
-    height: 35px;
-    border: 0;
-    text-shadow: none;
-    text-align: center;
-    -webkit-transition: all ease-in-out .3s;
-    transition: all ease-in-out .3s
-}
-.team_columns_carousel_control_icons {
-    line-height: 35px;
-    font-size: 20px!important;
-    font-weight: normal!important;
-    margin-top:8px;
-}
-.team_columns_carousel_control_left {
-    left: 26px!important
-}
-.team_columns_carousel_control_right {
-    left: 63px!important
-}
-.adv_left {
-    left: 41px!important
-}
-.adv_right {
-    left: 78px!important
-}
+
 .team_columns_item_image {
     padding-top: 60px;
     padding-bottom: 25px
@@ -171,12 +267,17 @@ body{
 .team_columns_item_caption {
     padding: 10px;
     text-align: center;
-    padding-bottom: 30px
+    padding-bottom: 30px;
+    color: #fff;
+    background: #171717
 }
+
 .team_columns_item_caption>hr {
+    border-top: 2px solid #feb600;
     width: 15%
 }
-.team_columns_item_caption h4 {
+   
+.team_columns_item_caption .h4-group-products {
     font-weight: 800;
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif
@@ -186,75 +287,8 @@ body{
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif
 }
-.team_columns_item_caption p {
-    font-weight: 400;
-    margin-top: 20px;
-    font-family: 'Open Sans', sans-serif
-}
-.team_columns_item_caption p a,
-.team_columns_item_caption p a:visited {
-    text-decoration: none;
-    -webkit-transition: all ease-in-out .3s;
-    transition: all ease-in-out .3s
-}
-.team_columns_item_social a,
-.team_columns_item_social a:visited {
-    width: 25px;
-    float: left;
-    height: 25px;
-    display: block;
-    line-height: 25px;
-    margin-right: 2px;
-    text-decoration: none;
-    -webkit-transition: background ease-in-out .3s;
-    transition: background ease-in-out .3s
-}
-@media(min-width:768px) and (max-width:789px) {
-    .adv_team_columns_item_social a, .adv_team_columns_item_social a:visited {
-        margin-right: 0
-    }
-}
-.team_columns_carousel_wrapper {
-    background: #fff
-}
-.team_columns_carousel_control_left,
-.team_columns_carousel_control_left:hover,
-.team_columns_carousel_control_left:active,
-.team_columns_carousel_control_left:focus,
-.team_columns_carousel_control_right,
-.team_columns_carousel_control_right:hover,
-.team_columns_carousel_control_right:active,
-.team_columns_carousel_control_right:focus {
-    color: #fff;
-    background: #feb600!important
-}
-.team_columns_item_caption {
-    color: #fff;
-    background: #171717
-}
-.team_columns_item_caption>hr {
-    border-top: 2px solid #feb600
-}
-.team_columns_item_caption p a,
-.team_columns_item_caption p a:visited {
-    color: #feb600
-}
-.team_columns_item_caption p a:hover,
-.team_columns_item_caption p a:active {
-    color: #cb9200
-}
-.team_columns_item_social a,
-.team_columns_item_social a:visited {
-    color: #171717;
-    background: #feb600
-}
-.team_columns_item_social a:hover,
-.team_columns_item_social a:active {
-    background: #cb9200
-}
-.four_shows_one_move .cloneditem-1,
-.four_shows_one_move .cloneditem-2,
-.four_shows_one_move .cloneditem-3 {
+
+.four_shows_one_move .cloneditem-1 {
     display: none
 }
 @media all and (min-width: 768px) {
