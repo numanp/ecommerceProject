@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function(props) {
   return (
-    <div className="reviews">
+    <div className="reviews cajaopinionproducto">
       <h2>Opiniones sobre el producto</h2>
       {
         props.addReview && props.addReview.map(review =>{

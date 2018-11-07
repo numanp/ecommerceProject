@@ -8,7 +8,7 @@ import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import axios from 'axios';
+import CarritoSlider from '../containers/CarritoSliderContainer'
 import Productos from './ProductosContainer';
 import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
@@ -58,7 +58,9 @@ class Main extends Component {
   render() {
     return (
       <div>
+        <CarritoSlider />
         <NavBar admin={this.state.admin} />
+
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />

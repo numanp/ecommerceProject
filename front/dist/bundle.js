@@ -4117,7 +4117,7 @@ module.exports = Cancel;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -4153,38 +4153,200 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function mapStateToProps(state, ownProps) {
-  return {};
+    return {};
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  return {};
+    return {};
 }
 
 var ContainerSingleProduct = function (_Component) {
-  _inherits(ContainerSingleProduct, _Component);
+    _inherits(ContainerSingleProduct, _Component);
 
-  function ContainerSingleProduct(props) {
-    _classCallCheck(this, ContainerSingleProduct);
+    function ContainerSingleProduct(props) {
+        _classCallCheck(this, ContainerSingleProduct);
 
-    return _possibleConstructorReturn(this, (ContainerSingleProduct.__proto__ || Object.getPrototypeOf(ContainerSingleProduct)).call(this, props));
-  }
-
-  _createClass(ContainerSingleProduct, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          this.props.product.nombre
-        )
-      );
+        return _possibleConstructorReturn(this, (ContainerSingleProduct.__proto__ || Object.getPrototypeOf(ContainerSingleProduct)).call(this, props));
     }
-  }]);
 
-  return ContainerSingleProduct;
+    _createClass(ContainerSingleProduct, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container-productos' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'card-SingleProduct' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'container-fliud' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'wrapper-ContainerSingleProduct row' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'preview col-md-6' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'preview-pic tab-content' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'tab-pane img-resp active', id: 'pic-1' },
+                                            _react2.default.createElement('img', { src: this.props.product.foto })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'tab-pane img-resp', id: 'pic-2' },
+                                            _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'tab-pane img-resp', id: 'pic-3' },
+                                            _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'tab-pane img-resp', id: 'pic-4' },
+                                            _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'tab-pane img-resp', id: 'pic-5' },
+                                            _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'ul',
+                                        { className: 'preview-thumbnail nav nav-tabs' },
+                                        _react2.default.createElement(
+                                            'li',
+                                            { className: 'active' },
+                                            _react2.default.createElement(
+                                                'a',
+                                                { 'data-target': '#pic-1', 'data-toggle': 'tab' },
+                                                _react2.default.createElement('img', { src: this.props.product.foto })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'li',
+                                            null,
+                                            _react2.default.createElement(
+                                                'a',
+                                                { 'data-target': '#pic-2', 'data-toggle': 'tab' },
+                                                _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'li',
+                                            null,
+                                            _react2.default.createElement(
+                                                'a',
+                                                { 'data-target': '#pic-3', 'data-toggle': 'tab' },
+                                                _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'li',
+                                            null,
+                                            _react2.default.createElement(
+                                                'a',
+                                                { 'data-target': '#pic-4', 'data-toggle': 'tab' },
+                                                _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            'li',
+                                            null,
+                                            _react2.default.createElement(
+                                                'a',
+                                                { 'data-target': '#pic-5', 'data-toggle': 'tab' },
+                                                _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                            )
+                                        )
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'details col-md-6' },
+                                    _react2.default.createElement(
+                                        'h3',
+                                        { className: 'product-title' },
+                                        this.props.product.nombre
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'rating' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'stars' },
+                                            _react2.default.createElement('span', { className: 'fa fa-star checked' }),
+                                            _react2.default.createElement('span', { className: 'fa fa-star checked' }),
+                                            _react2.default.createElement('span', { className: 'fa fa-star checked' }),
+                                            _react2.default.createElement('span', { className: 'fa fa-star' }),
+                                            _react2.default.createElement('span', { className: 'fa fa-star' })
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'container-description' },
+                                        _react2.default.createElement(
+                                            'p',
+                                            { className: 'product-description' },
+                                            this.props.product.descripcion
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'h4',
+                                        null,
+                                        _react2.default.createElement(
+                                            'span',
+                                            { className: 'margin-price-text' },
+                                            ' Stock Disponible : '
+                                        ),
+                                        _react2.default.createElement(
+                                            'span',
+                                            null,
+                                            this.props.product.stock
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'h4',
+                                        { className: 'price-singleProduct' },
+                                        _react2.default.createElement(
+                                            'span',
+                                            { className: 'margin-price-text' },
+                                            ' Precio Actual : '
+                                        ),
+                                        _react2.default.createElement(
+                                            'span',
+                                            null,
+                                            this.props.product.precio
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'action' },
+                                        _react2.default.createElement(
+                                            'button',
+                                            { className: 'add-to-cart btn btn-success', type: 'button' },
+                                            'add to cart'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(_ContainerReview2.default, null)
+            );
+        }
+    }]);
+
+    return ContainerSingleProduct;
 }(_react.Component);
 
 exports.default = ContainerSingleProduct;
@@ -4203,7 +4365,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (props) {
   return _react2.default.createElement(
     "div",
-    { className: "reviews" },
+    { className: "reviews cajaopinionproducto" },
     _react2.default.createElement(
       "h2",
       null,
@@ -30713,9 +30875,9 @@ var _SignUp = __webpack_require__(155);
 
 var _SignUp2 = _interopRequireDefault(_SignUp);
 
-var _axios = __webpack_require__(12);
+var _CarritoSliderContainer = __webpack_require__(171);
 
-var _axios2 = _interopRequireDefault(_axios);
+var _CarritoSliderContainer2 = _interopRequireDefault(_CarritoSliderContainer);
 
 var _ProductosContainer = __webpack_require__(156);
 
@@ -30793,12 +30955,12 @@ var Main = function (_Component) {
   _createClass(Main, [{
     key: 'sign',
     value: function sign(object) {
-      _axios2.default.post('api/user/signup', object);
+      axios.post('api/user/signup', object);
     }
   }, {
     key: 'logn',
     value: function logn(object) {
-      _axios2.default.post('api/login', object).then(function (res) {
+      axios.post('api/login', object).then(function (res) {
         return console.log(res.data);
       });
     }
@@ -30807,7 +30969,7 @@ var Main = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('api/user/me').then(function (response) {
+      axios.get('api/user/me').then(function (response) {
         _this2.props.logginSuccess(response.data);
       });
     }
@@ -30819,6 +30981,7 @@ var Main = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_CarritoSliderContainer2.default, null),
         _react2.default.createElement(_NavBar2.default, { admin: this.state.admin }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/signup', render: function render() {
@@ -30952,7 +31115,7 @@ var NavBar = function (_Component) {
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
                                 { to: '/', className: 'navbar-brand' },
-                                _react2.default.createElement('img', { src: './images/mercadonuma.png' })
+                                _react2.default.createElement('img', { src: './images/skereeteam.png' })
                             )
                         ),
                         _react2.default.createElement(
@@ -30963,7 +31126,33 @@ var NavBar = function (_Component) {
                                 { className: 'nav navbar-nav navbar-left' },
                                 _react2.default.createElement(_SearchBar2.default, null)
                             ),
-                            _react2.default.createElement(
+                            this.state.logueado === true ? [_react2.default.createElement(
+                                'ul',
+                                { className: 'nav navbar-nav navbar-right' },
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login', onClick: function onClick() {
+                                                return _this2.props.logout();
+                                            } },
+                                        'Logout'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/carrito' },
+                                        'Carrito'
+                                    ),
+                                    ' '
+                                )
+                            )] : [_react2.default.createElement(
                                 'ul',
                                 { className: 'nav navbar-nav navbar-right' },
                                 _react2.default.createElement(
@@ -30976,18 +31165,7 @@ var NavBar = function (_Component) {
                                         'Registrate'
                                     )
                                 ),
-                                this.state.logueado === true ? _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login', onClick: function onClick() {
-                                                return _this2.props.logout();
-                                            } },
-                                        'Logout'
-                                    )
-                                ) : _react2.default.createElement(
+                                _react2.default.createElement(
                                     'li',
                                     null,
                                     ' ',
@@ -31008,7 +31186,7 @@ var NavBar = function (_Component) {
                                     ),
                                     ' '
                                 )
-                            )
+                            )]
                         )
                     )
                 )
@@ -31021,35 +31199,45 @@ var NavBar = function (_Component) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
 
-// import React from 'react'
 
-// export default () => {
-//     return(
-//         <nav className="navbar navbar-default">
-//             <div className="container">
-//             <div className="container-fluid">
-//                 <div className="navbar-header">
-//                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-//                     <span className="sr-only">Toggle navigation</span>
-//                     <span className="icon-bar"></span>
-//                     <span className="icon-bar"></span>
-//                     <span className="icon-bar"></span>
-//                 </button>
-//                 <a href="ver-todo.html" className="navbar-brand"><img src="./images/mercadonuma.png"></img></a>
-//                 </div>
-
-//                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-//                 <ul className="nav navbar-nav navbar-right">
-//                     <li><a href="#">Regístrate</a></li>
-//                     <li><a href="#">Ingresa</a></li>
-//                     <li><a className="glyphicon glyphicon-question-sign" href="https://www.mercadolibre.com.ar/ayuda" target="_blank"></a></li>
-//                 </ul>
-//                 </div>
-//             </div>
-//             </div>
-//         </nav>
-//     )
-// }
+{/* <nav className="navbar navbar-default">
+    <div className="container">
+       <div className="container-fluid">
+           <div className="navbar-header">
+               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                   <span className="sr-only">Toggle navigation</span>
+                   <span className="icon-bar"></span>
+                   <span className="icon-bar"></span>
+                   <span className="icon-bar"></span>
+               </button>
+               <Link to="/" className="navbar-brand">
+                   <img src="./images/mercadonuma.png"></img>
+               </Link>
+           </div>
+            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul className="nav navbar-nav navbar-left">
+                   <SearchBar />
+               </ul>
+                   {
+                       this.state.logueado === true ?
+                       [
+                       <ul className="nav navbar-nav navbar-right">
+                           <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
+                           <li> <Link to="/carrito">Carrito</Link> </li>
+                       </ul>
+                       ] :
+                       [
+                       <ul className="nav navbar-nav navbar-right">
+                           <li> <Link to="/signup">Registrate</Link></li>
+                           <li> <Link to="/login">Login</Link></li>
+                           <li> <Link to="/carrito">Carrito</Link> </li>
+                       </ul>
+                       ]
+                   }
+           </div>
+       </div>
+    </div>
+    </nav> */}
 
 /***/ }),
 /* 130 */
@@ -32162,8 +32350,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(6);
-
 var _reactRedux = __webpack_require__(4);
 
 var _WebStoreSlider = __webpack_require__(150);
@@ -32190,6 +32376,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function mapStateToProps(state) {
+    return {
+        product: state.products.product,
+        productos: state.products.products
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
 var LandingPage = function (_Component) {
     _inherits(LandingPage, _Component);
 
@@ -32198,9 +32394,13 @@ var LandingPage = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LandingPage.__proto__ || Object.getPrototypeOf(LandingPage)).call(this, props));
 
-        _this.state = {};
+        console.log('props', props);
         return _this;
     }
+
+    // componentDidMount() {
+    //     this.props.getProducts()
+    // }
 
     _createClass(LandingPage, [{
         key: 'render',
@@ -32209,7 +32409,7 @@ var LandingPage = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_WebStoreSlider2.default, null),
-                _react2.default.createElement(_GroupProducts2.default, null),
+                _react2.default.createElement(_GroupProducts2.default, { productos: this.props.productos }),
                 _react2.default.createElement(_ContenidoCelulares2.default, null),
                 _react2.default.createElement(_ContenidoInformativo2.default, null)
             );
@@ -32219,18 +32419,7 @@ var LandingPage = function (_Component) {
     return LandingPage;
 }(_react.Component);
 
-// const mapStateToProps = (state) => ({
-
-// })
-
-// const mapDispatchToProps = {
-
-// }
-
-//export default connect(mapStateToProps, mapDispatchToProps)(LandingPage)
-
-
-exports.default = LandingPage;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LandingPage);
 
 /***/ }),
 /* 150 */
@@ -32748,156 +32937,190 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
 
 exports.default = function (productos) {
+    console.log(productos);
     return _react2.default.createElement(
         "div",
-        { className: "container Group-Products-Container-Props" },
+        { "class": "container" },
         _react2.default.createElement(
             "div",
-            { className: "row" },
+            { "class": "row" },
             _react2.default.createElement(
-                "div",
-                { className: "col-md-2 column productbox" },
-                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
-                _react2.default.createElement(
-                    "div",
-                    { className: "producttitle" },
-                    "secador de pelo TurboPower"
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "productprice" },
-                    _react2.default.createElement(
-                        "div",
-                        null,
-                        _react2.default.createElement(
-                            "div",
-                            { className: "pricetext" },
-                            "\xA38.95"
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
-                            _react2.default.createElement(
-                                "span",
-                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
-                                " (1)"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
-                            "BUY"
-                        )
-                    )
-                )
+                "h1",
+                null,
+                "Proba tu suerte!"
             ),
             _react2.default.createElement(
                 "div",
-                { className: "col-md-2 column productbox" },
-                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
+                { id: "adv_team_4_columns_carousel", "class": "carousel slide four_shows_one_move team_columns_carousel_wrapper", "data-ride": "carousel", "data-interval": "2000", "data-pause": "hover" },
                 _react2.default.createElement(
                     "div",
-                    { className: "producttitle" },
-                    "secador de pelo TurboPower"
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "productprice" },
+                    { "class": "carousel-inner", role: "listbox" },
                     _react2.default.createElement(
                         "div",
-                        null,
+                        { "class": "item" },
                         _react2.default.createElement(
                             "div",
-                            { className: "pricetext" },
-                            "\xA38.95"
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
+                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 01" }),
                             _react2.default.createElement(
-                                "span",
-                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
-                                " (1)"
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
                             )
                         ),
                         _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
-                            "BUY"
+                            "div",
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
+                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
+                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
+                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
+                            )
                         )
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "col-md-2 column productbox" },
-                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
-                _react2.default.createElement(
-                    "div",
-                    { className: "producttitle" },
-                    "secador de pelo TurboPower"
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "productprice" },
+                    ),
                     _react2.default.createElement(
                         "div",
-                        null,
+                        { "class": "item active" },
                         _react2.default.createElement(
                             "div",
-                            { className: "pricetext" },
-                            "\xA38.95"
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
+                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
                             _react2.default.createElement(
-                                "span",
-                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
-                                " (1)"
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
                             )
                         ),
                         _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
-                            "BUY"
-                        )
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                "div",
-                { className: "col-md-2 column productbox" },
-                _react2.default.createElement("img", { className: "img-responsive", src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" }),
-                _react2.default.createElement(
-                    "div",
-                    { className: "producttitle" },
-                    "secador de pelo TurboPower"
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "productprice" },
-                    _react2.default.createElement(
-                        "div",
-                        null,
-                        _react2.default.createElement(
                             "div",
-                            { className: "pricetext" },
-                            "\xA38.95"
-                        ),
-                        _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-success btn-sm", role: "button" },
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
+                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
                             _react2.default.createElement(
-                                "span",
-                                { className: "glyphicon glyphicon-shopping-cart", "aria-hidden": "true" },
-                                " (1)"
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
                             )
                         ),
                         _react2.default.createElement(
-                            "a",
-                            { href: "#", className: "glyphicon-props btn btn-danger btn-sm", role: "button" },
-                            "BUY"
+                            "div",
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
+                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
+                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
+                            _react2.default.createElement(
+                                "div",
+                                { "class": "team_columns_item_caption" },
+                                _react2.default.createElement(
+                                    "h4",
+                                    { className: "h4-group-products" },
+                                    "PROBANDO"
+                                ),
+                                _react2.default.createElement("hr", null),
+                                _react2.default.createElement(
+                                    "h5",
+                                    null,
+                                    "PROBANDO"
+                                )
+                            )
                         )
                     )
                 )
@@ -32905,6 +33128,20 @@ exports.default = function (productos) {
         )
     );
 };
+
+// {productos.map(producto => {
+//     return(
+//     <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
+//         <img src={producto.foto} alt="slider 01" />
+//         <div class="team_columns_item_caption">
+//             <h4>{producto.nombre}</h4>
+//             <hr />
+//             <h5>{producto.descripcion}</h5>
+//         </div>
+//     </div>
+//     )
+// })}
+
 
 {/* <div className="container Group-Products-Container-Props">
        <div className="row">
@@ -32933,6 +33170,32 @@ exports.default = function (productos) {
            ))}
         </div>
     </div> */}
+
+{/* // DIV QUE ANDA NO TOCAR!!!
+    // <div className="container Group-Products-Container-Props">
+    // <div className="row">
+    //     <div className="col-md-2 column productbox">
+    //         <img className="img-responsive" src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" />
+    //         <div className="producttitle">secador de pelo TurboPower</div>
+    //         <div className="productprice"><div ><div className="pricetext">£8.95</div><a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a><a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+    //     </div>
+    //     <div className="col-md-2 column productbox">
+    //         <img className="img-responsive" src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" />
+    //         <div className="producttitle">secador de pelo TurboPower</div>
+    //         <div className="productprice"><div ><div className="pricetext">£8.95</div><a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a><a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+    //     </div>
+    //     <div className="col-md-2 column productbox">
+    //         <img className="img-responsive" src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" />
+    //         <div className="producttitle">secador de pelo TurboPower</div>
+    //         <div className="productprice"><div ><div className="pricetext">£8.95</div><a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a><a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+    //     </div>
+    //     <div className="col-md-2 column productbox">
+    //         <img className="img-responsive" src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" />
+    //         <div className="producttitle">secador de pelo TurboPower</div>
+    //         <div className="productprice"><div ><div className="pricetext">£8.95</div><a href="#" className="glyphicon-props btn btn-success btn-sm" role="button"><span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"> (1)</span></a><a href="#" className="glyphicon-props btn btn-danger btn-sm" role="button">BUY</a></div></div>
+    //     </div>
+    // </div>
+    // </div> */}
 
 /***/ }),
 /* 154 */
@@ -33290,6 +33553,7 @@ var ProductosContainer = function (_Component) {
         value: function render() {
             var _this2 = this;
 
+            console.log(this.props);
             var match = this.props.match;
 
             return _react2.default.createElement(
@@ -33419,68 +33683,70 @@ var ProductosSubContainer = function (_Component) {
             var selectProduct = this.props.selectProduct;
             return _react2.default.createElement(
                 'div',
-                { className: 'container Group-Products-Container-Props' },
+                { className: 'container productbox' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'row' },
+                    { className: 'row-productos' },
                     this.props.products && this.props.products.map(function (product) {
                         return _react2.default.createElement(
                             'div',
-                            { key: product.id, className: 'col-md-2 column productbox' },
-                            _react2.default.createElement('img', {
-                                className: 'img-responsive',
-                                title: product.nombre
-                                // src="../baseHarcodeada/productos/1-groot.jpg"
-                                , src: 'https://avatars1.githubusercontent.com/u/2078339?s=400&v=4'
-                            }),
+                            { key: product.id, className: 'col-md-3 col-sm-6' },
                             _react2.default.createElement(
-                                'h3',
-                                { className: 'producttitle' },
-                                product.nombre
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                null,
-                                ' ',
-                                product.descripcion,
-                                ' '
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'productprice' },
+                                'span',
+                                { className: 'thumbnail' },
+                                _react2.default.createElement('img', { className: 'img-size', src: product.foto, alt: '...' }),
+                                _react2.default.createElement(
+                                    'h4',
+                                    { className: 'h4-productos' },
+                                    product.nombre
+                                ),
                                 _react2.default.createElement(
                                     'div',
-                                    null,
+                                    { className: 'ratings' },
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-star' }),
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-star' }),
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-star' }),
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-star' }),
+                                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-star-empty' })
+                                ),
+                                _react2.default.createElement(
+                                    'p',
+                                    { className: 'p-productos' },
+                                    product.descripcion
+                                ),
+                                _react2.default.createElement('hr', { className: 'line' }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'row' },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'pricetext' },
-                                        '$',
-                                        product.precio
-                                    ),
-                                    _react2.default.createElement(
-                                        'a',
-                                        { className: 'glyphicon-props btn btn-success btn-sm', role: 'button', onClick: function onClick() {
-                                                var obj = { q: 1, id: product.id };_this2.props.addToCart(obj);setTimeout(function () {
-                                                    localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
-                                                }, 10);
-                                            } },
+                                        { className: 'col-md-6 col-sm-6' },
                                         _react2.default.createElement(
-                                            'span',
-                                            { className: 'glyphicon glyphicon-shopping-cart', 'aria-hidden': 'true' },
-                                            'CART'
+                                            'p',
+                                            { className: 'price' },
+                                            '$ ',
+                                            product.precio
                                         )
                                     ),
                                     _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/productos/singleProduct', className: 'glyphicon-props btn btn-secondary btn-sm', role: 'button', onClick: function onClick() {
+                                        'div',
+                                        { className: 'col-md-6 col-sm-6' },
+                                        _react2.default.createElement(
+                                            'a',
+                                            { href: '', target: '_blank' },
+                                            _react2.default.createElement(
+                                                'button',
+                                                { className: 'glyphicon glyphicon-shopping-cart btn btn-info right', onClick: function onClick() {
+                                                        var obj = { q: 1, id: product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                            localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
+                                                        }, 10);
+                                                    } },
+                                                ' '
+                                            )
+                                        ),
+                                        _react2.default.createElement(_reactRouterDom.Link, { to: '/productos/singleProduct', className: 'glyphicon glyphicon-zoom-in btn btn-info right', role: 'button', onClick: function onClick() {
                                                 return selectProduct(product.id);
-                                            } },
-                                        ' Detalles'
-                                    ),
-                                    _react2.default.createElement(
-                                        'a',
-                                        { href: '#', className: 'glyphicon-props btn btn-danger btn-sm', role: 'button' },
-                                        'BUY'
+                                            } })
                                     )
                                 )
                             )
@@ -33656,6 +33922,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 exports.default = function (_ref) {
     var handleChange = _ref.handleChange,
         handleSubmit = _ref.handleSubmit,
@@ -33663,16 +33931,16 @@ exports.default = function (_ref) {
 
     return _react2.default.createElement(
         'form',
-        { className: 'form-horizontal', onSubmit: handleSubmit },
+        { className: 'form-horizontal inputReview', onSubmit: handleSubmit },
         _react2.default.createElement(
             'label',
-            { className: 'pProducto' },
+            { className: 'input-review-text' },
             'Dejanos tu review sobre este producto:'
         ),
-        _react2.default.createElement('textarea', { type: 'text', name: 'addreview', addreview: addreview, onChange: handleChange, className: 'form-control custom-control' }),
+        _react2.default.createElement('textarea', _defineProperty({ placeholder: 'deja tu review aca...', type: 'text', name: 'addreview', className: '', addreview: addreview, onChange: handleChange }, 'className', 'form-control custom-control')),
         _react2.default.createElement(
             'button',
-            { type: 'submit', className: 'btn btn-success' },
+            { type: 'submit', className: 'btn btn-success input-review-button' },
             'enviar!'
         )
     );
@@ -34681,6 +34949,101 @@ exports.default = function () {
         })
     );
 };
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state, ownProps) {
+    return {};
+}
+
+function mapDispatchToprops(dispatch, ownProps) {
+    return {};
+}
+
+var CarritoSlider = function (_Component) {
+    _inherits(CarritoSlider, _Component);
+
+    function CarritoSlider(props) {
+        _classCallCheck(this, CarritoSlider);
+
+        return _possibleConstructorReturn(this, (CarritoSlider.__proto__ || Object.getPrototypeOf(CarritoSlider)).call(this, props));
+    }
+
+    _createClass(CarritoSlider, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'wrapper-sidebar' },
+                    _react2.default.createElement(
+                        'nav',
+                        { id: 'sidebar-skeree' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'sidebar-header' },
+                            _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { id: 'content' },
+                        _react2.default.createElement(
+                            'nav',
+                            { className: 'navbar-sidebar navbar-default' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'container-fluid' },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'navbar-header' },
+                                    _react2.default.createElement(
+                                        'button',
+                                        { type: 'button', id: 'sidebarCollapse', className: 'navbar-btn' },
+                                        _react2.default.createElement('span', null),
+                                        _react2.default.createElement('span', null),
+                                        _react2.default.createElement('span', null)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CarritoSlider;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToprops)(CarritoSlider);
 
 /***/ })
 /******/ ]);
