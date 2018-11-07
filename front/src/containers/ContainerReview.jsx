@@ -4,16 +4,25 @@ import ReviewInput from '../components/ReviewInput'
 import { connect } from 'react-redux';
 import { addReview } from '../redux/action-creators/review-action'
 
+function mapStateToProps(state){
+  return {
+    rev: state.review,
+    user: state,
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    addReview: function(value, user){
+      dispatch(addReview(value, user))
+    }
+  }
+}
+
 class ContainerReview extends Component {
     constructor(props){
         super(props);
         this.state = {
-                fakeReviews: {
-                    estrellas: '',
-                    opiniones: 1,
-                    descripcion:
-                      '  Buen producto. La calidad es buena. El software(interfaz) también, por lo que estoy bastante conforme. En mi caso, lo compré para usar con mi computadora y puedo decir que la resolución para esta función es bastante mala(hd). Como televisor la verdad muy recomendado. Antes de comprarlo recuerden que, no es smart y no es full hd. Igual, todo eso está aclarado en al descripción. Yo lo compré consciente de sus características. Saludos!.',
-                  },
                 value: '',
                 addReview: [],
                 currentProduct: 0,
@@ -24,13 +33,15 @@ class ContainerReview extends Component {
 
     handleChange(evt){
         this.setState({
-            value: evt.target.value
+            value: evt.target.value,
         })
     }
 
     handleSubmit(evt) {
+      var usuario = this.props.user
+      console.log(this.props)
         evt.preventDefault();
-        this.props.addReview(this.state.value)
+        this.props.addReview(this.state.value, usuario)
       }
 
     fechReviews(reviews){
@@ -41,24 +52,9 @@ class ContainerReview extends Component {
     return (
       <div>
         <ReviewInput handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Reviews user={this.props.user} addReview={this.props.rev} fakeReviews={this.state.fakeReviews}/>
+        <Reviews user={this.props.user} addReview={this.props.rev}/>
       </div>
     )
-  }
-}
-
-function mapStateToProps(state){
-  return {
-    rev: state.review,
-    user: state.user,
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    addReview: function(value){
-      dispatch(addReview(value))
-    }
   }
 }
 
