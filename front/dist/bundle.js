@@ -31072,12 +31072,12 @@ var NavBar = function (_Component) {
                             { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
                             _react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-left' },
+                                { className: 'nav navbar-nav navbar-left', key: '1' },
                                 _react2.default.createElement(_SearchBar2.default, null)
                             ),
                             this.state.logueado === true ? [_react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-right' },
+                                { className: 'nav navbar-nav navbar-right', key: '2' },
                                 _react2.default.createElement(
                                     'li',
                                     null,
@@ -31103,7 +31103,7 @@ var NavBar = function (_Component) {
                                 )
                             )] : [_react2.default.createElement(
                                 'ul',
-                                { className: 'nav navbar-nav navbar-right' },
+                                { className: 'nav navbar-nav navbar-right', key: '3' },
                                 _react2.default.createElement(
                                     'li',
                                     null,
@@ -32007,10 +32007,10 @@ exports.default = function (productos) {
     console.log(productos);
     return _react2.default.createElement(
         "div",
-        { "class": "container" },
+        { className: "container" },
         _react2.default.createElement(
             "div",
-            { "class": "row" },
+            { className: "row" },
             _react2.default.createElement(
                 "h1",
                 null,
@@ -32018,20 +32018,20 @@ exports.default = function (productos) {
             ),
             _react2.default.createElement(
                 "div",
-                { id: "adv_team_4_columns_carousel", "class": "carousel slide four_shows_one_move team_columns_carousel_wrapper", "data-ride": "carousel", "data-interval": "2000", "data-pause": "hover" },
+                { id: "adv_team_4_columns_carousel", className: "carousel slide four_shows_one_move team_columns_carousel_wrapper", "data-ride": "carousel", "data-interval": "2000", "data-pause": "hover" },
                 _react2.default.createElement(
                     "div",
-                    { "class": "carousel-inner", role: "listbox" },
+                    { className: "carousel-inner", role: "listbox" },
                     _react2.default.createElement(
                         "div",
-                        { "class": "item" },
+                        { className: "item" },
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
                             _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 01" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32047,11 +32047,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
                             _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32067,11 +32067,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
                             _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32087,11 +32087,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
                             _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32108,14 +32108,14 @@ exports.default = function (productos) {
                     ),
                     _react2.default.createElement(
                         "div",
-                        { "class": "item active" },
+                        { className: "item active" },
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
                             _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32131,11 +32131,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
                             _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32151,11 +32151,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
                             _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -32171,11 +32171,11 @@ exports.default = function (productos) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { "class": "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
+                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
                             _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
                             _react2.default.createElement(
                                 "div",
-                                { "class": "team_columns_item_caption" },
+                                { className: "team_columns_item_caption" },
                                 _react2.default.createElement(
                                     "h4",
                                     { className: "h4-group-products" },
@@ -34999,18 +34999,18 @@ var CarritoSlider = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'ul',
-                            { 'class': 'list-unstyled components' },
+                            { className: 'list-unstyled components' },
                             _react2.default.createElement(
                                 'li',
-                                { 'class': 'active' },
+                                { className: 'active' },
                                 _react2.default.createElement(
                                     'a',
-                                    { href: '#homeSubmenu', 'data-toggle': 'collapse', 'class': 'dropdown-toggle' },
+                                    { href: '#homeSubmenu', 'data-toggle': 'collapse', className: 'dropdown-toggle' },
                                     'Carrito'
                                 ),
                                 _react2.default.createElement(
                                     'ul',
-                                    { 'class': 'collapse list-unstyled', id: 'homeSubmenu' },
+                                    { className: 'collapse list-unstyled', id: 'homeSubmenu' },
                                     _react2.default.createElement(
                                         'li',
                                         { className: 'li-sidebarSkeree' },

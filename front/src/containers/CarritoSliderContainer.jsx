@@ -30,10 +30,10 @@ class CarritoSlider extends Component {
                             <img src="./images/skereeteam.png" />
                         </div>
 
-                        <ul class="list-unstyled components">
-                            <li class="active">
-                                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Carrito</a>
-                                <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <ul className="list-unstyled components">
+                            <li className="active">
+                                <a href="#homeSubmenu" data-toggle="collapse" className="dropdown-toggle">Carrito</a>
+                                <ul className="collapse list-unstyled" id="homeSubmenu">
                                     <li className="li-sidebarSkeree">
                                         <a className="a-carritoSlider" href="#">COMPRA CARRITO1</a>
                                     </li>
