@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 var arregloProductos = [
     {
         producto: 'Producto',
@@ -58,14 +59,18 @@ export default (props) => (
                 </div>
                 <div className="form-group">
 
-                    {props.listaCategorias.map(categoria =>
-                        <label key={categoria.id}>
-                            {categoria.nombre}
-                            <input type="checkbox" name={categoria.nombre} />
+                    {
+                        props.listaCategorias ?
+                            props.listaCategorias.map(categoria =>
+                            <label key={categoria.id}>
+                                {categoria.nombre}
+                                <input type="checkbox" name={categoria.nombre} />
 
-                        </label>
+                            </label>
 
-                    )}
+                            )
+                            : null
+                    }
                 </div>
 
                 <div className="form-group">

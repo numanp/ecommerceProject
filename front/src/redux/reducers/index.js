@@ -8,7 +8,7 @@ import reviewReducer from './review-reducer'
 const rootReducer = combineReducers({
   cart: cartReducer,
   products: productsReducer,
-  /* userAdmin: userAdminReducer, */
+  userAdmin: userAdminReducer, 
   user: userReducer,
   review: reviewReducer
 });

@@ -22,7 +22,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            logueado: {}
+            logueado: false
         }
     }
     componentDidMount() {

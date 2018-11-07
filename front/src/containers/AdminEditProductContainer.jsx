@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { fetchCategorys} from '../redux/action-creators/user'
+import { getSingleProduct} from '../redux/action-creators/products'
+import { Link } from 'react-router-dom'
 import AdminEditProduct from '../components/AdminEditProduct'
 
 class AdminEditProductContainer extends Component {
@@ -10,7 +12,7 @@ class AdminEditProductContainer extends Component {
     }
     componentDidMount(){
         this.props.fetchCategorys();
-
+        this.props.getSingleProduct();
     }
 
     handleSubmit(evt){
@@ -27,14 +29,22 @@ class AdminEditProductContainer extends Component {
     render() {
         return (
             <div>        
-                <AdminEditProduct handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias}/>
+                <AdminEditProduct
+                    handleSubmit={this.handleSubmit}
+                    listaCategorias={this.props.listaCategorias}
+                    selectedProd={this.props.product}
+                  />
             </div>   
         )
     }
 }
-function mapStateToProps (state){
-    return{ 
-        listaCategorias: state.userAdmin.listaCategorias
+function mapStateToProps (state, ownProps){
+    const productID = ownProps.match.params.id
+    const selectedProd = state.userAdmin.listaProductos.find(prod => prod.id === parseInt(productID,10))
+
+    return { 
+        listaCategorias: state.userAdmin.listaCategorias,
+        product: selectedProd
     }
 }
 
@@ -43,8 +53,8 @@ function mapDispatchToProps(dispatch){
         fetchCategorys: function (categorias){
             dispatch(fetchCategorys(categorias))
         },
-        fetchDataProducto: function(producto){
-            dispatch(fetchDataProducto(producto))
+        getSingleProduct: function(producto){
+            dispatch(getSingleProduct(producto))
         }
     }
 }

@@ -1,9 +1,10 @@
 import {
-    FETCH_PRODUCTS,
+    FETCH_PRODUCTS_USER,
     FETCH_PRODUCTS_BY_CATEGORY,
     FETCH_SINGLE_PRODUCT,
     PRODUCT_AMOUNT,
-    UPDATE_PRODUCT
+    UPDATE_PRODUCT,
+    
 } from '../constants';
 
 const productsReducer = (state = {
@@ -12,7 +13,7 @@ const productsReducer = (state = {
     productosParaCarrito: []
 }, action) => {
     switch (action.type) {
-        case FETCH_PRODUCTS:
+        case FETCH_PRODUCTS_USER:
             return Object.assign({}, state, {
                 products: action.products
             })
