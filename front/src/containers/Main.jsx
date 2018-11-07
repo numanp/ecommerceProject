@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios'
+import { logginSuccess } from '../redux/action-creators/user'
 
 //COMPONENTES
 import NavBar from './NavBar';
@@ -19,7 +20,11 @@ import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
 import AdminManejarProductos from '../containers/AdminManejarProductos';
 import AdminEditProductContainer from '../containers/AdminEditProductContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import { logginSuccess } from '../redux/action-creators/user'
+import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+import AdminProductos from '../components/AdminProductos';
+import AdminManejarProductos from './AdminManejarProductos';
+import AdminEditProductContainer from './AdminEditProductContainer';
+/* import EditCategoriaDeProducto from './EditCategoriaDeProducto'; */
 
 function mapStateToProps(state) {
   return {
@@ -40,8 +45,8 @@ class Main extends Component {
     super(props);
     this.state = {
       admin: false,
-      logueado: false
-    }
+      logueado: false,
+    };
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
   }
@@ -49,8 +54,7 @@ class Main extends Component {
     axios.post('api/user/signup', object);
   }
   logn(object) {
-    axios.post('api/login', object)
-      .then(res => console.log(res.data))
+    axios.post('api/login', object).then(res => console.log(res.data));
   }
   componentDidMount() {
     axios.get('api/user/me')
@@ -71,15 +75,18 @@ class Main extends Component {
         <Route exact path="/carrito" component={Carrito} />
         {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
 
-        {//RUTAS DEL ADMIN
-        }
-        <Route exact path="/admin" component={AdminContainer} />
+
+        {/* <Route exact path="/admin" component={AdminContainer} />
+        <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
+        <Route exact path="/admin/agregarCategoria" component={AdminAddCategory} />
+        <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
+        <Route exact path="/admin/promoveUser" component={PromoveUser} />
+        <Route exact path="/admin/deleteUser" component={DeleteUser} />
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
-        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
-        
+        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> */}
       </div>
     );
   }

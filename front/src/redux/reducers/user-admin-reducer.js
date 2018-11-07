@@ -13,10 +13,7 @@ import {
 
 } from '../constants';
 
-const initialState = {
-    listaProductos: [],
-    listaCategorias: []
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -39,9 +36,9 @@ export default (state = initialState, action) => {
             }
         case FETCH_CATEGORYS:
             //Accedo a todas las categorias
-            return Object.assign({}, state, { listaCategorias: [...action.data]});
+            return Object.assign({}, state, { listaCategorias: [...action.data] });
         case FETCH_PRODUCTS:
-            return  Object.assign({}, state, { listaProductos:  [...action.data]}); 
+            return Object.assign({}, state, { listaProductos: [...action.data] });
         default:
             return state;
     }

@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { connect } from 'react-redux'
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 
 function mapStateToProps(state, ownProps) {
-  return {
-
-  }
+    return {};
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  return {}
+    return {};
 }
 
 class ContainerSingleProduct extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-        <div>
-            <div className="container-productos">
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>
+                <div className="container-productos">
                     <div className="card-SingleProduct">
                         <div className="container-fliud">
                             <div className="wrapper-ContainerSingleProduct row">
@@ -82,12 +80,12 @@ class ContainerSingleProduct extends Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <ContainerReview />
             </div>
-            <ContainerReview />
-        </div>
 
-    );
-  }
+        );
+    }
 }
 
 export default ContainerSingleProduct

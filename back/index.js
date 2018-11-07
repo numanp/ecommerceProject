@@ -15,14 +15,16 @@ app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
+
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
   models.User.findById(id)
-    .then((user) => {
+    .then(user => {
       done(null, user);
-    }).catch(err => done(err));
+    })
+    .catch(err => done(err));
 });
 passport.use(
   new LocalStrategy(
@@ -72,6 +74,7 @@ app.post('/api/logout', (req, res) => {
   /* return res.send('deslogeado') */;
 });
 app.use('/api', require('./routes/index'));
+
 app.get('/*', function (req, res) {
   res.sendFile(path.resolve('../front/index.html'));
-})
+});

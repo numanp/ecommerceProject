@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
-import { bindActionCreators } from 'react-router-dom'
-// import * as ProductsActions from '../redux/action-creators/products'
-// import * as CartActions from '../redux/action-creators/cart'
-import { addToLocalStorage } from '../redux/action-creators/cart'
+import { addToLocalStorage } from '../redux/action-creators/cart';
+import { Link } from 'react-router-dom';
 
 function mapStateToProps(state) {
     return {
     }
 }
-function mapDispatchToProps(dispatch) {
-    return {
-        addToCart: (producto) => {
-            dispatch(addToLocalStorage(producto))
-        }
-    }
-    // return bindActionCreators(...ProductsActions, ...CartActions, dispatch)
+function mapDispatchToProps(state) {
+    return {};
 }
-
 
 class ProductosSubContainer extends Component {
     constructor(props) {
@@ -61,7 +52,7 @@ class ProductosSubContainer extends Component {
                     }
                 </div>
             </div>
-        )
+        );
     }
 }
 

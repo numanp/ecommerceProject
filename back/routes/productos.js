@@ -5,62 +5,60 @@ const models = require('../models/index').modelos;
 module.exports = router;
 
 router.get('/', (req, res) => {
-    models.Producto.findAll()
-        .then((productos) => {
-            res.status(200).send(productos)
-        })
-})
+  models.Producto.findAll().then(productos => {
+    res.status(200).send(productos);
+  });
+});
 
 router.get('/:id', (req, res) => {
-    models.Producto.findById(req.params.id)
-        .then((producto) => {
-            if (producto != null) res.status(200).send(producto)
-            else { res.status(200).send('no existe el producto') }
-        })
-})
+  models.Producto.findById(req.params.id).then(producto => {
+    if (producto != null) res.status(200).send(producto);
+    else {
+      res.status(200).send('no existe el producto');
+    }
+  });
+});
 
 router.get('/cat/:categoria', (req, res) => {
-    models.Categoria.findOne({ where: { nombre: req.params.categoria } })
-        .then((cat) => {
-            var categ = cat.id
-            models.Producto.findAll({
-                include: [{
-                    model: models.Categoria,
-                    attributes: ['nombre'],
-                    through: { where: { categoriaId: categ } }
-                }]
-            })
-                .then((productos) => {
-                    res.status(200).send(productos)
-                })
-        })
-        .catch(() => {
-            res.send('algo salio mal')
-        })
-})
+  models.Categoria.findOne({ where: { nombre: req.params.categoria } })
+    .then(cat => {
+      var categ = cat.id;
+      models.Producto.findAll({
+        include: [
+          {
+            model: models.Categoria,
+            attributes: ['nombre'],
+            through: { where: { categoriaId: categ } },
+          },
+        ],
+      }).then(productos => {
+        res.status(200).send(productos);
+      });
+    })
+    .catch(() => {
+      res.send('algo salio mal');
+    });
+});
 
 router.post('/', (req, res) => {
-    //TOMA DESDE ADMIN EL FORMULARIO CON EL BUTTON 
-    models.Producto.create({
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: req.body.precio,
-        foto: req.body.foto,
-        stock: req.body.stock
-    }).then((producto) => {
-        res.status(200).send(producto)
-    });
-})
+  //TOMA DESDE ADMIN EL FORMULARIO CON EL BUTTON
+  models.Producto.create({
+    nombre: req.body.nombre,
+    descripcion: req.body.descripcion,
+    precio: req.body.precio,
+    foto: req.body.foto,
+    stock: req.body.stock,
+  }).then(producto => {
+    res.status(200).send(producto);
+  });
+});
 
 router.put('/addCategory/', (req, res) => {
-    models.Producto.findOne({ where: { nombre: req.body.nombreProducto } })
-        .then((producto) => {
-            producto.setCategorias(req.body.categorias)
-        })
-        .then(() => {
-            res.status(200).send('categorias agregadas correctamente')
-        })
-})
-
-
-
+  models.Producto.findOne({ where: { nombre: req.body.nombreProducto } })
+    .then(producto => {
+      producto.setCategorias(req.body.categorias);
+    })
+    .then(() => {
+      res.status(200).send('categorias agregadas correctamente');
+    });
+});
