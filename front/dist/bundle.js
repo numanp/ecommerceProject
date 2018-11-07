@@ -30610,9 +30610,10 @@ var cartReducer = function cartReducer() {
 
     switch (action.type) {
         case _constants.ADD_TO_CART:
+            //AGREGAR TRY PARA QUE NO MUESTRE ERROR CUANDO NO PASE LA VALIDACION
             var index = -1;
             for (var i = 0; i < state.length; i++) {
-                if (state[0].id == action.payload.id) {
+                if (state[i].id == action.payload.id) {
                     index = i;
                 }
             }
@@ -30943,7 +30944,6 @@ var Main = function (_Component) {
       var _this2 = this;
 
       _axios2.default.get('api/user/me').then(function (response) {
-        console.log('response: ', response);
         _this2.props.logginSuccess(response.data);
       });
     }
@@ -33132,6 +33132,11 @@ var Login = function (_Component) {
     }
 
     _createClass(Login, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log(this.props.usuario);
+        }
+    }, {
         key: 'emailChange',
         value: function emailChange(e) {
             this.setState({
@@ -33457,7 +33462,7 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _products = __webpack_require__(52);
 
-var ProductsActions = _interopRequireWildcard(_products);
+var _cart = __webpack_require__(53);
 
 var _ProductosSubContainer = __webpack_require__(158);
 
@@ -33468,10 +33473,6 @@ var _ContainerSingleProduct = __webpack_require__(54);
 var _ContainerSingleProduct2 = _interopRequireDefault(_ContainerSingleProduct);
 
 var _reactRouterDom = __webpack_require__(4);
-
-var _redux = __webpack_require__(11);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33484,12 +33485,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function mapStateToProps(state) {
     return {
         product: state.products.product,
-        productos: state.products.products
+        productos: state.products.products,
+        cart: state.cart
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return (0, _redux.bindActionCreators)(ProductsActions, dispatch);
+    return {
+        getProducts: function getProducts() {
+            dispatch((0, _products.getProducts)());
+        },
+        getSingleProduct: function getSingleProduct(idProducto) {
+            dispatch((0, _products.getSingleProduct)(idProducto));
+        },
+        addToCart: function addToCart(producto) {
+            dispatch((0, _cart.addToCart)(producto));
+        },
+        removeFromCart: function removeFromCart(productoId) {
+            dispatch((0, _cart.removeFromCart)(productoId));
+        },
+        addQtoProduct: function addQtoProduct(productoId) {
+            dispatch((0, _cart.addQtoProduct)(productoId));
+        },
+        lessQtoProduct: function lessQtoProduct(productoId) {
+            dispatch((0, _cart.lessQtoProduct)(productoId));
+        }
+
+    };
 }
 
 var ProductosContainer = function (_Component) {
@@ -33505,6 +33527,7 @@ var ProductosContainer = function (_Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.props.getProducts();
+            console.log(this.props);
         }
     }, {
         key: 'render',
@@ -33520,10 +33543,10 @@ var ProductosContainer = function (_Component) {
                     _reactRouterDom.Switch,
                     null,
                     _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/singleProduct', render: function render() {
-                            return _react2.default.createElement(_ContainerSingleProduct2.default, { product: _this2.props.product });
+                            return _react2.default.createElement(_ContainerSingleProduct2.default, { lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product });
                         } }),
                     _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
-                            return _react2.default.createElement(_ProductosSubContainer2.default, { selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos });
+                            return _react2.default.createElement(_ProductosSubContainer2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos });
                         } })
                 )
             );
@@ -33570,9 +33593,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 function mapStateToProps(state) {
-    return {
-        cart: state.cart
-    };
+    return {};
 }
 function mapDispatchToProps(dispatch) {
     return {
@@ -33641,7 +33662,9 @@ var ProductosSubContainer = function (_Component) {
                                     _react2.default.createElement(
                                         'a',
                                         { className: 'glyphicon-props btn btn-success btn-sm', role: 'button', onClick: function onClick() {
-                                                return _this2.props.addToCart(product);
+                                                var obj = { q: 1, id: product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                    localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
+                                                }, 10);
                                             } },
                                         _react2.default.createElement(
                                             'span',

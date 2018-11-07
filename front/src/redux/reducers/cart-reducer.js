@@ -2,10 +2,10 @@ import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO } 
 
 const cartReducer = (state = [], action) => {
     switch (action.type) {
-        case ADD_TO_CART:
+        case ADD_TO_CART://AGREGAR TRY PARA QUE NO MUESTRE ERROR CUANDO NO PASE LA VALIDACION
             var index = -1
             for (var i = 0; i < state.length; i++) {
-                if (state[0].id == action.payload.id) {
+                if (state[i].id == action.payload.id) {
                     index = i
                 }
             }
