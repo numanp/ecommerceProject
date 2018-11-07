@@ -4,7 +4,8 @@ import { addToLocalStorage } from '../redux/action-creators/cart'
 import { Link } from 'react-router-dom'
 
 function mapStateToProps(state) {
-    return {}
+    return {
+    }
 }
 function mapDispatchToProps(state) {
     return {}
@@ -36,7 +37,7 @@ class ProductosSubContainer extends Component {
                                 <div className="productprice"><div>
                                     <div className="pricetext">${product.precio}</div>
 
-                                    <a className="glyphicon-props btn btn-success btn-sm" role="button" /* onClick={() => props.addToCart(props.product)} */>
+                                    <a className="glyphicon-props btn btn-success btn-sm" role="button" onClick={() => { var obj = { q: 1, id: product.id }; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }}>
                                         <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true">CART</span>
                                     </a>
 
