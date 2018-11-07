@@ -15,15 +15,13 @@ import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
-import AdminManejarProductos from '../containers/AdminManejarProductos';
-import AdminEditProductContainer from '../containers/AdminEditProductContainer';
+import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+import AdminProductos from '../components/AdminProductos';
+import AdminManejarProductos from './AdminManejarProductos';
+import AdminEditProductContainer from './AdminEditProductContainer';
+import AdminUsersContainer from './AdminUsersContainer';
  import AdminOrdenes from '../components/AdminOrdenes';
-// import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-// import AdminProductos from '../components/AdminProductos';
-// import AdminManejarProductos from './AdminManejarProductos';
-// import AdminEditProductContainer from './AdminEditProductContainer';
-/* import EditCategoriaDeProducto from './EditCategoriaDeProducto'; */
+ import EditCategoriaDeProducto from './EditCategoriaDeProducto'; */
 
 function mapStateToProps(state) {
   return {
@@ -40,7 +38,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Main extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
       admin: false,
@@ -49,8 +47,10 @@ class Main extends Component {
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
   }
+   
+  
   sign(object) {
-    axios.post('api/user/signup', object);
+    return axios.post('api/user/signup', object);
   }
   logn(object) {
     axios.post('api/login', object).then(res => console.log(res.data));
@@ -78,16 +78,11 @@ class Main extends Component {
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> 
-
-        {
-          /* 
-          <Route exact path="/admin/deleteUser" component={DeleteUser} />
-        <Route exact path="/admin/promoveUser" component={PromoveUser} />
-      </div>
-        */}
+        <Route exact path="/admin/users/" component={AdminUsersContainer} />
+       
         </div>
     );
-  }
-}
+  
+}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
