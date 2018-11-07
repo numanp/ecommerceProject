@@ -49,7 +49,6 @@ class SignUp extends Component {
             {
                 telefono: e.target.value
             },
-            console.log(e.target.value)
         )
     }
 

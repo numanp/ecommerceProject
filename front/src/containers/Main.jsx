@@ -1,25 +1,36 @@
 //DEPENDENCIAS
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios'
 
 //COMPONENTES
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import axios from 'axios';
+import CarritoSlider from '../containers/CarritoSliderContainer'
 import Productos from './ProductosContainer';
 import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import PromoveUser from './ContainerAdminPromoveUser';
-import DeleteUser from './ContainerAdminDeleteUser';
-import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-import AdminProductos from '../components/AdminProductos';
-import AdminManejarProductos from './AdminManejarProductos';
-import AdminEditProductContainer from './AdminEditProductContainer';
+import { logginSuccess } from '../redux/action-creators/user'
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logginSuccess: (user) => {
+      dispatch(logginSuccess(user))
+    }
+  }
+}
 
 class Main extends Component {
   constructor(props) {
@@ -30,7 +41,6 @@ class Main extends Component {
     };
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
-    this.logout = this.logout.bind(this);
   }
   sign(object) {
     axios.post('api/user/signup', object);
@@ -38,22 +48,18 @@ class Main extends Component {
   logn(object) {
     axios.post('api/login', object).then(res => console.log(res.data));
   }
-  logout() {
-    axios.post('api/logout').then(res => console.log(res.data));
-  }
   componentDidMount() {
-    axios.get('api/user/me').then(response => {
-      this.setState({
-        login: response.admin,
-      });
-      console.log(response);
-    });
-    localStorage.setItem('hola', 'man');
+    axios.get('api/user/me')
+      .then((response) => {
+        this.props.logginSuccess(response.data)
+      })
   }
   render() {
     return (
       <div>
+        <CarritoSlider />
         <NavBar admin={this.state.admin} />
+
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
@@ -112,4 +118,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

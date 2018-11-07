@@ -3,7 +3,6 @@ const router = express.Router();
 const models = require('../models/index').modelos;
 
 router.get('/me', (req, res) => {
-  console.log('entra a la rutaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
   res.send(req.user || 'no estas logeado');
 });
 

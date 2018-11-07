@@ -6,11 +6,7 @@ import {
   SIGN_UP,
 } from '../constants';
 
-const initialState = {
-  reviews: [],
-  loggedIn: false,
-  user: {},
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -24,14 +20,14 @@ export default (state = initialState, action) => {
 
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        loggedIn: true,
-        user: action.user,
+        /* loggedIn: true, */
+        logged: action.user
       });
 
     case LOGOUT:
       return Object.assign({}, state, {
-        loggedIn: false,
-        user: action.user,
+        /* loggedIn: false, */
+        user: action.user
       });
 
     case SIGN_UP:
