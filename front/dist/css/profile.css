@@ -1,42 +1,10 @@
-.profile_compra {
-  border: 1px solid #d1d1d1;
-  padding: 20px;
-}
-.profile_compra img {
-  max-width: 100px;
-  padding: 10px;
-}
-.profile_compra p {
-  display: inline;
-  font-size: 16px;
-  padding: 10px;
-}
-.profile_compra .profile_celeste {
-  color: #3855a2;
-}
-
-.profile_comentario {
-  border: 1px solid #d1d1d1;
-  margin: 1px;
-  border-radius: 4px;
-}
-.profile_comentario img {
-  max-width: 100px;
-  padding: 10px;
-}
-.profile_comentario p {
-  display: inline;
-  font-size: 16px;
-  padding: 10px;
-}
-
 .sidebar {
   background-color: #f5f5f5;
   min-height: 100vh;
   color: #666;
 }
 
-#adminPanel, #AdminAddCategory {
+#adminPanel, #AdminAddCategory, #adminOrdenes {
   background-color: #f5f5f5;
 }
 
@@ -85,13 +53,13 @@
 #adminListaProductos .listaProductoIndividual h3, #adminListaProductos .listaProductoIndividual p {
   color: #666;
 }
-#adminListaProductos .listaProductoIndividual .btn-primary {
+#adminListaProductos .listaProductoIndividual .btn-warning {
   background-color: white;
-  color: #2e6da4;
+  color: #f0b765;
   transition: 0.2s;
 }
-#adminListaProductos .listaProductoIndividual .btn-primary:hover {
-  background-color: #3278b4;
+#adminListaProductos .listaProductoIndividual .btn-warning:hover {
+  background-color: #f0b765;
   color: white;
   transition: 0.2s;
 }
@@ -125,10 +93,19 @@
 #AdminAddCategory .thumbnail button {
   margin-left: 15px;
 }
-#AdminAddCategory .thumbnail .btn-danger {
+#AdminAddCategory .thumbnail .btn-warning, #AdminAddCategory .thumbnail .btn-danger {
   background-color: white;
-  color: #de5454;
   transition-duration: 0.2s;
+}
+#AdminAddCategory .thumbnail .btn-warning {
+  color: #f0b765;
+}
+#AdminAddCategory .thumbnail .btn-warning:hover {
+  background-color: #f0b765;
+  color: white;
+}
+#AdminAddCategory .thumbnail .btn-danger {
+  color: #de5454;
 }
 #AdminAddCategory .thumbnail .btn-danger:hover {
   background-color: #de5454;
@@ -175,6 +152,45 @@
 }
 #loginFormulario .form-group {
   margin-bottom: 0px;
+}
+
+#adminOrdenes {
+  display: flex;
+}
+#adminOrdenes .container {
+  flex-direction: column;
+  display: flex;
+}
+#adminOrdenes .profile_compra {
+  border: 1px solid #f5f5f5;
+  padding: 20px;
+  background-color: white;
+}
+#adminOrdenes .profile_compra img {
+  max-width: 100px;
+  padding: 10px;
+}
+#adminOrdenes .profile_compra p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
+}
+#adminOrdenes .profile_compra .profile_celeste {
+  color: #3855a2;
+}
+#adminOrdenes .profile_compra .profile_comentario {
+  border: 1px solid #f5f5f5;
+  margin: 1px;
+  border-radius: 4px;
+}
+#adminOrdenes img {
+  max-width: 100px;
+  padding: 10px;
+}
+#adminOrdenes p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=profile.css.map */

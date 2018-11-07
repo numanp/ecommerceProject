@@ -10,13 +10,11 @@ class AdminAddProductContainer extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        this.props.fetchCategorys();
     }
     //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
     handleSubmit(evt) {
         evt.preventDefault();
-        console.log(evt.target)
         const productoAgregar = {
             nombre: evt.target.nombreProducto.value,
             descripcion: evt.target.descripcionProducto.value,
@@ -24,22 +22,18 @@ class AdminAddProductContainer extends Component {
             foto: evt.target.imgProducto.value,
             stock: evt.target.stockProducto.value
         }
-        console.log("PRODUCTO AGREGAR: ");
-
-        console.log(productoAgregar)
         this.props.addProduct(productoAgregar)
     }
     render() {
         return (
             <div>
-                <AdminAddProduct handleSubmit={this.handleSubmit} listaCategorias={this.props.listaCategorias} />
+                <AdminAddProduct handleSubmit={this.handleSubmit} />
             </div>
         )
     }
 }
 function mapStateToProps(state) {
     return {
-        listaCategorias: state.userAdmin.listaCategorias
     }
 }
 

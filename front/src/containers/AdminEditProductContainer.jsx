@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { fetchCategorys} from '../redux/action-creators/user'
 import { getSingleProduct} from '../redux/action-creators/products'
-
+import { Link } from 'react-router-dom'
 import AdminEditProduct from '../components/AdminEditProduct'
 
 class AdminEditProductContainer extends Component {

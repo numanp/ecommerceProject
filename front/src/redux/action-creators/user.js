@@ -58,16 +58,17 @@ export const postProduct = product => ({
     type: CREATE_PRODUCT,
     product,
 });
+export const Fetch_Products = (data) => ({
+    type: FETCH_PRODUCTS,
+    data
+});
 
-//ACTION CREATORS CATEGORIAS
 export const addCategory = category => ({
-    //ESTE ADD CATEGORY ASSIGNA UNA CATEGORIA A UN PRODUCTO
     type: ADD_CATEGORY,
     category,
 });
 
 export const postCategory = category => ({
-    //ESTE postCategory CREA UNA NUEVA CATEGORIA
     type: CREATE_CATEGORY,
     category,
 });
@@ -87,11 +88,6 @@ export const getCategory = category => ({
     category,
 });
 
-export const fetchOrders = () => dispatch =>
-    axios
-        .get('/api/ventas')
-        .then(res => res.data)
-        .then(orders => dispatch(getOrders(orders)));
 //ACTION CREATORS USERS
 export const putUser = user => ({
     type: UPDATE_USER,
@@ -102,16 +98,17 @@ export const deleteUser = user => ({
     type: DELETE_USER,
     user,
 });
+export const Fetch_categorys = (data) => ({
+    type: FETCH_CATEGORYS,
+    data
+});
 
-
-
-//ACTIONS VENTAS
-/* const fetchOrders = () => dispatch =>
+export const fetchOrders = () => dispatch =>
     axios
-        .get('/api/admin/orders')
+        .get('/api/ventas')
         .then(res => res.data)
-        .then(orders => dispatch(getOrders(orders))); */
-
+        .then(orders => dispatch(getOrders(orders)));
+    
 export const updateOrders = (orderId, order) => dispatch =>
     axios
         .put(`/api/orders/${orderId}`, order)
@@ -120,9 +117,10 @@ export const updateOrders = (orderId, order) => dispatch =>
 
 //ACTIONS CATEGORYS
 export const createCategory = categoria => dispatch =>
-    axios.post('/api/categorias/', categoria)
+    axios.post('/api/categorias/', { nombre: categoria })
         .then(res => res.data)
         .then(data => dispatch(postCategory(data)))
+        
 //SET CATGORIES
 
 //export const addCategory;// ESTA ACCION DEBE AGREGAR UNA CATEGORIA A UN PRODUCTO
@@ -146,12 +144,8 @@ export const updateUser = (userId, user) => dispatch =>
         .then(res => res.data)
         .then(data => dispatch(postProduct(data))); */
 
-
 //PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
-export const Fetch_Products = (data) => ({
-    type: FETCH_PRODUCTS,
-    data
-});
+
 
 export const addProduct = producto => dispatch =>
     axios
@@ -164,16 +158,12 @@ export const removeUser = user => dispatch =>
         .delete(`/api/user/${user}`)
         .then(res => res.data)
         .then(user => dispatch(deleteUser(user)));
-export const fetchProducts = () => dispatch =>
+
+export const fetchProducts= () => dispatch =>
     axios
         .get('/api/productos')
         .then(res => res.data)
         .then(data => dispatch(Fetch_Products(data)))
-
-export const Fetch_categorys = (data) => ({
-    type: FETCH_CATEGORYS,
-    data
-});
 
 export const fetchCategorys = () => dispatch =>
     axios

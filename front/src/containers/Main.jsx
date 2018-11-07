@@ -14,11 +14,11 @@ import CarritoSlider from '../containers/CarritoSliderContainer'
 import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
-// import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-// import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
-// import AdminManejarProductos from '../containers/AdminManejarProductos';
-// import AdminEditProductContainer from '../containers/AdminEditProductContainer';
-// import AdminOrdenes from '../components/AdminOrdenes';
+import AdminAddProductContainer from '../containers/AdminAddProductContainer';
+import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
+import AdminManejarProductos from '../containers/AdminManejarProductos';
+import AdminEditProductContainer from '../containers/AdminEditProductContainer';
+ import AdminOrdenes from '../components/AdminOrdenes';
 // import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 // import AdminProductos from '../components/AdminProductos';
 // import AdminManejarProductos from './AdminManejarProductos';
@@ -72,19 +72,20 @@ class Main extends Component {
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
 
-
-        {/* <Route exact path="/admin" component={AdminContainer} />
+        <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
-        <Route exact path="/admin/agregarCategoria" component={AdminAddCategory} />
-        <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        <Route exact path="/admin/promoveUser" component={PromoveUser} />
-        <Route exact path="/admin/deleteUser" component={DeleteUser} />
-        <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
+        <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
-        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> */}
+        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> 
+
+        {
+          /* 
+          <Route exact path="/admin/deleteUser" component={DeleteUser} />
+        <Route exact path="/admin/promoveUser" component={PromoveUser} />
       </div>
+        */}
+        </div>
     );
   }
 }

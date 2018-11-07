@@ -10,17 +10,23 @@ class AdminManejarProductos extends Component {
     componentWillMount() {
         this.props.fetchProducts();
     }
+    componentDidlMount() {
+        this.props.fetchProducts();
+    }
 
     render() {
         return (
             <div>   
-                <AdminProductos listaProductos={this.props.listaProductos}/>     
-            </div>   
+            {
+                <AdminProductos listaProductos={this.props.listaProductos} />     
+            }
+         </div>   
         )
     }
 }
 
 function mapStateToProps (state){
+  //  console.log(state)
     return{ 
         listaProductos: state.userAdmin.listaProductos
     }

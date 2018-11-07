@@ -1,4 +1,4 @@
-import { FETCH_SINGLE_PRODUCT, FETCH_PRODUCTS } from '../constants'
+import { FETCH_SINGLE_PRODUCT, FETCH_PRODUCTS_USER } from '../constants'
 import axios from 'axios'
 
 export const fetchSingleProduct = product => ({
@@ -6,15 +6,15 @@ export const fetchSingleProduct = product => ({
     product,
 })
 
-export const fetchProducts = products => ({
-    type: FETCH_PRODUCTS,
+export const fetchProductsUser = products => ({
+    type: FETCH_PRODUCTS_USER,
     products
 })
 
 export const getProducts = () => {
     return (dispatch) =>
         axios.get('/api/productos')
-            .then((res) => dispatch(fetchProducts(res.data)))
+            .then((res) => dispatch(fetchProductsUser(res.data)))
 }
 
 export const getSingleProduct = (idProducto) => {
