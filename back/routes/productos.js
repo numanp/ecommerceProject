@@ -53,6 +53,8 @@ router.post('/', (req, res) => {
 })
 
 router.put('/addCategory/', (req, res) => {
+    //Toma el req.body.nombreProducto 
+    //Le setea al propducto las req.body.categorias (Arreglo de categorias por id)
     models.Producto.findOne({ where: { nombre: req.body.nombreProducto } })
         .then((producto) => {
             producto.setCategorias(req.body.categorias)

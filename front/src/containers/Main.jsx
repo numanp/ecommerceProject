@@ -18,6 +18,7 @@ import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 import AdminProductos from '../components/AdminProductos';
 import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
+import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
 
 class Main extends Component {
@@ -63,6 +64,7 @@ class Main extends Component {
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
+        <Route exact path="/admin/editCategoriasProducto/:id" component={EditCategoriaDeProducto} />
         
       </div>
     );

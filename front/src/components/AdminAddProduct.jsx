@@ -32,18 +32,18 @@ export default (props) => (
             <label htmlFor="stockProducto">Stock</label>
             <input name="stockProducto" type="text" className="form-control" placeholder="Cantidad a agregar"></input>
         </div>
+            {/* props.listaCategorias.map(categoria => 
         <div className="form-group">
             <label htmlFor="categorias" id="addProductCategories">Categorias</label>
             <br/>
-            { props.listaCategorias.map(categoria => 
                    <label key={categoria.id}>
                         {categoria.nombre}
                        <input type="checkbox" name={categoria.nombre} /> 
                        
                    </label>
 
-                )}
         </div>
+                ) */}
 
         <div className="form-group">
             <label htmlFor="descripcionProducto">Descripcion</label>

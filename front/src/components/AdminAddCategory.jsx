@@ -29,12 +29,24 @@ export default (props) => (
 					{
 						props.listaCategorias.map(categoria => {
 							return (
-							<li key={categoria.id}> <p>{categoria.nombre}</p>	 
+							<li key={categoria.id}>
+								<div className="col-md-2">
+									<p>{categoria.nombre}</p>	 
+								</div>
+							
 								<button className="btn btn-danger" onClick={() => props.removeCategory(categoria.id)}>
 	
 									<span class="glyphicon glyphicon-remove" aria-hidden="true">
 									</span> Eliminar categoria
 								</button> 
+								<button className="btn btn-warning" >
+	
+									<span class="
+										glyphicon glyphicon-pencil" aria-hidden="true">
+									</span> Editar categoria
+								</button> 
+
+								
 							</li>)
 						})
 						

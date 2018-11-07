@@ -40,15 +40,18 @@ export default (props) => (
                             <div className="col-md-4">
                                 <h1> {producto.nombre }</h1>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-2">
                                 <h3> ${producto.precio} </h3>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-2">
                                 <p> {producto.descripcion} </p>
                             </div>
-                            <div className="col-md-2">
+                            <div className="col-md-3">
                                <Link to={`/admin/EditarProducto/${producto.id}`}>
-                                    <button className="btn btn-primary"> <span className="glyphicon glyphicon-pencil"></span> Editar Product</button>
+                                    <button className="btn btn-warning"> <span className="glyphicon glyphicon-pencil"></span> Editar Product</button>
+                                </Link>
+                                <Link to={`/admin/editCategoriasProducto/${producto.id}`}>
+                                    <button className="btn btn-warning"> <span className="glyphicon glyphicon-pencil"></span> Editar categorias</button>
                                 </Link>
                             </div>
                         </div>

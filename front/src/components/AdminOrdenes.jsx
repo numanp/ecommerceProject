@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 
 var arregloCompras = [
@@ -28,40 +29,57 @@ var arregloCompras = [
 export default () => (
 
 
-<div  className="container-fluid" id="">
-    <h1>Manejo de ordenes</h1>
-    
-    {
-        //DROPDOWN PARA FILTRAR LAS CATEGORIAS
-    }
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Filtrar por Status <span class="caret"></span>
-         </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">CREADO</a></li>
-                <li><a href="#">PROCESADO</a></li>
-                <li><a href="#">CANCELADO</a></li>
-                <li><a href="#">COMPLETADO</a></li>
-           </ul>
+<div  className="container-fluid" id="adminOrdenes">
+    <div className="container">
+        <h1>Manejo de ordenes</h1>
+        
+        {
+            //DROPDOWN PARA FILTRAR LAS CATEGORIAS
+        }
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filtrar por Status <span class="caret"></span>
+            </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">CREADO</a></li>
+                    <li><a href="#">PROCESADO</a></li>
+                    <li><a href="#">CANCELADO</a></li>
+                    <li><a href="#">COMPLETADO</a></li>
+            </ul>
+        </div>
+
+
+        { //MAPEO POR EL ARREGLO DE COMPRAS
+            arregloCompras.map(compra => (
+                <div className="profile_compra"  key={compra.idVenta}>
+                    <div className="col-md-2">
+                        <p>INFO DE LA VENTA.</p>
+                    </div>
+                    <div className="col-md-2">
+                        <p>ID VENTA: {compra.idVenta}</p>
+                    </div>
+                    <div className="col-md-2">
+                        <p>Fecha: {compra.fechaVenta}</p>
+                    </div>
+                    
+                    <div className="col-md-2">
+                        <p>Status: {compra.status}</p>    
+                    </div>
+                    <div className="col-md-2">
+                        <Link to="#"><p class="profile_celeste">Ver Detalle</p></Link>
+                    </div>
+                    
+                    <div className="col-md-2">
+                        <button class="btn btn-primary">Cambiar el Status</button>
+                    
+                    </div>
+                    
+                </div>
+            ))
+        }
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> <br/>
     </div>
-
-
-    { //MAPEO POR EL ARREGLO DE COMPRAS
-        arregloCompras.map(compra => (
-            <div className="profile_compra"  key={compra.idVenta}>
-                <a href={compra.linkProducto}>
-                    <img src="https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg" alt=""/>
-                </a>
-                <p>INFO DE LA VENTA.</p>
-                <p>ID VENTA: {compra.idVenta}</p>
-                <p>Fecha: {compra.fechaVenta}</p>
-                <p>Status: {compra.status}</p>    
-                <p class="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)</p>
-                <button class="btn btn-primary">Cambiar el Status</button>
-            </div>
-        ))
-    }
-
 </div>
 );
