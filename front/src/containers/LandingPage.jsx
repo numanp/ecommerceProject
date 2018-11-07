@@ -1,26 +1,38 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-
 
 import WebStoreSlider from '../components/WebStoreSlider'
 import ContenidoCelulares from '../components/ContenidoCelulares';
 import ContenidoInformativo from '../components/ContenidoInformativo'
 import GroupProducts from '../components/GroupProducts'
 
-export default class LandingPage extends Component {
+function mapStateToProps(state) {
+    return {
+        product: state.products.product,
+        productos: state.products.products,
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+
+    }
+}
+
+class LandingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            
-        }
+        console.log('props', props)
     }
     
+    // componentDidMount() {
+    //     this.props.getProducts()
+    // }
+
     render() {
         return (
             <div>
                 <WebStoreSlider />
-                <GroupProducts />
+                <GroupProducts productos={this.props.productos}/>
                 <ContenidoCelulares />
                 <ContenidoInformativo />
             </div>
@@ -28,15 +40,7 @@ export default class LandingPage extends Component {
     }
 }
 
-// const mapStateToProps = (state) => ({
-  
-// })
-
-// const mapDispatchToProps = {
-  
-// }
-
-//export default connect(mapStateToProps, mapDispatchToProps)(LandingPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage)
 
 
 
