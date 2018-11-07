@@ -57,7 +57,7 @@ class NavBar extends Component {
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul className="nav navbar-nav navbar-left">
+                            <ul className="nav navbar-nav navbar-left" key="1">
                                 <SearchBar />
                             </ul>
                             {
