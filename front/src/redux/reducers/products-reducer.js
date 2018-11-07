@@ -8,7 +8,8 @@ import {
 
 const productsReducer = (state = {
     products: [],
-    product: {}
+    product: {},
+    productosParaCarrito: []
 }, action) => {
     switch (action.type) {
         case FETCH_PRODUCTS:

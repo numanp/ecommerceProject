@@ -5,41 +5,41 @@ import React from 'react';
 export default (productos) =>{
     console.log(productos)
     return(
-        <div class="container">
-            <div class="row">
+        <div className="container">
+            <div className="row">
             <h1>Proba tu suerte!</h1>
-                <div id="adv_team_4_columns_carousel" class="carousel slide four_shows_one_move team_columns_carousel_wrapper" data-ride="carousel" data-interval="2000" data-pause="hover">
+                <div id="adv_team_4_columns_carousel" className="carousel slide four_shows_one_move team_columns_carousel_wrapper" data-ride="carousel" data-interval="2000" data-pause="hover">
 
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item">
+                    <div className="carousel-inner" role="listbox">
+                        <div className="item">
 
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
                                 <img src="http://placehold.it/150x150" alt="slider 01" />
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1">
                                 <img src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" alt="slider 02" />
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2">
                                 <img src="http://placehold.it/150x150" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3">
                                 <img src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
@@ -47,34 +47,34 @@ export default (productos) =>{
                             </div>
                         </div>
 
-                        <div class="item active">
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
+                        <div className="item active">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
                                 <img src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1">
                                 <img src="http://placehold.it/150x150" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2">
                                 <img src="https://avatars1.githubusercontent.com/u/2078339?s=400&v=4" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr />
                                     <h5>PROBANDO</h5>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3">
+                            <div className="col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3">
                                 <img src="http://placehold.it/150x150" alt="slider 02"/>
-                                <div class="team_columns_item_caption">
+                                <div className="team_columns_item_caption">
                                     <h4 className="h4-group-products">PROBANDO</h4>
                                     <hr/>
                                     <h5>PROBANDO</h5>

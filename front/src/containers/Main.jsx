@@ -12,7 +12,6 @@ import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import CarritoSlider from '../containers/CarritoSliderContainer'
 import Productos from './ProductosContainer';
-import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 // import AdminAddProductContainer from '../containers/AdminAddProductContainer';
@@ -65,15 +64,13 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <CarritoSlider />
+        <CarritoSlider cart={this.props.cart} />
         <NavBar admin={this.state.admin} />
 
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
-        <Route exact path="/carrito" component={Carrito} />
-        {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
 
 
         {/* <Route exact path="/admin" component={AdminContainer} />
