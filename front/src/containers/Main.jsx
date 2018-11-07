@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios'
 
 //COMPONENTES
 import NavBar from './NavBar';
