@@ -70,7 +70,6 @@ class Main extends Component {
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
         <Route exact path="/carrito" component={Carrito} />
-        {/*        <Route exact path="/singleProduct" component={SingleProduct} /> */}
 
 
         {/* <Route exact path="/admin" component={AdminContainer} />

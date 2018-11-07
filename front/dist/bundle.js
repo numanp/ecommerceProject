@@ -4255,6 +4255,8 @@ var ContainerSingleProduct = function (_Component) {
     _createClass(ContainerSingleProduct, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -4415,7 +4417,11 @@ var ContainerSingleProduct = function (_Component) {
                                         { className: 'action' },
                                         _react2.default.createElement(
                                             'button',
-                                            { className: 'add-to-cart btn btn-success', type: 'button' },
+                                            { className: 'add-to-cart btn btn-success', type: 'button', onClick: function onClick(e) {
+                                                    e.preventDefault();console.log(_this2.props);var obj = { q: 1, id: _this2.props.product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                        localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
+                                                    }, 10);
+                                                } },
                                             'add to cart'
                                         )
                                     )
@@ -33730,7 +33736,7 @@ var ProductosContainer = function (_Component) {
                     _reactRouterDom.Switch,
                     null,
                     _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/singleProduct', render: function render() {
-                            return _react2.default.createElement(_ContainerSingleProduct2.default, { lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product });
+                            return _react2.default.createElement(_ContainerSingleProduct2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product });
                         } }),
                     _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
                             return _react2.default.createElement(_ProductosSubContainer2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos });
