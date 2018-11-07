@@ -15,15 +15,15 @@ import Productos from './ProductosContainer';
 import Carrito from './CarritoContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
-import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
-import AdminManejarProductos from '../containers/AdminManejarProductos';
-import AdminEditProductContainer from '../containers/AdminEditProductContainer';
-import AdminOrdenes from '../components/AdminOrdenes';
-import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-import AdminProductos from '../components/AdminProductos';
-import AdminManejarProductos from './AdminManejarProductos';
-import AdminEditProductContainer from './AdminEditProductContainer';
+// import AdminAddProductContainer from '../containers/AdminAddProductContainer';
+// import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
+// import AdminManejarProductos from '../containers/AdminManejarProductos';
+// import AdminEditProductContainer from '../containers/AdminEditProductContainer';
+// import AdminOrdenes from '../components/AdminOrdenes';
+// import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+// import AdminProductos from '../components/AdminProductos';
+// import AdminManejarProductos from './AdminManejarProductos';
+// import AdminEditProductContainer from './AdminEditProductContainer';
 /* import EditCategoriaDeProducto from './EditCategoriaDeProducto'; */
 
 function mapStateToProps(state) {
