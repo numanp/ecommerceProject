@@ -60,7 +60,7 @@ class NavBar extends Component {
                             <ul className="nav navbar-nav navbar-left">
                                 <SearchBar />
                             </ul>
-                            {
+                            {/*
                                 this.state.logueado === true ?
                                     [
                                         <ul key="1" className="nav navbar-nav navbar-right">
@@ -75,6 +75,7 @@ class NavBar extends Component {
                                             <li> <Link to="/carrito">Carrito</Link> </li>
                                         </ul>
                                     ]
+                                    */
                             }
                         </div>
                     </div>
