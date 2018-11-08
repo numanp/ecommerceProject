@@ -18,13 +18,13 @@ import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
 import AdminManejarProductos from '../containers/AdminManejarProductos';
 import AdminEditProductContainer from '../containers/AdminEditProductContainer';
-import checkOutContainer from '../containers/checkOutContainer';
- import AdminOrdenes from '../components/AdminOrdenes';
+import checkOutContainer from '../containers/CheckoutContainer';
+import AdminOrdenes from '../components/AdminOrdenes';
  import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
 // import AdminProductos from '../components/AdminProductos';
 // import AdminManejarProductos from './AdminManejarProductos';
 // import AdminEditProductContainer from './AdminEditProductContainer';
-/* import EditCategoriaDeProducto from './EditCategoriaDeProducto'; */
+// import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
 function mapStateToProps(state) {
   return {
@@ -36,7 +36,7 @@ function mapDispatchToProps(dispatch) {
   return {
     logginSuccess: (user) => {
       dispatch(logginSuccess(user))
-    }
+    },
   }
 }
 
@@ -50,8 +50,10 @@ class Main extends Component {
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
   }
+
+
   sign(object) {
-    axios.post('api/user/signup', object);
+    return axios.post('api/user/signup', object);
   }
   logn(object) {
     axios.post('api/login', object).then(res => console.log(res.data));
@@ -89,8 +91,9 @@ class Main extends Component {
         <Route exact path="/admin/promoveUser" component={PromoveUser} />
       </div>
         */}
-        </div>
+      </div>
     );
+
   }
 }
 

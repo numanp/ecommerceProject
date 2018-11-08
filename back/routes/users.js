@@ -2,13 +2,21 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models/index').modelos;
 
+router.get('/', (req, res) => {
+  models.User.findAll().then(users => res.send(users));
+});
+
 router.get('/me', (req, res) => {
   res.send(req.user || 'no estas logeado');
 });
 
-router.delete('/:user', (req, res) => {
+router.get('/:userId', (req, res) => {
+  models.User.findById(req.params.userId).then(user => res.send(user));
+});
+
+router.delete('/:userId', (req, res) => {
   console.log('userBack', req.params.user);
-  models.User.destroy({ where: { email: req.params.user } }).then(() => {
+  models.User.destroy({ where: { id: req.params.userId } }).then(() => {
     res.status(200).send('OK');
   });
 });
@@ -23,9 +31,11 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.put('/admin/:user', (req, res) => {
-  models.User.findAll({ where: { email: req.params.user } }).then(user =>
-    user[0].update({ admin: true }),
+router.put('/makeAdmin/:userId', (req, res) => {
+  models.User.findById(req.params.userId).then(user =>
+    user.update({ admin: true }).then(() => {
+      res.status(200).send('usuario modificado ');
+    }),
   );
 });
 
@@ -36,10 +46,12 @@ router.post('/signup', (req, res) => {
     email: req.body.email,
     password: req.body.password,
     telefono: req.body.telefono,
-  }).then(() => {
-    console.log('usuario creado');
-    res.send('usuario creado correctamente');
-  });
+  })
+    .then(() => {
+      console.log('usuario creado');
+      res.send('usuario creado correctamente');
+    })
+    .catch(err => res.status(400).send(err));
 });
 
 module.exports = router;

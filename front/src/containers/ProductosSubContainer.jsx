@@ -41,7 +41,7 @@ class ProductosSubContainer extends Component {
                                                 <p className="price">$ {product.precio}</p>
                                             </div>
                                             <div className="col-md-6 col-sm-6">
-                                                <a href="" target="_blank" ><button className="glyphicon glyphicon-shopping-cart btn btn-info right" onClick={(e) => { e.preventDefault(); var obj = { q: 1, id: product.id }; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }} > </button></a>
+                                                <a href="" target="_blank" ><button className="glyphicon glyphicon-shopping-cart btn btn-info right" onClick={(e) => { e.preventDefault(); var obj = product; obj.q = 1; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }} > </button></a>
                                                 <Link to={`/productos/singleProduct`} className="glyphicon glyphicon-zoom-in btn btn-info right" role="button" onClick={() => selectProduct(product.id)}></Link>
                                             </div>
                                         </div>

@@ -8,7 +8,8 @@ import {
     
 } from '../constants';
 
-const productsReducer = (state = {
+const productsReducer = (
+  state = {
     products: [],
     product: {},
     productosParaCarrito: []
@@ -21,7 +22,7 @@ const productsReducer = (state = {
         case FETCH_SINGLE_PRODUCT:
             return Object.assign({}, state, {
                 product: action.product
-            })
+            });
         case FETCH_SINGLE_PRODUCT_wCATEGORIES:
         return Object.assign({}, state,
              {producto_wCategories: action.producto

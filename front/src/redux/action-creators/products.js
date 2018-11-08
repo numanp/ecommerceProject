@@ -2,14 +2,14 @@ import { FETCH_SINGLE_PRODUCT, FETCH_PRODUCTS_USER, FETCH_SINGLE_PRODUCT_wCATEGO
 import axios from 'axios'
 
 export const fetchSingleProduct = product => ({
-    type: FETCH_SINGLE_PRODUCT,
-    product,
-})
+  type: FETCH_SINGLE_PRODUCT,
+  product,
+});
 
 export const fetchProductsUser = products => ({
-    type: FETCH_PRODUCTS_USER,
-    products
-})
+  type: FETCH_PRODUCTS_USER,
+  products,
+});
 
 export const fetchSingleProductxCategories = producto => ({
     type: FETCH_SINGLE_PRODUCT_wCATEGORIES,
@@ -17,10 +17,11 @@ export const fetchSingleProductxCategories = producto => ({
 })
 
 export const getProducts = () => {
-    return (dispatch) =>
-        axios.get('/api/productos')
-            .then((res) => dispatch(fetchProductsUser(res.data)))
-}
+  return dispatch =>
+    axios
+      .get('/api/productos')
+      .then(res => dispatch(fetchProductsUser(res.data)));
+};
 
 export const getSingleProduct = (idProducto) => {
     return (dispatch) =>
@@ -41,3 +42,16 @@ export const postCategoriesToProducts = (id, arr) => {
             .then(console.log("TODO SALIO BIEN"))}
 
 }
+
+export const deleteProduct = productId => {
+  return dispatch =>
+    axios
+      .delete(`/api/productos/${productId}`)
+      .then(res => res.data)
+      .then(producto =>
+        dispatch({
+          type: DELETE_PRODUCT,
+          productId,
+        }),
+      );
+};
