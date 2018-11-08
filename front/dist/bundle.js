@@ -4218,6 +4218,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRedux = __webpack_require__(3);
 
+var _products = __webpack_require__(159);
+
 var _Reviews = __webpack_require__(54);
 
 var _Reviews2 = _interopRequireDefault(_Reviews);
@@ -4239,11 +4241,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function mapStateToProps(state, ownProps) {
-    return {};
+    return {
+        product: state.products.product
+    };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    return {};
+    return {
+        getSingleProduct: function getSingleProduct(idProducto) {
+            dispatch((0, _products.getSingleProduct)(idProducto));
+        }
+    };
 }
 
 var ContainerSingleProduct = function (_Component) {
@@ -4256,6 +4264,11 @@ var ContainerSingleProduct = function (_Component) {
     }
 
     _createClass(ContainerSingleProduct, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.getSingleProduct(this.props.match.params.productId);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -4441,7 +4454,7 @@ var ContainerSingleProduct = function (_Component) {
     return ContainerSingleProduct;
 }(_react.Component);
 
-exports.default = ContainerSingleProduct;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerSingleProduct);
 
 /***/ }),
 /* 54 */
@@ -4466,7 +4479,7 @@ exports.default = function (props) {
     props.addReview && props.addReview.map(function (review) {
       return _react2.default.createElement(
         "div",
-        { className: "container" },
+        { key: "4", className: "container" },
         _react2.default.createElement(
           "div",
           { className: "row" },
@@ -33367,7 +33380,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state) {
     return {
-        loggedIn: state.loggedIn
+        loggedIn: state.user.logged
     };
 }
 
@@ -33398,7 +33411,7 @@ var Login = function (_Component) {
     _createClass(Login, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log(this.props.usuario);
+            console.log(this.props.loggedIn);
         }
     }, {
         key: 'emailChange',
@@ -33759,7 +33772,8 @@ function mapStateToProps(state) {
     return {
         product: state.products.product,
         productos: state.products.products,
-        cart: state.cart
+        cart: state.cart,
+        user: state.user
     };
 }
 
@@ -33814,11 +33828,12 @@ var ProductosContainer = function (_Component) {
                 _react2.default.createElement(
                     _reactRouterDom.Switch,
                     null,
-                    _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/singleProduct', render: function render() {
-                            return _react2.default.createElement(_ContainerSingleProduct2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product });
+                    _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/:productId', render: function render(_ref) {
+                            var match = _ref.match;
+                            return _react2.default.createElement(_ContainerSingleProduct2.default, { match: match, cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product, user: _this2.props.user });
                         } }),
                     _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
-                            return _react2.default.createElement(_ProductosSubContainer2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos });
+                            return _react2.default.createElement(_ProductosSubContainer2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos, user: _this2.props.user });
                         } })
                 )
             );
@@ -33996,9 +34011,7 @@ var ProductosSubContainer = function (_Component) {
                                                 ' '
                                             )
                                         ),
-                                        _react2.default.createElement(_reactRouterDom.Link, { to: '/productos/singleProduct', className: 'glyphicon glyphicon-zoom-in btn btn-info right', role: 'button', onClick: function onClick() {
-                                                return selectProduct(product.id);
-                                            } })
+                                        _react2.default.createElement(_reactRouterDom.Link, { to: '/productos/' + product.id, className: 'glyphicon glyphicon-zoom-in btn btn-info right', role: 'button' })
                                     )
                                 )
                             )
@@ -34089,14 +34102,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function mapStateToProps(state) {
   return {
     rev: state.review,
-    user: state
+    user: state.user,
+    producto: state.products.product
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addReview: function addReview(value, user) {
-      dispatch((0, _reviewAction.addReview)(value, user));
+    addReview: function addReview(value, user, product) {
+      dispatch((0, _reviewAction.addReview)(value, user, product));
     }
   };
 }
@@ -34129,10 +34143,8 @@ var ContainerReview = function (_Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
-      var usuario = this.props.user;
-      console.log(this.props);
       evt.preventDefault();
-      this.props.addReview(this.state.value, usuario);
+      this.props.addReview(this.state.value, this.props.user, this.props.producto);
     }
   }, {
     key: 'fechReviews',
@@ -34144,7 +34156,7 @@ var ContainerReview = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
-        _react2.default.createElement(_Reviews2.default, { user: this.props.user, addReview: this.props.rev })
+        _react2.default.createElement(_Reviews2.default, { user: this.props.user, addReview: this.props.rev, product: this.props.producto })
       );
     }
   }]);
@@ -34222,19 +34234,24 @@ var saveReview = function saveReview(review) {
     };
 };
 
-var addReview = exports.addReview = function addReview(value, user) {
+var addReview = exports.addReview = function addReview(value, user, product) {
     return function (dispatch) {
+        console.log("ACTION-VALUE", value, "ACTION-USER", user, "ACTION-PRODUCT", product);
         var reviewUser = {
-            value: value,
-            user: user
+            comentario: value,
+            user: user,
+            product: product
         };
 
-        _axios2.default.post('/api/reviews', reviewUser).then(function (res) {
-            return console.log('REVIEEEEEEEEEWWWWWWWWWWWWWW', res.data);
+        _axios2.default.post('/api/reviews/' + product.id, reviewUser).then(function (res) {
+            return console.log('AXIOSSSS', res.data);
+        }).then(function (res) {
+            dispatch(saveReview(res.data));
         });
-        // dispatch (saveReview(value))
     };
 };
+
+// .then(res => {dispatch (saveReview(value, user, product))
 
 /***/ }),
 /* 165 */

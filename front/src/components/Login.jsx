@@ -4,7 +4,7 @@ import { addLoginToLocalStorage } from '../redux/action-creators/user'
 
 function mapStateToProps(state) {
     return {
-        loggedIn: state.loggedIn
+        loggedIn: state.user.logged
     }
 }
 
@@ -26,7 +26,7 @@ class Login extends Component {
         this.logn = this.logn.bind(this)
     }
     componentDidMount() {
-        console.log(this.props.usuario)
+        console.log(this.props.loggedIn)
     }
     emailChange(e) {
         this.setState(

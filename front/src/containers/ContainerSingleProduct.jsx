@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { getSingleProduct } from '../redux/action-creators/products';
 
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
 
 function mapStateToProps(state, ownProps) {
-    return {};
+    return {
+        product: state.products.product,
+    };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    return {};
+    return {
+        getSingleProduct: (idProducto) => {
+            dispatch(getSingleProduct(idProducto))
+        }
+    };
 }
 
 class ContainerSingleProduct extends Component {
     constructor(props) {
         super(props);
     }
-    render() {
 
+    componentDidMount(){
+        this.props.getSingleProduct(this.props.match.params.productId)
+
+    }
+
+    render() {
         return (
             <div>
                 <div className="container-productos">
@@ -89,4 +101,4 @@ class ContainerSingleProduct extends Component {
     }
 }
 
-export default ContainerSingleProduct
+export default connect(mapStateToProps, mapDispatchToProps)(ContainerSingleProduct)
