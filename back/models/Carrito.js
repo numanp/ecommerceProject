@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Carrito = db.define('carritos', {
     carro: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long')
     }
 });
 

@@ -35,6 +35,7 @@ const cartReducer = (state = [], action) => {
             var obj = state.find((i) => i.id == action.payload).q--
             return Object.assign([], state, { cart: obj });
         case UPDATE_CART:
+            console.log('entra update cart')
             if (Array.isArray(action.payload)) state = action.payload
         default:
             return state

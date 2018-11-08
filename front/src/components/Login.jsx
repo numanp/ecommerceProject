@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addLoginToLocalStorage } from '../redux/action-creators/user';
+import { getMyCart } from '../redux/action-creators/cart'
 
 function mapStateToProps(state) {
   return {

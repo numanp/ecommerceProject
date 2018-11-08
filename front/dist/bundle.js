@@ -2232,7 +2232,7 @@ module.exports = defaults;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.actualizarCarro = exports.lessQtoProduct = exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
+exports.getMyCart = exports.saveCart = exports.actualizarCarro = exports.lessQtoProduct = exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
 
 var _constants = __webpack_require__(7);
 
@@ -2281,6 +2281,17 @@ var actualizarCarro = exports.actualizarCarro = function actualizarCarro(arreglo
   };
 };
 
+var saveCart = exports.saveCart = function saveCart(carrito, userId) {
+  var objeto = { carrito: carrito, userId: userId };
+  _axios2.default.post('api/cart', objeto);
+};
+
+var getMyCart = exports.getMyCart = function getMyCart(id) {
+  _axios2.default.get('/api/cart/' + id).then(function (res) {
+    console.log(res.data);
+    localStorage.setItem("cart", JSON.stringify(res.data));
+  });
+};
 /* export const addToLocalStorage = producto => dispatch => {
   sessionStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
@@ -31056,6 +31067,7 @@ var cartReducer = function cartReducer() {
             }).q--;
             return Object.assign([], state, { cart: obj });
         case _constants.UPDATE_CART:
+            console.log('entra update cart');
             if (Array.isArray(action.payload)) state = action.payload;
         default:
             return state;
@@ -31334,9 +31346,9 @@ var _AdminEditProductContainer = __webpack_require__(173);
 
 var _AdminEditProductContainer2 = _interopRequireDefault(_AdminEditProductContainer);
 
-var _checkOutContainer = __webpack_require__(176);
+var _CheckoutContainer = __webpack_require__(177);
 
-var _checkOutContainer2 = _interopRequireDefault(_checkOutContainer);
+var _CheckoutContainer2 = _interopRequireDefault(_CheckoutContainer);
 
 var _AdminOrdenes = __webpack_require__(169);
 
@@ -31436,7 +31448,7 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', component: _checkOutContainer2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', component: _CheckoutContainer2.default })
       );
     }
   }]);
@@ -33611,6 +33623,8 @@ var _reactRedux = __webpack_require__(3);
 
 var _user = __webpack_require__(9);
 
+var _cart = __webpack_require__(27);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34076,9 +34090,7 @@ var CarritoSlider = function (_Component) {
 
     _createClass(CarritoSlider, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.actualizarCarro();
-        }
+        value: function componentDidMount() {}
         /*  updateCart() {
              var storage = JSON.parse(localStorage.getItem("cart"));
              this.cartProducts = storage
@@ -34178,8 +34190,19 @@ var CarritoSlider = function (_Component) {
                                 _react2.default.createElement('br', null),
                                 _react2.default.createElement(
                                     'button',
-                                    { className: 'btn btn-success comprar-carrito-btn' },
+                                    { onClick: function onClick() {
+                                            (0, _cart.saveCart)(localStorage.getItem('cart'), _this2.props.logged.id);
+                                        }, className: 'btn btn-success comprar-carrito-btn' },
                                     'Guardar carrito'
+                                ),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                            (0, _cart.getMyCart)(_this2.props.logged.id);_this2.props.actualizarCarro(JSON.parse(localStorage.getItem('cart')));
+                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                    'Continuar compra guardada'
                                 )
                             )]
                         )
@@ -35909,7 +35932,6 @@ exports.default = function (props) {
         )
       ),
       _react2.default.createElement('h1', null),
-      console.log(props.selectedProd, 'selectedProd'),
       _react2.default.createElement(
         'h1',
         null,
@@ -36129,7 +36151,8 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 176 */
+/* 176 */,
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36178,66 +36201,135 @@ var CheckoutContainer = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'contenedorCheckout' },
-                    _react2.default.createElement('div', { className: 'col-md-4 IMGCHECKOUT' }),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'col-md-4 checkoutForm' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                'h2',
+                                null,
+                                'Detalle de productos'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                'ul',
+                                null,
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' Producto 1 '
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' Producto 2 '
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' Producto 3 '
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' Producto 4 '
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' Producto 5 '
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Fecha: '
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'form-group' },
+                            _react2.default.createElement(
+                                'label',
+                                { htmlFor: 'texto' },
+                                'Direccion de entrega'
+                            ),
+                            _react2.default.createElement('input', { type: 'texto', className: 'form-control', id: 'email', name: 'direccion', placeholder: 'Direccion' })
+                        ),
+                        _react2.default.createElement(
+                            'h2',
+                            null,
+                            'Monto total: '
+                        )
+                    ),
                     _react2.default.createElement(
                         'div',
                         { className: 'col-md-4 checkoutForm' },
                         _react2.default.createElement(
                             'h2',
                             null,
-                            'Total a pagar: 100'
+                            'Detalles del pago'
                         ),
                         _react2.default.createElement(
                             'form',
                             null,
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
+                                { className: 'form-group' },
                                 _react2.default.createElement(
                                     'label',
-                                    { 'for': 'email' },
+                                    { htmlFor: 'email' },
                                     'Nombre de tarjeta'
                                 ),
-                                _react2.default.createElement('input', { type: 'email', 'class': 'form-control', id: 'email', name: 'email', placeholder: 'Email' })
+                                _react2.default.createElement('input', { type: 'email', className: 'form-control', name: 'email', placeholder: 'Email' })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
+                                { className: 'form-group' },
                                 _react2.default.createElement(
                                     'label',
-                                    { 'for': 'tarjeta' },
+                                    { htmlFor: 'tarjeta' },
                                     'Tarjeta'
                                 ),
-                                _react2.default.createElement('input', { type: 'password', 'class': 'form-control', id: 'tarjeta', placeholder: 'Password' })
+                                _react2.default.createElement('input', { autoComplete: 'off', type: 'password', className: 'form-control', placeholder: 'Password' })
                             ),
                             _react2.default.createElement(
                                 'div',
                                 { className: 'datos' },
                                 _react2.default.createElement(
                                     'div',
-                                    { 'class': 'form-group' },
+                                    { className: 'form-group' },
                                     _react2.default.createElement(
                                         'label',
-                                        { 'for': 'tarjeta' },
+                                        { htmlFor: 'tarjeta' },
                                         'Expiration Date'
                                     ),
-                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control checkoutExpiracion', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                    _react2.default.createElement('input', { type: 'text', className: 'form-control checkoutExpiracion', placeholder: 'FECHA EXPIRACION' })
                                 ),
                                 _react2.default.createElement(
                                     'div',
-                                    { 'class': 'form-group cvvcheckout' },
+                                    { className: 'form-group cvvcheckout' },
                                     _react2.default.createElement(
                                         'label',
-                                        { 'for': 'tarjeta' },
+                                        { htmlFor: 'tarjeta' },
                                         'CVV'
                                     ),
-                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control ', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                    _react2.default.createElement('input', { type: 'text', className: 'form-control ', placeholder: 'FECHA EXPIRACION' })
                                 )
                             ),
                             _react2.default.createElement(
                                 'button',
-                                { type: 'submit', 'class': 'btn btn-success btn-block btn-lg' },
-                                'Realizar pago'
+                                { type: 'submit', className: 'btn btn-success btn-block btn-lg' },
+                                'Realizar Compra'
                             )
                         )
                     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeFromCart, addQtoProduct, lessQtoProduct } from '../redux/action-creators/cart'
-import { actualizarCarro } from '../redux/action-creators/cart'
+import { actualizarCarro, saveCart, getMyCart } from '../redux/action-creators/cart'
 import { Link } from 'react-router-dom';
 
 
@@ -37,7 +37,7 @@ class CarritoSlider extends Component {
         /* this.updateCart = this.updateCart.bind(this); */
     }
     componentDidMount() {
-        this.props.actualizarCarro()
+
     }
     /*  updateCart() {
          var storage = JSON.parse(localStorage.getItem("cart"));
@@ -87,7 +87,10 @@ class CarritoSlider extends Component {
                                             <Link to={'/checkout'} role="button" className="btn btn-success comprar-carrito-btn">Checkout</Link>
                                             <br></br>
                                             <br></br>
-                                            <button className="btn btn-success comprar-carrito-btn">Guardar carrito</button>
+                                            <button onClick={() => { saveCart(localStorage.getItem('cart'), this.props.logged.id) }} className="btn btn-success comprar-carrito-btn">Guardar carrito</button>
+                                            <br></br>
+                                            <br></br>
+                                            <button onClick={() => { getMyCart(this.props.logged.id); this.props.actualizarCarro(JSON.parse(localStorage.getItem('cart'))) }} className="btn btn-success comprar-carrito-btn">Continuar compra guardada</button>
                                         </div>
                                     ]
                             }

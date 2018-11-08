@@ -6,6 +6,7 @@ import {
   SIGN_UP,
 } from '../constants';
 
+
 const initialState = {};
 
 export default (state = initialState, action) => {

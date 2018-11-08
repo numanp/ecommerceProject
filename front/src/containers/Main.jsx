@@ -18,7 +18,7 @@ import AdminAddProductContainer from '../containers/AdminAddProductContainer';
 import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
 import AdminManejarProductos from '../containers/AdminManejarProductos';
 import AdminEditProductContainer from '../containers/AdminEditProductContainer';
-import CheckoutContainer from '../containers/checkOutContainer';
+import CheckoutContainer from '../containers/CheckoutContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
 // import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 // import AdminProductos from '../components/AdminProductos';

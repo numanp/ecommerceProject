@@ -29,6 +29,18 @@ export const actualizarCarro = (arreglo) => ({
   payload: arreglo
 })
 
+export const saveCart = (carrito, userId) => {
+  var objeto = { carrito: carrito, userId: userId }
+  axios.post('api/cart', objeto)
+}
+
+export const getMyCart = (id) => {
+  axios.get(`/api/cart/${id}`)
+    .then((res) => {
+      console.log(res.data)
+      localStorage.setItem("cart", JSON.stringify(res.data))
+    })
+}
 /* export const addToLocalStorage = producto => dispatch => {
   sessionStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
