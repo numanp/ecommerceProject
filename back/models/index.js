@@ -5,14 +5,18 @@ const User = require('./Users');
 const Review = require('./Reviews');
 const Venta = require('./Ventas');
 const Categoria = require('./Categorias');
+const Carrito = require('./Carrito');
 
 const modelos = {
     Producto,
     User,
     Review,
     Venta,
-    Categoria
+    Categoria,
+    Carrito
 };
+
+Carrito.belongsTo(User);
 
 User.hasMany(Venta, { as: 'Compras' });
 
