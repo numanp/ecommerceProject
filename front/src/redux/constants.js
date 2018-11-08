@@ -18,6 +18,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const SAVE_CART = 'SAVE_CART';
 export const ADD_Q_TO_PRODUCTO = 'ADD_Q_TO_PRODUCTO';
 export const LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
+export const UPDATE_CART = 'UPDATE_CART';
 
 // Productos
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';

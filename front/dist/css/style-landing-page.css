@@ -37,7 +37,6 @@ body{
     position: fixed;
     /* margin-left: -2%; */
     z-index: +1;
-    width: 100%;
     top: 15%;
     /* padding-left: 10% */
 }
@@ -128,6 +127,10 @@ body{
     background: #555;
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
     transition-delay: 0.2s;
+}
+
+.comprar-carrito-btn{
+    margin-left: 7.6vw
 }
 
 #sidebarCollapse span:first-of-type {

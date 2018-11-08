@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch) {
   return {
     logginSuccess: (user) => {
       dispatch(logginSuccess(user))
-    }
+    },
   }
 }
 

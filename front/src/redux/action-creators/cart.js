@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO } from '../constants';
+import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO, UPDATE_CART } from '../constants';
 import store from '../store'
 import axios from 'axios'
 
@@ -24,8 +24,15 @@ export const lessQtoProduct = (productoId) => ({
   payload: productoId
 })
 
-export const addToLocalStorage = producto => dispatch => {
+export const actualizarCarro = (arreglo) => ({
+  type: UPDATE_CART,
+  payload: arreglo
+})
+
+/* export const addToLocalStorage = producto => dispatch => {
   sessionStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
-}
+} */
+
+
 
