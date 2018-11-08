@@ -785,6 +785,7 @@ var LESS_Q_TO_PRODUCTO = exports.LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
 // Productos
 var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 var FETCH_PRODUCTS_USER = exports.FETCH_PRODUCTS_USER = 'FETCH_PRODUCTS_USER';
+var FETCH_SINGLE_PRODUCT_wCATEGORIES = exports.FETCH_SINGLE_PRODUCT_wCATEGORIES = 'FETCH_SINGLE_PRODUCT_wCATEGORIES';
 var FETCH_PRODUCTS_BY_CATEGORY = exports.FETCH_PRODUCTS_BY_CATEGORY = 'FETCH_PRODUCTS_BY_CATEGORY';
 var FETCH_SINGLE_PRODUCT = exports.FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
 var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
@@ -4127,7 +4128,7 @@ module.exports = Cancel;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getSingleProduct = exports.getProducts = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
+exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
 
 var _constants = __webpack_require__(7);
 
@@ -4151,6 +4152,13 @@ var fetchProductsUser = exports.fetchProductsUser = function fetchProductsUser(p
     };
 };
 
+var fetchSingleProductxCategories = exports.fetchSingleProductxCategories = function fetchSingleProductxCategories(producto) {
+    return {
+        type: _constants.FETCH_SINGLE_PRODUCT_wCATEGORIES,
+        producto: producto
+    };
+};
+
 var getProducts = exports.getProducts = function getProducts() {
     return function (dispatch) {
         return _axios2.default.get('/api/productos').then(function (res) {
@@ -4164,6 +4172,21 @@ var getSingleProduct = exports.getSingleProduct = function getSingleProduct(idPr
         return _axios2.default.get('/api/productos/' + idProducto).then(function (res) {
             return dispatch(fetchSingleProduct(res.data));
         });
+    };
+};
+
+var getSingleProduct_wCategories = exports.getSingleProduct_wCategories = function getSingleProduct_wCategories(id) {
+    return function (dispatch) {
+        return _axios2.default.get('/api/productos/productoxcategoria/' + id).then(function (res) {
+            return dispatch(fetchSingleProductxCategories(res.data));
+        });
+    };
+};
+
+var postCategoriesToProducts = exports.postCategoriesToProducts = function postCategoriesToProducts(id, arr) {
+    return function (dispatch) {
+        console.log('----action creator');
+        _axios2.default.post('/api/productos/catAproducto/' + id, arr).then(console.log("TODO SALIO BIEN"));
     };
 };
 
@@ -31655,6 +31678,9 @@ var productsReducer = function productsReducer() {
             return Object.assign({}, state, {
                 product: action.product
             });
+        case _constants.FETCH_SINGLE_PRODUCT_wCATEGORIES:
+            return Object.assign({}, state, { producto_wCategories: action.producto
+            });
         default:
             return state;
     }
@@ -31957,6 +31983,10 @@ var _AdminOrdenes = __webpack_require__(175);
 
 var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
 
+var _AdminAddCategoryToProductContainer = __webpack_require__(176);
+
+var _AdminAddCategoryToProductContainer2 = _interopRequireDefault(_AdminAddCategoryToProductContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31969,7 +31999,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //COMPONENTES
 
 
-// import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 // import AdminProductos from '../components/AdminProductos';
 // import AdminManejarProductos from './AdminManejarProductos';
 // import AdminEditProductContainer from './AdminEditProductContainer';
@@ -32051,7 +32080,8 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkoutContainer/', component: _checkOutContainer2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkoutContainer/', component: _checkOutContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/editCategoriasProducto/:id', component: _AdminAddCategoryToProductContainer2.default })
       );
     }
   }]);
@@ -33023,8 +33053,6 @@ var NavBar = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             // console.log(this.state.logueado)
             return _react2.default.createElement(
                 'nav',
@@ -33063,68 +33091,7 @@ var NavBar = function (_Component) {
                                 'ul',
                                 { className: 'nav navbar-nav navbar-left', key: '1' },
                                 _react2.default.createElement(_SearchBar2.default, null)
-                            ),
-                            this.state.logueado === true ? [_react2.default.createElement(
-                                'ul',
-                                { className: 'nav navbar-nav navbar-right' },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login', onClick: function onClick() {
-                                                return _this2.props.logout();
-                                            } },
-                                        'Logout'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/carrito' },
-                                        'Carrito'
-                                    ),
-                                    ' '
-                                )
-                            )] : [_react2.default.createElement(
-                                'ul',
-                                { className: 'nav navbar-nav navbar-right' },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/signup' },
-                                        'Registrate'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login' },
-                                        'Login'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/carrito' },
-                                        'Carrito'
-                                    ),
-                                    ' '
-                                )
-                            )]
+                            )
                         )
                     )
                 )
@@ -35500,19 +35467,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AdminAddProductContainer = function (_Component) {
-    _inherits(AdminAddProductContainer, _Component);
+var editCategoriasProducto = function (_Component) {
+    _inherits(editCategoriasProducto, _Component);
 
-    function AdminAddProductContainer(props) {
-        _classCallCheck(this, AdminAddProductContainer);
+    function editCategoriasProducto(props) {
+        _classCallCheck(this, editCategoriasProducto);
 
-        var _this = _possibleConstructorReturn(this, (AdminAddProductContainer.__proto__ || Object.getPrototypeOf(AdminAddProductContainer)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (editCategoriasProducto.__proto__ || Object.getPrototypeOf(editCategoriasProducto)).call(this, props));
 
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
-    _createClass(AdminAddProductContainer, [{
+    _createClass(editCategoriasProducto, [{
         key: 'componentDidMount',
         value: function componentDidMount() {}
         //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
@@ -35541,7 +35508,7 @@ var AdminAddProductContainer = function (_Component) {
         }
     }]);
 
-    return AdminAddProductContainer;
+    return editCategoriasProducto;
 }(_react.Component);
 
 function mapStateToProps(state) {
@@ -35550,16 +35517,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addProduct: function addProduct(producto) {
-            dispatch((0, _user.addProduct)(producto));
-        },
         fetchCategorys: function fetchCategorys(categorias) {
             dispatch((0, _user.fetchCategorys)(categorias));
         }
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(editCategoriasProducto);
 
 /***/ }),
 /* 167 */
@@ -36717,6 +36681,243 @@ exports.default = function () {
                 )
             );
         })
+    );
+};
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _AdminAddCategoryToProduct = __webpack_require__(177);
+
+var _AdminAddCategoryToProduct2 = _interopRequireDefault(_AdminAddCategoryToProduct);
+
+var _user = __webpack_require__(9);
+
+var _products = __webpack_require__(52);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminAddCategoryToProductContainer = function (_Component) {
+    _inherits(AdminAddCategoryToProductContainer, _Component);
+
+    function AdminAddCategoryToProductContainer(props) {
+        _classCallCheck(this, AdminAddCategoryToProductContainer);
+
+        var _this = _possibleConstructorReturn(this, (AdminAddCategoryToProductContainer.__proto__ || Object.getPrototypeOf(AdminAddCategoryToProductContainer)).call(this, props));
+
+        _this.state = {
+            arregloCategorias: [],
+            idProducto: 0
+        };
+        _this.handleClick = _this.handleClick.bind(_this);
+        _this.handleAgregarCategorias = _this.handleAgregarCategorias.bind(_this);
+        return _this;
+    }
+
+    _createClass(AdminAddCategoryToProductContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchCategorys();
+            this.props.getSingleProduct_wCategories(this.props.match.params.id);
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            if (nextProps.producto.producto_wCategories !== undefined) {
+                this.state.idProducto = nextProps.producto.producto_wCategories.id;
+            }
+            if (nextProps.producto.producto_wCategories !== undefined) {
+                for (var i = 0; i < nextProps.producto.producto_wCategories.categorias.length; i++) {
+                    if (this.state.arregloCategorias.indexOf(nextProps.producto.producto_wCategories.categorias[i].id) < 0) {
+                        this.state.arregloCategorias.push(nextProps.producto.producto_wCategories.categorias[i].id);
+                    }
+                }
+            }
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(evt) {
+            var categoria = document.querySelector('.botonAgregarCategoria');
+            if (this.state.arregloCategorias.indexOf(parseInt(categoria.value)) < 0) {
+                this.state.arregloCategorias.push(parseInt(categoria.value));
+            }
+        }
+    }, {
+        key: 'handleAgregarCategorias',
+        value: function handleAgregarCategorias() {
+            console.log(this.state.arregloCategorias);
+            this.props.postCategoriesToProducts(this.state.idProducto, this.state.arregloCategorias);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            {
+                this.props.producto ? console.log(this.props.producto) : null;
+            }
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_AdminAddCategoryToProduct2.default, {
+                    listaCategorias: this.props.listaCategorias,
+                    handleClick: this.handleClick,
+                    handleAgregarCategorias: this.handleAgregarCategorias,
+                    arregloCategorias: this.state.arregloCategorias,
+                    producto: this.props.producto.producto_wCategories
+                })
+            );
+        }
+    }]);
+
+    return AdminAddCategoryToProductContainer;
+}(_react.Component);
+
+function mapStateToProps(state) {
+
+    return {
+        listaCategorias: state.userAdmin.listaCategorias,
+        producto: state.products
+
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchCategorys: function fetchCategorys() {
+            dispatch((0, _user.fetchCategorys)());
+        },
+        getSingleProduct_wCategories: function getSingleProduct_wCategories(id) {
+            dispatch((0, _products.getSingleProduct_wCategories)(id));
+        },
+        postCategoriesToProducts: function postCategoriesToProducts(id, arr) {
+            dispatch((0, _products.postCategoriesToProducts)(id, arr));
+        }
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AdminAddCategoryToProductContainer);
+
+
+{
+    /* NO BORRAR POR LAS DUDAS
+    arregloCategorias: nextProps.producto.producto_wCategories.categorias
+      nextProps.producto.producto_wCategories && this.setState({
+    */
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+    var listaCategorias = _ref.listaCategorias,
+        categoriasProducto = _ref.categoriasProducto,
+        handleClick = _ref.handleClick,
+        producto = _ref.producto,
+        handleAgregarCategorias = _ref.handleAgregarCategorias;
+    return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid', id: 'AgregarCatAPrdoucto' },
+        _react2.default.createElement(
+            'div',
+            { className: 'container agregarCatInd' },
+            _react2.default.createElement(
+                'h1',
+                null,
+                _react2.default.createElement(
+                    'b',
+                    null,
+                    ' ',
+                    producto ? producto.nombre : null,
+                    ' '
+                )
+            ),
+            _react2.default.createElement(
+                'h2',
+                null,
+                'Categorias:'
+            ),
+            _react2.default.createElement(
+                'ul',
+                null,
+                producto ? producto.categorias.map(function (categoria) {
+                    return _react2.default.createElement(
+                        'li',
+                        null,
+                        categoria.nombre
+                    );
+                }) : null
+            ),
+            _react2.default.createElement(
+                'h1',
+                null,
+                'Editar Categorias producto 1'
+            ),
+            _react2.default.createElement(
+                'select',
+                { className: 'form-control  botonAgregarCategoria', name: 'AgregarCat', id: '' },
+                listaCategorias.map(function (categoria) {
+                    return _react2.default.createElement(
+                        'option',
+                        { value: categoria.id },
+                        categoria.nombre,
+                        ' '
+                    );
+                })
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+                'button',
+                { className: 'btn btn-primary', onClick: function onClick() {
+                        return handleClick();
+                    } },
+                'Agregar Categorias'
+            ),
+            _react2.default.createElement(
+                'button',
+                { className: 'btn btn-primary ', onClick: function onClick() {
+                        return handleAgregarCategorias();
+                    } },
+                'Confirmar Cambios'
+            )
+        )
     );
 };
 

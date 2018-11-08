@@ -4,6 +4,7 @@ import {
     FETCH_SINGLE_PRODUCT,
     PRODUCT_AMOUNT,
     UPDATE_PRODUCT,
+    FETCH_SINGLE_PRODUCT_wCATEGORIES
     
 } from '../constants';
 
@@ -21,6 +22,10 @@ const productsReducer = (state = {
             return Object.assign({}, state, {
                 product: action.product
             })
+        case FETCH_SINGLE_PRODUCT_wCATEGORIES:
+        return Object.assign({}, state,
+             {producto_wCategories: action.producto
+        })
         default:
             return state
     }
