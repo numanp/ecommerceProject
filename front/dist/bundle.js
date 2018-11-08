@@ -31295,7 +31295,7 @@ var _AdminEditProductContainer = __webpack_require__(173);
 
 var _AdminEditProductContainer2 = _interopRequireDefault(_AdminEditProductContainer);
 
-var _CheckoutContainer = __webpack_require__(178);
+var _CheckoutContainer = __webpack_require__(175);
 
 var _CheckoutContainer2 = _interopRequireDefault(_CheckoutContainer);
 
@@ -35892,153 +35892,7 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 175 */,
-/* 176 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var arregloCompras = [{
-    idVenta: 1,
-    productos: [10, 20, 30],
-    fechaVenta: '10:25PM',
-    status: 'Completado',
-    linkProducto: '#'
-}, {
-    idVenta: 3,
-    productos: [10, 20, 30],
-    fechaVenta: '10:25PM',
-    status: 'incompleto',
-    linkProducto: '#'
-},, {
-    idVenta: 4,
-    productos: [10, 20, 30],
-    fechaVenta: '10:25PM',
-    status: 'incompleto',
-    linkProducto: '#'
-}];
-
-exports.default = function () {
-    return _react2.default.createElement(
-        'div',
-        { className: 'container-fluid', id: '' },
-        _react2.default.createElement(
-            'h1',
-            null,
-            'Manejo de ordenes'
-        ),
-        _react2.default.createElement(
-            'div',
-            { 'class': 'btn-group' },
-            _react2.default.createElement(
-                'button',
-                { type: 'button', 'class': 'btn btn-default dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
-                'Filtrar por Status ',
-                _react2.default.createElement('span', { 'class': 'caret' })
-            ),
-            _react2.default.createElement(
-                'ul',
-                { 'class': 'dropdown-menu' },
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        'a',
-                        { href: '#' },
-                        'CREADO'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        'a',
-                        { href: '#' },
-                        'PROCESADO'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        'a',
-                        { href: '#' },
-                        'CANCELADO'
-                    )
-                ),
-                _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                        'a',
-                        { href: '#' },
-                        'COMPLETADO'
-                    )
-                )
-            )
-        ),
-        //MAPEO POR EL ARREGLO DE COMPRAS
-        arregloCompras.map(function (compra) {
-            return _react2.default.createElement(
-                'div',
-                { className: 'profile_compra', key: compra.idVenta },
-                _react2.default.createElement(
-                    'a',
-                    { href: compra.linkProducto },
-                    _react2.default.createElement('img', { src: 'https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg', alt: '' })
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'INFO DE LA VENTA.'
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'ID VENTA: ',
-                    compra.idVenta
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'Fecha: ',
-                    compra.fechaVenta
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'Status: ',
-                    compra.status
-                ),
-                _react2.default.createElement(
-                    'p',
-                    { 'class': 'profile_celeste' },
-                    'Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)'
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { 'class': 'btn btn-primary' },
-                    'Cambiar el Status'
-                )
-            );
-        })
-    );
-};
-
-/***/ }),
-/* 177 */,
-/* 178 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36263,6 +36117,308 @@ function mapDispatchToProps(dispatch) {
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(11);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { connect } from 'react-redux';
+
+
+var AdminOrdenes = function (_Component) {
+    _inherits(AdminOrdenes, _Component);
+
+    function AdminOrdenes(props) {
+        _classCallCheck(this, AdminOrdenes);
+
+        var _this = _possibleConstructorReturn(this, (AdminOrdenes.__proto__ || Object.getPrototypeOf(AdminOrdenes)).call(this, props));
+
+        _this.toggleOpen = function () {
+            return _this.setState({ isOpen: !_this.state.isOpen });
+        };
+
+        _this.selectedStatus = function (status) {
+            _this.setState({ selectedStatus: status });
+
+            var ordenes = _this.state.ordenes;
+            var estado = _this.state.selectedStatus;
+            var ordenesFiltradas = [];
+
+            for (var i = 0; i < ordenes.length; i++) {
+                if (ordenes[i].status == _this.state.selectedStatus) {
+                    ordenesFiltradas.push(ordenes[i]);
+                }
+            }
+
+            _this.setState({ selectedOrders: ordenesFiltradas });
+
+            console.log('ordenes totales: ', ordenes, ' - estado: ', estado, ' - ordenes filtradas: ', ordenesFiltradas);
+        };
+
+        _this.state = {
+            ordenes: [],
+            isOpen: false,
+            selectedStatus: '',
+            selectedOrders: []
+        };
+        _this.selectedStatus = _this.selectedStatus.bind(_this);
+        return _this;
+    }
+
+    _createClass(AdminOrdenes, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            _axios2.default.get('/api/ventas').then(function (res) {
+                return _this2.setState({ ordenes: res.data });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            var menuClass = 'dropdown-menu' + (this.state.isOpen ? " show" : "");
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'h1-adminOrdenes' },
+                        'Manejo de ordenes'
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'btn-group', onClick: this.toggleOpen },
+                        _react2.default.createElement(
+                            'button',
+                            { type: 'button', className: 'btn btn-default dropdown-toggle', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                            'Filtrar por Status ',
+                            _react2.default.createElement('span', { className: 'caret' })
+                        ),
+                        _react2.default.createElement(
+                            'ul',
+                            { className: menuClass },
+                            _react2.default.createElement(
+                                'li',
+                                { onClick: function onClick() {
+                                        return _this3.selectedStatus('procesando');
+                                    } },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    'procesando'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                { onClick: function onClick() {
+                                        return _this3.selectedStatus('creado');
+                                    } },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    'creado'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                { onClick: function onClick() {
+                                        return _this3.selectedStatus('cancelado');
+                                    } },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    'cancelado'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                { onClick: function onClick() {
+                                        return _this3.selectedStatus('completado');
+                                    } },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    'completado'
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container container-tabla' },
+                    _react2.default.createElement(
+                        'table',
+                        { className: 'table table-hover' },
+                        _react2.default.createElement(
+                            'thead',
+                            { className: 'Head-tabla-orden-admin' },
+                            _react2.default.createElement(
+                                'tr',
+                                null,
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'ID Orden'
+                                ),
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'Status'
+                                ),
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'Fecha'
+                                ),
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'Importe'
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'tbody',
+                            null,
+                            this.state.selectedOrders.length > 0 ? this.state.selectedOrders.map(function (orden) {
+                                return _react2.default.createElement(
+                                    'tr',
+                                    { className: 'profile_orden', key: orden.id },
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.id
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.status
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.fecha
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.importe
+                                    )
+                                );
+                            }) : this.state.ordenes.map(function (orden) {
+                                return _react2.default.createElement(
+                                    'tr',
+                                    { className: 'profile_orden', key: orden.id },
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.id
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.status
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.fecha
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        orden.importe
+                                    )
+                                );
+                            })
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return AdminOrdenes;
+}(_react.Component);
+
+// function mapStateToProps (state) {
+//     return {
+//     }
+// }
+// function mapDispatchToProps (dispatch) {
+//     return {
+//     }
+// }
+
+// export default connect(mapStateToProps,mapDispatchToProps)(AdminOrdenes)
+
+// <table className="table table-striped ">
+//                     { 
+//                         this.state.selectedOrders.length > 0 ? 
+//                         this.state.selectedOrders.map(orden => (
+//                             <tr className="profile_orden"  key={orden.id}>
+//                                 <th>INFO DE LA ORDEN</th>
+//                                 <th>ID Orden: {orden.id}</th>
+//                                 <p>Status: {orden.status}</p>
+//                                 <p>Fecha: {orden.fecha}</p>
+//                                 <p>Import: {orden.importe}</p>    
+//                                 <p>Email: {orden.email}</p> 
+//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
+//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
+//                                 <button className="btn btn-primary">Cambiar el Status</button>
+//                             </tr>
+//                         ))
+//                         :
+//                         this.state.ordenes.map(orden => (
+//                             <div className="profile_orden"  key={orden.id}>
+//                                 <p>INFO DE LA ORDEN</p>
+//                                 <p>ID Orden: {orden.id}</p>
+//                                 <p>Status: {orden.status}</p>
+//                                 <p>Fecha: {orden.fecha}</p>
+//                                 <p>Import: {orden.importe}</p>    
+//                                 <p>Email: {orden.email}</p> 
+//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
+//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
+//                                 <button className="btn btn-primary">Cambiar el Status</button>
+//                             </div>
+//                         ))
+//                     }
+
+//                 </table>
+
+
+exports.default = AdminOrdenes;
 
 /***/ })
 /******/ ]);

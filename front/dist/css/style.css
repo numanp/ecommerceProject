@@ -439,3 +439,26 @@ span.thumbnail {
 /* -------------------------aca termina Review-------------------------------- */
 
 /* -------------------------aca termina ContainerReview-------------------------------- */
+
+
+/* -------------------------aca empieza ADMIN --------------------------------- */
+
+/* -------------------------aca empieza ADMIN-manejo de ordenes --------------------------------- */
+.Head-tabla-orden-admin > tr >th {
+  font-size: 2em;
+}
+.profile_orden > td{
+  font-size: 1.3em
+}
+.h1-adminOrdenes{
+  display: inline;
+  margin-right: 5%;
+}
+.container-tabla{
+  margin-top: 3%
+}
+
+
+/* -------------------------aca empieza ADMIN-manejo de ordenes --------------------------------- */
+
+/* -------------------------aca termina ADMIN --------------------------------- */
