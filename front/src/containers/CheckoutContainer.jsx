@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-class checkOutContainer extends Component {
+class CheckoutContainer extends Component {
     constructor(props) {
         super(props);
     }
@@ -29,9 +29,9 @@ class checkOutContainer extends Component {
                         <div>
                             <h3>Fecha: </h3>
                         </div>
-                        <div class="form-group">
-                            <label for="texto">Direccion de entrega</label>
-                            <input type="texto" class="form-control" id="email" name="direccion" placeholder="Direccion"/>
+                        <div className="form-group">
+                            <label htmlFor="texto">Direccion de entrega</label>
+                            <input type="texto" className="form-control" id="email" name="direccion" placeholder="Direccion"/>
                         </div>
                         <h2>Monto total: </h2>
 
@@ -42,26 +42,26 @@ class checkOutContainer extends Component {
                     <div className='col-md-4 checkoutForm'>
                         <h2>Detalles del pago</h2>
                         <form>
-                        <div class="form-group">
-                            <label for="email">Nombre de tarjeta</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"/>
+                        <div className="form-group">
+                            <label htmlFor="email">Nombre de tarjeta</label>
+                            <input type="email" className="form-control" name="email" placeholder="Email"/>
                         </div>
-                        <div class="form-group">
-                            <label for="tarjeta">Tarjeta</label>
-                            <input type="password" class="form-control" id="tarjeta" placeholder="Password"/>
+                        <div className="form-group">
+                            <label htmlFor="tarjeta">Tarjeta</label>
+                            <input autoComplete="off" type="password" className="form-control"  placeholder="Password"/>
                         </div>
                         <div className="datos">
-                            <div class="form-group">
-                                <label for="tarjeta">Expiration Date</label>
-                                <input type="text" class="form-control checkoutExpiracion" id="tarjeta" placeholder="FECHA EXPIRACION"/>
+                            <div className="form-group">
+                                <label htmlFor="tarjeta">Expiration Date</label>
+                                <input type="text" className="form-control checkoutExpiracion"  placeholder="FECHA EXPIRACION"/>
                             </div>
-                            <div class="form-group cvvcheckout">
-                            <label for="tarjeta">CVV</label>
-                                <input type="text" class="form-control " id="tarjeta" placeholder="FECHA EXPIRACION"/>
+                            <div className="form-group cvvcheckout">
+                            <label htmlFor="tarjeta">CVV</label>
+                                <input type="text" className="form-control "  placeholder="FECHA EXPIRACION"/>
                             </div>
                         </div>
                 
-                        <button type="submit" class="btn btn-success btn-block btn-lg">Realizar Compra</button>
+                        <button type="submit" className="btn btn-success btn-block btn-lg">Realizar Compra</button>
                     
                         </form> 
                     </div>
@@ -88,4 +88,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(checkOutContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);

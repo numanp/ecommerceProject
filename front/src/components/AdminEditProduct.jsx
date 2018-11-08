@@ -11,7 +11,6 @@ export default props => (
       </button>
 
       <h1 />
-      {console.log(props.selectedProd, 'selectedProd')}
       <h1>Editar {props.selectedProd.nombre}</h1>
       <form>
         <div className="form-group">

@@ -31295,9 +31295,9 @@ var _AdminEditProductContainer = __webpack_require__(173);
 
 var _AdminEditProductContainer2 = _interopRequireDefault(_AdminEditProductContainer);
 
-var _ContainerCheckout = __webpack_require__(177);
+var _CheckoutContainer = __webpack_require__(178);
 
-var _ContainerCheckout2 = _interopRequireDefault(_ContainerCheckout);
+var _CheckoutContainer2 = _interopRequireDefault(_CheckoutContainer);
 
 var _AdminOrdenes = __webpack_require__(176);
 
@@ -31397,7 +31397,7 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', component: _ContainerCheckout2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', component: _CheckoutContainer2.default })
       );
     }
   }]);
@@ -35723,7 +35723,6 @@ exports.default = function (props) {
         )
       ),
       _react2.default.createElement('h1', null),
-      console.log(props.selectedProd, 'selectedProd'),
       _react2.default.createElement(
         'h1',
         null,
@@ -36038,7 +36037,8 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 177 */
+/* 177 */,
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36064,16 +36064,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var checkOutContainer = function (_Component) {
-    _inherits(checkOutContainer, _Component);
+var CheckoutContainer = function (_Component) {
+    _inherits(CheckoutContainer, _Component);
 
-    function checkOutContainer(props) {
-        _classCallCheck(this, checkOutContainer);
+    function CheckoutContainer(props) {
+        _classCallCheck(this, CheckoutContainer);
 
-        return _possibleConstructorReturn(this, (checkOutContainer.__proto__ || Object.getPrototypeOf(checkOutContainer)).call(this, props));
+        return _possibleConstructorReturn(this, (CheckoutContainer.__proto__ || Object.getPrototypeOf(CheckoutContainer)).call(this, props));
     }
 
-    _createClass(checkOutContainer, [{
+    _createClass(CheckoutContainer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {}
         //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
@@ -36143,13 +36143,13 @@ var checkOutContainer = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'div',
-                            { 'class': 'form-group' },
+                            { className: 'form-group' },
                             _react2.default.createElement(
                                 'label',
-                                { 'for': 'texto' },
+                                { htmlFor: 'texto' },
                                 'Direccion de entrega'
                             ),
-                            _react2.default.createElement('input', { type: 'texto', 'class': 'form-control', id: 'email', name: 'direccion', placeholder: 'Direccion' })
+                            _react2.default.createElement('input', { type: 'texto', className: 'form-control', id: 'email', name: 'direccion', placeholder: 'Direccion' })
                         ),
                         _react2.default.createElement(
                             'h2',
@@ -36170,51 +36170,51 @@ var checkOutContainer = function (_Component) {
                             null,
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
+                                { className: 'form-group' },
                                 _react2.default.createElement(
                                     'label',
-                                    { 'for': 'email' },
+                                    { htmlFor: 'email' },
                                     'Nombre de tarjeta'
                                 ),
-                                _react2.default.createElement('input', { type: 'email', 'class': 'form-control', id: 'email', name: 'email', placeholder: 'Email' })
+                                _react2.default.createElement('input', { type: 'email', className: 'form-control', name: 'email', placeholder: 'Email' })
                             ),
                             _react2.default.createElement(
                                 'div',
-                                { 'class': 'form-group' },
+                                { className: 'form-group' },
                                 _react2.default.createElement(
                                     'label',
-                                    { 'for': 'tarjeta' },
+                                    { htmlFor: 'tarjeta' },
                                     'Tarjeta'
                                 ),
-                                _react2.default.createElement('input', { type: 'password', 'class': 'form-control', id: 'tarjeta', placeholder: 'Password' })
+                                _react2.default.createElement('input', { autoComplete: 'off', type: 'password', className: 'form-control', placeholder: 'Password' })
                             ),
                             _react2.default.createElement(
                                 'div',
                                 { className: 'datos' },
                                 _react2.default.createElement(
                                     'div',
-                                    { 'class': 'form-group' },
+                                    { className: 'form-group' },
                                     _react2.default.createElement(
                                         'label',
-                                        { 'for': 'tarjeta' },
+                                        { htmlFor: 'tarjeta' },
                                         'Expiration Date'
                                     ),
-                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control checkoutExpiracion', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                    _react2.default.createElement('input', { type: 'text', className: 'form-control checkoutExpiracion', placeholder: 'FECHA EXPIRACION' })
                                 ),
                                 _react2.default.createElement(
                                     'div',
-                                    { 'class': 'form-group cvvcheckout' },
+                                    { className: 'form-group cvvcheckout' },
                                     _react2.default.createElement(
                                         'label',
-                                        { 'for': 'tarjeta' },
+                                        { htmlFor: 'tarjeta' },
                                         'CVV'
                                     ),
-                                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control ', id: 'tarjeta', placeholder: 'FECHA EXPIRACION' })
+                                    _react2.default.createElement('input', { type: 'text', className: 'form-control ', placeholder: 'FECHA EXPIRACION' })
                                 )
                             ),
                             _react2.default.createElement(
                                 'button',
-                                { type: 'submit', 'class': 'btn btn-success btn-block btn-lg' },
+                                { type: 'submit', className: 'btn btn-success btn-block btn-lg' },
                                 'Realizar Compra'
                             )
                         )
@@ -36224,7 +36224,7 @@ var checkOutContainer = function (_Component) {
         }
     }]);
 
-    return checkOutContainer;
+    return CheckoutContainer;
 }(_react.Component);
 
 function mapStateToProps(state) {
@@ -36262,7 +36262,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(checkOutContainer);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CheckoutContainer);
 
 /***/ })
 /******/ ]);
