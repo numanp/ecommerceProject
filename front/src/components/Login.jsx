@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addLoginToLocalStorage } from '../redux/action-creators/user';
+import { getMyCart } from '../redux/action-creators/cart'
 
 function mapStateToProps(state) {
   return {
@@ -21,22 +22,25 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: '',
-    };
-    this.logn = this.logn.bind(this);
+      password: ''
+    }
+    this.logn = this.logn.bind(this)
   }
   componentDidMount() {
-    console.log(this.props.usuario);
   }
   emailChange(e) {
-    this.setState({
-      email: e.target.value,
-    });
+    this.setState(
+      {
+        email: e.target.value
+      }
+    )
   }
   passwordChange(e) {
-    this.setState({
-      password: e.target.value,
-    });
+    this.setState(
+      {
+        password: e.target.value
+      }
+    )
   }
 
   logn(object) {
