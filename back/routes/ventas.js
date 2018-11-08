@@ -1,8 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../models/index').modelos;
+const sgMail = require('@sendgrid/mail'); //PARA EL MAIL
 
 module.exports = router;
+
+router.get('/email', (req,res) =>{
+    console.log("MAIL ENVIANDO?")
+    //NO TOCAR LA KEY ESTA HARCODEADISIMA
+    sgMail.setApiKey('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');
+    var productosComprados = [
+        {
+            producto: 'PelotaFutbol',
+        },
+        {
+            producto: 'Libro'
+        }
+    ]
+    var htmlEnviar = '<p> Has comprado los siguientes productos ';
+    for(var i = 0; i < productosComprados.length; i++){
+        htmlEnviar+= productosComprados[i].producto + ", ";
+    }
+    htmlEnviar+= '</p>'
+    const msg = {
+    to: 'diegofernandezfontana@gmail.com',
+    from: 'diegofernandezfontana@gmail.com',
+    subject: 'Tu compra se ha realizado correctamente',
+    text: 'Compra realizada correctamente',
+    html: `<h1>Felicitaciones tu compra se a realizado con exito</h1>
+            ${htmlEnviar}
+    `,
+    };
+    sgMail.send(msg);
+    res.redirect('/');
+
+})
+
 
 router.get('/', (req, res) => {
   models.Venta.findAll().then(ventas => {

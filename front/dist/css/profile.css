@@ -44,31 +44,177 @@
   min-height: 170px;
 }
 
+#adminListaProductos {
+  background-color: #f5f5f5;
+}
+#adminListaProductos .titleListaProductos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
 #adminListaProductos .container {
   display: flex;
 }
 #adminListaProductos .listaProductos {
-  flex-direction: row;
+  flex-direction: column;
+  min-width: 99%;
+  display: flex;
+  flex: wrap;
 }
 #adminListaProductos .listaProductoIndividual {
+  display: flex;
   flex-direction: row;
-  border: 1px solid grey;
+  align-items: center;
+  background-color: white;
+  min-width: 90%;
+  border: 1px solid #f5f5f5;
+  border-radius: 3px;
+  margin-bottom: 1px;
   font-size: 16px;
   min-width: 400px;
-  padding: 10px;
+  padding: 20px;
+}
+#adminListaProductos .listaProductoIndividual h1, #adminListaProductos .listaProductoIndividual h3, #adminListaProductos .listaProductoIndividual p {
+  display: inline;
+}
+#adminListaProductos .listaProductoIndividual h1 {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+#adminListaProductos .listaProductoIndividual h3, #adminListaProductos .listaProductoIndividual p {
+  color: #666;
+}
+#adminListaProductos .listaProductoIndividual .btn-primary {
+  background-color: white;
+  color: #2e6da4;
+  transition: 0.2s;
+}
+#adminListaProductos .listaProductoIndividual .btn-primary:hover {
+  background-color: #3278b4;
+  color: white;
+  transition: 0.2s;
 }
 
 #AdminAddCategory {
   font-size: 16px;
   color: #666;
 }
+#AdminAddCategory .thumbnail {
+  border: 0px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  padding-left: 0px;
+}
+#AdminAddCategory .thumbnail ul {
+  padding-left: 0px;
+}
+#AdminAddCategory .thumbnail li {
+  background-color: white;
+  list-style: none;
+  min-width: 50px;
+  border: 1px solid #f5f5f5;
+  padding: 20px;
+  font-size: 16px;
+}
+#AdminAddCategory .thumbnail li p {
+  font-weight: bold;
+  display: inline;
+  min-width: 100px;
+}
+#AdminAddCategory .thumbnail button {
+  margin-left: 15px;
+}
+#AdminAddCategory .thumbnail .btn-danger {
+  background-color: white;
+  color: #de5454;
+  transition-duration: 0.2s;
+}
+#AdminAddCategory .thumbnail .btn-danger:hover {
+  background-color: #de5454;
+  color: white;
+  transition-duration: 0.2s;
+}
+#AdminAddCategory form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid #eae6e6;
+}
+#AdminAddCategory form label {
+  margin-right: 10px;
+  font-weight: 100;
+}
+#AdminAddCategory form label input[type=checkbox], #AdminAddCategory form label input[type=radio] {
+  margin-left: 5px;
+}
 
 #AdminEditProduct {
   font-size: 16px;
 }
 
-#AdminAddCategory li {
+#loginFormulario {
+  background-color: #f5f5f5;
+  min-height: 700px;
+}
+#loginFormulario h1 {
+  margin-top: 70px;
+  text-align: center;
+}
+#loginFormulario label {
   font-size: 16px;
+}
+#loginFormulario .loginForm {
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+  border-radius: 5px;
+}
+#loginFormulario .btn {
+  min-height: 50px;
+}
+#loginFormulario .form-group {
+  margin-bottom: 0px;
+}
+
+#checkOutContaier {
+  margin-top: 50px;
+  margin-left: 400px;
+  border-radius: 5px;
+}
+#checkOutContaier .contenedorCheckout {
+  color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+}
+#checkOutContaier .col-md-4 {
+  padding: 0px;
+  font-size: 16px;
+}
+#checkOutContaier .checkOutContaier {
+  border: 1px solid red;
+}
+#checkOutContaier .IMGCHECKOUT {
+  background-image: url("http://ecx.images-amazon.com/images/I/61%2BABMMN5zL._SL1500_.jpg");
+  min-height: 500px;
+  background-size: cover;
+}
+#checkOutContaier .checkoutForm {
+  background-color: #2f2c33;
+  min-height: 500px;
+  padding: 15px;
+}
+#checkOutContaier .checkoutExpiracion {
+  margin-right: 15px;
+}
+#checkOutContaier .cvvcheckout {
+  margin-left: 20px;
+  max-width: 40%;
+}
+#checkOutContaier .datos {
+  display: flex;
+}
+#checkOutContaier .btn-success {
+  margin-top: 50px;
 }
 
 /*# sourceMappingURL=profile.css.map */

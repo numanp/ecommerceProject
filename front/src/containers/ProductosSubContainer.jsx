@@ -14,7 +14,6 @@ function mapDispatchToProps(state) {
 class ProductosSubContainer extends Component {
     constructor(props) {
         super(props);
-
     }
     render() {
         var selectProduct = this.props.selectProduct

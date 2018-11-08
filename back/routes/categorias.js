@@ -7,8 +7,9 @@ module.exports = router;
 router.post('/', (req, res) => {
   models.Categoria.create({
     nombre: req.body.nombre,
-  }).then(() => {
-    res.status(200).send('categoria creada exitosamente');
+  })
+  .then((data) => {
+    res.status(200).send(data);
   });
 });
 
