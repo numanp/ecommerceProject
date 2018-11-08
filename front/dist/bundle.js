@@ -783,6 +783,7 @@ var REMOVE_FROM_CART = exports.REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 var SAVE_CART = exports.SAVE_CART = 'SAVE_CART';
 var ADD_Q_TO_PRODUCTO = exports.ADD_Q_TO_PRODUCTO = 'ADD_Q_TO_PRODUCTO';
 var LESS_Q_TO_PRODUCTO = exports.LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
+var UPDATE_CART = exports.UPDATE_CART = 'UPDATE_CART';
 
 // Productos
 var FETCH_PRODUCTS = exports.FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -4328,7 +4329,7 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addToLocalStorage = exports.lessQtoProduct = exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
+exports.getMyCart = exports.saveCart = exports.actualizarCarro = exports.lessQtoProduct = exports.addQtoProduct = exports.removeFromCart = exports.addToCart = undefined;
 
 var _constants = __webpack_require__(7);
 
@@ -4370,12 +4371,28 @@ var lessQtoProduct = exports.lessQtoProduct = function lessQtoProduct(productoId
   };
 };
 
-var addToLocalStorage = exports.addToLocalStorage = function addToLocalStorage(producto) {
-  return function (dispatch) {
-    sessionStorage.setItem('carrito', JSON.stringify(producto));
-    dispatch(addToCart(producto));
+var actualizarCarro = exports.actualizarCarro = function actualizarCarro(arreglo) {
+  return {
+    type: _constants.UPDATE_CART,
+    payload: arreglo
   };
 };
+
+var saveCart = exports.saveCart = function saveCart(carrito, userId) {
+  var objeto = { carrito: carrito, userId: userId };
+  _axios2.default.post('api/cart', objeto);
+};
+
+var getMyCart = exports.getMyCart = function getMyCart(id) {
+  _axios2.default.get('/api/cart/' + id).then(function (res) {
+    console.log(res.data);
+    localStorage.setItem("cart", JSON.stringify(res.data));
+  });
+};
+/* export const addToLocalStorage = producto => dispatch => {
+  sessionStorage.setItem('carrito', JSON.stringify(producto))
+  dispatch(addToCart(producto))
+} */
 
 /***/ }),
 /* 54 */
@@ -4644,28 +4661,7 @@ exports.default = function (props) {
       "h2",
       null,
       "Opiniones sobre el producto"
-    ),
-    props.addReview && props.addReview.map(function (review) {
-      return _react2.default.createElement(
-        "div",
-        { className: "container" },
-        _react2.default.createElement(
-          "div",
-          { className: "row" },
-          _react2.default.createElement(
-            "div",
-            { className: "col-xs-8 col-sm-8 col-md-8 col-lg-8" },
-            _react2.default.createElement(
-              "p",
-              { className: "opinionProducto", key: review.id },
-              "- ",
-              review,
-              " "
-            )
-          )
-        )
-      );
-    })
+    )
   );
 };
 
@@ -30950,6 +30946,24 @@ var cartReducer = function cartReducer() {
                 }
             }
             if (index == -1) return [].concat(_toConsumableArray(state), [action.payload]);
+        case _constants.REMOVE_FROM_CART:
+            var index = -1;
+            var newArr = [];
+            for (var i = 0; i < state.length; i++) {
+                if (state[i].id == action.payload) {
+                    index = i;
+                }
+            }
+            for (var j = 0; j < state.length; j++) {
+                if (j != index) newArr.push(state[j]);
+            }
+            return state = newArr;
+        /* if (index !== -1) {
+            return state = [
+                ...state.slice(0, index),
+                ...state.slice(index + 1)
+            ]
+        } */
         case _constants.ADD_Q_TO_PRODUCTO:
             var obj = state.find(function (i) {
                 return i.id == action.payload;
@@ -30960,22 +30974,17 @@ var cartReducer = function cartReducer() {
                 return i.id == action.payload;
             }).q--;
             return Object.assign([], state, { cart: obj });
-        case _constants.REMOVE_FROM_CART:
-            var index = -1;
-            for (var i = 0; i < state.length; i++) {
-                if (state[0].id == action.payload) {
-                    index = i;
-                }
-            }
-            if (index !== -1) {
-                return state = [].concat(_toConsumableArray(state.slice(0, index)), _toConsumableArray(state.slice(index + 1)));
-            }
+        case _constants.UPDATE_CART:
+            console.log('entra update cart');
+            if (Array.isArray(action.payload)) state = action.payload;
         default:
             return state;
     }
 };
 
 exports.default = cartReducer;
+
+//ver q si no hace nada retorna el state
 
 /***/ }),
 /* 125 */
@@ -33572,6 +33581,8 @@ var _reactRedux = __webpack_require__(2);
 
 var _user = __webpack_require__(9);
 
+var _cart = __webpack_require__(53);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33612,9 +33623,7 @@ var Login = function (_Component) {
 
   _createClass(Login, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(this.props.usuario);
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'emailChange',
     value: function emailChange(e) {
@@ -33990,6 +33999,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
+var _cart = __webpack_require__(53);
+
+var _reactRouterDom = __webpack_require__(4);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34000,13 +34013,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state, ownProps) {
     return {
-        prods: state.cart
+        cart: state.cart,
+        logged: state.user.logged
     };
 }
 
 function mapDispatchToprops(dispatch, ownProps) {
 
-    return {};
+    return {
+        removeFromCart: function removeFromCart(id) {
+            dispatch((0, _cart.removeFromCart)(id));
+        },
+        addQtoProduct: function addQtoProduct(id) {
+            dispatch((0, _cart.addQtoProduct)(id));
+        },
+        lessQtoProduct: function lessQtoProduct(id) {
+            dispatch((0, _cart.lessQtoProduct)(id));
+        },
+        actualizarCarro: function actualizarCarro(arreglo) {
+            dispatch((0, _cart.actualizarCarro)(arreglo));
+        }
+    };
 }
 
 var CarritoSlider = function (_Component) {
@@ -34016,20 +34043,28 @@ var CarritoSlider = function (_Component) {
         _classCallCheck(this, CarritoSlider);
 
         return _possibleConstructorReturn(this, (CarritoSlider.__proto__ || Object.getPrototypeOf(CarritoSlider)).call(this, props));
+        /* this.updateCart = this.updateCart.bind(this); */
     }
 
     _createClass(CarritoSlider, [{
         key: 'componentDidMount',
         value: function componentDidMount() {}
+        /*  updateCart() {
+             var storage = JSON.parse(localStorage.getItem("cart"));
+             this.cartProducts = storage
+           } */
+
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
                     'div',
-                    { className: 'wrapper-sidebar' },
+                    { className: 'wrapper-sidebar', onClick: function onClick() {/* this.updateCart(); this.forceUpdate() */} },
                     _react2.default.createElement(
                         'nav',
                         { id: 'sidebar-skeree', className: 'active' },
@@ -34049,8 +34084,85 @@ var CarritoSlider = function (_Component) {
                                     { href: '#homeSubmenu', 'data-toggle': 'collapse', className: 'dropdown-toggle' },
                                     'Carrito'
                                 ),
-                                _react2.default.createElement('ul', { className: 'collapse list-unstyled', id: 'homeSubmenu' })
-                            )
+                                _react2.default.createElement(
+                                    'ul',
+                                    { className: 'collapse list-unstyled', id: 'homeSubmenu' },
+                                    this.props.cart && this.props.cart.map(function (product) {
+                                        return _react2.default.createElement(
+                                            'li',
+                                            { key: product.id, className: 'li-sidebarSkeree' },
+                                            _react2.default.createElement(
+                                                'a',
+                                                { className: 'a-carritoSlider', href: '#' },
+                                                product.nombre,
+                                                ' - Cantidad:',
+                                                product.q,
+                                                '-Subtotal:',
+                                                product.precio * product.q
+                                            ),
+                                            _react2.default.createElement(
+                                                'div',
+                                                { className: 'btn-group', role: 'group', 'aria-label': '...' },
+                                                _react2.default.createElement(
+                                                    'button',
+                                                    { type: 'button', className: 'btn btn-warning', onClick: function onClick() {
+                                                            _this2.props.lessQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
+                                                        } },
+                                                    'Restar'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'button',
+                                                    { type: 'button', className: 'btn btn-danger', onClick: function onClick() {
+                                                            _this2.props.removeFromCart(product.id);setTimeout(function () {
+                                                                localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
+                                                            }, 10);console.log('elimina', _this2.props.cart);
+                                                        } },
+                                                    'Eliminar'
+                                                ),
+                                                _react2.default.createElement(
+                                                    'button',
+                                                    { type: 'button', className: 'btn btn-success', onClick: function onClick() {
+                                                            _this2.props.addQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
+                                                        } },
+                                                    'Sumar'
+                                                )
+                                            )
+                                        );
+                                    })
+                                ),
+                                _react2.default.createElement('br', null)
+                            ),
+                            this.props.logged == 'no estas logeado' ? [_react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { key: 1, to: '/login', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                'Loguearte para comprar'
+                            )] : [_react2.default.createElement(
+                                'div',
+                                { key: 2 },
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: '/checkout', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                    'Checkout'
+                                ),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                            (0, _cart.saveCart)(localStorage.getItem('cart'), _this2.props.logged.id);
+                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                    'Guardar carrito'
+                                ),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement(
+                                    'button',
+                                    { onClick: function onClick() {
+                                            (0, _cart.getMyCart)(_this2.props.logged.id);_this2.props.actualizarCarro(JSON.parse(localStorage.getItem('cart')));
+                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                    'Continuar compra guardada'
+                                )
+                            )]
                         )
                     ),
                     _react2.default.createElement(
@@ -34158,6 +34270,9 @@ function mapDispatchToProps(dispatch) {
         },
         lessQtoProduct: function lessQtoProduct(productoId) {
             dispatch((0, _cart.lessQtoProduct)(productoId));
+        },
+        actualizarCarro: function actualizarCarro(arreglo) {
+            dispatch((0, _cart.actualizarCarro)(arreglo));
         }
 
     };
@@ -34315,7 +34430,7 @@ var ProductosSubContainer = function (_Component) {
                                             _react2.default.createElement(
                                                 'button',
                                                 { className: 'glyphicon glyphicon-shopping-cart btn btn-info right', onClick: function onClick(e) {
-                                                        e.preventDefault();var obj = { q: 1, id: product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                        e.preventDefault();var obj = product;obj.q = 1;_this2.props.addToCart(obj);setTimeout(function () {
                                                             localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
                                                         }, 10);
                                                     } },

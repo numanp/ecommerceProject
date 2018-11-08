@@ -14,7 +14,6 @@ router.get('/:userId', (req, res) => {
   models.User.findById(req.params.userId).then(user => res.send(user));
 });
 
-
 router.delete('/:userId', (req, res) => {
   console.log('userBack', req.params.user);
   models.User.destroy({ where: { id: req.params.userId } }).then(() => {
