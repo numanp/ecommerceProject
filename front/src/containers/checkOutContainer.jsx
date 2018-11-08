@@ -14,7 +14,7 @@ class checkOutContainer extends Component {
             <div className="container" id="checkOutContaier">
                 <div className="contenedorCheckout">
                     <div className='col-md-4 IMGCHECKOUT'>
-                    
+                     
                     </div>
                         <div className='col-md-4 checkoutForm'>
                             <h2>Total a pagar: 100</h2>
