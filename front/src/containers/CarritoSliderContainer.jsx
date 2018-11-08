@@ -79,11 +79,16 @@ class CarritoSlider extends Component {
                             {
                                 this.props.logged == 'no estas logeado' ?
                                     [
-                                        <Link to={'/login'} role="button" className="btn btn-success comprar-carrito-btn">Loguearte para comprar</Link>
+                                        <Link key={1} to={'/login'} role="button" className="btn btn-success comprar-carrito-btn">Loguearte para comprar</Link>
 
                                     ] :
                                     [
-                                        <Link to={'/checkout'} role="button" className="btn btn-success comprar-carrito-btn">Checkout</Link>
+                                        <div key={2}>
+                                            <Link to={'/checkout'} role="button" className="btn btn-success comprar-carrito-btn">Checkout</Link>
+                                            <br></br>
+                                            <br></br>
+                                            <button className="btn btn-success comprar-carrito-btn">Guardar carrito</button>
+                                        </div>
                                     ]
                             }
                         </ul>

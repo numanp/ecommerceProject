@@ -41,7 +41,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Main extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       admin: false,
@@ -50,8 +50,8 @@ class Main extends Component {
     this.sign = this.sign.bind(this);
     this.logn = this.logn.bind(this);
   }
-   
-  
+
+
   sign(object) {
     return axios.post('api/user/signup', object);
   }
@@ -80,19 +80,20 @@ class Main extends Component {
         <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> 
-        
-        <Route exact path="/checkout/" component={CheckoutContainer} /> 
-        
+        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
+
+        <Route exact path="/checkout/" component={CheckoutContainer} />
+
         {
           /* 
           <Route exact path="/admin/deleteUser" component={DeleteUser} />
         <Route exact path="/admin/promoveUser" component={PromoveUser} />
       </div>
         */}
-        </div>
+      </div>
     );
-  
-}}
+
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

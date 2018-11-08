@@ -4587,28 +4587,7 @@ exports.default = function (props) {
       "h2",
       null,
       "Opiniones sobre el producto"
-    ),
-    props.addReview && props.addReview.map(function (review) {
-      return _react2.default.createElement(
-        "div",
-        { className: "container" },
-        _react2.default.createElement(
-          "div",
-          { className: "row" },
-          _react2.default.createElement(
-            "div",
-            { className: "col-xs-8 col-sm-8 col-md-8 col-lg-8" },
-            _react2.default.createElement(
-              "p",
-              { className: "opinionProducto", key: review.id },
-              "- ",
-              review,
-              " "
-            )
-          )
-        )
-      );
-    })
+    )
   );
 };
 
@@ -31077,7 +31056,6 @@ var cartReducer = function cartReducer() {
             }).q--;
             return Object.assign([], state, { cart: obj });
         case _constants.UPDATE_CART:
-            console.log('updating cart');
             if (Array.isArray(action.payload)) state = action.payload;
         default:
             return state;
@@ -32352,12 +32330,411 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 148 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (66:1)\n\n\u001b[0m \u001b[90m 64 | \u001b[39m                                \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m.\u001b[39mlogueado \u001b[33m===\u001b[39m \u001b[36mtrue\u001b[39m \u001b[33m?\u001b[39m\n \u001b[90m 65 | \u001b[39m                                    [\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 66 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 67 | \u001b[39m                                        \u001b[33m<\u001b[39m\u001b[33mul\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"nav navbar-nav navbar-right\"\u001b[39m key\u001b[33m=\u001b[39m\u001b[32m\"2\"\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 68 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 69 | \u001b[39m                                        \u001b[33m<\u001b[39m\u001b[33mul\u001b[39m key\u001b[33m=\u001b[39m\u001b[32m\"1\"\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"nav navbar-nav navbar-right\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(5);
+
+var _reactRedux = __webpack_require__(3);
+
+var _SearchBar = __webpack_require__(149);
+
+var _SearchBar2 = _interopRequireDefault(_SearchBar);
+
+var _user = __webpack_require__(9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        logout: function logout() {
+            dispatch((0, _user.removeLoginFromLocalStorage)());
+        }
+    };
+}
+
+var NavBar = function (_Component) {
+    _inherits(NavBar, _Component);
+
+    function NavBar(props) {
+        _classCallCheck(this, NavBar);
+
+        var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+
+        _this.state = {
+            logueado: false
+        };
+        return _this;
+    }
+
+    _createClass(NavBar, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var objeto = sessionStorage.getItem('login');
+            if (!!objeto) {
+                this.setState({
+                    logueado: true
+                });
+            } else {
+                this.setState({
+                    logueado: false
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            // console.log(this.state.logueado)
+            return _react2.default.createElement(
+                'nav',
+                { className: 'navbar navbar-default' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-fluid' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'navbar-header' },
+                            _react2.default.createElement(
+                                'button',
+                                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'sr-only' },
+                                    'Toggle navigation'
+                                ),
+                                _react2.default.createElement('span', { className: 'icon-bar' }),
+                                _react2.default.createElement('span', { className: 'icon-bar' }),
+                                _react2.default.createElement('span', { className: 'icon-bar' })
+                            ),
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/', className: 'navbar-brand' },
+                                _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+                            _react2.default.createElement(
+                                'ul',
+                                { className: 'nav navbar-nav navbar-left' },
+                                _react2.default.createElement(_SearchBar2.default, null)
+                            ),
+                            this.state.logueado === true ? [_react2.default.createElement(
+                                'ul',
+                                { key: '1', className: 'nav navbar-nav navbar-right' },
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login', onClick: function onClick() {
+                                                return _this2.props.logout();
+                                            } },
+                                        'Logout'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/carrito' },
+                                        'Carrito'
+                                    ),
+                                    ' '
+                                )
+                            )] : [_react2.default.createElement(
+                                'ul',
+                                { key: '2', className: 'nav navbar-nav navbar-right' },
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/signup' },
+                                        'Registrate'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login' },
+                                        'Login'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/carrito' },
+                                        'Carrito'
+                                    ),
+                                    ' '
+                                )
+                            )]
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NavBar;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
 
 /***/ }),
-/* 149 */,
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchBar = function (_Component) {
+    _inherits(SearchBar, _Component);
+
+    function SearchBar(props) {
+        _classCallCheck(this, SearchBar);
+
+        var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+
+        _this.state = {};
+
+        return _this;
+    }
+
+    _createClass(SearchBar, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "col-md-12" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "input-group", id: "adv-search" },
+                    _react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "ingresa un snippet" }),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "input-group-btn" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "btn-group", role: "group" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "dropdown dropdown-lg" },
+                                _react2.default.createElement(
+                                    "button",
+                                    { type: "button", className: "btn btn-default dropdown-toggle", "data-toggle": "dropdown", "aria-expanded": "false" },
+                                    _react2.default.createElement("span", { className: "caret" })
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "dropdown-menu dropdown-menu-right", role: "menu" },
+                                    _react2.default.createElement(
+                                        "form",
+                                        { className: "form-horizontal", role: "form" },
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "form-group" },
+                                            _react2.default.createElement(
+                                                "label",
+                                                { htmlFor: "filter" },
+                                                "Filtralo por:"
+                                            ),
+                                            _react2.default.createElement(
+                                                "select",
+                                                { className: "form-control" },
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "0", defaultValue: true },
+                                                    "todos los Snippets"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "1" },
+                                                    "CategoriaTuVieja"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "2" },
+                                                    "CategoriaLancelot"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "option",
+                                                    { value: "3" },
+                                                    "CategoriaElBolson"
+                                                )
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "form-group" },
+                                            _react2.default.createElement(
+                                                "label",
+                                                { htmlFor: "contain" },
+                                                "busca"
+                                            ),
+                                            _react2.default.createElement("input", { className: "form-control", type: "text" })
+                                        ),
+                                        _react2.default.createElement(
+                                            "button",
+                                            { type: "submit", className: "btn btn-primary" },
+                                            _react2.default.createElement("span", { className: "glyphicon glyphicon-search", "aria-hidden": "true" })
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "button",
+                                { type: "button", className: "btn btn-primary" },
+                                _react2.default.createElement("span", { className: "glyphicon glyphicon-search", "aria-hidden": "true" })
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return SearchBar;
+}(_react.Component);
+
+//</div>
+
+
+//este es el que meti en la pagina
+
+exports.default = SearchBar;
+{} /* <div className="col-md-12">
+   <div className="input-group" id="adv-search">
+      <input type="text" className="form-control" placeholder="ingresa un snippet" />
+      <div className="input-group-btn">
+          <div className="btn-group" role="group">
+              <div className="dropdown dropdown-lg">
+                  <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span className="caret"></span></button>
+                  <div className="dropdown-menu dropdown-menu-right" role="menu">
+                      <form className="form-horizontal" role="form">
+                      <div className="form-group">
+                          <label htmlFor="filter">Filtralo por:</label>
+                          <select className="form-control">
+                              <option value="0" defaultValue>todos los Snippets</option>
+                              <option value="1">CategoriaTuVieja</option>
+                              <option value="2">CategoriaLancelot</option>
+                              <option value="3">CategoriaElBolson</option>
+                          </select>
+                      </div>
+                      <div className="form-group">
+                          <label For="contain">busca</label>
+                          <input className="form-control" type="text" />
+                      </div>
+                      <button type="submit" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      </form>
+                  </div>
+              </div>
+              <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </div>
+      </div>
+   </div>
+   </div> */
+
+//este es el original
+
+{/* <div class="col-md-12">
+               <div class="input-group" id="adv-search">
+                   <input type="text" class="form-control" placeholder="Search for snippets" />
+                   <div class="input-group-btn">
+                       <div class="btn-group" role="group">
+                           <div class="dropdown dropdown-lg">
+                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                               <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                   <form class="form-horizontal" role="form">
+                                     <div class="form-group">
+                                       <label for="filter">Filter by</label>
+                                       <select class="form-control">
+                                           <option value="0" selected>All Snippets</option>
+                                           <option value="1">Featured</option>
+                                           <option value="2">Most popular</option>
+                                           <option value="3">Top rated</option>
+                                           <option value="4">Most commented</option>
+                                       </select>
+                                     </div>
+                                     <div class="form-group">
+                                       <label for="contain">Author</label>
+                                       <input class="form-control" type="text" />
+                                     </div>
+                                     <div class="form-group">
+                                       <label for="contain">Contains the words</label>
+                                       <input class="form-control" type="text" />
+                                     </div>
+                                     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                   </form>
+                               </div>
+                           </div>
+                           <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                       </div>
+                   </div>
+               </div>
+             </div>
+           </div> */}
+
+/***/ }),
 /* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33215,9 +33592,174 @@ exports.default = function (productos) {
 
 /***/ }),
 /* 155 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (20:0)\n\n\u001b[0m \u001b[90m 18 | \u001b[39m\n \u001b[90m 19 | \u001b[39m\u001b[36mclass\u001b[39m \u001b[33mLogin\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mComponent\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 20 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 21 | \u001b[39m    constructor(props) {\n \u001b[90m 22 | \u001b[39m        \u001b[36msuper\u001b[39m(props)\u001b[33m;\u001b[39m\n \u001b[90m 23 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate \u001b[33m=\u001b[39m {\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(3);
+
+var _user = __webpack_require__(9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.loggedIn
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: function login(user) {
+      dispatch((0, _user.addLoginToLocalStorage)(user));
+    }
+  };
+}
+
+var Login = function (_Component) {
+  _inherits(Login, _Component);
+
+  function Login(props) {
+    _classCallCheck(this, Login);
+
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+    _this.state = {
+      email: '',
+      password: ''
+    };
+    _this.logn = _this.logn.bind(_this);
+    return _this;
+  }
+
+  _createClass(Login, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'emailChange',
+    value: function emailChange(e) {
+      this.setState({
+        email: e.target.value
+      });
+    }
+  }, {
+    key: 'passwordChange',
+    value: function passwordChange(e) {
+      this.setState({
+        password: e.target.value
+      });
+    }
+  }, {
+    key: 'logn',
+    value: function logn(object) {
+      this.props.logginSuccess(object);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid', id: 'loginFormulario' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-4 col-md-offset-4' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Sign In'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'loginForm' },
+              _react2.default.createElement(
+                'form',
+                {
+                  onSubmit: function onSubmit(e) {
+                    e.preventDefault();
+                    _this2.props.login(_this2.state);
+                  }
+                },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'email' },
+                    'Email address'
+                  ),
+                  _react2.default.createElement('input', {
+                    onChange: function onChange(e) {
+                      return _this2.emailChange(e);
+                    },
+                    type: 'text',
+                    name: 'email',
+                    placeholder: 'Email',
+                    className: 'form-control'
+                  }),
+                  _react2.default.createElement('br', null),
+                  _react2.default.createElement('br', null)
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'email' },
+                    'Password'
+                  ),
+                  _react2.default.createElement('input', {
+                    onChange: function onChange(e) {
+                      return _this2.passwordChange(e);
+                    },
+                    type: 'text',
+                    name: 'password',
+                    placeholder: 'Password',
+                    className: 'form-control'
+                  }),
+                  _react2.default.createElement('br', null),
+                  _react2.default.createElement('br', null)
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { className: 'btn btn-primary btn-block', type: 'submit' },
+                  'Login'
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('br', null)
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Login;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 156 */
@@ -33622,12 +34164,23 @@ var CarritoSlider = function (_Component) {
                             ),
                             this.props.logged == 'no estas logeado' ? [_react2.default.createElement(
                                 _reactRouterDom.Link,
-                                { to: '/login', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                { key: 1, to: '/login', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
                                 'Loguearte para comprar'
                             )] : [_react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/checkout', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
-                                'Checkout'
+                                'div',
+                                { key: 2 },
+                                _react2.default.createElement(
+                                    _reactRouterDom.Link,
+                                    { to: '/checkout', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                    'Checkout'
+                                ),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement(
+                                    'button',
+                                    { className: 'btn btn-success comprar-carrito-btn' },
+                                    'Guardar carrito'
+                                )
                             )]
                         )
                     ),

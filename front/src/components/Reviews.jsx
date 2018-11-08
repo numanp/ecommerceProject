@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function(props) {
+export default function (props) {
   return (
     <div className="reviews cajaopinionproducto">
       <h2>Opiniones sobre el producto</h2>
-      {
+      {/*   {
         props.addReview && props.addReview.map(review =>{
           return(
             <div className="container">
@@ -16,7 +16,7 @@ export default function(props) {
             </div>
           )
         })
-      }
+      } */}
     </div>
   );
 }
