@@ -15,13 +15,16 @@ import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
+import AdminAddCategoryContainer from '../containers/AdminAddCategoryContainer';
+import AdminManejarProductos from '../containers/AdminManejarProductos';
+import AdminEditProductContainer from '../containers/AdminEditProductContainer';
+import checkOutContainer from '../containers/checkOutContainer';
+import AdminOrdenes from '../components/AdminOrdenes';
 import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 import AdminProductos from '../components/AdminProductos';
 import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
-import AdminUsersContainer from './AdminUsersContainer';
-import AdminOrdenes from '../components/AdminOrdenes';
-// import EditCategoriaDeProducto from './EditCategoriaDeProducto'; 
+import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
 function mapStateToProps(state) {
   return {
@@ -78,8 +81,15 @@ class Main extends Component {
         <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} /> 
-        <Route exact path="/admin/users/" component={AdminUsersContainer} />
-       
+        
+        <Route exact path="/checkoutContainer/" component={checkOutContainer} /> 
+        
+        {
+          /* 
+          <Route exact path="/admin/deleteUser" component={DeleteUser} />
+        <Route exact path="/admin/promoveUser" component={PromoveUser} />
+      </div>
+        */}
         </div>
     );
   
