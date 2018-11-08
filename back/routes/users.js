@@ -6,13 +6,14 @@ router.get('/', (req, res) => {
   models.User.findAll().then(users => res.send(users));
 });
 
+router.get('/me', (req, res) => {
+  res.send(req.user || 'no estas logeado');
+});
+
 router.get('/:userId', (req, res) => {
   models.User.findById(req.params.userId).then(user => res.send(user));
 });
 
-router.get('/me', (req, res) => {
-  res.send(req.user || 'no estas logeado');
-});
 
 router.delete('/:userId', (req, res) => {
   console.log('userBack', req.params.user);
