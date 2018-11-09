@@ -20,33 +20,30 @@ export default props => (
       <form onSubmit={props.handleSubmit}>
         <div className="form-group">
           <label htmlFor="nombreProducto">Nombre Producto</label>
-          <input
-            name="nombreProducto"
-            type="text"
-            className="form-control"
-            placeholder="Nombre Porducto"
-          />
+          <input name="nombreProducto" type="text" className="form-control"  placeholder="Nombre Porducto" />
         </div>
         <div className="form-group">
           <label htmlFor="precioProducto">Precio</label>
-          <input
-            name="precioProducto"
-            type="text"
-            className="form-control"
-            placeholder="Precio"
+          <input name="precioProducto" type="text" className="form-control"  placeholder="Precio"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imgProducto">
-            Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , )
-            APLICAR SPLIT
+          <label htmlFor="imgProducto1">
+            Image 1
           </label>
-          <input
-            name="imgProducto"
-            type="text"
-            className="form-control"
-            placeholder="Separar imagenes por ,"
-          />
+          <input name="imgProducto1" type="text" className="form-control" placeholder="Separar "/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imgProducto2">
+            Image 2
+          </label>
+          <input name="imgProducto2" type="text" className="form-control" placeholder="Separar "/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imgProducto3">
+            Image 3
+          </label>
+          <input name="imgProducto3" type="text" className="form-control" placeholder="Separar "/>
         </div>
 
         <div className="form-group">

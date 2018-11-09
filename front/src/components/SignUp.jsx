@@ -103,7 +103,7 @@ class SignUp extends Component {
                   <label htmlFor="nombre">Password</label>
                   <input
                     onChange={e => this.passwordChange(e)}
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Password"
                     className="form-control"

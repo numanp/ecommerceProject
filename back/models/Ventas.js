@@ -20,8 +20,8 @@ const Ventas = db.define('ventas', {
             isEmail: true,
         },
     },
-    productoXcantidad: {
-        type: Sequelize.JSON, //AGREGAR PRODUCTO Y CANTIDAD DE CADA PRODUCTO
+    carro: {
+        type: Sequelize.TEXT('long')
     }
 });
 

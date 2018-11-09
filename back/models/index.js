@@ -20,7 +20,8 @@ const modelos = {
 
 User.hasOne(Carrito, { as: 'carro' });
 
-User.hasMany(Venta, { as: 'Compras' });
+User.hasMany(Venta, { as: 'compra' });
+Venta.belongsTo(User);
 
 User.hasMany(Producto, { as: 'publicaciones' });
 

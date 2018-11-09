@@ -21,6 +21,7 @@ export const SAVE_CART = 'SAVE_CART';
 export const ADD_Q_TO_PRODUCTO = 'ADD_Q_TO_PRODUCTO';
 export const LESS_Q_TO_PRODUCTO = 'LESS_Q_TO_PRODUCTO';
 export const UPDATE_CART = 'UPDATE_CART';
+export const EMPTY_CART = 'EMPTY_CART';
 
 // Productos
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -31,6 +32,7 @@ export const FETCH_SINGLE_PRODUCT = 'FETCH_SINGLE_PRODUCT';
 export const PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const FETCH_PRODUCTS_BY_NAME = 'FETCH_PRODUCTS_BY_NAME';
 
 // User admin
 export const ADD_CATEGORY = 'ADD_CATEGORY';

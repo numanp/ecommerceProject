@@ -5,8 +5,8 @@ import { getMyCart } from '../redux/action-creators/cart'
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.loggedIn,
-  };
+    loggedIn: state.user.logged
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -76,7 +76,7 @@ class Login extends Component {
                   <label htmlFor="email">Password</label>
                   <input
                     onChange={e => this.passwordChange(e)}
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Password"
                     className="form-control"
