@@ -79,7 +79,6 @@ class Main extends Component {
         <Route exact path="/checkout/" render={(props) => <CheckoutContainer {...props} />} />
         <Route exact path="/admin/users/" component={AdminUsersContainer} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
-        <Route exact path="/checkout/" render={(props) => <CheckoutContainer {...props} />} />
         <Route exact path="/admin/editCategoriasProducto/:id" component={AdminAddCategoryToProductContainer} />
       </div>
     );

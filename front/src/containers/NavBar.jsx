@@ -28,19 +28,42 @@ class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      logueado: false
-    }
+      nombreProducto: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
   }
   componentDidMount() {
-    var objeto = sessionStorage.getItem('login')
+    // console.log(this.state, 'estado interno navbar');
+    var objeto = sessionStorage.getItem('login');
     if (!!objeto) {
       this.setState({
-        logueado: true
-      })
+        logueado: true,
+      });
     } else {
       this.setState({
-        logueado: false
-      })
+        logueado: false,
+      });
+    }
+  }
+
+  handleChange(evt) {
+    const value = evt.target.value;
+    this.setState({
+      nombreProducto: value,
+    });
+    console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+  }
+
+  handleOnClick() {
+    this.props.getProductsByName(this.state.nombreProducto);
+    this.props.history.push('/productos');
+  }
+
+  handelOnKeyPress(event) {
+    if (event.key == 'Enter') {
+      this.handleOnClick();
     }
   }
 
@@ -64,7 +87,7 @@ class NavBar extends Component {
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul key="1" className="nav navbar-nav navbar-left" key="1">
-                <SearchBar />
+                <SearchBar handleChange={this.handleChange} handleOnClick={this.handleOnClick} handelOnKeyPress={this.handelOnKeyPress} />
               </ul>
               {
                 this.state.logueado === true ?

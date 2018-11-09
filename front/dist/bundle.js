@@ -31654,9 +31654,6 @@ var Main = function (_Component) {
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/users/', component: _AdminUsersContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', render: function render(props) {
-            return _react2.default.createElement(_CheckoutContainer2.default, props);
-          } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/editCategoriasProducto/:id', component: _AdminAddCategoryToProductContainer2.default })
       );
     }
@@ -32616,14 +32613,18 @@ var NavBar = function (_Component) {
     var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
 
     _this.state = {
-      logueado: false
+      nombreProducto: ''
     };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleOnClick = _this.handleOnClick.bind(_this);
+    _this.handelOnKeyPress = _this.handelOnKeyPress.bind(_this);
     return _this;
   }
 
   _createClass(NavBar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      // console.log(this.state, 'estado interno navbar');
       var objeto = sessionStorage.getItem('login');
       if (!!objeto) {
         this.setState({
@@ -32633,6 +32634,28 @@ var NavBar = function (_Component) {
         this.setState({
           logueado: false
         });
+      }
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(evt) {
+      var value = evt.target.value;
+      this.setState({
+        nombreProducto: value
+      });
+      console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+    }
+  }, {
+    key: 'handleOnClick',
+    value: function handleOnClick() {
+      this.props.getProductsByName(this.state.nombreProducto);
+      this.props.history.push('/productos');
+    }
+  }, {
+    key: 'handelOnKeyPress',
+    value: function handelOnKeyPress(event) {
+      if (event.key == 'Enter') {
+        this.handleOnClick();
       }
     }
   }, {
@@ -32677,7 +32700,7 @@ var NavBar = function (_Component) {
               _react2.default.createElement(
                 'ul',
                 _defineProperty({ key: '1', className: 'nav navbar-nav navbar-left' }, 'key', '1'),
-                _react2.default.createElement(_SearchBar2.default, null)
+                _react2.default.createElement(_SearchBar2.default, { handleChange: this.handleChange, handleOnClick: this.handleOnClick, handelOnKeyPress: this.handelOnKeyPress })
               ),
               this.state.logueado === true ? [_react2.default.createElement(
                 'ul',
@@ -32804,7 +32827,10 @@ var SearchBar = function (_Component) {
             type: "text",
             className: "form-control",
             placeholder: "Enter product name",
-            onChange: this.props.handleChange
+            onChange: this.props.handleChange,
+            onKeyPress: function onKeyPress(event) {
+              return _this2.props.handelOnKeyPress(event);
+            }
           }),
           _react2.default.createElement(
             "div",
@@ -32909,86 +32935,7 @@ var SearchBar = function (_Component) {
   return SearchBar;
 }(_react.Component);
 
-//</div>
-
-//este es el que meti en la pagina
-
 exports.default = SearchBar;
-{}
-/* <div className="col-md-12">
-<div className="input-group" id="adv-search">
-  <input type="text" className="form-control" placeholder="ingresa un snippet" />
-  <div className="input-group-btn">
-      <div className="btn-group" role="group">
-          <div className="dropdown dropdown-lg">
-              <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span className="caret"></span></button>
-              <div className="dropdown-menu dropdown-menu-right" role="menu">
-                  <form className="form-horizontal" role="form">
-                  <div className="form-group">
-                      <label htmlFor="filter">Filtralo por:</label>
-                      <select className="form-control">
-                          <option value="0" defaultValue>todos los Snippets</option>
-                          <option value="1">CategoriaTuVieja</option>
-                          <option value="2">CategoriaLancelot</option>
-                          <option value="3">CategoriaElBolson</option>
-                      </select>
-                  </div>
-                  <div className="form-group">
-                      <label For="contain">busca</label>
-                      <input className="form-control" type="text" />
-                  </div>
-                  <button type="submit" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                  </form>
-              </div>
-          </div>
-          <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-      </div>
-  </div>
-</div>
-</div> */
-
-
-//este es el original
-
-{
-  /* <div class="col-md-12">
-            <div class="input-group" id="adv-search">
-                <input type="text" class="form-control" placeholder="Search for snippets" />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Filter by</label>
-                                    <select class="form-control">
-                                        <option value="0" selected>All Snippets</option>
-                                        <option value="1">Featured</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">Top rated</option>
-                                        <option value="4">Most commented</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Author</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Contains the words</label>
-                                    <input class="form-control" type="text" />
-                                  </div>
-                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </form>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div> */
-}
 
 /***/ }),
 /* 152 */
