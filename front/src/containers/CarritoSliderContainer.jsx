@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeFromCart, addQtoProduct, lessQtoProduct } from '../redux/action-creators/cart'
-import { actualizarCarro, saveCart, getMyCart } from '../redux/action-creators/cart'
+import { actualizarCarro, saveCart, getMyCart, emptyCart } from '../redux/action-creators/cart'
 import { Link } from 'react-router-dom';
+
 
 
 
@@ -27,7 +28,8 @@ function mapDispatchToprops(dispatch, ownProps) {
         },
         actualizarCarro: (arreglo) => {
             dispatch(actualizarCarro(arreglo))
-        }
+        },
+
     }
 }
 

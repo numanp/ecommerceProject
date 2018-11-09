@@ -48,6 +48,9 @@ router.post('/', (req, res) => {
     precio: req.body.precio,
     foto: req.body.foto,
     stock: req.body.stock,
+    imagenSingle1: req.body.imagenSingle1,
+    imagenSingle2: req.body.imagenSingle2,
+    imagenSingle3: req.body.imagenSingle3
   }).then(producto => {
     res.status(200).send(producto);
   });

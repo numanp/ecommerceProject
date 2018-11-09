@@ -21,6 +21,15 @@ const Producto = db.define('producto', {
     stock: {
         type: Sequelize.INTEGER,
     },
+    imagenSingle1: {
+        type: Sequelize.TEXT
+    },
+    imagenSingle2: {
+        type: Sequelize.TEXT
+    },
+    imagenSingle3: {
+        type: Sequelize.TEXT
+    }
 });
 
 module.exports = Producto;

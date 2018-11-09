@@ -74,7 +74,6 @@ class Main extends Component {
         <Route exact path="/signup" render={() => <SignUp sign={this.sign} />} />
         <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
-
         <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
         <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
@@ -82,7 +81,7 @@ class Main extends Component {
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
 
-        <Route exact path="/checkout/" component={CheckoutContainer} />
+        <Route exact path="/checkout/" render={(props) => <CheckoutContainer {...props} />} />
 
         {
           /* 
