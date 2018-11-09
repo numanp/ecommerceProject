@@ -1053,9 +1053,13 @@ var Fetch_Products = exports.Fetch_Products = function Fetch_Products(data) {
 // //   user,
 // // });
 
-// const Fetch_categorys = data => ({
-//   type: FETCH_CATEGORYS,
-//   data,
+var get_categorys = function get_categorys(data) {
+  return {
+    type: _constants.FETCH_CATEGORYS,
+    data: data
+  };
+};
+
 var addCategory = exports.addCategory = function addCategory(category) {
   return {
     type: _constants.ADD_CATEGORY,
@@ -1250,7 +1254,7 @@ var fetchCategorys = exports.fetchCategorys = function fetchCategorys() {
     return _axios2.default.get('/api/categorias').then(function (res) {
       return res.data;
     }).then(function (data) {
-      return dispatch(Fetch_categorys(data));
+      return dispatch(get_categorys(data));
     });
   };
 };
@@ -1460,7 +1464,7 @@ var createPath = function createPath(location) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
+exports.fetchProductsByCategory = exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
 
 var _constants = __webpack_require__(6);
 
@@ -1551,6 +1555,14 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
         type: _constants.DELETE_PRODUCT,
         productId: productId
       });
+    });
+  };
+};
+
+var fetchProductsByCategory = exports.fetchProductsByCategory = function fetchProductsByCategory(categoryId) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/productos/todoDeUnaCategoria/' + categoryId).then(function (productos) {
+      fetchProductsUser(productos);
     });
   };
 };
@@ -32589,7 +32601,8 @@ function mapStateToProps(state, ownProps) {
   //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
-    history: ownProps.history
+    history: ownProps.history,
+    categorias: state.userAdmin.listaCategorias
   };
 }
 
@@ -32600,6 +32613,12 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     getProductsByName: function getProductsByName(nombre) {
       dispatch((0, _products.getProductsByName)(nombre));
+    },
+    fetchCategorys: function fetchCategorys() {
+      dispatch((0, _user.fetchCategorys)());
+    },
+    fetchProductsByCategory: function fetchProductsByCategory(id) {
+      dispatch((0, _products.fetchProductsByCategory)(id));
     }
   };
 }
@@ -32624,7 +32643,9 @@ var NavBar = function (_Component) {
   _createClass(NavBar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      // console.log(this.state, 'estado interno navbar');
+      var _this2 = this;
+
+      this.props.fetchCategorys();
       var objeto = sessionStorage.getItem('login');
       if (!!objeto) {
         this.setState({
@@ -32635,6 +32656,9 @@ var NavBar = function (_Component) {
           logueado: false
         });
       }
+      setTimeout(function () {
+        console.log(_this2.props.categorias);
+      }, 10);
     }
   }, {
     key: 'handleChange',
@@ -32661,7 +32685,7 @@ var NavBar = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       // console.log(this.state.logueado)
       return _react2.default.createElement(
@@ -32696,6 +32720,31 @@ var NavBar = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
+              { className: 'dropdown' },
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-default dropdown-toggle', type: 'button', id: 'dropdownMenu1', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'true' },
+                'Categorias',
+                _react2.default.createElement('span', { className: 'caret' })
+              ),
+              _react2.default.createElement(
+                'ul',
+                { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenu1' },
+                this.props.categorias.map(function (categoria) {
+                  return _react2.default.createElement(
+                    'li',
+                    { onClick: function onClick() {
+                        _this3.props.fetchProductsByCategory(categoria.id);
+                      } },
+                    ' ',
+                    categoria.nombre,
+                    ' '
+                  );
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
               { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
               _react2.default.createElement(
                 'ul',
@@ -32712,7 +32761,7 @@ var NavBar = function (_Component) {
                   _react2.default.createElement(
                     _reactRouterDom.Link,
                     { to: '/login', onClick: function onClick() {
-                        return _this2.props.logout();
+                        return _this3.props.logout();
                       } },
                     'Logout'
                   )
