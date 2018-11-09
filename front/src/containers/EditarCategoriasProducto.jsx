@@ -4,7 +4,7 @@ import AdminAddProduct from '../components/AdminAddProduct'
 import { connect } from 'react-redux';
 import { addProduct, fetchCategorys } from '../redux/action-creators/user'
 
-class EditCategoriasProducto extends Component {
+class editCategoriasProducto extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,4 +47,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditCategoriasProducto);
+export default connect(mapStateToProps, mapDispatchToProps)(editCategoriasProducto);
