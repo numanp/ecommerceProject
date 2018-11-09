@@ -20,6 +20,7 @@ import AdminManejarProductos from '../containers/AdminManejarProductos';
 import AdminEditProductContainer from '../containers/AdminEditProductContainer';
 import checkOutContainer from '../containers/CheckoutContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
+import EditarCategoriasProducto from './EditarCategoriasProducto';
  import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
 // import AdminProductos from '../components/AdminProductos';
 // import AdminManejarProductos from './AdminManejarProductos';
