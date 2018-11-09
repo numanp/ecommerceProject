@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .profile_compra {
   border: 1px solid #d1d1d1;
   padding: 20px;
@@ -261,7 +260,6 @@
 }
 
 /*# sourceMappingURL=style.css.map */
-=======
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -703,4 +701,27 @@ span.thumbnail {
 /* -------------------------aca termina Review-------------------------------- */
 
 /* -------------------------aca termina ContainerReview-------------------------------- */
->>>>>>> 595ef3950aa7b784c06a284268203182c64c64ff
+
+
+/* -------------------------aca empieza ADMIN --------------------------------- */
+
+/* -------------------------aca empieza ADMIN-manejo de ordenes --------------------------------- */
+.Head-tabla-orden-admin > tr >th {
+  font-size: 2em;
+}
+.profile_orden > td{
+  font-size: 1.3em
+}
+.h1-adminOrdenes{
+  display: inline;
+  margin-right: 5%;
+}
+.container-tabla{
+  margin-top: 3%
+}
+
+
+/* -------------------------aca empieza ADMIN-manejo de ordenes --------------------------------- */
+
+/* -------------------------aca termina ADMIN --------------------------------- */
+
