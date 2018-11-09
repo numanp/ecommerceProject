@@ -57,19 +57,19 @@ class NavBar extends Component {
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul className="nav navbar-nav navbar-left">
+                            <ul key="1" className="nav navbar-nav navbar-left" key="1">
                                 <SearchBar />
                             </ul>
                             {
                                 this.state.logueado === true ?
                                     [
-                                        <ul key="1" className="nav navbar-nav navbar-right">
+                                        <ul key="2" className="nav navbar-nav navbar-right">
                                             <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
                                             <li> <Link to="/carrito">Carrito</Link> </li>
                                         </ul>
                                     ] :
                                     [
-                                        <ul key="2" className="nav navbar-nav navbar-right">
+                                        <ul key="3" className="nav navbar-nav navbar-right">
                                             <li> <Link to="/signup">Registrate</Link></li>
                                             <li> <Link to="/login">Login</Link></li>
                                             <li> <Link to="/carrito">Carrito</Link> </li>

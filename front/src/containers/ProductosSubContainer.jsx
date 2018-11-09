@@ -12,6 +12,7 @@ function mapDispatchToProps(state) {
 }
 
 class ProductosSubContainer extends Component {
+
     constructor(props) {
         super(props);
     }
@@ -42,7 +43,7 @@ class ProductosSubContainer extends Component {
                                             </div>
                                             <div className="col-md-6 col-sm-6">
                                                 <a href="" target="_blank" ><button className="glyphicon glyphicon-shopping-cart btn btn-info right" onClick={(e) => { e.preventDefault(); var obj = product; obj.q = 1; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }} > </button></a>
-                                                <Link to={`/productos/singleProduct`} className="glyphicon glyphicon-zoom-in btn btn-info right" role="button" onClick={() => selectProduct(product.id)}></Link>
+                                                <Link to={`/productos/${product.id}`} className="glyphicon glyphicon-zoom-in btn btn-info right" role="button"></Link>
                                             </div>
                                         </div>
                                     </span>
