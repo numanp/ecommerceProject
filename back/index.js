@@ -46,7 +46,7 @@ passport.use(
     },
   ),
 );
-db.sync({ force: true }).then(function () {
+db.sync({ force: false }).then(function () {
   app.listen('3001', function () {
     console.log('listening at 3001');
   });

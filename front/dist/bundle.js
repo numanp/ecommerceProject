@@ -36286,7 +36286,8 @@ var AdminOrdenes = function (_Component) {
         _this.selectedStatus = function (status) {
             if (status === 'todos') {
                 _this.setState({
-                    selectedOrders: _this.state.ordenes
+                    selectedOrders: _this.state.ordenes,
+                    selectedOrderToEdit: []
                 });
                 return;
             }
@@ -36306,6 +36307,7 @@ var AdminOrdenes = function (_Component) {
             selectedOrders: []
         };
         _this.selectedStatus = _this.selectedStatus.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
@@ -36319,10 +36321,9 @@ var AdminOrdenes = function (_Component) {
             });
         }
     }, {
-        key: 'handleClick',
-        value: function handleClick(e) {
-            console.log(e);
-            this.router.transitionTo('http://www.google.com');
+        key: 'handleSubmit',
+        value: function handleSubmit(evento, ordenId) {
+            _axios2.default.put('/api/ventas/' + ordenId, { status: evento.target.value }).then(location.reload());
         }
     }, {
         key: 'render',
@@ -36446,11 +36447,6 @@ var AdminOrdenes = function (_Component) {
                                 _react2.default.createElement(
                                     'th',
                                     null,
-                                    'Editar'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
                                     'Detalles'
                                 )
                             )
@@ -36470,15 +36466,31 @@ var AdminOrdenes = function (_Component) {
                                     _react2.default.createElement(
                                         'td',
                                         null,
-                                        orden.status
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
                                         _react2.default.createElement(
-                                            'button',
-                                            null,
-                                            'Edit status'
+                                            'select',
+                                            { value: orden.status, onChange: function onChange(event) {
+                                                    return _this3.handleSubmit(event, orden.id);
+                                                } },
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'procesando' },
+                                                'Procesando'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'completado' },
+                                                'Completado'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'creado' },
+                                                'Creado'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'cancelado' },
+                                                'Cancelado'
+                                            )
                                         )
                                     ),
                                     _react2.default.createElement(
@@ -36494,7 +36506,7 @@ var AdminOrdenes = function (_Component) {
                                     ),
                                     _react2.default.createElement(
                                         'td',
-                                        { onClick: _this3.handleClick.bind(_this3) },
+                                        null,
                                         _react2.default.createElement(
                                             'button',
                                             null,
@@ -36514,15 +36526,31 @@ var AdminOrdenes = function (_Component) {
                                     _react2.default.createElement(
                                         'td',
                                         null,
-                                        orden.status
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
                                         _react2.default.createElement(
-                                            'button',
-                                            null,
-                                            'Edit status'
+                                            'select',
+                                            { value: orden.status, onChange: function onChange(event) {
+                                                    return _this3.handleSubmit(event, orden.id);
+                                                } },
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'procesando' },
+                                                'Procesando'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'completado' },
+                                                'Completado'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'creado' },
+                                                'Creado'
+                                            ),
+                                            _react2.default.createElement(
+                                                'option',
+                                                { value: 'cancelado' },
+                                                'Cancelado'
+                                            )
                                         )
                                     ),
                                     _react2.default.createElement(
@@ -36538,7 +36566,7 @@ var AdminOrdenes = function (_Component) {
                                     ),
                                     _react2.default.createElement(
                                         'td',
-                                        { onClick: _this3.handleClick.bind(_this3) },
+                                        null,
                                         _react2.default.createElement(
                                             'button',
                                             null,
