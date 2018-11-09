@@ -43,10 +43,10 @@ export const logginSuccess = user => ({
 
 // // OTRAS ACCIONES:
 
-// const editProduct = product => ({
-//   type: UPDATE_PRODUCT,
-//   product,
-// });
+const editProduct = product => ({
+  type: UPDATE_PRODUCT,
+  product,
+});
 
 // const getOrders = orders => ({
 //   type: FETCH_ORDERS_ADMIN,
@@ -240,44 +240,39 @@ export const removeCategory = categoryId => dispatch =>
 //     .then(user => dispatch(putUser(user)));
 
 export const addProduct = producto => dispatch =>
-  //   axios
-  //     .post('/api/productos/', producto)
-  //     .then(res => res.data)
-  //     .then(data => dispatch(postProduct(data)));
-
-  // export const updateProduct = product => dispatch =>
-  //   axios
-  //     .put(`/api/productos/${product.id}`, product)
-  //     .then(res => res.data)
-  //     .then(console.log)
-  //     .then(product => dispatch(editProduct(product)));
-
-  // //PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
-  // const Fetch_Products = data => ({
-  //   type: FETCH_PRODUCTS,
-  //   data,
-  // });
-
-  // // export const removeUser = user => dispatch =>
-  // //   axios
-  // //     .delete(`/api/user/${user}`)
-  // //     .then(res => res.data)
-  // //     .then(user => dispatch(deleteUser(user)));
-  // export const fetchProducts = () => dispatch =>
-  //   axios
-  //     .get('/api/productos')
-  //     .then(res => res.data)
-  //     .then(data => dispatch(Fetch_Products(data)));
-
-  // export const fetchCategorys = () => dispatch =>
-  //   axios
-  //     .get('/api/categorias')
-  //     .then(res => res.data)
-  //     .then(data => dispatch(Fetch_categorys(data)));
   axios
-    .post('/api/productos', producto)
+    .post('/api/productos/', producto)
     .then(res => res.data)
     .then(data => dispatch(postProduct(data)));
+
+export const updateProduct = product => dispatch =>
+  axios
+    .put(`/api/productos/${product.id}`, product)
+    .then(res => res.data)
+    .then(product => dispatch(editProduct(product)));
+
+// //PROBANDO DIEGO HACIENDO ANDAR LA LISTA DE TODOS LOS PRODUCTOS
+// const Fetch_Products = data => ({
+//   type: FETCH_PRODUCTS,
+//   data,
+// });
+
+// // export const removeUser = user => dispatch =>
+// //   axios
+// //     .delete(`/api/user/${user}`)
+// //     .then(res => res.data)
+// //     .then(user => dispatch(deleteUser(user)));
+// export const fetchProducts = () => dispatch =>
+//   axios
+//     .get('/api/productos')
+//     .then(res => res.data)
+//     .then(data => dispatch(Fetch_Products(data)));
+
+// export const fetchCategorys = () => dispatch =>
+//   axios
+//     .get('/api/categorias')
+//     .then(res => res.data)
+//     .then(data => dispatch(Fetch_categorys(data)));
 
 export const removeUser = user => dispatch =>
   axios

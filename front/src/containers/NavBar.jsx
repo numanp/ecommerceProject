@@ -1,101 +1,133 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import SearchBar from './SearchBar'
-import { removeLoginFromLocalStorage } from '../redux/action-creators/user'
+import SearchBar from './SearchBar';
+import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
+import { getProductsByName } from '../redux/action-creators/products';
 
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    }
+function mapStateToProps(state, ownProps) {
+  console.log(ownProps, 'STATE NAVBAR');
+  return {
+    user: state.user,
+    history: ownProps.history,
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    return {
-        logout: () => {
-            dispatch(removeLoginFromLocalStorage())
-        }
-    }
+  return {
+    logout: () => {
+      dispatch(removeLoginFromLocalStorage());
+    },
+    getProductsByName: nombre => {
+      dispatch(getProductsByName(nombre));
+    },
+  };
 }
 
 class NavBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            logueado: false
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      nombreProducto: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+  componentDidMount() {
+    // console.log(this.state, 'estado interno navbar');
+    var objeto = sessionStorage.getItem('login');
+    if (!!objeto) {
+      this.setState({
+        logueado: true,
+      });
+    } else {
+      this.setState({
+        logueado: false,
+      });
     }
-    componentDidMount() {
-        var objeto = sessionStorage.getItem('login')
-        if (!!objeto) {
-            this.setState({
-                logueado: true
-            })
-        } else {
-            this.setState({
-                logueado: false
-            })
-        }
-    }
+  }
 
-    render() {
-        // console.log(this.state.logueado)
-        return (
-            <nav className="navbar navbar-default">
-                <div className="container">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span className="sr-only">Toggle navigation</span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                            </button>
-                            <Link to="/" className="navbar-brand">
-                                <img src="./images/skereeteam.png"></img>
-                            </Link>
-                        </div>
+  handleChange(evt) {
+    const value = evt.target.value;
+    this.setState({
+      nombreProducto: value,
+    });
+    console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+  }
 
-                        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul className="nav navbar-nav navbar-left" key="1">
-                                <SearchBar />
-                            </ul>
-                            {
-                                this.state.logueado === true ?
-                                    [
-                                        <ul className="nav navbar-nav navbar-right">
-                                            <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
-                                            <li> <Link to="/carrito">Carrito</Link> </li>
-                                        </ul>
-                                    ] :
-                                    [
-                                        <ul className="nav navbar-nav navbar-right">
-                                            <li> <Link to="/signup">Registrate</Link></li>
-                                            <li> <Link to="/login">Login</Link></li>
-                                            <li> <Link to="/carrito">Carrito</Link> </li>
-                                        </ul>
-                                    ]
-                            }
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        )
-    }
+  handleOnClick() {
+    this.props.getProductsByName(this.state.nombreProducto);
+    this.props.history.push('/productos');
+  }
+
+  render() {
+    return (
+      <nav className="navbar navbar-default">
+        <div className="container">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button
+                type="button"
+                className="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+              </button>
+              <Link to="/" className="navbar-brand">
+                <img src="./images/skereeteam.png" />
+              </Link>
+            </div>
+
+            <div
+              className="collapse navbar-collapse"
+              id="bs-example-navbar-collapse-1"
+            >
+              <ul className="nav navbar-nav navbar-left" key="1">
+                <SearchBar
+                  handleChange={this.handleChange}
+                  handleOnClick={this.handleOnClick}
+                />
+              </ul>
+              {this.state.logueado === true
+                ? [
+                    <ul className="nav navbar-nav navbar-right" key="2">
+                      <li key="1">
+                        <Link to="/login" onClick={() => this.props.logout()}>
+                          Logout
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/carrito">Carrito</Link>
+                      </li>
+                    </ul>,
+                  ]
+                : [
+                    <ul className="nav navbar-nav navbar-right">
+                      <li>
+                        <Link to="/signup">Registrate</Link>
+                      </li>
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/carrito">Carrito</Link>
+                      </li>
+                    </ul>,
+                  ]}
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NavBar);

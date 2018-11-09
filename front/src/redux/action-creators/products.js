@@ -2,6 +2,7 @@ import {
   FETCH_SINGLE_PRODUCT,
   FETCH_PRODUCTS_USER,
   DELETE_PRODUCT,
+  FETCH_PRODUCTS_BY_NAME,
 } from '../constants';
 import axios from 'axios';
 
@@ -14,6 +15,25 @@ export const fetchProductsUser = products => ({
   type: FETCH_PRODUCTS_USER,
   products,
 });
+
+const fetchProductsByName = products => ({
+  type: FETCH_PRODUCTS_BY_NAME,
+  products,
+});
+
+export const getProductsByName = nombre => {
+  return dispatch =>
+    axios
+      .get('/api/productos/busqueda', {
+        params: {
+          nombre: nombre,
+        },
+      })
+      .then(res => {
+        dispatch(fetchProductsByName(res.data));
+      })
+      .then(() => console.log('nombre ENTRA EN EL ACTION', nombre));
+};
 
 export const getProducts = () => {
   return dispatch =>

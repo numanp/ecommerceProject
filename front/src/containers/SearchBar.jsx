@@ -1,61 +1,87 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class SearchBar extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-
-        }
-
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
     return (
-            
-                <div className="col-md-12">
-                    <div className="input-group" id="adv-search">
-                        <input type="text" className="form-control" placeholder="ingresa un snippet" />
-                        <div className="input-group-btn">
-                            <div className="btn-group" role="group">
-                                <div className="dropdown dropdown-lg">
-                                    <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span className="caret"></span></button>
-                                    <div className="dropdown-menu dropdown-menu-right" role="menu">
-                                        <form className="form-horizontal" role="form">
-                                        <div className="form-group">
-                                            <label htmlFor="filter">Filtralo por:</label>
-                                            <select className="form-control">
-                                                <option value="0" defaultValue>todos los Snippets</option>
-                                                <option value="1">CategoriaTuVieja</option>
-                                                <option value="2">CategoriaLancelot</option>
-                                                <option value="3">CategoriaElBolson</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="contain">busca</label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <button type="submit" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                            </div>
-                        </div>
+      <div className="col-md-12">
+        <div className="input-group" id="adv-search">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter product name"
+            onChange={this.props.handleChange}
+          />
+          {/* <input
+            type="text"
+            className="form-control"
+            placeholder="ingresa un snippet"
+          /> */}
+          <div className="input-group-btn">
+            <div className="btn-group" role="group">
+              <div className="dropdown dropdown-lg">
+                <button
+                  type="button"
+                  className="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span className="caret" />
+                </button>
+                <div className="dropdown-menu dropdown-menu-right" role="menu">
+                  <form className="form-horizontal" role="form">
+                    <div className="form-group">
+                      <label htmlFor="filter">Filtralo por:</label>
+                      <select className="form-control">
+                        <option value="0" defaultValue>
+                          todos los Snippets
+                        </option>
+                        <option value="1">CategoriaTuVieja</option>
+                        <option value="2">CategoriaLancelot</option>
+                        <option value="3">CategoriaElBolson</option>
+                      </select>
                     </div>
+                    <div className="form-group">
+                      <label htmlFor="contain">busca</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                      <span
+                        className="glyphicon glyphicon-search"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </form>
                 </div>
-
-    )
+              </div>
+              <button
+                onClick={() => this.props.handleOnClick()}
+                type="submit"
+                className="btn btn-primary"
+              >
+                <span
+                  className="glyphicon glyphicon-search"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
 //</div>
 
-
-
-
 //este es el que meti en la pagina
-            
-{/* <div className="col-md-12">
+
+{
+  /* <div className="col-md-12">
 <div className="input-group" id="adv-search">
     <input type="text" className="form-control" placeholder="ingresa un snippet" />
     <div className="input-group-btn">
@@ -85,21 +111,13 @@ export default class SearchBar extends Component {
         </div>
     </div>
 </div>
-</div> */}
-
-
-
-
-
-
-
-
-
-
+</div> */
+}
 
 //este es el original
 
-{/* <div class="col-md-12">
+{
+  /* <div class="col-md-12">
             <div class="input-group" id="adv-search">
                 <input type="text" class="form-control" placeholder="Search for snippets" />
                 <div class="input-group-btn">
@@ -135,4 +153,5 @@ export default class SearchBar extends Component {
                 </div>
             </div>
           </div>
-        </div> */}
+        </div> */
+}
