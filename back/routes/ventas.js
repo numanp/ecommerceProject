@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   models.Venta.findById(req.params.id).then(venta => {
     venta.update(req.body, { fields: ['status'] });
-  });
+  })
 });
 
 router.post('/', (req, res) => {

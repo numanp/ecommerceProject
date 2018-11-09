@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Ventas = db.define('ventas', {
     status: {
-        type: Sequelize.ENUM('creado', 'procesado', 'cancelado', 'completado'),
+        type: Sequelize.ENUM('creado', 'procesando', 'cancelado', 'completado'),
     },
     fecha: {
         type: Sequelize.DATE,
