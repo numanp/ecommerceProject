@@ -1,53 +1,56 @@
-
 import React, { Component } from 'react';
-import AdminAddProduct from '../components/AdminAddProduct'
+import AdminAddProduct from '../components/AdminAddProduct';
 import { connect } from 'react-redux';
-import { addProduct, fetchCategorys } from '../redux/action-creators/user'
+import { addProduct, fetchCategorys } from '../redux/action-creators/user';
 
 class AdminAddProductContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    componentDidMount() {
-    }
-    //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount() {}
+  //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
-    handleSubmit(evt) {
-        evt.preventDefault();
-        const productoAgregar = {
-            nombre: evt.target.nombreProducto.value,
-            descripcion: evt.target.descripcionProducto.value,
-            precio: evt.target.precioProducto.value,
-            foto: evt.target.imgProducto.value,
-            stock: evt.target.stockProducto.value
-        }
-        this.props.addProduct(productoAgregar)
-    }
-    render() {
-        return (
-            <div>
-                <AdminAddProduct handleSubmit={this.handleSubmit} />
-            </div>
-        )
-    }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const productoAgregar = {
+      nombre: evt.target.nombreProducto.value,
+      descripcion: evt.target.descripcionProducto.value,
+      precio: evt.target.precioProducto.value,
+      foto1: evt.target.imgProducto.value,
+      foto2: evt.target.imgProducto.value,
+      foto3: evt.target.imgProducto.value,
+      stock: evt.target.stockProducto.value,
+    };
+    this.props.addProduct(productoAgregar);
+    this.props.history.push('/admin');
+  }
+  render() {
+    return (
+      <div>
+        <AdminAddProduct handleSubmit={this.handleSubmit} />
+      </div>
+    );
+  }
 }
-function mapStateToProps(state) {
-    return {
-    }
+function mapStateToProps(state, ownProps) {
+  return {
+    history: ownProps.history,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        addProduct: function (producto) {
-            dispatch(addProduct(producto))
-        },
-        fetchCategorys: function (categorias) {
-            dispatch(fetchCategorys(categorias))
-        },
-    }
+  return {
+    addProduct: function(producto) {
+      dispatch(addProduct(producto));
+    },
+    fetchCategorys: function(categorias) {
+      dispatch(fetchCategorys(categorias));
+    },
+  };
 }
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProductContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AdminAddProductContainer);
