@@ -74,7 +74,7 @@ class ContainerReview extends Component {
     }
     
     render() {
-      console.log(this.state.rating)
+    // console.log(this.state.rating)
     // console.log(this.state.reviews)
     // console.log(this.props.producto)
     // const { rating } = this.state.rating;

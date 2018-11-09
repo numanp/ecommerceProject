@@ -4466,40 +4466,77 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 exports.default = function (props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "reviews cajaopinionproducto" },
-    _react2.default.createElement(
-      "h2",
-      null,
-      "Opiniones sobre el producto"
-    ),
-    props.reviews && props.reviews.map(function (review) {
-      return _react2.default.createElement(
+    return _react2.default.createElement(
         "div",
-        { key: review.id, className: "container" },
+        { className: "container" },
         _react2.default.createElement(
-          "div",
-          { className: "row" },
-          _react2.default.createElement(
             "div",
-            { className: "col-xs-8 col-sm-8 col-md-8 col-lg-8" },
+            { className: "row" },
             _react2.default.createElement(
-              "p",
-              { className: "opinionProducto" },
-              "- ",
-              review.comentario,
-              " "
+                "div",
+                { className: "col-sm-7" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "review-block" },
+                    props.reviews && props.reviews.map(function (review) {
+                        var idEstrellas = 0;
+                        var estrellas = review.estrellas;
+                        var arr = [];
+                        for (var i = 0; i < estrellas; i++) {
+                            arr.push(i);
+                        }
+
+                        return _react2.default.createElement(
+                            "div",
+                            { key: review.id },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "row" },
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "col-sm-3" },
+                                    _react2.default.createElement("img", { src: "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg", className: "img-rounded img-user-review" }),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-name" },
+                                        "user id: ",
+                                        review.userId
+                                    ),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-date" },
+                                        review.createdAt.substring(0, 10)
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "col-sm-9" },
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-rate" },
+                                        arr.map(function (estrellas) {
+                                            idEstrellas++;
+                                            return _react2.default.createElement("span", { key: idEstrellas, className: "glyphicon glyphicon-star estrellas-review-user", "aria-hidden": "true" });
+                                        })
+                                    ),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-description" },
+                                        review.comentario
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement("hr", null)
+                        );
+                    })
+                )
             )
-          )
         )
-      );
-    })
-  );
+    );
 };
 
 var _react = __webpack_require__(0);
@@ -4507,6 +4544,47 @@ var _react = __webpack_require__(0);
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+{/* <div class="col-sm-3">
+    	<div class="rating-block">
+    		<h4>Average user rating</h4>
+    		<h2 class="bold padding-bottom-7">4.3 <small>/ 5</small></h2>
+    		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    		</button>
+    		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    		</button>
+    		<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    		</button>
+    		<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+    		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    		</button>
+    		<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+    		  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    		</button>
+    	</div>
+    </div> */}
+
+{/* ESTE ES EL QUE ANDA */}
+
+{/* <div className="reviews cajaopinionproducto">
+    <h2>Opiniones sobre el producto</h2>
+    {
+     props.reviews && props.reviews.map(review =>{
+       return(
+         <div key={review.id} className="container">
+         <div className='row'>
+         <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+         <p className='opinionProducto'>- {review.comentario} </p>
+         </div>
+         </div>
+         </div>
+       )
+     })
+    }
+    </div> */}
 
 /***/ }),
 /* 55 */
@@ -34185,7 +34263,7 @@ var ContainerReview = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.rating);
+      // console.log(this.state.rating)
       // console.log(this.state.reviews)
       // console.log(this.props.producto)
       // const { rating } = this.state.rating;
@@ -34268,17 +34346,25 @@ exports.default = function (_ref) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'text-right' },
-                                    _react2.default.createElement(_reactStarRatingComponent2.default, { onStarClick: onStarClick.bind(undefined), name: 'rate1', starCount: 5, value: rating }),
                                     _react2.default.createElement(
-                                        'a',
-                                        { className: 'btn btn-danger btn-sm', href: '#', id: 'close-review-box', style: { display: "none", marginRight: "10px" } },
-                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' }),
-                                        'Cancel'
+                                        'div',
+                                        { className: 'contenedorEstrellas' },
+                                        _react2.default.createElement(_reactStarRatingComponent2.default, { onStarClick: onStarClick.bind(undefined), name: 'rate1', starCount: 5, value: rating })
                                     ),
                                     _react2.default.createElement(
-                                        'button',
-                                        { className: 'btn btn-success btn-lg', type: 'submit' },
-                                        'Save'
+                                        'div',
+                                        null,
+                                        _react2.default.createElement(
+                                            'a',
+                                            { className: 'btn btn-danger btn-sm', href: '#', id: 'close-review-box', style: { display: "none", marginRight: "10px" } },
+                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' }),
+                                            'Cancel'
+                                        ),
+                                        _react2.default.createElement(
+                                            'button',
+                                            { className: 'btn btn-success btn-lg', type: 'submit' },
+                                            'Save'
+                                        )
                                     )
                                 )
                             )

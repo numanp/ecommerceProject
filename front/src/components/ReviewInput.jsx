@@ -19,10 +19,14 @@ export default ({ handleChange, handleSubmit, addreview, rating, onStarClick }) 
                                     <textarea className="form-control animated" cols="50" id="new-review" name="comment" placeholder="escribi aca y puntua!" rows="5" addreview={addreview} onChange={handleChange}></textarea>
                     
                                     <div className="text-right">
-                                        <StarRatingComponent onStarClick={onStarClick.bind(this)} name="rate1" starCount={5} value={rating}/>
-                                        <a className="btn btn-danger btn-sm" href="#" id="close-review-box" style={{display:"none", marginRight:"10px"}}>
-                                        <span className="glyphicon glyphicon-remove"></span>Cancel</a>
-                                        <button className="btn btn-success btn-lg" type="submit">Save</button>
+                                        <div className="contenedorEstrellas">
+                                            <StarRatingComponent onStarClick={onStarClick.bind(this)} name="rate1" starCount={5} value={rating}/>
+                                        </div>
+                                        <div>
+                                            <a className="btn btn-danger btn-sm" href="#" id="close-review-box" style={{display:"none", marginRight:"10px"}}>
+                                            <span className="glyphicon glyphicon-remove"></span>Cancel</a>
+                                            <button className="btn btn-success btn-lg" type="submit">Save</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
