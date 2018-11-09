@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../models/index').modelos;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = router;
 
@@ -8,6 +10,17 @@ router.get('/', (req, res) => {
   models.Producto.findAll().then(productos => {
     res.status(200).send(productos);
   });
+});
+
+router.get('/busqueda', (req, res) => {
+  console.log(req.query.nombre);
+  models.Producto.findAll({
+    where: {
+      nombre: {
+        [Op.like]: '%' + req.query.nombre + '%',
+      },
+    },
+  }).then(productos => res.send(productos));
 });
 
 router.get('/:id', (req, res) => {
@@ -64,7 +77,7 @@ router.put('/addCategory/', (req, res) => {
 });
 
 router.put('/:id/', (req, res) => {
-  console.log(req.body), 'req.body';
+  console.log(req.body, 'req.body producto');
   models.Producto.findOne({ where: { id: req.body.id } })
     .then(producto => producto.updateAttributes(req.body))
     .then(updated => {
