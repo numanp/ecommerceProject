@@ -1,67 +1,105 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addLoginToLocalStorage } from '../redux/action-creators/user'
+import { addLoginToLocalStorage } from '../redux/action-creators/user';
+import { getMyCart } from '../redux/action-creators/cart'
 
 function mapStateToProps(state) {
-    return {
-        loggedIn: state.user.logged
-    }
+  return {
+    loggedIn: state.user.logged
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        login: (user) => {
-            dispatch(addLoginToLocalStorage(user))
-        }
-    }
+  return {
+    login: user => {
+      dispatch(addLoginToLocalStorage(user));
+    },
+  };
 }
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: ''
-        }
-        this.logn = this.logn.bind(this)
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
     }
-    componentDidMount() {
-    }
-    emailChange(e) {
-        this.setState(
-            {
-                email: e.target.value
-            }
-        )
-    }
-    passwordChange(e) {
-        this.setState(
-            {
-                password: e.target.value
-            }
-        )
-    }
+    this.logn = this.logn.bind(this)
+  }
+  componentDidMount() {
+  }
+  emailChange(e) {
+    this.setState(
+      {
+        email: e.target.value
+      }
+    )
+  }
+  passwordChange(e) {
+    this.setState(
+      {
+        password: e.target.value
+      }
+    )
+  }
 
-    logn(object) {
-        this.props.logginSuccess(object)
-    }
+  logn(object) {
+    this.props.logginSuccess(object);
+  }
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={(e) => { e.preventDefault(); this.props.login(this.state) }}>
-                    <input onChange={(e) => this.emailChange(e)} type="text" name="email" placeholder="email" /><br /><br />
-                    <input onChange={(e) => this.passwordChange(e)} type="text" name="password" placeholder="password" /><br /><br />
-                    <button type="submit">Login</button><br /><br />
-                </form>
+  render() {
+    return (
+      <div className="container-fluid" id="loginFormulario">
+        <div className="container">
+          <div className="col-md-4 col-md-offset-4">
+            <h1>Sign In</h1>
+            <div className="loginForm">
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  this.props.login(this.state);
+                }}
+              >
+                <div className="form-group">
+                  <label htmlFor="email">Email address</label>
+                  <input
+                    onChange={e => this.emailChange(e)}
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    className="form-control"
+                  />
+                  <br />
+                  <br />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Password</label>
+                  <input
+                    onChange={e => this.passwordChange(e)}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    className="form-control"
+                  />
+                  <br />
+                  <br />
+                </div>
+
+                <button className="btn btn-primary btn-block" type="submit">
+                  Login
+                </button>
+                <br />
+                <br />
+              </form>
             </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
-
-
-
-
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);

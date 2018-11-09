@@ -14,13 +14,16 @@ class AdminManejarProductos extends Component {
     render() {
         return (
             <div>   
-                <AdminProductos listaProductos={this.props.listaProductos}/>     
-            </div>   
+            {
+                <AdminProductos listaProductos={this.props.listaProductos} />     
+            }
+         </div>   
         )
     }
 }
 
 function mapStateToProps (state){
+  //  console.log(state)
     return{ 
         listaProductos: state.userAdmin.listaProductos
     }

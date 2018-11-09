@@ -6,6 +6,7 @@ import { addToCart, removeFromCart, addQtoProduct, lessQtoProduct } from '../red
 import ListadoProductos from './ProductosSubContainer';
 import ContainerSingleProduct from './ContainerSingleProduct';
 import { Route, Switch } from 'react-router-dom';
+import { actualizarCarro } from '../redux/action-creators/cart'
 
 
 
@@ -39,6 +40,9 @@ function mapDispatchToProps(dispatch) {
         lessQtoProduct: (productoId) => {
             dispatch(lessQtoProduct(productoId))
         },
+        actualizarCarro: (arreglo) => {
+            dispatch(actualizarCarro(arreglo))
+        }
 
     }
 

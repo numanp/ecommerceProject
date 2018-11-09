@@ -8,7 +8,7 @@ import StarRatingComponent from 'react-star-rating-component';
 
 
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     rev: state.review,
     user: state.user,
@@ -16,7 +16,7 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
     addReview: function(value, user, product,estrellas){
       dispatch(addReview(value, user, product, estrellas))
@@ -38,11 +38,6 @@ class ContainerReview extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onStarClick = this.onStarClick.bind(this)
     }
-
-    // componentDidMount(){
-    //   console.log(this.props.producto)
-
-    // }
     
     componentWillReceiveProps(nextProps){
       if(nextProps.producto.id == this.state.producto.id){
@@ -53,6 +48,7 @@ class ContainerReview extends Component {
         .then(reviews => this.setState({reviews: reviews.data}))
       }
     }
+
 
     handleChange(evt){
       this.setState({

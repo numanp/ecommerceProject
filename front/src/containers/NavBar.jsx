@@ -1,30 +1,40 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import SearchBar from './SearchBar'
-import { removeLoginFromLocalStorage } from '../redux/action-creators/user'
+import SearchBar from './SearchBar';
+import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
+import { getProductsByName } from '../redux/action-creators/products';
 
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    }
+function mapStateToProps(state, ownProps) {
+  //console.log(ownProps, 'STATE NAVBAR');
+  return {
+    user: state.user,
+    history: ownProps.history,
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    return {
-        logout: () => {
-            dispatch(removeLoginFromLocalStorage())
-        }
-    }
+  return {
+    logout: () => {
+      dispatch(removeLoginFromLocalStorage());
+    },
+    getProductsByName: nombre => {
+      dispatch(getProductsByName(nombre));
+    },
+  };
 }
 
 class NavBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            logueado: {}
-        }
-    }
+  constructor(props) {
+    super(props)
+    this.state = {
+      nombreProducto: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
+  }
+
     componentDidMount() {
         var objeto = sessionStorage.getItem('login')
         if (!!objeto) {
@@ -84,18 +94,6 @@ class NavBar extends Component {
     }
 }
 
+
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
-
-
-
-
-
-
-
-
-
-
-
-
-
 

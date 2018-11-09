@@ -31,6 +31,7 @@ export default () => (
             </div>
           </div>
         </div>
+
         <div className="col-sm-6 col-md-4">
           <div className="thumbnail">
             <div className="caption">
@@ -71,7 +72,7 @@ export default () => (
               <p>
                 <a href="#" className="btn btn-primary">
                   Button
-                </a>{' '}
+                </a>
                 <a href="#" className="btn btn-default">
                   Button
                 </a>
@@ -84,22 +85,10 @@ export default () => (
       <div className="col-sm-6 col-md-4">
         <div className="thumbnail">
           <div className="caption">
-            <h3>Promover Usuario</h3>
+            <h3>Lista de Usuarios</h3>
             <p>
-              <Link to="/admin/promoveUser" className="btn btn-warning">
-                Haceme admin
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="col-sm-6 col-md-4">
-        <div className="thumbnail">
-          <div className="caption">
-            <h3>Eliminar Usuario</h3>
-            <p>
-              <Link to="/admin/deleteUser" className="btn btn-warning">
-                Eliminar usuario
+              <Link to="/admin/users" className="btn btn-warning">
+                Manejo de Usuarios
               </Link>
             </p>
           </div>

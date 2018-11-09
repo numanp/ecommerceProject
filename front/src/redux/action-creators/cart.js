@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO } from '../constants';
+import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO, UPDATE_CART, EMPTY_CART } from '../constants';
 import store from '../store'
 import axios from 'axios'
 
@@ -24,8 +24,32 @@ export const lessQtoProduct = (productoId) => ({
   payload: productoId
 })
 
-export const addToLocalStorage = producto => dispatch => {
+export const actualizarCarro = (arreglo) => ({
+  type: UPDATE_CART,
+  payload: arreglo
+})
+
+export const saveCart = (carrito, userId) => {
+  var objeto = { carrito: carrito, userId: userId }
+  axios.post('api/cart', objeto)
+}
+
+export const getMyCart = (id) => {
+  axios.get(`/api/cart/${id}`)
+    .then((res) => {
+      console.log(res.data)
+      localStorage.setItem("cart", JSON.stringify(res.data))
+    })
+}
+
+export const emptyCart = () => ({
+  type: EMPTY_CART,
+  payload: []
+})
+/* export const addToLocalStorage = producto => dispatch => {
   sessionStorage.setItem('carrito', JSON.stringify(producto))
   dispatch(addToCart(producto))
-}
+} */
+
+
 

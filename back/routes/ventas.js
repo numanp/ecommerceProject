@@ -1,8 +1,42 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../models/index').modelos;
+const sgMail = require('@sendgrid/mail'); //PARA EL MAIL
+
 
 module.exports = router;
+
+router.get('/email', (req, res) => {
+  console.log("MAIL ENVIANDO?")
+  //NO TOCAR LA KEY ESTA HARCODEADISIMA
+  sgMail.setApiKey('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');
+  var productosComprados = [
+    {
+      producto: 'PelotaFutbol',
+    },
+    {
+      producto: 'Libro'
+    }
+  ]
+  var htmlEnviar = '<p> Has comprado los siguientes productos ';
+  for (var i = 0; i < productosComprados.length; i++) {
+    htmlEnviar += productosComprados[i].producto + ", ";
+  }
+  htmlEnviar += '</p>'
+  const msg = {
+    to: 'diegofernandezfontana@gmail.com',
+    from: 'diegofernandezfontana@gmail.com',
+    subject: 'Tu compra se ha realizado correctamente',
+    text: 'Compra realizada correctamente',
+    html: `<h1>Felicitaciones tu compra se a realizado con exito</h1>
+            ${htmlEnviar}
+    `,
+  };
+  sgMail.send(msg);
+  res.redirect('/');
+
+})
+
 
 router.get('/', (req, res) => {
   models.Venta.findAll().then(ventas => {
@@ -21,12 +55,10 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   models.Venta.findById(req.params.id).then(venta => {
     venta.update(req.body, { fields: ['status'] });
-  });
+  })
 });
 
 router.post('/', (req, res) => {
-  var usuario = {};
-  var sale = {};
   models.User.findById(req.body.user)
     .then(us => {
       return models.Venta.create({
@@ -35,17 +67,19 @@ router.post('/', (req, res) => {
         importe: req.body.importe,
         direccion: req.body.direccion,
         email: req.body.email,
-        productoXcantidad: req.body.productoXcantidad,
+        carro: req.body.carro,
       })
-        .then(venta => {
-          venta.setProductos(req.body.productos);
-          return venta;
-        })
-        .then(venta => {
-          us.setCompras(venta.id);
-        });
     })
-    .then(a => res.send(a));
+    .then((venta) => {
+      return models.User.findById(req.body.userId)
+        .then((user) => {
+          return venta.setUser(user.id)
+        })
+        .then(() => {
+          res.send('COMPRA CORRECTAMENTE')
+        })
+
+    })
 });
 
 router.get('/', (req, res) => {
