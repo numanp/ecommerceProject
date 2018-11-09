@@ -3,7 +3,6 @@ import React from 'react';
 //ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
 
 export default (productos) =>{
-    console.log(productos)
     return(
         <div className="container">
             <div className="row">

@@ -21,13 +21,8 @@ function mapDispatchToProps(dispatch){
 class LandingPage extends Component {
     constructor(props) {
         super(props);
-        console.log('props', props)
     }
     
-    // componentDidMount() {
-    //     this.props.getProducts()
-    // }
-
     render() {
         return (
             <div>

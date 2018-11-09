@@ -32,6 +32,31 @@ router.get('/:id', (req, res) => {
   });
 });
 
+//PARA TRAER TODAS LAS CATEGORIAS DE CIERTO PRODUCTO
+// powered by diego
+router.get('/productoxcategoria/:id', (req, res) => {
+	models.Producto.findOne({
+		where: {id: req.params.id},
+		include: [models.Categoria]
+	})
+	.then(producto => res.send(producto))
+	
+});
+
+router.post('/catAproducto/:id', (req, res) => {
+  	var arreglo = req.body;
+  	models.Producto.findById(req.params.id)
+ 	.then(producto => {
+		arreglo.forEach(el => producto.setCategorias(el))
+	  	res.send('TODO SALIO BIEN')}
+	) 
+	.catch(e=> res.send('SWISS MEDICAL NO FUNCIONA'))
+    //res.send(producto))
+	
+});
+
+
+
 router.get('/cat/:categoria', (req, res) => {
   models.Categoria.findOne({ where: { nombre: req.params.categoria } })
     .then(cat => {

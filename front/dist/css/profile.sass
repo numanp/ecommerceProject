@@ -42,8 +42,9 @@ $navbarGrisOscuro: #666
 
 
     //ADMIN PANEKL
-#adminPanel,#AdminAddCategory
+#adminPanel,#AdminAddCategory, #AgregarCatAPrdoucto
     background-color: $navbarGrisClaro
+    min-height: 700px
 #adminPanel
     .thumbnail
         min-height: 170px
@@ -56,7 +57,6 @@ $navbarGrisOscuro: #666
         flex-direction: row
         align-items: center
         margin-top: 20px
-        &:first-child
     .container
         display: flex
     .listaProductos
@@ -158,3 +158,70 @@ $navbarGrisOscuro: #666
         min-height: 50px
     .form-group
         margin-bottom: 0px
+
+#checkOutContaier
+    margin-top: 50px
+    margin-left: 400px
+    border-radius: 5px
+    .contenedorCheckout
+        color: $navbarGrisClaro
+        border: 1px solid $navbarGrisClaro
+
+    .col-md-4
+        padding: 0px
+        font-size: 16px
+    .checkOutContaier
+        border: 1px solid red
+    .IMGCHECKOUT
+        background-image: url('http://ecx.images-amazon.com/images/I/61%2BABMMN5zL._SL1500_.jpg')
+        min-height: 500px
+        background-size: cover
+    .checkoutForm
+        background-color: #2f2c33
+        min-height: 500px
+        padding: 15px
+    .checkoutExpiracion
+        margin-right: 15px
+    .cvvcheckout
+        margin-left: 20px
+        max-width: 40%
+    .datos
+        display: flex
+        
+    .btn-success
+        margin-top: 50px
+
+#AgregarCatAPrdoucto
+    .agregarCatInd
+        padding: 30px
+        background-color: white
+        border: 1px solid $grisMediano
+        margin-top: 50px
+        border-radius: 3px
+    .btn-primary
+        background-color: white
+        color: #337ab7
+        transition-duration: 0.2s
+        margin-right: 10px
+        &:hover
+            background-color: #337ab7
+            color: white
+            transition-duration: 0.2s
+    h1
+        font-size: 27px
+        text-transform: capitalize
+    h2
+        font-size: 22px
+    ul
+        padding-left: 0px
+        &:first-child
+            padding-left: 0px
+        li
+
+            text-transform: capitalize
+            font-size: 16px
+            list-style: none
+            color: $navbarGrisOscuro
+            display: inline
+            padding-right: 10px
+            border-radius: 2px

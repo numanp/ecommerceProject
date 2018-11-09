@@ -14,7 +14,7 @@ function mapDispatchToProps(state) {
 
 class ProductosSubContainer extends Component {
   constructor(props) {
-    super();
+    super(props);
   }
   render() {
     var selectProduct = this.props.selectProduct;
@@ -47,7 +47,8 @@ class ProductosSubContainer extends Component {
                             className="glyphicon glyphicon-shopping-cart btn btn-info right"
                             onClick={e => {
                               e.preventDefault();
-                              var obj = { q: 1, id: product.id };
+                              var obj = product;
+                              obj.q = 1;
                               this.props.addToCart(obj);
                               setTimeout(() => {
                                 localStorage.setItem(
@@ -73,6 +74,7 @@ class ProductosSubContainer extends Component {
               );
             })}
         </div>
+        ); })}
       </div>
     );
   }

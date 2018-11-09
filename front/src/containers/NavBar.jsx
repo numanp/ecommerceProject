@@ -93,7 +93,7 @@ class NavBar extends Component {
                   handleOnClick={this.handleOnClick}
                 />
               </ul>
-              {this.state.logueado === true
+              {/* {this.state.logueado === true
                 ? [
                     <ul className="nav navbar-nav navbar-right" key="2">
                       <li key="1">
@@ -118,7 +118,7 @@ class NavBar extends Component {
                         <Link to="/carrito">Carrito</Link>
                       </li>
                     </ul>,
-                  ]}
+                  ]} */}
             </div>
           </div>
         </div>

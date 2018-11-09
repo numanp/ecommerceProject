@@ -21,6 +21,8 @@ import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
 import AdminUsersContainer from './AdminUsersContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
+import checkOutContainer from '../containers/CheckoutContainer';
+import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
 function mapStateToProps(state) {
@@ -99,12 +101,21 @@ class Main extends Component {
           component={AdminAddCategoryContainer}
         />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
+
+        <Route exact path="/admin/users/" component={AdminUsersContainer} />
+
         <Route
           exact
           path="/admin/EditarProducto/:id"
           component={AdminEditProductContainer}
         />
-        <Route exact path="/admin/users/" component={AdminUsersContainer} />
+
+        <Route exact path="/checkoutContainer/" component={checkOutContainer} />
+        <Route
+          exact
+          path="/admin/editCategoriasProducto/:id"
+          component={AdminAddCategoryToProductContainer}
+        />
       </div>
     );
   }

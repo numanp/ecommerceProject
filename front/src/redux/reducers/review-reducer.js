@@ -1,4 +1,4 @@
-import {ADD_REVIEW} from '../constants';
+import { ADD_REVIEW } from '../constants';
 
 const reviewReducer = (state = [], action) => {
 
@@ -9,6 +9,6 @@ const reviewReducer = (state = [], action) => {
         default: return state
 
     }
-} 
+}
 
 export default reviewReducer
