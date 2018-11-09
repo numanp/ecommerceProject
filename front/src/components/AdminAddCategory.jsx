@@ -34,7 +34,9 @@ export default props => (
 
                         <button
                           className="btn btn-danger"
-                          onClick={() => props.removeCategory(categoria.id)}
+                          onClick={() => props.removeCategory(categoria.id)
+                            
+                          }
                         >
                           <span
                             className="glyphicon glyphicon-remove"

@@ -6,7 +6,7 @@ import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
 import { getProductsByName } from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
-  console.log(ownProps, 'STATE NAVBAR');
+  //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
@@ -68,6 +68,7 @@ class NavBar extends Component {
   }
 
   render() {
+    // console.log(this.state.logueado)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -94,7 +95,7 @@ class NavBar extends Component {
               className="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1"
             >
-              <ul className="nav navbar-nav navbar-left" key="1">
+              <ul key="1" className="nav navbar-nav navbar-left" key="1">
                 <SearchBar
                   handleChange={this.handleChange}
                   handleOnClick={this.handleOnClick}
@@ -103,27 +104,32 @@ class NavBar extends Component {
               </ul>
               {this.state.logueado === true
                 ? [
-                    <ul className="nav navbar-nav navbar-right" key="2">
-                      <li key="1">
+                    <ul key="2" className="nav navbar-nav navbar-right">
+                      <li>
+                        {' '}
                         <Link to="/login" onClick={() => this.props.logout()}>
                           Logout
                         </Link>
                       </li>
                       <li>
-                        <Link to="/carrito">Carrito</Link>
+                        {' '}
+                        <Link to="/carrito">Carrito</Link>{' '}
                       </li>
                     </ul>,
                   ]
                 : [
-                    <ul className="nav navbar-nav navbar-right">
+                    <ul key="3" className="nav navbar-nav navbar-right">
                       <li>
+                        {' '}
                         <Link to="/signup">Registrate</Link>
                       </li>
                       <li>
+                        {' '}
                         <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <Link to="/carrito">Carrito</Link>
+                        {' '}
+                        <Link to="/carrito">Carrito</Link>{' '}
                       </li>
                     </ul>,
                   ]}

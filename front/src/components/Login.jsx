@@ -5,8 +5,8 @@ import { getMyCart } from '../redux/action-creators/cart';
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.loggedIn,
-  };
+    loggedIn: state.user.logged
+  }
 }
 
 function mapDispatchToProps(dispatch) {

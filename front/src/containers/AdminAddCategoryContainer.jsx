@@ -13,7 +13,11 @@ class AdminAddCategoryContainer extends Component {
     this.props.fetchCategorys();
   }
   componentWillMount() {
+   
     this.props.fetchCategorys();
+  }
+
+  componentDidUpdate(){
   }
 
   handleSubmit(evt) {
@@ -25,6 +29,7 @@ class AdminAddCategoryContainer extends Component {
   }
 
   render() {
+    console.log(this.props.listaCategorias)
     return (
       <div>
         {
@@ -60,7 +65,4 @@ function mapDispatchToProps(dispatch) {
   // }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AdminAddCategoryContainer);
+export default connect( mapStateToProps, mapDispatchToProps)(AdminAddCategoryContainer);

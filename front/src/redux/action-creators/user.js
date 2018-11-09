@@ -230,7 +230,7 @@ export const removeCategory = categoryId => dispatch =>
   axios
     .delete(`/api/categorias/${categoryId}`)
     .then(res => res.data)
-    .then(id => dispatch(deleteCategory(id)));
+    .then(id => dispatch(deleteCategory(id)))
 
 //ACTION USERS
 // export const updateUser = (userId, user) => dispatch =>
