@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router'
 
 export default class AdminOrdenes extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ export default class AdminOrdenes extends Component {
         this.state = {
             ordenes: [],
             isOpen: false,
-            selectedStatus: '',
+            // selectedStatus: '',
             selectedOrders: []
         }
         this.selectedStatus = this.selectedStatus.bind(this)
@@ -22,25 +23,25 @@ export default class AdminOrdenes extends Component {
     toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
     selectedStatus = (status) => {
-        this.setState({ selectedStatus: status })
-
-        var ordenes = this.state.ordenes
-        var estado = this.state.selectedStatus
+        if (status === 'todos') {
+            this.setState({
+                selectedOrders: this.state.ordenes
+            })
+            return
+        }
         var ordenesFiltradas = [];
-
-        for (var i = 0; i < ordenes.length; i++) {
-            if (ordenes[i].status == this.state.selectedStatus) {
-                ordenesFiltradas.push(ordenes[i]);
+        for (var i = 0; i < this.state.ordenes.length; i++) {
+            if (this.state.ordenes[i].status == status) {
+                ordenesFiltradas.push(this.state.ordenes[i]);
             }
         }
-        
         this.setState({ selectedOrders: ordenesFiltradas })
-        
-        console.log('ordenes totales: ',ordenes, ' - estado: ',estado, ' - ordenes filtradas: ', ordenesFiltradas)
+    }
+    handleClick(e) {
+        console.log(e)
+        this.router.transitionTo('http://www.google.com')
     }
 
-
-    
     render() {
         const menuClass = `dropdown-menu${this.state.isOpen ? " show" : ""}`;
         return (
@@ -52,10 +53,11 @@ export default class AdminOrdenes extends Component {
                     Filtrar por Status <span className="caret"></span>
                     </button>
                     <ul className={menuClass}>
-                        <li onClick={() => this.selectedStatus('procesando')}><a href="#">procesando</a></li>
-                        <li onClick={() => this.selectedStatus('creado')}><a href="#">creado</a></li>
-                        <li onClick={() => this.selectedStatus('cancelado')}><a href="#">cancelado</a></li>
-                        <li onClick={() => this.selectedStatus('completado')}><a href="#">completado</a></li>
+                        <li onClick={() => this.selectedStatus('procesando')}><a href="#">PROCESANDO</a></li>
+                        <li onClick={() => this.selectedStatus('creado')}><a href="#">CREADO</a></li>
+                        <li onClick={() => this.selectedStatus('cancelado')}><a href="#">CANCELADO</a></li>
+                        <li onClick={() => this.selectedStatus('completado')}><a href="#">COMPLETADO</a></li>
+                        <li onClick={() => this.selectedStatus('todos')}><a href="#">TODOS</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,6 +69,8 @@ export default class AdminOrdenes extends Component {
                             <th>Status</th>
                             <th>Fecha</th>
                             <th>Importe</th>
+                            <th>Editar</th>
+                            <th>Detalles</th>
                         </tr>
                     </thead>   
                     <tbody>
@@ -76,8 +80,10 @@ export default class AdminOrdenes extends Component {
                             <tr className="profile_orden"  key={orden.id}>
                                 <td>{orden.id}</td>
                                 <td>{orden.status}</td>
+                                <td><button>Edit status</button></td>
                                 <td>{orden.fecha}</td>
-                                <td>{orden.importe}</td>    
+                                <td>$ {orden.importe}</td>
+                                <td onClick={this.handleClick.bind(this)}><button>Detalles</button></td>
                             </tr>
                         ))
                         :
@@ -85,8 +91,10 @@ export default class AdminOrdenes extends Component {
                             <tr className="profile_orden"  key={orden.id}>
                                 <td>{orden.id}</td>
                                 <td>{orden.status}</td>
+                                <td><button>Edit status</button></td>
                                 <td>{orden.fecha}</td>
-                                <td>{orden.importe}</td>    
+                                <td>$ {orden.importe}</td>
+                                <td onClick={this.handleClick.bind(this)}><button>Detalles</button></td>
                             </tr>
                         ))
                     }
@@ -100,48 +108,3 @@ export default class AdminOrdenes extends Component {
         )
     }
 }
-
-// function mapStateToProps (state) {
-//     return {
-//     }
-// }
-// function mapDispatchToProps (dispatch) {
-//     return {
-//     }
-// }
-
-// export default connect(mapStateToProps,mapDispatchToProps)(AdminOrdenes)
-
-// <table className="table table-striped ">
-//                     { 
-//                         this.state.selectedOrders.length > 0 ? 
-//                         this.state.selectedOrders.map(orden => (
-//                             <tr className="profile_orden"  key={orden.id}>
-//                                 <th>INFO DE LA ORDEN</th>
-//                                 <th>ID Orden: {orden.id}</th>
-//                                 <p>Status: {orden.status}</p>
-//                                 <p>Fecha: {orden.fecha}</p>
-//                                 <p>Import: {orden.importe}</p>    
-//                                 <p>Email: {orden.email}</p> 
-//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
-//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
-//                                 <button className="btn btn-primary">Cambiar el Status</button>
-//                             </tr>
-//                         ))
-//                         :
-//                         this.state.ordenes.map(orden => (
-//                             <div className="profile_orden"  key={orden.id}>
-//                                 <p>INFO DE LA ORDEN</p>
-//                                 <p>ID Orden: {orden.id}</p>
-//                                 <p>Status: {orden.status}</p>
-//                                 <p>Fecha: {orden.fecha}</p>
-//                                 <p>Import: {orden.importe}</p>    
-//                                 <p>Email: {orden.email}</p> 
-//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
-//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
-//                                 <button className="btn btn-primary">Cambiar el Status</button>
-//                             </div>
-//                         ))
-//                     }
-
-//                 </table>

@@ -31312,6 +31312,10 @@ var _AdminOrdenes = __webpack_require__(176);
 
 var _AdminOrdenes2 = _interopRequireDefault(_AdminOrdenes);
 
+var _AdminSingleOrder = __webpack_require__(178);
+
+var _AdminSingleOrder2 = _interopRequireDefault(_AdminSingleOrder);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31405,6 +31409,7 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/adminListaProductos', component: _AdminManejarProductos2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarCategoria', component: _AdminAddCategoryContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrdenes', component: _AdminOrdenes2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/verOrden', component: _AdminSingleOrder2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/checkout/', component: _CheckoutContainer2.default })
       );
@@ -36254,6 +36259,8 @@ var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouter = __webpack_require__(177);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36277,27 +36284,25 @@ var AdminOrdenes = function (_Component) {
         };
 
         _this.selectedStatus = function (status) {
-            _this.setState({ selectedStatus: status });
-
-            var ordenes = _this.state.ordenes;
-            var estado = _this.state.selectedStatus;
+            if (status === 'todos') {
+                _this.setState({
+                    selectedOrders: _this.state.ordenes
+                });
+                return;
+            }
             var ordenesFiltradas = [];
-
-            for (var i = 0; i < ordenes.length; i++) {
-                if (ordenes[i].status == _this.state.selectedStatus) {
-                    ordenesFiltradas.push(ordenes[i]);
+            for (var i = 0; i < _this.state.ordenes.length; i++) {
+                if (_this.state.ordenes[i].status == status) {
+                    ordenesFiltradas.push(_this.state.ordenes[i]);
                 }
             }
-
             _this.setState({ selectedOrders: ordenesFiltradas });
-
-            console.log('ordenes totales: ', ordenes, ' - estado: ', estado, ' - ordenes filtradas: ', ordenesFiltradas);
         };
 
         _this.state = {
             ordenes: [],
             isOpen: false,
-            selectedStatus: '',
+            // selectedStatus: '',
             selectedOrders: []
         };
         _this.selectedStatus = _this.selectedStatus.bind(_this);
@@ -36312,6 +36317,12 @@ var AdminOrdenes = function (_Component) {
             _axios2.default.get('/api/ventas').then(function (res) {
                 return _this2.setState({ ordenes: res.data });
             });
+        }
+    }, {
+        key: 'handleClick',
+        value: function handleClick(e) {
+            console.log(e);
+            this.router.transitionTo('http://www.google.com');
         }
     }, {
         key: 'render',
@@ -36350,7 +36361,7 @@ var AdminOrdenes = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#' },
-                                    'procesando'
+                                    'PROCESANDO'
                                 )
                             ),
                             _react2.default.createElement(
@@ -36361,7 +36372,7 @@ var AdminOrdenes = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#' },
-                                    'creado'
+                                    'CREADO'
                                 )
                             ),
                             _react2.default.createElement(
@@ -36372,7 +36383,7 @@ var AdminOrdenes = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#' },
-                                    'cancelado'
+                                    'CANCELADO'
                                 )
                             ),
                             _react2.default.createElement(
@@ -36383,7 +36394,18 @@ var AdminOrdenes = function (_Component) {
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#' },
-                                    'completado'
+                                    'COMPLETADO'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                { onClick: function onClick() {
+                                        return _this3.selectedStatus('todos');
+                                    } },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    'TODOS'
                                 )
                             )
                         )
@@ -36420,6 +36442,16 @@ var AdminOrdenes = function (_Component) {
                                     'th',
                                     null,
                                     'Importe'
+                                ),
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'Editar'
+                                ),
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    'Detalles'
                                 )
                             )
                         ),
@@ -36443,12 +36475,31 @@ var AdminOrdenes = function (_Component) {
                                     _react2.default.createElement(
                                         'td',
                                         null,
+                                        _react2.default.createElement(
+                                            'button',
+                                            null,
+                                            'Edit status'
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
                                         orden.fecha
                                     ),
                                     _react2.default.createElement(
                                         'td',
                                         null,
+                                        '$ ',
                                         orden.importe
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        { onClick: _this3.handleClick.bind(_this3) },
+                                        _react2.default.createElement(
+                                            'button',
+                                            null,
+                                            'Detalles'
+                                        )
                                     )
                                 );
                             }) : this.state.ordenes.map(function (orden) {
@@ -36468,12 +36519,31 @@ var AdminOrdenes = function (_Component) {
                                     _react2.default.createElement(
                                         'td',
                                         null,
+                                        _react2.default.createElement(
+                                            'button',
+                                            null,
+                                            'Edit status'
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
                                         orden.fecha
                                     ),
                                     _react2.default.createElement(
                                         'td',
                                         null,
+                                        '$ ',
                                         orden.importe
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        { onClick: _this3.handleClick.bind(_this3) },
+                                        _react2.default.createElement(
+                                            'button',
+                                            null,
+                                            'Detalles'
+                                        )
                                     )
                                 );
                             })
@@ -36487,53 +36557,126 @@ var AdminOrdenes = function (_Component) {
     return AdminOrdenes;
 }(_react.Component);
 
-// function mapStateToProps (state) {
-//     return {
-//     }
-// }
-// function mapDispatchToProps (dispatch) {
-//     return {
-//     }
-// }
-
-// export default connect(mapStateToProps,mapDispatchToProps)(AdminOrdenes)
-
-// <table className="table table-striped ">
-//                     { 
-//                         this.state.selectedOrders.length > 0 ? 
-//                         this.state.selectedOrders.map(orden => (
-//                             <tr className="profile_orden"  key={orden.id}>
-//                                 <th>INFO DE LA ORDEN</th>
-//                                 <th>ID Orden: {orden.id}</th>
-//                                 <p>Status: {orden.status}</p>
-//                                 <p>Fecha: {orden.fecha}</p>
-//                                 <p>Import: {orden.importe}</p>    
-//                                 <p>Email: {orden.email}</p> 
-//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
-//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
-//                                 <button className="btn btn-primary">Cambiar el Status</button>
-//                             </tr>
-//                         ))
-//                         :
-//                         this.state.ordenes.map(orden => (
-//                             <div className="profile_orden"  key={orden.id}>
-//                                 <p>INFO DE LA ORDEN</p>
-//                                 <p>ID Orden: {orden.id}</p>
-//                                 <p>Status: {orden.status}</p>
-//                                 <p>Fecha: {orden.fecha}</p>
-//                                 <p>Import: {orden.importe}</p>    
-//                                 <p>Email: {orden.email}</p> 
-//                                 <p>ProductoXCantidad: {orden.productoXcantidad}</p> 
-//                                 <p className="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS ordenDOS EN LA VENTA)</p>
-//                                 <button className="btn btn-primary">Cambiar el Status</button>
-//                             </div>
-//                         ))
-//                     }
-
-//                 </table>
-
-
 exports.default = AdminOrdenes;
+
+/***/ }),
+/* 177 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MemoryRouter__ = __webpack_require__(78);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Prompt__ = __webpack_require__(82);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_1__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Redirect__ = __webpack_require__(84);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_2__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(31);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_3__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(21);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_4__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(86);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_5__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(88);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_6__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__generatePath__ = __webpack_require__(33);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return __WEBPACK_IMPORTED_MODULE_7__generatePath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__matchPath__ = __webpack_require__(22);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_8__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__withRouter__ = __webpack_require__(92);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminSingleOrder = function (_Component) {
+    _inherits(AdminSingleOrder, _Component);
+
+    function AdminSingleOrder(props) {
+        _classCallCheck(this, AdminSingleOrder);
+
+        return _possibleConstructorReturn(this, (AdminSingleOrder.__proto__ || Object.getPrototypeOf(AdminSingleOrder)).call(this, props));
+    }
+
+    _createClass(AdminSingleOrder, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "container" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "jumbotron" },
+                    _react2.default.createElement(
+                        "h1",
+                        null,
+                        "Detalles de la orden"
+                    ),
+                    _react2.default.createElement(
+                        "ul",
+                        null,
+                        _react2.default.createElement("li", null)
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        _react2.default.createElement(
+                            "a",
+                            { className: "btn btn-primary btn-lg", href: "#", role: "button" },
+                            "Editar Status"
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return AdminSingleOrder;
+}(_react.Component);
+
+exports.default = AdminSingleOrder;
 
 /***/ })
 /******/ ]);
