@@ -32,6 +32,7 @@ class NavBar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
   }
   componentDidMount() {
     // console.log(this.state, 'estado interno navbar');
@@ -58,6 +59,12 @@ class NavBar extends Component {
   handleOnClick() {
     this.props.getProductsByName(this.state.nombreProducto);
     this.props.history.push('/productos');
+  }
+
+  handelOnKeyPress(event) {
+    if (event.key == 'Enter') {
+      this.handleOnClick();
+    }
   }
 
   render() {
@@ -91,9 +98,10 @@ class NavBar extends Component {
                 <SearchBar
                   handleChange={this.handleChange}
                   handleOnClick={this.handleOnClick}
+                  handelOnKeyPress={this.handelOnKeyPress}
                 />
               </ul>
-              {/* {this.state.logueado === true
+              {this.state.logueado === true
                 ? [
                     <ul className="nav navbar-nav navbar-right" key="2">
                       <li key="1">
@@ -118,7 +126,7 @@ class NavBar extends Component {
                         <Link to="/carrito">Carrito</Link>
                       </li>
                     </ul>,
-                  ]} */}
+                  ]}
             </div>
           </div>
         </div>

@@ -36,6 +36,7 @@ class AdminEditProductContainer extends Component {
     const productoAgregar = this.state;
     this.props.updateProduct(productoAgregar);
     this.props.history.push('/admin/adminListaProductos');
+    location.reload();
   }
 
   render() {
