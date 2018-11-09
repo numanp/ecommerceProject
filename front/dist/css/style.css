@@ -319,7 +319,13 @@ margin-right: auto;
 
 /* -------------------------aca empieza ReviewInput-------------------------------- */
 
-.inputReview {
+.animated {
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  transition: height 0.2s;
+}
+
+/* .inputReview {
   margin-top: 5%;
   width: 85%;
   margin-left: auto;
@@ -332,7 +338,7 @@ margin-right: auto;
 
 .input-review-button{
   margin-top: 1%;
-}
+} */
 
 
 

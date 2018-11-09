@@ -768,6 +768,7 @@ var SEND_EMAIL_STATUS = exports.SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS';
 
 //USER_REDUCER
 var ADD_REVIEW = exports.ADD_REVIEW = 'ADD_REVIEW';
+var FETCH_REVIEWS = exports.FETCH_REVIEWS = 'FETCH_REVIEWS';
 var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
@@ -4243,6 +4244,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function mapStateToProps(state, ownProps) {
     return {
         product: state.products.product
+        // user: state.user,
     };
 }
 
@@ -4446,7 +4448,7 @@ var ContainerSingleProduct = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_ContainerReview2.default, null)
+                this.props.user.logged == "no estas logeado" ? null : _react2.default.createElement(_ContainerReview2.default, null)
             );
         }
     }]);
@@ -4476,10 +4478,10 @@ exports.default = function (props) {
       null,
       "Opiniones sobre el producto"
     ),
-    props.addReview && props.addReview.map(function (review) {
+    props.reviews && props.reviews.map(function (review) {
       return _react2.default.createElement(
         "div",
-        { key: "4", className: "container" },
+        { key: review.id, className: "container" },
         _react2.default.createElement(
           "div",
           { className: "row" },
@@ -4488,9 +4490,9 @@ exports.default = function (props) {
             { className: "col-xs-8 col-sm-8 col-md-8 col-lg-8" },
             _react2.default.createElement(
               "p",
-              { className: "opinionProducto", key: review.id },
+              { className: "opinionProducto" },
               "- ",
-              review,
+              review.comentario,
               " "
             )
           )
@@ -31150,21 +31152,19 @@ var Main = function (_Component) {
   _createClass(Main, [{
     key: 'sign',
     value: function sign(object) {
-      _axios2.default.post('api/user/signup', object);
+      _axios2.default.post('/api/user/signup', object);
     }
   }, {
     key: 'logn',
     value: function logn(object) {
-      _axios2.default.post('api/login', object).then(function (res) {
-        return console.log(res.data);
-      });
+      _axios2.default.post('/api/login', object);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('api/user/me').then(function (response) {
+      _axios2.default.get('/api/user/me').then(function (response) {
         _this2.props.logginSuccess(response.data);
       });
     }
@@ -32161,7 +32161,6 @@ var NavBar = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            // console.log(this.state.logueado)
             return _react2.default.createElement(
                 'nav',
                 { className: 'navbar navbar-default' },
@@ -32189,7 +32188,7 @@ var NavBar = function (_Component) {
                             _react2.default.createElement(
                                 _reactRouterDom.Link,
                                 { to: '/', className: 'navbar-brand' },
-                                _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                                _react2.default.createElement('img', { src: '/images/skereeteam.png' })
                             )
                         ),
                         _react2.default.createElement(
@@ -32200,33 +32199,7 @@ var NavBar = function (_Component) {
                                 _defineProperty({ key: '1', className: 'nav navbar-nav navbar-left' }, 'key', '1'),
                                 _react2.default.createElement(_SearchBar2.default, null)
                             ),
-                            this.state.logueado === true ? [_react2.default.createElement(
-                                'ul',
-                                { key: '2', className: 'nav navbar-nav navbar-right' },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login', onClick: function onClick() {
-                                                return _this2.props.logout();
-                                            } },
-                                        'Logout'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/carrito' },
-                                        'Carrito'
-                                    ),
-                                    ' '
-                                )
-                            )] : [_react2.default.createElement(
+                            this.state.logueado === false ? [_react2.default.createElement(
                                 'ul',
                                 { key: '3', className: 'nav navbar-nav navbar-right' },
                                 _react2.default.createElement(
@@ -32247,6 +32220,32 @@ var NavBar = function (_Component) {
                                         _reactRouterDom.Link,
                                         { to: '/login' },
                                         'Login'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/carrito' },
+                                        'Carrito'
+                                    ),
+                                    ' '
+                                )
+                            )] : [_react2.default.createElement(
+                                'ul',
+                                { key: '2', className: 'nav navbar-nav navbar-right' },
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    ' ',
+                                    _react2.default.createElement(
+                                        _reactRouterDom.Link,
+                                        { to: '/login', onClick: function onClick() {
+                                                return _this2.props.logout();
+                                            } },
+                                        'Logout'
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -33410,9 +33409,7 @@ var Login = function (_Component) {
 
     _createClass(Login, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log(this.props.loggedIn);
-        }
+        value: function componentDidMount() {}
     }, {
         key: 'emailChange',
         value: function emailChange(e) {
@@ -33673,7 +33670,7 @@ var CarritoSlider = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'sidebar-header' },
-                            _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                            _react2.default.createElement('img', { src: '/images/skereeteam.png' })
                         ),
                         _react2.default.createElement(
                             'ul',
@@ -33828,7 +33825,7 @@ var ProductosContainer = function (_Component) {
                 _react2.default.createElement(
                     _reactRouterDom.Switch,
                     null,
-                    _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/:productId', render: function render(_ref) {
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/productos/:productId', render: function render(_ref) {
                             var match = _ref.match;
                             return _react2.default.createElement(_ContainerSingleProduct2.default, { match: match, cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product, user: _this2.props.user });
                         } }),
@@ -34091,6 +34088,14 @@ var _reactRedux = __webpack_require__(3);
 
 var _reviewAction = __webpack_require__(164);
 
+var _axios = __webpack_require__(11);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactStarRatingComponent = __webpack_require__(175);
+
+var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34109,8 +34114,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addReview: function addReview(value, user, product) {
-      dispatch((0, _reviewAction.addReview)(value, user, product));
+    addReview: function addReview(value, user, product, estrellas) {
+      dispatch((0, _reviewAction.addReview)(value, user, product, estrellas));
     }
   };
 }
@@ -34126,14 +34131,37 @@ var ContainerReview = function (_Component) {
     _this.state = {
       value: '',
       addReview: [],
-      currentProduct: 0
+      reviews: [],
+      currentProduct: 0,
+      producto: _this.props.producto,
+      rating: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.onStarClick = _this.onStarClick.bind(_this);
     return _this;
   }
 
+  // componentDidMount(){
+  //   console.log(this.props.producto)
+
+  // }
+
   _createClass(ContainerReview, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      if (nextProps.producto.id == this.state.producto.id) {
+        return;
+      } else {
+        this.setState({ producto: nextProps.producto });
+        _axios2.default.get('/api/reviews/' + nextProps.producto.id).then(function (reviews) {
+          return _this2.setState({ reviews: reviews.data });
+        });
+      }
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange(evt) {
       this.setState({
@@ -34144,7 +34172,12 @@ var ContainerReview = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
       evt.preventDefault();
-      this.props.addReview(this.state.value, this.props.user, this.props.producto);
+      this.props.addReview(this.state.value, this.props.user, this.props.producto, this.state.rating);
+    }
+  }, {
+    key: 'onStarClick',
+    value: function onStarClick(nextValue, prevValue, name) {
+      this.setState({ rating: nextValue });
     }
   }, {
     key: 'fechReviews',
@@ -34152,11 +34185,15 @@ var ContainerReview = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.state.rating);
+      // console.log(this.state.reviews)
+      // console.log(this.props.producto)
+      // const { rating } = this.state.rating;
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
-        _react2.default.createElement(_Reviews2.default, { user: this.props.user, addReview: this.props.rev, product: this.props.producto })
+        _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit, rating: this.state.rating, onStarClick: this.onStarClick }),
+        _react2.default.createElement(_Reviews2.default, { reviews: this.state.reviews, user: this.props.user, addReview: this.props.rev })
       );
     }
   }]);
@@ -34165,6 +34202,8 @@ var ContainerReview = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerReview);
+
+// reviews={this.props.reviews}
 
 /***/ }),
 /* 163 */
@@ -34181,31 +34220,85 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _reactStarRatingComponent = __webpack_require__(175);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (_ref) {
     var handleChange = _ref.handleChange,
         handleSubmit = _ref.handleSubmit,
-        addreview = _ref.addreview;
+        addreview = _ref.addreview,
+        rating = _ref.rating,
+        onStarClick = _ref.onStarClick;
 
     return _react2.default.createElement(
-        'form',
-        { className: 'form-horizontal inputReview', onSubmit: handleSubmit },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-            'label',
-            { className: 'input-review-text' },
-            'Dejanos tu review sobre este producto:'
-        ),
-        _react2.default.createElement('textarea', _defineProperty({ placeholder: 'deja tu review aca...', type: 'text', name: 'addreview', className: '', addreview: addreview, onChange: handleChange }, 'className', 'form-control custom-control')),
-        _react2.default.createElement(
-            'button',
-            { type: 'submit', className: 'btn btn-success input-review-button' },
-            'enviar!'
+            'div',
+            { className: 'row', style: { marginTop: "40px" } },
+            _react2.default.createElement(
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'well well-sm' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'text-right' },
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'btn btn-success btn-green', href: '#reviews-anchor', id: 'open-review-box' },
+                            'Dejanos tu review!'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row', id: 'post-review-box', style: { display: "none" } },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-12' },
+                            _react2.default.createElement(
+                                'form',
+                                { onSubmit: handleSubmit, acceptCharset: 'UTF-8', action: '', method: 'post' },
+                                _react2.default.createElement('input', { id: 'ratings-hidden', name: 'rating', type: 'hidden' }),
+                                _react2.default.createElement('textarea', { className: 'form-control animated', cols: '50', id: 'new-review', name: 'comment', placeholder: 'escribi aca y puntua!', rows: '5', addreview: addreview, onChange: handleChange }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'text-right' },
+                                    _react2.default.createElement(_reactStarRatingComponent2.default, { onStarClick: onStarClick.bind(undefined), name: 'rate1', starCount: 5, value: rating }),
+                                    _react2.default.createElement(
+                                        'a',
+                                        { className: 'btn btn-danger btn-sm', href: '#', id: 'close-review-box', style: { display: "none", marginRight: "10px" } },
+                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' }),
+                                        'Cancel'
+                                    ),
+                                    _react2.default.createElement(
+                                        'button',
+                                        { className: 'btn btn-success btn-lg', type: 'submit' },
+                                        'Save'
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
         )
     );
 };
+//import ContainerStars from '../containers/ContainerStars'
+
+
+{/* <form className="form-horizontal inputReview" onSubmit={handleSubmit}>
+    <label className='input-review-text'>Dejanos tu review sobre este producto:</label>
+       <textarea placeholder="deja tu review aca..." type="text" name="addreview" className='' addreview={addreview} onChange={handleChange} className="form-control custom-control"></textarea>
+       <button type="submit" className="btn btn-success input-review-button">
+         enviar!
+       </button>
+    </form> */}
 
 /***/ }),
 /* 164 */
@@ -34234,24 +34327,31 @@ var saveReview = function saveReview(review) {
     };
 };
 
-var addReview = exports.addReview = function addReview(value, user, product) {
+// const getReview = (review) => ({
+//     type: FETCH_REVIEW,
+//     review
+// })
+
+var addReview = exports.addReview = function addReview(value, user, product, estrellas) {
     return function (dispatch) {
-        console.log("ACTION-VALUE", value, "ACTION-USER", user, "ACTION-PRODUCT", product);
+        // console.log("ACTION-VALUE", value, "ACTION-USER", user, "ACTION-PRODUCT", product)
         var reviewUser = {
             comentario: value,
             user: user,
-            product: product
+            product: product,
+            estrellas: estrellas
         };
-
         _axios2.default.post('/api/reviews/' + product.id, reviewUser).then(function (res) {
-            return console.log('AXIOSSSS', res.data);
-        }).then(function (res) {
-            dispatch(saveReview(res.data));
+            dispatch(saveReview(value, user, product, estrellas));
         });
     };
 };
 
-// .then(res => {dispatch (saveReview(value, user, product))
+// export const fetchReview = () => (dispatch) => {
+//     axios.get(`/api/reviews/${this.props.producto.id}`)
+//     .then(res => dispatch(getReview(res.data)))
+//     // falta hacer el reducer!!!!!!!!!
+// }
 
 /***/ }),
 /* 165 */
@@ -35486,6 +35586,328 @@ exports.default = function (props) {
         )
     );
 };
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(176);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StarRatingComponent = function (_Component) {
+  _inherits(StarRatingComponent, _Component);
+
+  function StarRatingComponent(props) {
+    _classCallCheck(this, StarRatingComponent);
+
+    var _this = _possibleConstructorReturn(this, (StarRatingComponent.__proto__ || Object.getPrototypeOf(StarRatingComponent)).call(this));
+
+    _this.state = {
+      value: props.value
+    };
+    return _this;
+  }
+
+  _createClass(StarRatingComponent, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var value = nextProps.value;
+
+
+      if (value != null && value !== this.state.value) {
+        this.setState({ value: value });
+      }
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(inputValue) {
+      var _props = this.props,
+          editing = _props.editing,
+          value = _props.value;
+
+
+      if (!editing) {
+        return;
+      }
+
+      // do not update internal state based on input value if prop passed
+      if (value != null) {
+        return;
+      }
+
+      this.setState({ value: inputValue });
+    }
+  }, {
+    key: 'onStarClick',
+    value: function onStarClick(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props2 = this.props,
+          onStarClick = _props2.onStarClick,
+          editing = _props2.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarClick && onStarClick(index, value, name, e);
+    }
+  }, {
+    key: 'onStarHover',
+    value: function onStarHover(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props3 = this.props,
+          onStarHover = _props3.onStarHover,
+          editing = _props3.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarHover && onStarHover(index, value, name, e);
+    }
+  }, {
+    key: 'onStarHoverOut',
+    value: function onStarHoverOut(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props4 = this.props,
+          onStarHoverOut = _props4.onStarHoverOut,
+          editing = _props4.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarHoverOut && onStarHoverOut(index, value, name, e);
+    }
+  }, {
+    key: 'renderStars',
+    value: function renderStars() {
+      var _this2 = this;
+
+      var _props5 = this.props,
+          name = _props5.name,
+          starCount = _props5.starCount,
+          starColor = _props5.starColor,
+          emptyStarColor = _props5.emptyStarColor,
+          editing = _props5.editing;
+      var value = this.state.value;
+
+
+      var starStyles = function starStyles(i, value) {
+        return {
+          float: 'right',
+          cursor: editing ? 'pointer' : 'default',
+          color: value >= i ? starColor : emptyStarColor
+        };
+      };
+      var radioStyles = {
+        display: 'none',
+        position: 'absolute',
+        marginLeft: -9999
+      };
+
+      // populate stars
+      var starNodes = [];
+
+      var _loop = function _loop(i) {
+        var id = name + '_' + i;
+        var starNodeInput = _react2.default.createElement('input', {
+          key: 'input_' + id,
+          style: radioStyles,
+          className: 'dv-star-rating-input',
+          type: 'radio',
+          name: name,
+          id: id,
+          value: i,
+          checked: value === i,
+          onChange: _this2.onChange.bind(_this2, i, name)
+        });
+        var starNodeLabel = _react2.default.createElement(
+          'label',
+          {
+            key: 'label_' + id,
+            style: starStyles(i, value),
+            className: 'dv-star-rating-star ' + (value >= i ? 'dv-star-rating-full-star' : 'dv-star-rating-empty-star'),
+            htmlFor: id,
+            onClick: function onClick(e) {
+              return _this2.onStarClick(i, value, name, e);
+            },
+            onMouseOver: function onMouseOver(e) {
+              return _this2.onStarHover(i, value, name, e);
+            },
+            onMouseLeave: function onMouseLeave(e) {
+              return _this2.onStarHoverOut(i, value, name, e);
+            }
+          },
+          _this2.renderIcon(i, value, name, id)
+        );
+
+        starNodes.push(starNodeInput);
+        starNodes.push(starNodeLabel);
+      };
+
+      for (var i = starCount; i > 0; i--) {
+        _loop(i);
+      }
+
+      return starNodes.length ? starNodes : null;
+    }
+  }, {
+    key: 'renderIcon',
+    value: function renderIcon(index, value, name, id) {
+      var _props6 = this.props,
+          renderStarIcon = _props6.renderStarIcon,
+          renderStarIconHalf = _props6.renderStarIconHalf;
+
+
+      if (typeof renderStarIconHalf === 'function' && Math.ceil(value) === index && value % 1 !== 0) {
+        return renderStarIconHalf(index, value, name, id);
+      }
+
+      if (typeof renderStarIcon === 'function') {
+        return renderStarIcon(index, value, name, id);
+      }
+
+      return _react2.default.createElement(
+        'i',
+        { key: 'icon_' + id, style: { fontStyle: 'normal', fontSize: '3em',  } },
+        '\u2605'
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props7 = this.props,
+          editing = _props7.editing,
+          className = _props7.className;
+
+      var classes = (0, _classnames2.default)('dv-star-rating', {
+        'dv-star-rating-non-editable': !editing
+      }, className);
+
+      return _react2.default.createElement(
+        'div',
+        { style: { display: 'inline-block', position: 'relative' }, className: classes },
+        this.renderStars()
+      );
+    }
+  }]);
+
+  return StarRatingComponent;
+}(_react.Component);
+
+StarRatingComponent.propTypes = {
+  name: _propTypes2.default.string.isRequired,
+  value: _propTypes2.default.number,
+  editing: _propTypes2.default.bool,
+  starCount: _propTypes2.default.number,
+  starColor: _propTypes2.default.string,
+  onStarClick: _propTypes2.default.func,
+  onStarHover: _propTypes2.default.func,
+  onStarHoverOut: _propTypes2.default.func,
+  renderStarIcon: _propTypes2.default.func,
+  renderStarIconHalf: _propTypes2.default.func
+};
+StarRatingComponent.defaultProps = {
+  starCount: 5,
+  editing: true,
+  starColor: '#ffb400',
+  emptyStarColor: '#333'
+};
+exports.default = StarRatingComponent;
+module.exports = exports['default'];
+
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
 
 /***/ })
 /******/ ]);

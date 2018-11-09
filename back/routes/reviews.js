@@ -13,13 +13,13 @@ router.post('/:id', (req, res) => {
         .then((review) => {
             return models.Producto.findById(req.params.id)
                 .then((producto) => {
-                    return producto.setReviews(review.id)
+                    return review.setProducto(producto.id)
                 })
                 .then(() => {
                     return models.User.findById(userId)     
                 })
                 .then((usuario)=>{
-                    return usuario.setUserReviews(review.id)
+                    return review.setUser(usuario.id) 
                 })
                 .then(() => {
                     res.send(review)
@@ -27,27 +27,13 @@ router.post('/:id', (req, res) => {
         })
 })
 
+router.get('/:idProduct', (req, res) =>{
+    console.log("LLEGA AL BACK")
+    models.Producto.findById(req.params.idProduct)
+    .then((productId) => {
+        return productId.getReviews()
+    }).then((reviews) => {
+        res.send(reviews)
+    }) 
+} )
 
-
-
-// router.post('/:id', (req, res) => {
-//     console.log("REQ.BODY" ,req.body)
-//     console.log("REQ.PARAMS", req.params)
-//     var user = req.body.user
-//     models.Review.create({
-//         comentario: req.body.comentario,
-//         // estrellas: req.body.estrellas
-//     })
-//         .then((review) => {
-//             return models.Producto.findById(req.params.idProduct)
-//                 .then((producto) => {
-//                     return producto.setReviews(review.id)
-//                 })
-//                 .then(() => {
-//                     return user.setUserReviews(review.id)
-//                 })
-//                 .then(() => {
-//                     res.send(review)
-//                 })
-//         })
-// })

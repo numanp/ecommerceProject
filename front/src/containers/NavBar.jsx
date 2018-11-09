@@ -39,7 +39,6 @@ class NavBar extends Component {
     }
 
     render() {
-        // console.log(this.state.logueado)
         return (
             <nav className="navbar navbar-default">
                 <div className="container">
@@ -52,7 +51,7 @@ class NavBar extends Component {
                                 <span className="icon-bar"></span>
                             </button>
                             <Link to="/" className="navbar-brand">
-                                <img src="./images/skereeteam.png"></img>
+                                <img src="/images/skereeteam.png"></img>
                             </Link>
                         </div>
 
@@ -61,17 +60,18 @@ class NavBar extends Component {
                                 <SearchBar />
                             </ul>
                             {
-                                this.state.logueado === true ?
+                                this.state.logueado === false ?
                                     [
-                                        <ul key="2" className="nav navbar-nav navbar-right">
-                                            <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
+
+                                        <ul key="3" className="nav navbar-nav navbar-right">
+                                            <li> <Link to="/signup">Registrate</Link></li>
+                                            <li> <Link to="/login">Login</Link></li>
                                             <li> <Link to="/carrito">Carrito</Link> </li>
                                         </ul>
                                     ] :
                                     [
-                                        <ul key="3" className="nav navbar-nav navbar-right">
-                                            <li> <Link to="/signup">Registrate</Link></li>
-                                            <li> <Link to="/login">Login</Link></li>
+                                        <ul key="2" className="nav navbar-nav navbar-right">
+                                            <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
                                             <li> <Link to="/carrito">Carrito</Link> </li>
                                         </ul>
                                     ]

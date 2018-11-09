@@ -5,12 +5,12 @@ export default function(props) {
     <div className="reviews cajaopinionproducto">
       <h2>Opiniones sobre el producto</h2>
       {
-        props.addReview && props.addReview.map(review =>{
+        props.reviews && props.reviews.map(review =>{
           return(
-            <div key="4" className="container">
+            <div key={review.id} className="container">
             <div className='row'>
             <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
-            <p className='opinionProducto' key={review.id}>- {review} </p>
+            <p className='opinionProducto'>- {review.comentario} </p>
             </div>
             </div>
             </div>

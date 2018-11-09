@@ -10,6 +10,7 @@ import ContainerReview from './ContainerReview';
 function mapStateToProps(state, ownProps) {
     return {
         product: state.products.product,
+        // user: state.user,
     };
 }
 
@@ -94,7 +95,7 @@ class ContainerSingleProduct extends Component {
                         </div>
                     </div>
                 </div>
-                <ContainerReview />
+                {this.props.user.logged == "no estas logeado" ? null : <ContainerReview /> }
             </div>
 
         );
