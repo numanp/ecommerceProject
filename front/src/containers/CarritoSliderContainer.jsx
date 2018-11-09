@@ -13,9 +13,7 @@ function mapStateToProps(state, ownProps) {
         logged: state.user.logged
     }
 }
-
 function mapDispatchToprops(dispatch, ownProps) {
-
     return {
         removeFromCart: (id) => {
             dispatch(removeFromCart(id))
@@ -32,14 +30,12 @@ function mapDispatchToprops(dispatch, ownProps) {
 
     }
 }
-
 class CarritoSlider extends Component {
     constructor(props) {
         super(props)
         /* this.updateCart = this.updateCart.bind(this); */
     }
     componentDidMount() {
-
     }
     /*  updateCart() {
          var storage = JSON.parse(localStorage.getItem("cart"));
@@ -54,7 +50,6 @@ class CarritoSlider extends Component {
                         <div className="sidebar-header">
                             <img src="./images/skereeteam.png" />
                         </div>
-
                         <ul className="list-unstyled components">
                             <li className="active">
                                 <a href="#homeSubmenu" data-toggle="collapse" className="dropdown-toggle">Carrito</a>
@@ -70,11 +65,9 @@ class CarritoSlider extends Component {
                                                         <button type="button" className="btn btn-success" onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}>Sumar</button>
                                                     </div>
                                                 </li>
-
                                             )
                                         })
                                     }
-
                                 </ul>
                                 <br></br>
                             </li>
@@ -82,7 +75,6 @@ class CarritoSlider extends Component {
                                 this.props.logged == 'no estas logeado' ?
                                     [
                                         <Link key={1} to={'/login'} role="button" className="btn btn-success comprar-carrito-btn">Loguearte para comprar</Link>
-
                                     ] :
                                     [
                                         <div key={2}>
@@ -97,9 +89,7 @@ class CarritoSlider extends Component {
                                     ]
                             }
                         </ul>
-
                     </nav>
-
                     <div id="content-carrito">
                         <nav className="navbar-sidebar navbar-default">
                             <div className="container-fluid">
@@ -118,5 +108,4 @@ class CarritoSlider extends Component {
         )
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToprops)(CarritoSlider)

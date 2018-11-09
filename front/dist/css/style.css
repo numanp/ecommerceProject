@@ -1,3 +1,267 @@
+<<<<<<< HEAD
+.profile_compra {
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+}
+.profile_compra img {
+  max-width: 100px;
+  padding: 10px;
+}
+.profile_compra p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
+}
+.profile_compra .profile_celeste {
+  color: #3855a2;
+}
+
+.profile_comentario {
+  border: 1px solid #d1d1d1;
+  margin: 1px;
+  border-radius: 4px;
+}
+.profile_comentario img {
+  max-width: 100px;
+  padding: 10px;
+}
+.profile_comentario p {
+  display: inline;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.sidebar {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  color: #666;
+}
+
+#adminPanel, #AdminAddCategory, #AgregarCatAPrdoucto {
+  background-color: #f5f5f5;
+  min-height: 700px;
+}
+
+#adminPanel .thumbnail {
+  min-height: 170px;
+}
+
+#adminListaProductos {
+  background-color: #f5f5f5;
+}
+#adminListaProductos .titleListaProductos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+#adminListaProductos .container {
+  display: flex;
+}
+#adminListaProductos .listaProductos {
+  flex-direction: column;
+  min-width: 99%;
+  display: flex;
+  flex: wrap;
+}
+#adminListaProductos .listaProductoIndividual {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  min-width: 90%;
+  border: 1px solid #f5f5f5;
+  border-radius: 3px;
+  margin-bottom: 1px;
+  font-size: 16px;
+  min-width: 400px;
+  padding: 20px;
+}
+#adminListaProductos .listaProductoIndividual h1, #adminListaProductos .listaProductoIndividual h3, #adminListaProductos .listaProductoIndividual p {
+  display: inline;
+}
+#adminListaProductos .listaProductoIndividual h1 {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+#adminListaProductos .listaProductoIndividual h3, #adminListaProductos .listaProductoIndividual p {
+  color: #666;
+}
+#adminListaProductos .listaProductoIndividual .btn-primary {
+  background-color: white;
+  color: #2e6da4;
+  transition: 0.2s;
+}
+#adminListaProductos .listaProductoIndividual .btn-primary:hover {
+  background-color: #3278b4;
+  color: white;
+  transition: 0.2s;
+}
+
+#AdminAddCategory {
+  font-size: 16px;
+  color: #666;
+}
+#AdminAddCategory .thumbnail {
+  border: 0px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  padding-left: 0px;
+}
+#AdminAddCategory .thumbnail ul {
+  padding-left: 0px;
+}
+#AdminAddCategory .thumbnail li {
+  background-color: white;
+  list-style: none;
+  min-width: 50px;
+  border: 1px solid #f5f5f5;
+  padding: 20px;
+  font-size: 16px;
+}
+#AdminAddCategory .thumbnail li p {
+  font-weight: bold;
+  display: inline;
+  min-width: 100px;
+}
+#AdminAddCategory .thumbnail button {
+  margin-left: 15px;
+}
+#AdminAddCategory .thumbnail .btn-danger {
+  background-color: white;
+  color: #de5454;
+  transition-duration: 0.2s;
+}
+#AdminAddCategory .thumbnail .btn-danger:hover {
+  background-color: #de5454;
+  color: white;
+  transition-duration: 0.2s;
+}
+#AdminAddCategory form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid #eae6e6;
+}
+#AdminAddCategory form label {
+  margin-right: 10px;
+  font-weight: 100;
+}
+#AdminAddCategory form label input[type=checkbox], #AdminAddCategory form label input[type=radio] {
+  margin-left: 5px;
+}
+
+#AdminEditProduct {
+  font-size: 16px;
+}
+
+#loginFormulario {
+  background-color: #f5f5f5;
+  min-height: 700px;
+}
+#loginFormulario h1 {
+  margin-top: 70px;
+  text-align: center;
+}
+#loginFormulario label {
+  font-size: 16px;
+}
+#loginFormulario .loginForm {
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+  border-radius: 5px;
+}
+#loginFormulario .btn {
+  min-height: 50px;
+}
+#loginFormulario .form-group {
+  margin-bottom: 0px;
+}
+
+#checkOutContaier {
+  margin-top: 50px;
+  margin-left: 400px;
+  border-radius: 5px;
+}
+#checkOutContaier .contenedorCheckout {
+  color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+}
+#checkOutContaier .col-md-4 {
+  padding: 0px;
+  font-size: 16px;
+}
+#checkOutContaier .checkOutContaier {
+  border: 1px solid red;
+}
+#checkOutContaier .IMGCHECKOUT {
+  background-image: url("http://ecx.images-amazon.com/images/I/61%2BABMMN5zL._SL1500_.jpg");
+  min-height: 500px;
+  background-size: cover;
+}
+#checkOutContaier .checkoutForm {
+  background-color: #2f2c33;
+  min-height: 500px;
+  padding: 15px;
+}
+#checkOutContaier .checkoutExpiracion {
+  margin-right: 15px;
+}
+#checkOutContaier .cvvcheckout {
+  margin-left: 20px;
+  max-width: 40%;
+}
+#checkOutContaier .datos {
+  display: flex;
+}
+#checkOutContaier .btn-success {
+  margin-top: 50px;
+}
+
+#AgregarCatAPrdoucto .agregarCatInd {
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  margin-top: 50px;
+  border-radius: 3px;
+}
+#AgregarCatAPrdoucto .btn-primary {
+  background-color: white;
+  color: #337ab7;
+  transition-duration: 0.2s;
+  margin-right: 10px;
+}
+#AgregarCatAPrdoucto .btn-primary:hover {
+  background-color: #337ab7;
+  color: white;
+  transition-duration: 0.2s;
+}
+#AgregarCatAPrdoucto h1 {
+  font-size: 27px;
+  text-transform: capitalize;
+}
+#AgregarCatAPrdoucto h2 {
+  font-size: 22px;
+}
+#AgregarCatAPrdoucto ul {
+  padding-left: 0px;
+}
+#AgregarCatAPrdoucto ul:first-child {
+  padding-left: 0px;
+}
+#AgregarCatAPrdoucto ul li {
+  text-transform: capitalize;
+  font-size: 16px;
+  list-style: none;
+  color: #666;
+  display: inline;
+  padding-right: 10px;
+  border-radius: 2px;
+}
+
+/*# sourceMappingURL=style.css.map */
+=======
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -439,3 +703,4 @@ span.thumbnail {
 /* -------------------------aca termina Review-------------------------------- */
 
 /* -------------------------aca termina ContainerReview-------------------------------- */
+>>>>>>> 595ef3950aa7b784c06a284268203182c64c64ff
