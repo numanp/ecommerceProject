@@ -86,6 +86,6 @@ export const fetchProductsByCategory = categoryId => {
   return dispatch =>
     axios.get(`/api/productos/todoDeUnaCategoria/${categoryId}`)
       .then((productos) => {
-        fetchProductsUser(productos)
+        dispatch(fetchProductsUser(productos.data))
       })
 }

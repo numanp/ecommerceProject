@@ -36,7 +36,7 @@ export default class SearchBar extends Component {
                         <option value="0" defaultValue>
                           todos los Snippets
                         </option>
-                        <option value="1">CategoriaTuVieja</option>
+                        <option onClick={() => console.log('click')} value="1">CategoriaTuVieja</option>
                         <option value="2">CategoriaLancelot</option>
                         <option value="3">CategoriaElBolson</option>
                       </select>

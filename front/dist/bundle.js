@@ -1561,7 +1561,7 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
 var fetchProductsByCategory = exports.fetchProductsByCategory = function fetchProductsByCategory(categoryId) {
   return function (dispatch) {
     return _axios2.default.get('/api/productos/todoDeUnaCategoria/' + categoryId).then(function (productos) {
-      fetchProductsUser(productos);
+      dispatch(fetchProductsUser(productos.data));
     });
   };
 };
@@ -32920,7 +32920,9 @@ var SearchBar = function (_Component) {
                         ),
                         _react2.default.createElement(
                           "option",
-                          { value: "1" },
+                          { onClick: function onClick() {
+                              return console.log('click');
+                            }, value: "1" },
                           "CategoriaTuVieja"
                         ),
                         _react2.default.createElement(

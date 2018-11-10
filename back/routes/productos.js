@@ -43,10 +43,10 @@ router.get('/productoxcategoria/:id', (req, res) => {
 });
 
 router.get('/todoDeUnaCategoria/:id', (req, res) => {
-  models.Categoria.findAll({
-    where: { id: req.params.id },
-    include: [models.Producto]
-  })
+  models.Categoria.findById(req.params.id)
+    .then((categoria) =>
+      categoria.getProductos()
+    )
     .then((productos) => res.send(productos))
 })
 
