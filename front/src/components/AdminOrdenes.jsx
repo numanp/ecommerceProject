@@ -108,8 +108,8 @@ export default class AdminOrdenes extends Component {
                                     </td>
                                     <td>{orden.fecha}</td>
                                     <td>$ {orden.importe}</td>
-                                    <td><button>Detalles</button></td>
-                                    </tr>
+                                    <td><Link></Link></td>
+                                </tr>
                             ))
                         }
                         </tbody> 
