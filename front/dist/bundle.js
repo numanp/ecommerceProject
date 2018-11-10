@@ -33882,6 +33882,9 @@ function mapDispatchToProps(dispatch) {
   return {
     login: function login(user) {
       dispatch((0, _user.addLoginToLocalStorage)(user));
+    },
+    getCart: function getCart(carro) {
+      dispatch((0, _cart.actualizarCarro)(carro));
     }
   };
 }
@@ -33908,7 +33911,7 @@ var Login = function (_Component) {
       var _this2 = this;
 
       setTimeout(function () {
-        if (_this2.props.loggedIn.id) _this2.props.history.push('/productos');
+        _this2.props.getCart(JSON.parse(localStorage.getItem('cart')));if (_this2.props.loggedIn.id) _this2.props.history.push('/productos');
       }, 10);
     }
   }, {

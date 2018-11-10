@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addLoginToLocalStorage } from '../redux/action-creators/user';
-import { getMyCart } from '../redux/action-creators/cart'
+import { getMyCart, actualizarCarro } from '../redux/action-creators/cart'
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -15,6 +15,9 @@ function mapDispatchToProps(dispatch) {
     login: user => {
       dispatch(addLoginToLocalStorage(user));
     },
+    getCart: (carro) => {
+      dispatch(actualizarCarro(carro))
+    }
   };
 }
 
@@ -28,7 +31,7 @@ class Login extends Component {
     this.logn = this.logn.bind(this)
   }
   componentDidMount() {
-    setTimeout(() => { if (this.props.loggedIn.id) this.props.history.push('/productos') }, 10)
+    setTimeout(() => { this.props.getCart(JSON.parse(localStorage.getItem('cart'))); if (this.props.loggedIn.id) this.props.history.push('/productos') }, 10)
   }
   emailChange(e) {
     this.setState(
