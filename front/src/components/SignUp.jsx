@@ -55,7 +55,6 @@ class SignUp extends Component {
                   this.props
                     .sign(this.state)
                     .then(answer => {
-                      console.log({ answer });
                       if (answer.status === 200) {
                         this.props.history.push('/login');
                       }

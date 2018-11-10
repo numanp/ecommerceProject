@@ -17,7 +17,6 @@ class AdminContainer extends Component {
     evt.preventDefault();
     const formulario = this.state.valorInput;
     if (formulario.length < 5) {
-      console.log('ESTOY PUDIENDO SUBMITEAR');
     }
   }
 

@@ -61,7 +61,7 @@ class CarritoSlider extends Component {
                                                     <a className="a-carritoSlider" href="#">{product.nombre} - Cantidad:{product.q}-Subtotal:{product.precio * product.q}</a>
                                                     <div className="btn-group" role="group" aria-label="...">
                                                         <button type="button" className="btn btn-warning" onClick={() => { this.props.lessQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }} >Restar</button>
-                                                        <button type="button" className="btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10); console.log('elimina', this.props.cart) }}>Eliminar</button>
+                                                        <button type="button" className="btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10) }}>Eliminar</button>
                                                         <button type="button" className="btn btn-success" onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}>Sumar</button>
                                                     </div>
                                                 </li>

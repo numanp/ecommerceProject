@@ -63,7 +63,6 @@ export const getSingleProduct_wCategories = id => {
 
 export const postCategoriesToProducts = (id, arr) => {
   return dispatch => {
-    console.log('----action creator');
     axios
       .post(`/api/productos/catAproducto/${id}`, arr)
       .then(console.log('TODO SALIO BIEN'));

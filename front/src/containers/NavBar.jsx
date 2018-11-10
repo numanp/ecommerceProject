@@ -6,7 +6,6 @@ import { removeLoginFromLocalStorage, fetchCategorys } from '../redux/action-cre
 import { getProductsByName, fetchProductsByCategory } from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
-  //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
@@ -53,9 +52,6 @@ class NavBar extends Component {
         logueado: false,
       });
     }
-    setTimeout(() => {
-      console.log(this.props.categorias)
-    }, 10);
   }
 
   handleChange(evt) {
@@ -78,7 +74,6 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log(this.state.logueado)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -103,7 +98,7 @@ class NavBar extends Component {
                 {
                   this.props.categorias.map((categoria) => {
                     return (
-                      <li onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
+                      <li key={categoria.id} onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
                     )
                   })
                 }

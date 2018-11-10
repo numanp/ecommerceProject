@@ -15,7 +15,6 @@ router.get('/:userId', (req, res) => {
 });
 
 router.delete('/:userId', (req, res) => {
-  console.log('userBack', req.params.user);
   models.User.destroy({ where: { id: req.params.userId } }).then(() => {
     res.status(200).send('OK');
   });

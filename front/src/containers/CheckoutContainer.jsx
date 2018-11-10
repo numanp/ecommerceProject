@@ -27,6 +27,11 @@ class CheckoutContainer extends Component {
         axios.post('/api/ventas', this.obj)
             .then(() => console.log('orden creada'))
             .then(() => {
+                var arrProds = JSON.parse(this.obj.carro)
+                var productos = []
+                arrProds.map((prod) => productos.push(prod.nombre))
+                axios.post('/api/ventas/email', { productos: productos, email: this.obj.email })
+                    .then((res) => { console.log(res) })
                 this.props.history.push('/')
                 localStorage.setItem('cart', JSON.stringify([]))
             })
