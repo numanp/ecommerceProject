@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getSingleProduct } from '../redux/action-creators/products';
+import { addToCart } from '../redux/action-creators/cart';
 
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
@@ -10,6 +11,7 @@ import ContainerReview from './ContainerReview';
 function mapStateToProps(state, ownProps) {
     return {
         product: state.products.product,
+        cart: state.cart
     };
 }
 
@@ -17,6 +19,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getSingleProduct: (idProducto) => {
             dispatch(getSingleProduct(idProducto))
+        },
+        addToCart: (producto) => {
+            dispatch(addToCart(producto))
         }
     };
 }
@@ -26,7 +31,7 @@ class ContainerSingleProduct extends Component {
         super(props);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getSingleProduct(this.props.match.params.productId)
 
     }
@@ -87,7 +92,7 @@ class ContainerSingleProduct extends Component {
                                         <span>{this.props.product.precio}</span>
                                     </h4>
                                     <div className="action">
-                                        <button className="add-to-cart btn btn-success" type="button" onClick={(e) => { e.preventDefault(); console.log(this.props); var obj = { q: 1, id: this.props.product.id }; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }}>add to cart</button>
+                                        <button className="add-to-cart btn btn-success" type="button" onClick={(e) => { e.preventDefault(); var obj = this.props.product; obj.q = 1; this.props.addToCart(obj); setTimeout(() => { localStorage.setItem("cart", JSON.stringify(this.props.cart)); }, 10); }}>add to cart</button>
                                     </div>
                                 </div>
                             </div>

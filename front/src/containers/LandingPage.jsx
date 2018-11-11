@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getProducts } from '../redux/action-creators/products';
 
 import WebStoreSlider from '../components/WebStoreSlider'
 import ContenidoCelulares from '../components/ContenidoCelulares';
@@ -12,9 +13,11 @@ function mapStateToProps(state) {
         productos: state.products.products,
     }
 }
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
-
+        getProducts: () => {
+            dispatch(getProducts())
+        }
     }
 }
 
@@ -22,12 +25,15 @@ class LandingPage extends Component {
     constructor(props) {
         super(props);
     }
-    
+    componentDidMount() {
+        this.props.getProducts()
+    }
+
     render() {
         return (
             <div>
                 <WebStoreSlider />
-                <GroupProducts productos={this.props.productos}/>
+                <GroupProducts productos={this.props.productos} />
                 <ContenidoCelulares />
                 <ContenidoInformativo />
             </div>

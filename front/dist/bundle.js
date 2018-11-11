@@ -5074,6 +5074,8 @@ var _reactRedux = __webpack_require__(2);
 
 var _products = __webpack_require__(14);
 
+var _cart = __webpack_require__(15);
+
 var _Reviews = __webpack_require__(61);
 
 var _Reviews2 = _interopRequireDefault(_Reviews);
@@ -5096,7 +5098,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state, ownProps) {
     return {
-        product: state.products.product
+        product: state.products.product,
+        cart: state.cart
     };
 }
 
@@ -5104,6 +5107,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getSingleProduct: function getSingleProduct(idProducto) {
             dispatch((0, _products.getSingleProduct)(idProducto));
+        },
+        addToCart: function addToCart(producto) {
+            dispatch((0, _cart.addToCart)(producto));
         }
     };
 }
@@ -5288,7 +5294,7 @@ var ContainerSingleProduct = function (_Component) {
                                         _react2.default.createElement(
                                             'button',
                                             { className: 'add-to-cart btn btn-success', type: 'button', onClick: function onClick(e) {
-                                                    e.preventDefault();console.log(_this2.props);var obj = { q: 1, id: _this2.props.product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                    e.preventDefault();var obj = _this2.props.product;obj.q = 1;_this2.props.addToCart(obj);setTimeout(function () {
                                                         localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
                                                     }, 10);
                                                 } },
@@ -33003,6 +33009,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
+var _products = __webpack_require__(14);
+
 var _WebStoreSlider = __webpack_require__(153);
 
 var _WebStoreSlider2 = _interopRequireDefault(_WebStoreSlider);
@@ -33034,7 +33042,11 @@ function mapStateToProps(state) {
     };
 }
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        getProducts: function getProducts() {
+            dispatch((0, _products.getProducts)());
+        }
+    };
 }
 
 var LandingPage = function (_Component) {
@@ -33047,6 +33059,11 @@ var LandingPage = function (_Component) {
     }
 
     _createClass(LandingPage, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.getProducts();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -33576,196 +33593,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
 
 exports.default = function (productos) {
+    var count = 0;
     return _react2.default.createElement(
-        "div",
-        { className: "container" },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-            "div",
-            { className: "row" },
+            'div',
+            { className: 'row' },
             _react2.default.createElement(
-                "h1",
+                'h1',
                 null,
-                "Proba tu suerte!"
+                'Proba tu suerte!'
             ),
             _react2.default.createElement(
-                "div",
-                { id: "adv_team_4_columns_carousel", className: "carousel slide four_shows_one_move team_columns_carousel_wrapper", "data-ride": "carousel", "data-interval": "2000", "data-pause": "hover" },
+                'div',
+                { id: 'adv_team_4_columns_carousel', className: 'carousel slide four_shows_one_move team_columns_carousel_wrapper', 'data-ride': 'carousel', 'data-interval': '2000', 'data-pause': 'hover' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "carousel-inner", role: "listbox" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "item" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 01" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "item active" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        )
-                    )
+                    'div',
+                    { className: 'carousel-inner', role: 'listbox' },
+                    _react2.default.createElement('div', { className: 'item' }),
+                    _react2.default.createElement('div', { className: 'item active' })
                 )
             )
         )
@@ -34735,8 +34589,7 @@ var ProductosSubContainer = function (_Component) {
               )
             );
           })
-        ),
-        '); })}'
+        )
       );
     }
   }]);
