@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO, UPDATE_CART } from '../constants';
+import { ADD_TO_CART, REMOVE_FROM_CART, ADD_Q_TO_PRODUCTO, LESS_Q_TO_PRODUCTO, UPDATE_CART, EMPTY_CART } from '../constants';
 
 const cartReducer = (state = [], action) => {
     switch (action.type) {
@@ -35,7 +35,8 @@ const cartReducer = (state = [], action) => {
             var obj = state.find((i) => i.id == action.payload).q--
             return Object.assign([], state, { cart: obj });
         case UPDATE_CART:
-            console.log('entra update cart')
+            if (Array.isArray(action.payload)) state = action.payload
+        case EMPTY_CART:
             if (Array.isArray(action.payload)) state = action.payload
         default:
             return state

@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { logginSuccess } from '../redux/action-creators/user';
-
 //COMPONENTES
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
@@ -15,14 +14,16 @@ import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-import AdminProductos from '../components/AdminProductos';
 import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
 import AdminUsersContainer from './AdminUsersContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import checkOutContainer from '../containers/CheckoutContainer';
+import AdminSingleOrder from '../components/AdminSingleOrder';
+import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+import AdminProductos from '../components/AdminProductos';
+import CheckoutContainer from '../containers/CheckoutContainer';
 import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
+import AdminOrdenesContainer from '../containers/AdminOrdersContainer'
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
 function mapStateToProps(state) {
@@ -65,57 +66,21 @@ class Main extends Component {
     return (
       <div>
         <CarritoSlider cart={this.props.cart} />
-        <Route
-          path="/*"
-          render={props => <NavBar {...props} admin={this.state.admin} />}
-        />
-        {/* <NavBar  admin={this.state.admin} /> */}
-
+        <Route path="/*" render={props => <NavBar {...props} admin={this.state.admin} />} />
         <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/signup"
-          render={props => <SignUp {...props} sign={this.sign} />}
-        />
-        <Route
-          exact
-          path="/login"
-          render={() => <Login logout={this.logout} logn={this.logn} />}
-        />
+        <Route exact path="/signup" render={props => <SignUp {...props} sign={this.sign} />} />
+        <Route exact path="/login" render={() => <Login logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
-
         <Route exact path="/admin" component={AdminContainer} />
-        <Route
-          exact
-          path="/admin/agregarProducto"
-          component={AdminAddProductContainer}
-        />
-        <Route
-          exact
-          path="/admin/adminListaProductos"
-          component={AdminManejarProductos}
-        />
-        <Route
-          exact
-          path="/admin/agregarCategoria"
-          component={AdminAddCategoryContainer}
-        />
-        <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
-
+        <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />
+        <Route exact path="/admin/adminListaProductos" component={AdminManejarProductos} />
+        <Route exact path="/admin/agregarCategoria" component={AdminAddCategoryContainer} />
+        <Route exact path="/admin/verOrdenes" component={AdminOrdenesContainer} />
+        <Route exact path="/admin/verOrden" component={AdminSingleOrder} />
+        <Route exact path="/checkout/" render={(props) => <CheckoutContainer {...props} />} />
         <Route exact path="/admin/users/" component={AdminUsersContainer} />
-
-        <Route
-          exact
-          path="/admin/EditarProducto/:id"
-          component={AdminEditProductContainer}
-        />
-
-        <Route exact path="/checkoutContainer/" component={checkOutContainer} />
-        <Route
-          exact
-          path="/admin/editCategoriasProducto/:id"
-          component={AdminAddCategoryToProductContainer}
-        />
+        <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
+        <Route exact path="/admin/editCategoriasProducto/:id" component={AdminAddCategoryToProductContainer} />
       </div>
     );
   }

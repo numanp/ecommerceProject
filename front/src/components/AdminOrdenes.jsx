@@ -1,67 +1,131 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
+export default class AdminOrdenes extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            ordenes: [],
+            isOpen: false,
+            selectedCarrito: [],
+            selectedOrders: []
+        }
+        this.selectedStatus = this.selectedStatus.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
-var arregloCompras = [
-    {
-        idVenta: 1,
-        productos: [10,20,30],
-        fechaVenta: '10:25PM',
-        status: 'Completado',
-        linkProducto: '#'
-    },{
-        idVenta: 3,
-        productos: [10,20,30],
-        fechaVenta: '10:25PM',
-        status: 'incompleto',
-        linkProducto: '#'
-    },
-    ,{
-        idVenta: 4,
-        productos: [10,20,30],
-        fechaVenta: '10:25PM',
-        status: 'incompleto',
-        linkProducto: '#'
-    },
-]
-
-
-export default () => (
-
-
-<div  className="container-fluid" id="">
-    <h1>Manejo de ordenes</h1>
+    componentDidMount() {
+        axios.get('/api/ventas')
+        .then( res => this.setState({ ordenes: res.data }))
+    }
     
-    {
-        //DROPDOWN PARA FILTRAR LAS CATEGORIAS
-    }
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Filtrar por Status <span class="caret"></span>
-         </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">CREADO</a></li>
-                <li><a href="#">PROCESADO</a></li>
-                <li><a href="#">CANCELADO</a></li>
-                <li><a href="#">COMPLETADO</a></li>
-           </ul>
-    </div>
+    toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
-
-    { //MAPEO POR EL ARREGLO DE COMPRAS
-        arregloCompras.map(compra => (
-            <div className="profile_compra"  key={compra.idVenta}>
-                <a href={compra.linkProducto}>
-                    <img src="https://cdn.jysk.es/media/catalog/product/cache/9/thumbnail/960x/163b81649b7ef7bc8a00b0066e59ae0a/u/n/unbenannt-1_947.jpg" alt=""/>
-                </a>
-                <p>INFO DE LA VENTA.</p>
-                <p>ID VENTA: {compra.idVenta}</p>
-                <p>Fecha: {compra.fechaVenta}</p>
-                <p>Status: {compra.status}</p>    
-                <p class="profile_celeste">Ver Detalle (OTRO COMPONENTE QUE MUESTRE TODOS LOS PRODUCTOS COMPRADOS EN LA VENTA)</p>
-                <button class="btn btn-primary">Cambiar el Status</button>
-            </div>
-        ))
+    selectedStatus = (status) => {
+        if (status === 'todos') {
+            this.setState({
+                selectedOrders: this.state.ordenes,
+                selectedOrderToEdit: []
+            })
+            return
+        }
+        var ordenesFiltradas = [];
+        for (var i = 0; i < this.state.ordenes.length; i++) {
+            if (this.state.ordenes[i].status == status) {
+                ordenesFiltradas.push(this.state.ordenes[i]);
+            }
+        }
+        this.setState({ selectedOrders: ordenesFiltradas })
     }
 
-</div>
-);
+    handleSubmit(evento, ordenId) {
+        axios.put(`/api/ventas/${ordenId}`, {status: evento.target.value})
+        .then(location.reload())
+    }
+    
+    render() {
+        const menuClass = `dropdown-menu${this.state.isOpen ? " show" : ""}`;
+        return (
+            <div>
+                <div className="container">
+                    <h1 className="h1-adminOrdenes">Manejo de ordenes</h1>
+
+                    <div className="btn-group" onClick={this.toggleOpen}>
+                    <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filtrar por Status <span className="caret"></span>
+                    </button>
+                    <ul className={menuClass}>
+                        <li onClick={() => this.selectedStatus('procesando')}><a href="#">PROCESANDO</a></li>
+                        <li onClick={() => this.selectedStatus('creado')}><a href="#">CREADO</a></li>
+                        <li onClick={() => this.selectedStatus('cancelado')}><a href="#">CANCELADO</a></li>
+                        <li onClick={() => this.selectedStatus('completado')}><a href="#">COMPLETADO</a></li>
+                        <li onClick={() => this.selectedStatus('todos')}><a href="#">TODOS</a></li>
+                    </ul>
+                    </div>
+
+                    <form className="form-inline" onSubmit={this.props.handleSubmitID}>
+                        <div className="form-group">
+                            <label className="sr-only" >ID Orden</label>
+                            <div className="input-group">
+                            <input type="text" name="ID" className="form-control" placeholder="ID"></input>
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Ver más detalles de Orden por ID</button>
+                    </form>
+
+                </div>
+                <div className="container container-tabla">
+                    <table className="table table-hover">
+                        <thead className="Head-tabla-orden-admin">
+                            <tr>
+                                <th>ID Orden</th>
+                                <th>Status</th>
+                                <th>Fecha</th>
+                                <th>Importe</th>
+                            </tr>
+                        </thead>   
+                        <tbody>
+                        {
+                            this.state.selectedOrders.length > 0 ? 
+                            this.state.selectedOrders.map(orden => (
+                                <tr className="profile_orden"  key={orden.id}>
+                                    <td>{orden.id}</td>
+                                    <td>
+                                        <select value={orden.status} onChange={(event) => this.handleSubmit(event, orden.id)}>
+                                            <option value="procesando">Procesando</option>
+                                            <option value="completado">Completado</option>
+                                            <option value="creado">Creado</option>
+                                            <option value="cancelado">Cancelado</option>
+                                        </select>
+                                    </td>
+                                    <td>{orden.fecha}</td>
+                                    <td>$ {orden.importe}</td>
+                                </tr>
+                            ))
+                            :
+                            this.state.ordenes.map(orden => (
+                                <tr className="profile_orden"  key={orden.id}>
+                                    <td>{orden.id}</td>
+                                    <td>
+                                        <select value={orden.status} onChange={(event) => this.handleSubmit(event, orden.id)}>
+                                            <option value="procesando">Procesando</option>
+                                            <option value="completado">Completado</option>
+                                            <option value="creado">Creado</option>
+                                            <option value="cancelado">Cancelado</option>
+                                        </select>
+                                    </td>
+                                    <td>{orden.fecha}</td>
+                                    <td>$ {orden.importe}</td>
+                                </tr>
+                            ))
+                        }
+                        </tbody> 
+                    </table>
+                </div>
+
+
+        </div>
+            
+        )
+    }
+}
