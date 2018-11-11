@@ -166,7 +166,7 @@ class NavBar extends Component {
                         <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <Link to="/carrito">Carrito</Link>
+                        <Link to="/productos">Productos</Link>
                       </li>
                     </ul>,
                   ]}
