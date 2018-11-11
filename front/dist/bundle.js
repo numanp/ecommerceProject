@@ -5285,58 +5285,58 @@ var AdminSingleOrder = function (_Component) {
                     ),
                     this.props.carrito.length > 0 ? this.props.carrito.map(function (carrito) {
                         return _react2.default.createElement(
-                            "ul",
+                            "div",
                             { key: carrito.id },
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Creado: ",
                                 carrito.createdAt
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Descripcion: ",
                                 carrito.descripcion
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Disponibildad: ",
-                                carrito.disponibilidad
+                                carrito.disponibipdad
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Foto: ",
                                 carrito.foto
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "ID: ",
                                 carrito.id
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Nombre: ",
                                 carrito.nombre
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Precio: ",
                                 carrito.precio
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Cantidad: ",
                                 carrito.q
                             ),
                             _react2.default.createElement(
-                                "li",
+                                "p",
                                 null,
                                 "Stock: ",
                                 carrito.stock
@@ -35407,9 +35407,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(3);
 
+var _axios = __webpack_require__(7);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _AdminComponent = __webpack_require__(169);
 
 var _AdminComponent2 = _interopRequireDefault(_AdminComponent);
+
+var _AdminSingleOrder = __webpack_require__(58);
+
+var _AdminSingleOrder2 = _interopRequireDefault(_AdminSingleOrder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35430,9 +35438,12 @@ var AdminContainer = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (AdminContainer.__proto__ || Object.getPrototypeOf(AdminContainer)).call(this));
 
-    _this.state = {};
+    _this.state = {
+      selectedCarritoById: ''
+    };
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleOrderById = _this.handleOrderById.bind(_this);
     return _this;
   }
 
@@ -35449,12 +35460,32 @@ var AdminContainer = function (_Component) {
       }
     }
   }, {
+    key: 'handleOrderById',
+    value: function handleOrderById(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var id = e.target.ID.value;
+
+      _axios2.default.get('/api/ventas/').then(function (res) {
+        return res.data;
+      }).then(function (ordenesTotales) {
+        var carrito = [];
+        for (var i = 0; i < ordenesTotales.length; i++) {
+          if (ordenesTotales[i].id == id) {
+            carrito.push(JSON.parse(ordenesTotales[i].carro));
+          }
+        }
+        _this2.setState({ selectedCarritoById: carrito[0] });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_AdminComponent2.default, { handleSubmit: this.handleSubmit })
+        this.state.selectedCarritoById.length > 0 ? _react2.default.createElement(_AdminSingleOrder2.default, { carrito: this.state.selectedCarritoById }) : _react2.default.createElement(_AdminComponent2.default, { handleSubmit: this.handleSubmit, handleOrderById: this.handleOrderById })
       );
     }
   }]);
@@ -35483,7 +35514,7 @@ var _reactRouterDom = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+exports.default = function (props) {
   return _react2.default.createElement(
     'div',
     { className: 'container-fluid', id: 'adminPanel' },
@@ -35614,24 +35645,28 @@ exports.default = function () {
               _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
-                _react2.default.createElement('input', {
-                  type: 'text',
-                  className: 'form-control',
-                  placeholder: 'Search'
-                })
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
                 _react2.default.createElement(
-                  'a',
-                  { href: '#', className: 'btn btn-primary' },
-                  'Button'
-                ),
-                _react2.default.createElement(
-                  'a',
-                  { href: '#', className: 'btn btn-default' },
-                  'Button'
+                  'form',
+                  { className: 'form-inline', onSubmit: props.handleOrderById },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                      'label',
+                      { className: 'sr-only' },
+                      'ID Orden'
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'input-group' },
+                      _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search', name: 'ID' })
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'button',
+                    { type: 'submit', className: 'btn btn-primary' },
+                    'Ver m\xE1s detalles de Orden por ID'
+                  )
                 )
               )
             )

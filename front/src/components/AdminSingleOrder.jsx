@@ -14,17 +14,18 @@ export default class AdminSingleOrder extends Component {
         
             this.props.carrito.length > 0  ?
             this.props.carrito.map( carrito => (
-                    <ul key={carrito.id}>
-                        <li>Creado: {carrito.createdAt}</li>
-                        <li>Descripcion: {carrito.descripcion}</li>
-                        <li>Disponibildad: {carrito.disponibilidad}</li>
-                        <li>Foto: {carrito.foto}</li>
-                        <li>ID: {carrito.id}</li>
-                        <li>Nombre: {carrito.nombre}</li>
-                        <li>Precio: {carrito.precio}</li>
-                        <li>Cantidad: {carrito.q}</li>
-                        <li>Stock: {carrito.stock}</li>
-                    </ul>
+                <div key={carrito.id}>
+                    <p>Creado: {carrito.createdAt}</p>
+                    <p>Descripcion: {carrito.descripcion}</p>
+                    <p>Disponibildad: {carrito.disponibipdad}</p>
+                    <p>Foto: {carrito.foto}</p>
+                    <p>ID: {carrito.id}</p>
+                    <p>Nombre: {carrito.nombre}</p>
+                    <p>Precio: {carrito.precio}</p>
+                    <p>Cantidad: {carrito.q}</p>
+                    <p>Stock: {carrito.stock}</p>
+                </div>
+                
                     
             ))
             : null
