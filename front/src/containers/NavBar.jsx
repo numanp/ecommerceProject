@@ -53,7 +53,7 @@ class NavBar extends Component {
     this.setState({
       nombreProducto: value,
     });
-    console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+    // console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
   }
 
   handleOnClick() {
@@ -68,7 +68,7 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log(this.state.logueado)
+    // console.log('this.props',this.props.admin)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -105,6 +105,18 @@ class NavBar extends Component {
                     </ul>
                   ]
               }
+
+              {
+                this.props.admin ? 
+                <ul>
+                  <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+                </ul>
+                :
+                <ul>
+                <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+                </ul>
+              }
+           
             </div>
           </div>
         </div>

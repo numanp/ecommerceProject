@@ -32029,6 +32029,10 @@ var _AdminOrdersContainer = __webpack_require__(182);
 
 var _AdminOrdersContainer2 = _interopRequireDefault(_AdminOrdersContainer);
 
+var _UserProfile = __webpack_require__(183);
+
+var _UserProfile2 = _interopRequireDefault(_UserProfile);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32039,8 +32043,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 //COMPONENTES
 
-
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
+
 
 function mapStateToProps(state) {
   return {
@@ -32081,8 +32085,9 @@ var Main = function (_Component) {
   }, {
     key: 'logn',
     value: function logn(object) {
+      console.log('hola');
       _axios2.default.post('api/login', object).then(function (res) {
-        return console.log(res.data);
+        return console.log(res);
       });
     }
   }, {
@@ -32093,6 +32098,8 @@ var Main = function (_Component) {
       _axios2.default.get('api/user/me').then(function (response) {
         _this2.props.logginSuccess(response.data);
       });
+      // axios.get('/api/user/3')
+      // .then(res => console.log(res.data))
     }
   }, {
     key: 'render',
@@ -32125,7 +32132,8 @@ var Main = function (_Component) {
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/users/', component: _AdminUsersContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/editCategoriasProducto/:id', component: _AdminAddCategoryToProductContainer2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/editCategoriasProducto/:id', component: _AdminAddCategoryToProductContainer2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/profile', component: _UserProfile2.default })
       );
     }
   }]);
@@ -33114,7 +33122,7 @@ var NavBar = function (_Component) {
       this.setState({
         nombreProducto: value
       });
-      console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+      // console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
     }
   }, {
     key: 'handleOnClick',
@@ -33134,7 +33142,7 @@ var NavBar = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      // console.log(this.state.logueado)
+      // console.log('this.props',this.props.admin)
       return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
@@ -33233,7 +33241,36 @@ var NavBar = function (_Component) {
                   ),
                   ' '
                 )
-              )]
+              )],
+              this.props.admin ? _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/admin/verOrdenes' },
+                    ' Panel Admin '
+                  ),
+                  ' '
+                )
+              ) : _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/user/profile' },
+                    ' Mi Cuenta '
+                  ),
+                  ' '
+                )
+              )
             )
           )
         )
@@ -37528,6 +37565,43 @@ var AdminOrdersContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = AdminOrdersContainer;
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+    var userPerfil = _ref.userPerfil,
+        arregloCompras = _ref.arregloCompras,
+        misReviews = _ref.misReviews;
+    return _react2.default.createElement(
+        "div",
+        { className: "col-xs-9" },
+        _react2.default.createElement(
+            "h1",
+            null,
+            "Compras"
+        ),
+        _react2.default.createElement(
+            "h1",
+            null,
+            "Reviews (PURAMENTE OPCIONAL) NO LO PIDE EN LOS PUNTOS"
+        )
+    );
+};
 
 /***/ })
 /******/ ]);

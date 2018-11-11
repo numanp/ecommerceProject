@@ -25,6 +25,7 @@ import CheckoutContainer from '../containers/CheckoutContainer';
 import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
 import AdminOrdenesContainer from '../containers/AdminOrdersContainer'
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
+import UserProfile from '../components/UserProfile'
 
 function mapStateToProps(state) {
   return {
@@ -55,13 +56,17 @@ class Main extends Component {
     return axios.post('api/user/signup', object);
   }
   logn(object) {
-    axios.post('api/login', object).then(res => console.log(res.data));
+    console.log('hola')
+    axios.post('api/login', object).then(res => console.log(res));
   }
   componentDidMount() {
     axios.get('api/user/me').then(response => {
       this.props.logginSuccess(response.data);
     });
+    // axios.get('/api/user/3')
+    // .then(res => console.log(res.data))
   }
+
   render() {
     return (
       <div>
@@ -81,6 +86,7 @@ class Main extends Component {
         <Route exact path="/admin/users/" component={AdminUsersContainer} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
         <Route exact path="/admin/editCategoriasProducto/:id" component={AdminAddCategoryToProductContainer} />
+        <Route exact path="/user/profile" component={UserProfile} />
       </div>
     );
   }
