@@ -93,32 +93,33 @@ class NavBar extends Component {
                   handleOnClick={this.handleOnClick}
                 />
               </ul>
-              {/* {this.state.logueado === true
+              {
+                this.state.logueado === true
                 ? [
                     <ul className="nav navbar-nav navbar-right" key="2">
-                      <li key="1">
+                      <li key="Logout">
                         <Link to="/login" onClick={() => this.props.logout()}>
                           Logout
                         </Link>
                       </li>
-                      <li>
+                      <li key='carrito'>
                         <Link to="/carrito">Carrito</Link>
                       </li>
                     </ul>,
                   ]
                 : [
                     <ul className="nav navbar-nav navbar-right">
-                      <li>
+                      <li key='singup'>
                         <Link to="/signup">Registrate</Link>
                       </li>
-                      <li>
+                      <li key='login'>
                         <Link to="/login">Login</Link>
                       </li>
-                      <li>
+                      <li key='carrito'>
                         <Link to="/carrito">Carrito</Link>
                       </li>
                     </ul>,
-                  ]} */}
+                  ]} 
             </div>
           </div>
         </div>
