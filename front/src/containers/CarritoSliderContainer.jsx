@@ -48,7 +48,7 @@ class CarritoSlider extends Component {
                 <div className="wrapper-sidebar" onClick={() => { /* this.updateCart(); this.forceUpdate() */ }}>
                     <nav id="sidebar-skeree" className="active" >
                         <div className="sidebar-header">
-                            <img src="./images/skereeteam.png" />
+                            <img src="/images/skereeteam.png" />
                         </div>
                         <ul className="list-unstyled components">
                             <li className="active">

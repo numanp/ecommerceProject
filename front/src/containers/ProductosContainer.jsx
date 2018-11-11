@@ -64,7 +64,7 @@ class ProductosContainer extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path={`${match.path}/:productId`} render={({match}) => <ContainerSingleProduct match={match} cart={this.props.cart} lessQtoProduct={this.props.lessQtoProduct} addQtoProduct={this.props.addQtoProduct} removeFromCart={this.props.removeFromCart} addToCart={this.props.addToCart} product={this.props.product} user={this.props.user} />} />
+                    <Route path='/productos/:productId' render={({match}) => <ContainerSingleProduct match={match} cart={this.props.cart} lessQtoProduct={this.props.lessQtoProduct} addQtoProduct={this.props.addQtoProduct} removeFromCart={this.props.removeFromCart} addToCart={this.props.addToCart} product={this.props.product} user={this.props.user} />} />
                     <Route render={() => <ListadoProductos cart={this.props.cart} lessQtoProduct={this.props.lessQtoProduct} addQtoProduct={this.props.addQtoProduct} removeFromCart={this.props.removeFromCart} addToCart={this.props.addToCart} selectProduct={this.props.getSingleProduct} products={this.props.productos} user={this.props.user} />} />
                 </Switch>
             </div>

@@ -99,7 +99,7 @@ class ContainerSingleProduct extends Component {
                         </div>
                     </div>
                 </div>
-                <ContainerReview />
+                {this.props.user.logged == "no estas logeado" ? null : <ContainerReview />}
             </div>
 
         );
