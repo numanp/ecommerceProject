@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default (props) => (
     <div className="container-fluid" id="adminListaProductos">
         
-    {console.log(props.listaProductos)}
         <br/>
         <Link to='/admin'>
         <button className='btn btn-primary'>

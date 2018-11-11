@@ -4758,7 +4758,6 @@ exports.default = function (props) {
     return _react2.default.createElement(
         'div',
         { className: 'container-fluid', id: 'adminListaProductos' },
-        console.log(props.listaProductos),
         _react2.default.createElement('br', null),
         _react2.default.createElement(
             _reactRouterDom.Link,
@@ -35915,11 +35914,6 @@ exports.default = function () {
       'div',
       { className: 'container' },
       _react2.default.createElement(
-        'h1',
-        null,
-        'ADMIN PANEL'
-      ),
-      _react2.default.createElement(
         'div',
         { className: 'row' },
         _react2.default.createElement(
@@ -35935,6 +35929,11 @@ exports.default = function () {
                 'h3',
                 null,
                 'Crear Producto'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'adminP' },
+                'Agregar productos a la base de datos.'
               ),
               _react2.default.createElement(
                 _reactRouterDom.Link,
@@ -35959,14 +35958,14 @@ exports.default = function () {
                 'Crear Categorias'
               ),
               _react2.default.createElement(
+                'p',
+                { className: 'adminP' },
+                'Agregar categorias a la base de datos.'
+              ),
+              _react2.default.createElement(
                 _reactRouterDom.Link,
                 { to: '/admin/agregarCategoria', className: 'btn btn-primary' },
                 'Crear Categoria'
-              ),
-              _react2.default.createElement(
-                'a',
-                { href: '#', className: 'btn ' },
-                'Editar Categoria'
               )
             )
           )
@@ -35986,6 +35985,11 @@ exports.default = function () {
                 'Editar productos'
               ),
               _react2.default.createElement(
+                'p',
+                { className: 'adminP' },
+                'Editar productos y cambiar sus propiedades.'
+              ),
+              _react2.default.createElement(
                 _reactRouterDom.Link,
                 { to: '/admin/adminListaProductos', className: 'btn btn-primary' },
                 'Editar Producto'
@@ -35993,7 +35997,6 @@ exports.default = function () {
             )
           )
         ),
-        _react2.default.createElement('div', { className: 'clearfix' }),
         _react2.default.createElement(
           'div',
           { className: 'col-sm-6 col-md-4' },
@@ -36009,14 +36012,14 @@ exports.default = function () {
                 'Ver lista ordenes'
               ),
               _react2.default.createElement(
+                'p',
+                { className: 'adminP' },
+                'Ver listado de ordenes y ordenes en especifico.'
+              ),
+              _react2.default.createElement(
                 _reactRouterDom.Link,
                 { to: '/admin/verOrdenes', className: 'btn btn-primary' },
                 'Ver Ordenes'
-              ),
-              _react2.default.createElement(
-                'a',
-                { href: '#', className: 'btn ' },
-                'Editar Producto'
               )
             )
           )
@@ -36041,7 +36044,7 @@ exports.default = function () {
                 _react2.default.createElement('input', {
                   type: 'text',
                   className: 'form-control',
-                  placeholder: 'Search'
+                  placeholder: 'Buscar numero de orden'
                 })
               ),
               _react2.default.createElement(
@@ -36050,46 +36053,41 @@ exports.default = function () {
                 _react2.default.createElement(
                   'a',
                   { href: '#', className: 'btn btn-primary' },
-                  'Button'
-                ),
+                  'Buscar'
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col-sm-6 col-md-4' },
+          _react2.default.createElement(
+            'div',
+            { className: 'thumbnail' },
+            _react2.default.createElement(
+              'div',
+              { className: 'caption' },
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Lista de Usuarios'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
                 _react2.default.createElement(
-                  'a',
-                  { href: '#', className: 'btn btn-default' },
-                  'Button'
+                  _reactRouterDom.Link,
+                  { to: '/admin/users', className: 'btn btn-primary' },
+                  'Manejo de Usuarios'
                 )
               )
             )
           )
         )
       ),
-      _react2.default.createElement(
-        'div',
-        { className: 'col-sm-6 col-md-4' },
-        _react2.default.createElement(
-          'div',
-          { className: 'thumbnail' },
-          _react2.default.createElement(
-            'div',
-            { className: 'caption' },
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Lista de Usuarios'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/admin/users', className: 'btn btn-warning' },
-                'Manejo de Usuarios'
-              )
-            )
-          )
-        )
-      )
-    ),
-    ' '
+      ' '
+    )
   );
 };
 
@@ -37999,15 +37997,14 @@ var AdminAddCategoryToProductContainer = function (_Component) {
     }, {
         key: 'handleAgregarCategorias',
         value: function handleAgregarCategorias() {
-            console.log(this.state.arregloCategorias);
+            console.log(this.props);
+            console.log(this.state);
             this.props.postCategoriesToProducts(this.state.idProducto, this.state.arregloCategorias);
         }
     }, {
         key: 'render',
         value: function render() {
-            {
-                this.props.producto ? console.log(this.props.producto) : null;
-            }
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -38111,7 +38108,7 @@ exports.default = function (_ref) {
                 producto ? producto.categorias.map(function (categoria) {
                     return _react2.default.createElement(
                         'li',
-                        null,
+                        { key: categoria.nombre },
                         categoria.nombre
                     );
                 }) : null
@@ -38127,7 +38124,7 @@ exports.default = function (_ref) {
                 listaCategorias.map(function (categoria) {
                     return _react2.default.createElement(
                         'option',
-                        { value: categoria.id },
+                        { value: categoria.id, key: categoria.id },
                         categoria.nombre,
                         ' '
                     );
@@ -38137,7 +38134,7 @@ exports.default = function (_ref) {
             _react2.default.createElement('br', null),
             _react2.default.createElement(
                 'button',
-                { className: 'btn btn-primary', onClick: function onClick() {
+                { className: 'btn btn-primary ', onClick: function onClick() {
                         return handleClick();
                     } },
                 'Agregar Categorias'
