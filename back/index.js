@@ -16,10 +16,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('../front/dist'));
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function(id, done) {
   models.User.findById(id)
     .then(user => {
       done(null, user);
@@ -32,7 +32,7 @@ passport.use(
       usernameField: 'email',
       passwordField: 'password',
     },
-    function (username, password, done) {
+    function(username, password, done) {
       models.User.findOne({ where: { email: username } }).then(user => {
         if (!user) {
           return done(null, false, { message: 'Incorrect username.' });
@@ -46,8 +46,8 @@ passport.use(
     },
   ),
 );
-db.sync({ force: false }).then(function () {
-  app.listen('3001', function () {
+db.sync({ force: false }).then(function() {
+  app.listen('3001', function() {
     console.log('listening at 3001');
   });
 });
@@ -63,18 +63,17 @@ app.post('/api/signup', (req, res) => {
     /* res.redirect('/') */
   });
 });
-app.post('/api/login', passport.authenticate('local'), function (req, res) {
+app.post('/api/login', passport.authenticate('local'), function(req, res) {
   res.send(req.user);
 });
 app.post('/api/logout', (req, res) => {
-  req.session.destroy(function () {
+  req.session.destroy(function() {
     res.clearCookie('connect.sid').send('bien');
-
   });
-  /* return res.send('deslogeado') */;
+  /* return res.send('deslogeado') */
 });
 app.use('/api', require('./routes/index'));
 
-app.get('/*', function (req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.resolve('../front/index.html'));
 });
