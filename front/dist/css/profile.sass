@@ -2,6 +2,8 @@ $celeste: #3855a2
 $gris: #d1d1d1
 $grisMediano: #e8e8e8
 $navbarGrisClaro: #f5f5f5
+$amarillo1: #f0ad4e
+$adminCeleste: #2d8388
 
 $navbarGrisOscuro: #666
 
@@ -46,17 +48,55 @@ $navbarGrisOscuro: #666
     background-color: $navbarGrisClaro
     min-height: 700px
 #adminPanel
+    padding-top: 50px
     .thumbnail
+        display: flex
+        border-top-left-radius: 10px
+        border-top-right-radius: 10px
         min-height: 170px
+        padding: 0px
+        .caption
+            padding: 0px 
+            flex-grow: 1
+        h3
+            border-top-left-radius: 10px
+            border-top-right-radius: 10px
+            background-color: $adminCeleste
+            padding: 10px
+            margin: 0px
+            color: white
+            border: 1px solid grey
+        .adminP
+            padding: 15px
+            font-size: 14px
+            color: $navbarGrisOscuro
+        .btn-primary
+            background-color: white
+            color: $adminCeleste
+            display: block
+            &:hover
+                justify-content: flex-end
+                background-color: $adminCeleste
+                color: white
+                transition-duration: 0.2s
+        
+
 
 #adminListaProductos
     background-color: $navbarGrisClaro
+    .container
+        padding-left: 0px
+        padding-right: 0px
+        
 
     .titleListaProductos
         display: flex
         flex-direction: row
         align-items: center
         margin-top: 20px
+        background-color: $amarillo1
+        border-top-left-radius: 10px
+        border-top-right-radius: 10px
     .container
         display: flex
     .listaProductos
@@ -92,6 +132,14 @@ $navbarGrisOscuro: #666
                 background-color: #3278b4
                 color: white
                 transition: 0.2s
+        .btn-warning
+            background-color: white 
+            color: $amarillo1
+            transition-duration: 0.2s
+            margin-right: 5px
+            &:hover
+                background-color: $amarillo1
+                color: white
 
     
 #AdminAddCategory
@@ -225,3 +273,24 @@ $navbarGrisOscuro: #666
             display: inline
             padding-right: 10px
             border-radius: 2px
+
+#users-table
+    .btn-danger
+            background-color: white
+            color: #de5454
+            transition-duration: 0.2s
+            &:hover
+                background-color: #de5454
+                color: white
+                transition-duration: 0.2s
+    .btn-warning
+            background-color: white 
+            color: $amarillo1
+            transition-duration: 0.2s
+            margin-right: 5px
+            &:hover
+                background-color: $amarillo1
+                color: white
+
+
+ 

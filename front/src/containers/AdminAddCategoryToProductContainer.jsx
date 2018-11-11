@@ -37,17 +37,19 @@ class AdminAddCategoryToProductContainer extends Component {
         var categoria = document.querySelector('.botonAgregarCategoria');  
         if(this.state.arregloCategorias.indexOf(parseInt(categoria.value)) < 0){
             this.state.arregloCategorias.push(parseInt(categoria.value))
-        }      
+        }
+        
        
     }
     handleAgregarCategorias(){
-        console.log(this.state.arregloCategorias)
+        console.log(this.props)
+        console.log(this.state)
         this.props.postCategoriesToProducts(this.state.idProducto,this.state.arregloCategorias)
     }
 
 
     render() {
-        {this.props.producto ? console.log(this.props.producto) : null}
+       
         return (
             <div>
                <AdminAddCategoryToProduct 

@@ -90,31 +90,30 @@ class NavBar extends Component {
                 <SearchBar handleChange={this.handleChange} handleOnClick={this.handleOnClick} handelOnKeyPress={this.handelOnKeyPress} />
               </ul>
               {
-                this.state.logueado === true ?
-                  [
-                    <ul key="2" className="nav navbar-nav navbar-right">
-                      <li> <Link to="/login" onClick={() => this.props.logout()}>Logout</Link></li>
-                      <li> <Link to="/carrito">Carrito</Link> </li>
-                    </ul>
-                  ] :
-                  [
-                    <ul key="3" className="nav navbar-nav navbar-right">
-                      <li> <Link to="/signup">Registrate</Link></li>
-                      <li> <Link to="/login">Login</Link></li>
-                      <li> <Link to="/carrito">Carrito</Link> </li>
+                this.state.logueado === true
+                ? [
+                    <ul className="nav navbar-nav navbar-right" key="2">
+                      <li key="Logout">
+                        <Link to="/login" onClick={() => this.props.logout()}> Logout</Link>
+                      </li>
+                      <li key='productos'>
+                        <Link to="/productos">Productos</Link>
+                      </li>
+                    </ul>,
+                  ]
+                : [
+                    <ul className="nav navbar-nav navbar-right" key="3">
+                      <li key='singup'>
+                        <Link to="/signup">Registrate</Link>
+                      </li>
+                      <li key='login'>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li key='productos'>
+                        <Link to="/productos">Productos</Link>
+                      </li>
                     </ul>
                   ]
-              }
-
-              {
-                this.props.admin ? 
-                <ul>
-                  <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
-                </ul>
-                :
-                <ul>
-                <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
-                </ul>
               }
            
             </div>
@@ -126,4 +125,17 @@ class NavBar extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+
+// {
+                  
+//   this.props.admin ? 
+//   <ul>
+//     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+//   </ul>
+//   :
+//   <ul>
+//   <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+//   </ul>
+
+// }
 

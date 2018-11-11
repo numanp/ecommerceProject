@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default (props) => (
     <div className="container-fluid" id="adminListaProductos">
         
-    {console.log(props.listaProductos)}
         <br/>
         <Link to='/admin'>
         <button className='btn btn-primary'>
@@ -20,13 +19,13 @@ export default (props) => (
             <div className="col-md-4">
                 <h3> Producto</h3>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
                 <h3> Precio </h3>
             </div>
             <div className="col-md-3">
             <h3> Descripcion</h3>
             </div>
-            <div className="col-md-2">
+            <div className="col-md-3">
                 <h3> Editar</h3>
             </div>
        
@@ -45,9 +44,9 @@ export default (props) => (
                                         <h3> ${producto.precio} </h3>
                                     </div>
                                     <div className="col-md-2">
-                                        <p> {producto.descripcion} </p>
+                                        <p> {producto.descripcion.substring(0,50)} </p>
                                     </div>
-                                    <div className="col-md-3">
+                                    <div className="col-md-4">
                                     <Link to={`/admin/EditarProducto/${producto.id}`}>
                                             <button className="btn btn-warning"> <span className="glyphicon glyphicon-pencil"></span> Editar Product</button>
                                         </Link>
