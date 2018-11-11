@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { logginSuccess } from '../redux/action-creators/user';
-
 //COMPONENTES
 import NavBar from './NavBar';
 import LandingPage from './LandingPage';
@@ -15,12 +14,13 @@ import Productos from './ProductosContainer';
 import SingleProduct from './ContainerSingleProduct';
 import AdminContainer from './AdminContainer';
 import AdminAddProductContainer from '../containers/AdminAddProductContainer';
-import AdminAddCategoryContainer from './AdminAddCategoryContainer';
-import AdminProductos from '../components/AdminProductos';
 import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
 import AdminUsersContainer from './AdminUsersContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
+import AdminSingleOrder from '../components/AdminSingleOrder';
+import AdminAddCategoryContainer from './AdminAddCategoryContainer';
+import AdminProductos from '../components/AdminProductos';
 import CheckoutContainer from '../containers/CheckoutContainer';
 import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductContainer';
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
@@ -70,7 +70,6 @@ class Main extends Component {
           path="/*"
           render={props => <NavBar {...props} admin={this.state.admin} />}
         />
-        {/* <NavBar  admin={this.state.admin} /> */}
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
@@ -100,6 +99,7 @@ class Main extends Component {
           component={AdminAddCategoryContainer}
         />
         <Route exact path="/admin/verOrdenes" component={AdminOrdenes} />
+        <Route exact path="/admin/verOrden" component={AdminSingleOrder} />
         <Route
           exact
           path="/checkout/"

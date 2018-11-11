@@ -63,9 +63,11 @@ app.post('/api/signup', (req, res) => {
     /* res.redirect('/') */
   });
 });
+
 app.post('/api/login', passport.authenticate('local'), function(req, res) {
   res.send(req.user);
 });
+
 app.post('/api/logout', (req, res) => {
   req.session.destroy(function() {
     res.clearCookie('connect.sid').send('bien');

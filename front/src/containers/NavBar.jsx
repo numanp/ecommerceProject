@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchBar from './SearchBar';
-import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
-import { getProductsByName } from '../redux/action-creators/products';
+import {
+  removeLoginFromLocalStorage,
+  fetchCategorys,
+} from '../redux/action-creators/user';
+import {
+  getProductsByName,
+  fetchProductsByCategory,
+} from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
   //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
+    categorias: state.userAdmin.listaCategorias,
   };
 }
 
@@ -20,6 +27,12 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     getProductsByName: nombre => {
       dispatch(getProductsByName(nombre));
+    },
+    fetchCategorys: () => {
+      dispatch(fetchCategorys());
+    },
+    fetchProductsByCategory: id => {
+      dispatch(fetchProductsByCategory(id));
     },
   };
 }
@@ -35,7 +48,7 @@ class NavBar extends Component {
     this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
   }
   componentDidMount() {
-    // console.log(this.state, 'estado interno navbar');
+    this.props.fetchCategorys();
     var objeto = sessionStorage.getItem('login');
     if (!!objeto) {
       this.setState({
@@ -46,6 +59,9 @@ class NavBar extends Component {
         logueado: false,
       });
     }
+    setTimeout(() => {
+      console.log(this.props.categorias);
+    }, 10);
   }
 
   handleChange(evt) {
@@ -90,7 +106,33 @@ class NavBar extends Component {
                 <img src="./images/skereeteam.png" />
               </Link>
             </div>
-
+            <div className="dropdown">
+              <button
+                className="btn btn-default dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true"
+              >
+                Categorias
+                <span className="caret" />
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {this.props.categorias.map(categoria => {
+                  return (
+                    <li
+                      onClick={() => {
+                        this.props.fetchProductsByCategory(categoria.id);
+                      }}
+                    >
+                      {' '}
+                      {categoria.nombre}{' '}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
             <div
               className="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1"
