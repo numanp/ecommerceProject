@@ -5270,97 +5270,79 @@ var AdminSingleOrder = function (_Component) {
     }
 
     _createClass(AdminSingleOrder, [{
-        key: 'render',
+        key: "render",
         value: function render() {
-            console.log('props carrito', this.props.carrito);
-            console.log('props ordenes', this.props.ordenes);
-
             return _react2.default.createElement(
-                'div',
-                { className: 'container' },
+                "div",
+                { className: "container" },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'jumbotron' },
+                    "div",
+                    { className: "jumbotron" },
                     _react2.default.createElement(
-                        'h1',
+                        "h1",
                         null,
-                        'Detalles de la orden'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        'Hola'
+                        "Detalles de la orden"
                     ),
                     this.props.carrito.length > 0 ? this.props.carrito.map(function (carrito) {
                         return _react2.default.createElement(
-                            'ul',
+                            "ul",
                             { key: carrito.id },
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Creado: ',
+                                "Creado: ",
                                 carrito.createdAt
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'CARRITO: ',
-                                carrito
-                            ),
-                            _react2.default.createElement(
-                                'li',
-                                null,
-                                'Descripcion: ',
+                                "Descripcion: ",
                                 carrito.descripcion
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Disponibildad: ',
+                                "Disponibildad: ",
                                 carrito.disponibilidad
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Foto: ',
+                                "Foto: ",
                                 carrito.foto
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'ID: ',
+                                "ID: ",
                                 carrito.id
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Nombre: ',
+                                "Nombre: ",
                                 carrito.nombre
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Precio: ',
+                                "Precio: ",
                                 carrito.precio
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Cantidad: ',
+                                "Cantidad: ",
                                 carrito.q
                             ),
                             _react2.default.createElement(
-                                'li',
+                                "li",
                                 null,
-                                'Stock: ',
+                                "Stock: ",
                                 carrito.stock
                             )
                         );
-                    }) : _react2.default.createElement(
-                        'div',
-                        null,
-                        ' Vac\xEDo '
-                    )
+                    }) : null
                 )
             );
         }
