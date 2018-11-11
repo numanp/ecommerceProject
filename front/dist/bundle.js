@@ -33623,11 +33623,11 @@ var NavBar = function (_Component) {
                 ),
                 _react2.default.createElement(
                   'li',
-                  { key: 'carrito' },
+                  { key: 'productos' },
                   _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/carrito' },
-                    'Carrito'
+                    { to: '/productos' },
+                    'Productos'
                   )
                 )
               )] : [_react2.default.createElement(
@@ -33653,11 +33653,11 @@ var NavBar = function (_Component) {
                 ),
                 _react2.default.createElement(
                   'li',
-                  { key: 'carrito' },
+                  { key: 'productos' },
                   _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/carrito' },
-                    'Carrito'
+                    { to: '/productos' },
+                    'Productos'
                   )
                 )
               )]
@@ -35521,7 +35521,7 @@ var ProductosSubContainer = function (_Component) {
               _react2.default.createElement(
                 'span',
                 { className: 'thumbnail' },
-                _react2.default.createElement('img', { className: 'img-size', src: product.foto, alt: '...' }),
+                _react2.default.createElement('img', { className: 'img-size', src: product.imagenSingle1, alt: '...' }),
                 _react2.default.createElement(
                   'h4',
                   { className: 'h4-productos' },
@@ -35577,8 +35577,7 @@ var ProductosSubContainer = function (_Component) {
               )
             );
           })
-        ),
-        '); })}'
+        )
       );
     }
   }]);
@@ -35871,9 +35870,7 @@ var AdminContainer = function (_Component) {
     value: function handleSubmit(evt) {
       evt.preventDefault();
       var formulario = this.state.valorInput;
-      if (formulario.length < 5) {
-        console.log('ESTOY PUDIENDO SUBMITEAR');
-      }
+      if (formulario.length < 5) {}
     }
   }, {
     key: 'render',
@@ -36150,13 +36147,14 @@ var AdminAddProductContainer = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
       evt.preventDefault();
+      console.log(evt.target.imagenSingle1.value);
       var productoAgregar = {
         nombre: evt.target.nombreProducto.value,
         descripcion: evt.target.descripcionProducto.value,
         precio: evt.target.precioProducto.value,
-        foto1: evt.target.imgProducto.value,
-        foto2: evt.target.imgProducto.value,
-        foto3: evt.target.imgProducto.value,
+        imagenSingle1: evt.target.imagenSingle1.value,
+        imagenSingle2: evt.target.imagenSingle2.value,
+        imagenSingle3: evt.target.imagenSingle3.value,
         stock: evt.target.stockProducto.value
       };
       this.props.addProduct(productoAgregar);
@@ -36271,30 +36269,30 @@ exports.default = function (props) {
           { className: 'form-group' },
           _react2.default.createElement(
             'label',
-            { htmlFor: 'imgProducto1' },
+            { htmlFor: 'imagenSingle1' },
             'Image 1'
           ),
-          _react2.default.createElement('input', { name: 'imgProducto1', type: 'text', className: 'form-control', placeholder: 'Separar ' })
+          _react2.default.createElement('input', { name: 'imagenSingle1', type: 'text', className: 'form-control', placeholder: 'Imagen 1 ' })
         ),
         _react2.default.createElement(
           'div',
           { className: 'form-group' },
           _react2.default.createElement(
             'label',
-            { htmlFor: 'imgProducto2' },
+            { htmlFor: 'imagenSingle2' },
             'Image 2'
           ),
-          _react2.default.createElement('input', { name: 'imgProducto2', type: 'text', className: 'form-control', placeholder: 'Separar ' })
+          _react2.default.createElement('input', { name: 'imagenSingle2', type: 'text', className: 'form-control', placeholder: 'Imagen 2 ' })
         ),
         _react2.default.createElement(
           'div',
           { className: 'form-group' },
           _react2.default.createElement(
             'label',
-            { htmlFor: 'imgProducto3' },
+            { htmlFor: 'imagenSingle3' },
             'Image 3'
           ),
-          _react2.default.createElement('input', { name: 'imgProducto3', type: 'text', className: 'form-control', placeholder: 'Separar ' })
+          _react2.default.createElement('input', { name: 'imagenSingle3', type: 'text', className: 'form-control', placeholder: 'Imagen 3 ' })
         ),
         _react2.default.createElement(
           'div',
@@ -38220,12 +38218,6 @@ var AdminSingleOrder = function (_Component) {
                                 null,
                                 'Creado: ',
                                 carrito.createdAt
-                            ),
-                            _react2.default.createElement(
-                                'li',
-                                null,
-                                'CARRITO: ',
-                                carrito
                             ),
                             _react2.default.createElement(
                                 'li',

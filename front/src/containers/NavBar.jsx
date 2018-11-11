@@ -96,8 +96,8 @@ class NavBar extends Component {
                       <li key="Logout">
                         <Link to="/login" onClick={() => this.props.logout()}> Logout</Link>
                       </li>
-                      <li key='carrito'>
-                        <Link to="/carrito">Carrito</Link>
+                      <li key='productos'>
+                        <Link to="/productos">Productos</Link>
                       </li>
                     </ul>,
                   ]
@@ -109,8 +109,8 @@ class NavBar extends Component {
                       <li key='login'>
                         <Link to="/login">Login</Link>
                       </li>
-                      <li key='carrito'>
-                        <Link to="/carrito">Carrito</Link>
+                      <li key='productos'>
+                        <Link to="/productos">Productos</Link>
                       </li>
                     </ul>,
                   ]} 

@@ -19,11 +19,9 @@ export default class AdminSingleOrder extends Component {
         {
         
             this.props.carrito.length > 0  ?
-            this.props.carrito.map( carrito => {
-                return (
+            this.props.carrito.map( carrito => (
                     <ul key={carrito.id}>
                         <li>Creado: {carrito.createdAt}</li>
-                        <li>CARRITO: {carrito}</li>
                         <li>Descripcion: {carrito.descripcion}</li>
                         <li>Disponibildad: {carrito.disponibilidad}</li>
                         <li>Foto: {carrito.foto}</li>
@@ -33,9 +31,8 @@ export default class AdminSingleOrder extends Component {
                         <li>Cantidad: {carrito.q}</li>
                         <li>Stock: {carrito.stock}</li>
                     </ul>
-                )
                     
-                })
+            ))
             : 
             <div> Vacío </div>
         }

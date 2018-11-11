@@ -27,7 +27,7 @@ class ProductosSubContainer extends Component {
               return (
                 <div key={product.id} className="col-md-3 col-sm-6">
                   <span className="thumbnail">
-                    <img className="img-size" src={product.foto} alt="..." />
+                    <img className="img-size" src={product.imagenSingle1} alt="..." />
                     <h4 className="h4-productos">{product.nombre}</h4>
                     <div className="ratings">
                       <span className="glyphicon glyphicon-star"></span>
@@ -53,8 +53,6 @@ class ProductosSubContainer extends Component {
             })
           }
         </div>
-        );
-      })}
         </div>
     );
   }

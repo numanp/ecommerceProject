@@ -13,13 +13,14 @@ class AdminAddProductContainer extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    console.log(evt.target.imagenSingle1.value)
     const productoAgregar = {
       nombre: evt.target.nombreProducto.value,
       descripcion: evt.target.descripcionProducto.value,
       precio: evt.target.precioProducto.value,
-      foto1: evt.target.imgProducto.value,
-      foto2: evt.target.imgProducto.value,
-      foto3: evt.target.imgProducto.value,
+      imagenSingle1: evt.target.imagenSingle1.value,
+      imagenSingle2: evt.target.imagenSingle2.value,
+      imagenSingle3: evt.target.imagenSingle3.value,
       stock: evt.target.stockProducto.value,
     };
     this.props.addProduct(productoAgregar);
