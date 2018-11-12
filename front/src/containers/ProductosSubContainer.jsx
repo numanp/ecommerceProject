@@ -74,7 +74,7 @@ class ProductosSubContainer extends Component {
             })
           }
         </div>
-      </div>
+        </div>
     );
   }
 }

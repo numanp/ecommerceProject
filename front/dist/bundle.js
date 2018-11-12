@@ -4782,22 +4782,17 @@ var ContainerSingleProduct = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-2' },
-                                            _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle1 })
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-3' },
-                                            _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle2 })
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-4' },
-                                            _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'tab-pane img-resp', id: 'pic-5' },
-                                            _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle3 })
                                         )
                                     ),
                                     _react2.default.createElement(
@@ -4818,7 +4813,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-2', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle1 })
                                             )
                                         ),
                                         _react2.default.createElement(
@@ -4827,7 +4822,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-3', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle2 })
                                             )
                                         ),
                                         _react2.default.createElement(
@@ -4836,16 +4831,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-4', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            'li',
-                                            null,
-                                            _react2.default.createElement(
-                                                'a',
-                                                { 'data-target': '#pic-5', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle3 })
                                             )
                                         )
                                     )
@@ -4948,7 +4934,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (props) {
-    var users = props.users;
     return _react2.default.createElement(
         "div",
         { className: "container" },
@@ -33548,7 +33533,7 @@ var Main = function (_Component) {
   _createClass(Main, [{
     key: 'sign',
     value: function sign(object) {
-      return _axios2.default.post('api/user/signup', object);
+      return _axios2.default.post('/api/user/signup', object);
     }
   }, {
     key: 'logn',
@@ -33565,8 +33550,6 @@ var Main = function (_Component) {
       _axios2.default.get('/api/user/me').then(function (response) {
         _this2.props.logginSuccess(response.data);
       });
-      // axios.get('/api/user/3')
-      // .then(res => console.log(res.data))
     }
   }, {
     key: 'render',
@@ -34545,7 +34528,6 @@ function mapStateToProps(state, ownProps) {
     categorias: state.userAdmin.listaCategorias
   };
 }
-
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     logout: function logout() {
@@ -34627,7 +34609,7 @@ var NavBar = function (_Component) {
 
       return _react2.default.createElement(
         'nav',
-        { className: 'navbar navbar-default' },
+        { className: 'navbar navbar-default navbar-inverse' },
         _react2.default.createElement(
           'div',
           { className: 'container' },
@@ -34658,55 +34640,41 @@ var NavBar = function (_Component) {
               _react2.default.createElement(
                 _reactRouterDom.Link,
                 { to: '/', className: 'navbar-brand' },
-                _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                _react2.default.createElement('img', { src: '/images/logo1.png' })
               )
             ),
             _react2.default.createElement(
               'div',
-              { className: 'dropdown' },
-              _react2.default.createElement(
-                'button',
-                {
-                  className: 'btn btn-default dropdown-toggle',
-                  type: 'button',
-                  id: 'dropdownMenu1',
-                  'data-toggle': 'dropdown',
-                  'aria-haspopup': 'true',
-                  'aria-expanded': 'true'
-                },
-                'Categorias',
-                _react2.default.createElement('span', { className: 'caret' })
-              ),
+              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
               _react2.default.createElement(
                 'ul',
-                { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenu1' },
-                this.props.categorias.map(function (categoria) {
-                  return _react2.default.createElement(
-                    'li',
-                    { key: categoria.id, onClick: function onClick() {
-                        _this2.props.fetchProductsByCategory(categoria.id);
-                      } },
-                    ' ',
-                    categoria.nombre,
-                    ' '
-                  );
-                })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              {
-                className: 'collapse navbar-collapse',
-                id: 'bs-example-navbar-collapse-1'
-              },
-              _react2.default.createElement(
-                'ul',
-                _defineProperty({ key: '1', className: 'nav navbar-nav navbar-left' }, 'key', '1'),
-                _react2.default.createElement(_SearchBar2.default, {
-                  handleChange: this.handleChange,
-                  handleOnClick: this.handleOnClick,
-                  handelOnKeyPress: this.handelOnKeyPress
-                })
+                _defineProperty({ key: '1', className: 'nav navbar-left navbar-nav' }, 'key', '1'),
+                _react2.default.createElement(_SearchBar2.default, { handleChange: this.handleChange, handleOnClick: this.handleOnClick, handelOnKeyPress: this.handelOnKeyPress }),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'dropdown' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'btn btn-default dropdown-toggle', type: 'button', id: 'dropdownMenu1', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'true' },
+                    'Categorias',
+                    _react2.default.createElement('span', { className: 'caret' })
+                  ),
+                  _react2.default.createElement(
+                    'ul',
+                    { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenu1' },
+                    this.props.categorias.map(function (categoria) {
+                      return _react2.default.createElement(
+                        'li',
+                        { key: categoria.id, onClick: function onClick() {
+                            _this2.props.fetchProductsByCategory(categoria.id);
+                          } },
+                        ' ',
+                        categoria.nombre,
+                        ' '
+                      );
+                    })
+                  )
+                )
               ),
               _react2.default.createElement(
                 'ul',
@@ -34723,7 +34691,7 @@ var NavBar = function (_Component) {
                   )
                 ) : _react2.default.createElement(
                   'ul',
-                  null,
+                  { className: 'nav navbar-nav navbar-right' },
                   _react2.default.createElement(
                     'li',
                     null,
@@ -34749,7 +34717,7 @@ var NavBar = function (_Component) {
                   ' ',
                   _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/admin/verOrdenes' },
+                    { to: '/admin/' },
                     ' Panel Admin '
                   ),
                   ' '
@@ -34786,47 +34754,6 @@ var NavBar = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
-
-// {this.state.logueado === true
-//   ? [
-//       <ul key="2" className="nav navbar-nav navbar-right">
-//         <li>
-//           <Link to="/login" onClick={() => this.props.logout()}>
-//             Logout
-//           </Link>
-//         </li>
-//         <li>
-//           <Link to="/productos">Productos</Link>
-//          </li>
-//       </ul>,
-//     ]
-//   : [
-//       <ul key="3" className="nav navbar-nav navbar-right">
-//         <li>
-//           <Link to="/signup">Registrate</Link>
-//         </li>
-//         <li>
-//           <Link to="/login">Login</Link>
-//         </li>
-//         <li>
-//           <Link to="/productos">Productos</Link>
-//         </li>
-//       </ul>,
-//     ]}
-//      {
-//         this.state.admin ? 
-//         <ul>
-//           <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
-//         </ul>
-//         : null
-//       }
-//       {
-//         this.state.logueado === true && !this.state.admin ?
-//         <ul>
-//         <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
-//        </ul> 
-//         : null
-//       }
 
 /***/ }),
 /* 156 */
@@ -36218,7 +36145,7 @@ var CarritoSlider = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'sidebar-header' },
-                            _react2.default.createElement('img', { src: '/images/skereeteam.png' })
+                            _react2.default.createElement('img', { src: '/images/logo2.png' })
                         ),
                         _react2.default.createElement(
                             'ul',
@@ -36249,29 +36176,32 @@ var CarritoSlider = function (_Component) {
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'btn-group', role: 'group', 'aria-label': '...' },
+                                                { className: 'btn-group btn-clase-carrito', role: 'group', 'aria-label': '...' },
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-warning', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-warning', onClick: function onClick() {
                                                             _this2.props.lessQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    'Restar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-minus img-circle text-warning' }),
+                                                    ' Restar'
                                                 ),
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-danger', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-danger', onClick: function onClick() {
                                                             _this2.props.removeFromCart(product.id);setTimeout(function () {
                                                                 localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
-                                                            }, 10);
+                                                            }, 10);console.log('elimina', _this2.props.cart);
                                                         } },
-                                                    'Eliminar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-trash img-circle text-danger' }),
+                                                    ' Eliminar'
                                                 ),
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-success', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-success', onClick: function onClick() {
                                                             _this2.props.addQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    'Sumar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-plus img-circle text-success' }),
+                                                    ' Sumar'
                                                 )
                                             )
                                         );
@@ -36288,7 +36218,7 @@ var CarritoSlider = function (_Component) {
                                 { key: 2 },
                                 _react2.default.createElement(
                                     _reactRouterDom.Link,
-                                    { to: '/checkout', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                    { to: '/checkout', role: 'button', className: 'btn icon-btn btn-success' },
                                     'Checkout'
                                 ),
                                 _react2.default.createElement('br', null),
@@ -36297,7 +36227,7 @@ var CarritoSlider = function (_Component) {
                                     'button',
                                     { onClick: function onClick() {
                                             (0, _cart.saveCart)(localStorage.getItem('cart'), _this2.props.logged.id);
-                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                        }, className: 'btn btn-success' },
                                     'Guardar carrito'
                                 ),
                                 _react2.default.createElement('br', null),
@@ -36306,7 +36236,7 @@ var CarritoSlider = function (_Component) {
                                     'button',
                                     { onClick: function onClick() {
                                             (0, _cart.getMyCart)(_this2.props.logged.id);_this2.props.actualizarCarro(JSON.parse(localStorage.getItem('cart')));
-                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                        }, className: 'btn btn-success ' },
                                     'Continuar compra guardada'
                                 )
                             )]
@@ -36711,12 +36641,6 @@ function mapDispatchToProps(dispatch) {
   return {
     addReview: function addReview(value, user, product, estrellas) {
       dispatch((0, _reviewAction.addReview)(value, user, product, estrellas));
-    },
-    fetchUsers: function fetchUsers() {
-      dispatch((0, _users.fetchUsers)());
-    },
-    fetchReviews: function fetchReviews(producto) {
-      dispatch((0, _reviewAction.fetchReviews)(producto));
     }
   };
 }
@@ -36734,6 +36658,7 @@ var ContainerReview = function (_Component) {
       addReview: [],
       reviews: [],
       currentProduct: 0,
+      producto: _this.props.producto,
       rating: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
@@ -36742,30 +36667,19 @@ var ContainerReview = function (_Component) {
     return _this;
   }
 
-  // componentDidMount(){
-  //   console.log(this.props.producto)
-
-  // }
-
-  /*   componentWillReceiveProps(nextProps) {
-      if (nextProps.producto.id == this.state.producto.id) {
-        return
-      } else {
-        this.setState({ producto: nextProps.producto })
-        axios.get(`/api/reviews/${nextProps.producto.id}`)
-          .then(reviews => this.setState({ reviews: reviews.data }))
-      }
-  
-      this.handleChange = this.handleChange.bind(this)
-      this.handleSubmit = this.handleSubmit.bind(this)
-    } */
-
-
   _createClass(ContainerReview, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchUsers();
-      setTimeout((0, _reviewAction.fetchReviews)(this.props.producto), 10);
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      if (nextProps.producto.id == this.state.producto.id) {
+        return;
+      } else {
+        this.setState({ producto: nextProps.producto });
+        _axios2.default.get('/api/reviews/' + nextProps.producto.id).then(function (reviews) {
+          return _this2.setState({ reviews: reviews.data });
+        });
+      }
     }
   }, {
     key: 'handleChange',
@@ -36799,7 +36713,7 @@ var ContainerReview = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit, rating: this.state.rating, onStarClick: this.onStarClick }),
-        _react2.default.createElement(_Reviews2.default, { users: this.props.users, reviews: this.state.reviews, user: this.props.user, addReview: this.props.rev })
+        _react2.default.createElement(_Reviews2.default, { reviews: this.state.reviews, user: this.props.user, addReview: this.props.rev })
       );
     }
   }]);

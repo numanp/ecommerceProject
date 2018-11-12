@@ -1,9 +1,8 @@
 import React from 'react';
 
 export default function (props) {
-    var users = props.users
-    return (
-        <div className="container">
+  return (
+        <div className="container">    
             <div className="row">
                 <div className="col-sm-7">
                     <div className="review-block">
@@ -58,7 +57,7 @@ export default function (props) {
                 </div>
             </div>
         </div>
-    );
+  );
 }
 
 
