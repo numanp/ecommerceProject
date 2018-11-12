@@ -16,10 +16,10 @@ router.post('/:id', (req, res) => {
                     return review.setProducto(producto.id)
                 })
                 .then(() => {
-                    return models.User.findById(userId)     
+                    return models.User.findById(userId)
                 })
-                .then((usuario)=>{
-                    return review.setUser(usuario.id) 
+                .then((usuario) => {
+                    return review.setUser(usuario.id)
                 })
                 .then(() => {
                     res.send(review)
@@ -27,13 +27,13 @@ router.post('/:id', (req, res) => {
         })
 })
 
-router.get('/:idProduct', (req, res) =>{
-    console.log("LLEGA AL BACK")
+router.get('/:idProduct', (req, res) => {
+    console.log("LLEGA AL BACK con: ", req.params.idProduct)
     models.Producto.findById(req.params.idProduct)
-    .then((productId) => {
-        return productId.getReviews()
-    }).then((reviews) => {
-        res.send(reviews)
-    }) 
-} )
+        .then((productId) => {
+            return productId.getReviews()
+        }).then((reviews) => {
+            res.send(reviews)
+        })
+})
 

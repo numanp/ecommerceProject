@@ -2,14 +2,16 @@ import axios from 'axios';
 
 import { FETCH_USERS, DELETE_USER, MAKE_ADMIN } from '../constants';
 
-export const fetchUsers = () => dispatch =>
+export const fetchUsers = () => dispatch => {
   axios.get('/api/user').then(res => {
-    console.log({ res });
-    dispatch({
-      type: FETCH_USERS,
-      users: res.data,
-    });
-  });
+    dispatch(getUsers(res.data));
+  })
+};
+
+export const getUsers = (users) => ({
+  type: FETCH_USERS,
+  users
+})
 
 export const deleteUser = userId => dispatch =>
   axios

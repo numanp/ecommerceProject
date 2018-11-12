@@ -4,14 +4,18 @@ import { connect } from 'react-redux';
 import { getSingleProduct } from '../redux/action-creators/products';
 import { addToCart } from '../redux/action-creators/cart';
 
+
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
+import ReviewSubContainer from './reviewSubContainer';
 
 function mapStateToProps(state, ownProps) {
     return {
         product: state.products.product,
-        cart: state.cart
+        cart: state.cart,
+        idproduct: ownProps.match.params.productId,
+        review: state.review
     };
 }
 
@@ -22,7 +26,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         },
         addToCart: (producto) => {
             dispatch(addToCart(producto))
-        }
+        },
     };
 }
 
@@ -32,8 +36,7 @@ class ContainerSingleProduct extends Component {
     }
 
     componentDidMount() {
-        this.props.getSingleProduct(this.props.match.params.productId)
-
+        this.props.getSingleProduct(this.props.idproduct)
     }
 
     render() {
@@ -99,7 +102,7 @@ class ContainerSingleProduct extends Component {
                         </div>
                     </div>
                 </div>
-                {this.props.user.logged == "no estas logeado" ? null : <ContainerReview />}
+                <ContainerReview producto={this.props.idproduct} />
             </div>
 
         );

@@ -54,11 +54,11 @@ class Main extends Component {
     return axios.post('api/user/signup', object);
   }
   logn(object) {
-    axios.post('api/login', object)
+    axios.post('/api/login', object)
       .then(res => console.log(res.data));
   }
   componentDidMount() {
-    axios.get('api/user/me').then(response => {
+    axios.get('/api/user/me').then(response => {
       this.props.logginSuccess(response.data);
     });
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function (props) {
+    var users = props.users
     return (
         <div className="container">
             <div className="row">
@@ -8,6 +9,7 @@ export default function (props) {
                     <div className="review-block">
                         {
                             props.reviews && props.reviews.map(review => {
+                                var user = {}
                                 var idEstrellas = 0
                                 var estrellas = review.estrellas;
                                 var arr = [];
@@ -15,13 +17,18 @@ export default function (props) {
                                     arr.push(i)
 
                                 }
+                                for (var j = 0; j < users.length; j++) {
+                                    if (users[j].id == review.userId) {
+                                        user = users[j]
+                                    }
+                                }
 
                                 return (
                                     <div key={review.id}>
                                         <div className="row">
                                             <div className="col-sm-3">
                                                 <img src="https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg" className="img-rounded img-user-review" />
-                                                <div className="review-block-name">user id: {review.userId}</div>
+                                                <div className="review-block-name">Usuario: {user.nombre}</div>
                                                 <div className="review-block-date">{review.createdAt.substring(0, 10)}</div>
                                             </div>
 
