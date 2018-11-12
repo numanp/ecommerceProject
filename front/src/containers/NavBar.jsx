@@ -42,6 +42,7 @@ class NavBar extends Component {
     super(props);
     this.state = {
       nombreProducto: '',
+      admin: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -50,9 +51,11 @@ class NavBar extends Component {
   componentDidMount() {
     this.props.fetchCategorys();
     var objeto = sessionStorage.getItem('login');
+
     if (!!objeto) {
       this.setState({
         logueado: true,
+        admin: JSON.parse(objeto).admin
       });
     } else {
       this.setState({
@@ -60,8 +63,16 @@ class NavBar extends Component {
       });
     }
     setTimeout(() => {
-      console.log(this.props.categorias);
     }, 10);
+
+    // let admin = JSON.parse(sessionStorage.getItem('login')).admin
+
+    // if (!!admin) {
+    //   this.setState({
+    //     admin: admin
+    //   })
+    // } 
+
   }
 
   handleChange(evt) {
@@ -84,7 +95,7 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log('this.props',this.props.admin)
+    // console.log('admin',this.state.admin)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -144,32 +155,42 @@ class NavBar extends Component {
                   handelOnKeyPress={this.handelOnKeyPress}
                 />
               </ul>
-              {this.state.logueado === true
-                ? [
-                    <ul key="2" className="nav navbar-nav navbar-right">
-                      <li>
-                        <Link to="/login" onClick={() => this.props.logout()}>
-                          Logout
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/carrito">Carrito</Link>
-                      </li>
-                    </ul>,
-                  ]
-                : [
-                    <ul key="3" className="nav navbar-nav navbar-right">
+
+                <ul className="nav navbar-nav navbar-right">
+                {
+                  this.state.logueado ?
+                    <li>
+                      <Link to="/login" onClick={() => this.props.logout()}>
+                        Logout
+                      </Link>
+                    </li>
+                    :
+                    <ul>
                       <li>
                         <Link to="/signup">Registrate</Link>
                       </li>
                       <li>
                         <Link to="/login">Login</Link>
-                      </li>
-                      <li>
-                        <Link to="/productos">Productos</Link>
-                      </li>
-                    </ul>,
-                  ]}
+                      </li>                    
+                    </ul>
+                }
+
+                {
+                   this.state.admin ? 
+                     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+                   : null
+                 }
+                 {
+                   this.state.logueado === true && !this.state.admin ?
+                   <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+                   : null
+                 }
+                 
+                 <li>
+                          <Link to="/productos">Productos</Link>
+                       </li>
+                </ul>
+              
             </div>
           </div>
         </div>
@@ -180,16 +201,45 @@ class NavBar extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 
-// {
-                  
-//   this.props.admin ? 
-//   <ul>
-//     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
-//   </ul>
-//   :
-//   <ul>
-//   <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
-//   </ul>
 
-// }
 
+// {this.state.logueado === true
+//   ? [
+//       <ul key="2" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/login" onClick={() => this.props.logout()}>
+//             Logout
+//           </Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//          </li>
+//       </ul>,
+//     ]
+//   : [
+//       <ul key="3" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/signup">Registrate</Link>
+//         </li>
+//         <li>
+//           <Link to="/login">Login</Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//         </li>
+//       </ul>,
+//     ]}
+//      {
+//         this.state.admin ? 
+//         <ul>
+//           <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+//         </ul>
+//         : null
+//       }
+//       {
+//         this.state.logueado === true && !this.state.admin ?
+//         <ul>
+//         <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+//        </ul> 
+//         : null
+//       }

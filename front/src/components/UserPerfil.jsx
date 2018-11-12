@@ -2,6 +2,16 @@ import React from 'react';
 
 export default props => (
   <div className="container">
+    <form className="form-inline" onSubmit={props.handleSubmitID}>
+      <div className="form-group">
+          <label className="sr-only" >ID Orden</label>
+          <div className="input-group">
+          <input type="text" name="ID" className="form-control" placeholder="ID"></input>
+          </div>
+      </div>
+      <button type="submit" className="btn btn-primary">Ver más detalles de Orden por ID</button>
+    </form>
+
     <div className="col-md-10 col-md-offset-1">
       <div>
         {props.orders && props.user ? (
@@ -29,7 +39,6 @@ export default props => (
           </tr>
         </thead>
         <tbody>
-          {console.log(props.orders)}
           {props.orders.length > 0 ? (
             props.orders.map(order => {
               return (
@@ -40,9 +49,6 @@ export default props => (
                   <td>{order.fecha}</td>
                   <td>{order.direccion}</td>
                   <td>{order.email}</td>
-                  <td>
-                    <button>Detalles de Compra</button>
-                  </td>
                 </tr>
               );
             })

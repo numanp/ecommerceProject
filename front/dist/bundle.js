@@ -32048,10 +32048,6 @@ var _AdminOrdersContainer = __webpack_require__(182);
 
 var _AdminOrdersContainer2 = _interopRequireDefault(_AdminOrdersContainer);
 
-var _UserProfile = __webpack_require__(183);
-
-var _UserProfile2 = _interopRequireDefault(_UserProfile);
-
 var _UserPerfilContainer = __webpack_require__(184);
 
 var _UserPerfilContainer2 = _interopRequireDefault(_UserPerfilContainer);
@@ -32067,9 +32063,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //COMPONENTES
 
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
-
-//decidir con cual de los dos User quedarse
-
 
 function mapStateToProps(state) {
   return {
@@ -32173,7 +32166,7 @@ var Main = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/users/', component: _AdminUsersContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/EditarProducto/:id', component: _AdminEditProductContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/editCategoriasProducto/:id', component: _AdminAddCategoryToProductContainer2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/profile', component: _UserProfile2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/profile', component: _UserPerfilContainer2.default })
       );
     }
   }]);
@@ -33139,7 +33132,8 @@ var NavBar = function (_Component) {
     var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
 
     _this.state = {
-      nombreProducto: ''
+      nombreProducto: '',
+      admin: false
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleOnClick = _this.handleOnClick.bind(_this);
@@ -33150,22 +33144,28 @@ var NavBar = function (_Component) {
   _createClass(NavBar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
       this.props.fetchCategorys();
       var objeto = sessionStorage.getItem('login');
+
       if (!!objeto) {
         this.setState({
-          logueado: true
+          logueado: true,
+          admin: JSON.parse(objeto).admin
         });
       } else {
         this.setState({
           logueado: false
         });
       }
-      setTimeout(function () {
-        console.log(_this2.props.categorias);
-      }, 10);
+      setTimeout(function () {}, 10);
+
+      // let admin = JSON.parse(sessionStorage.getItem('login')).admin
+
+      // if (!!admin) {
+      //   this.setState({
+      //     admin: admin
+      //   })
+      // } 
     }
   }, {
     key: 'handleChange',
@@ -33192,9 +33192,9 @@ var NavBar = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
-      // console.log('this.props',this.props.admin)
+      // console.log('admin',this.state.admin)
       return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
@@ -33255,7 +33255,7 @@ var NavBar = function (_Component) {
                     'li',
                     {
                       onClick: function onClick() {
-                        _this3.props.fetchProductsByCategory(categoria.id);
+                        _this2.props.fetchProductsByCategory(categoria.id);
                       }
                     },
                     ' ',
@@ -33280,50 +33280,63 @@ var NavBar = function (_Component) {
                   handelOnKeyPress: this.handelOnKeyPress
                 })
               ),
-              this.state.logueado === true ? [_react2.default.createElement(
+              _react2.default.createElement(
                 'ul',
-                { key: '2', className: 'nav navbar-nav navbar-right' },
-                _react2.default.createElement(
+                { className: 'nav navbar-nav navbar-right' },
+                this.state.logueado ? _react2.default.createElement(
                   'li',
                   null,
                   _react2.default.createElement(
                     _reactRouterDom.Link,
                     { to: '/login', onClick: function onClick() {
-                        return _this3.props.logout();
+                        return _this2.props.logout();
                       } },
                     'Logout'
                   )
-                ),
-                _react2.default.createElement(
-                  'li',
+                ) : _react2.default.createElement(
+                  'ul',
                   null,
                   _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/carrito' },
-                    'Carrito'
-                  )
-                )
-              )] : [_react2.default.createElement(
-                'ul',
-                { key: '3', className: 'nav navbar-nav navbar-right' },
-                _react2.default.createElement(
-                  'li',
-                  null,
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      _reactRouterDom.Link,
+                      { to: '/signup' },
+                      'Registrate'
+                    )
+                  ),
                   _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { to: '/signup' },
-                    'Registrate'
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                      _reactRouterDom.Link,
+                      { to: '/login' },
+                      'Login'
+                    )
                   )
                 ),
-                _react2.default.createElement(
+                this.state.admin ? _react2.default.createElement(
                   'li',
                   null,
+                  ' ',
                   _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/login' },
-                    'Login'
-                  )
-                ),
+                    { to: '/admin/verOrdenes' },
+                    ' Panel Admin '
+                  ),
+                  ' '
+                ) : null,
+                this.state.logueado === true && !this.state.admin ? _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/user/profile' },
+                    ' Mi Cuenta '
+                  ),
+                  ' '
+                ) : null,
                 _react2.default.createElement(
                   'li',
                   null,
@@ -33333,7 +33346,7 @@ var NavBar = function (_Component) {
                     'Productos'
                   )
                 )
-              )]
+              )
             )
           )
         )
@@ -33346,18 +33359,46 @@ var NavBar = function (_Component) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
 
-// {
-
-//   this.props.admin ? 
-//   <ul>
-//     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
-//   </ul>
-//   :
-//   <ul>
-//   <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
-//   </ul>
-
-// }
+// {this.state.logueado === true
+//   ? [
+//       <ul key="2" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/login" onClick={() => this.props.logout()}>
+//             Logout
+//           </Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//          </li>
+//       </ul>,
+//     ]
+//   : [
+//       <ul key="3" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/signup">Registrate</Link>
+//         </li>
+//         <li>
+//           <Link to="/login">Login</Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//         </li>
+//       </ul>,
+//     ]}
+//      {
+//         this.state.admin ? 
+//         <ul>
+//           <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+//         </ul>
+//         : null
+//       }
+//       {
+//         this.state.logueado === true && !this.state.admin ?
+//         <ul>
+//         <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+//        </ul> 
+//         : null
+//       }
 
 /***/ }),
 /* 153 */
@@ -37707,43 +37748,7 @@ var AdminOrdersContainer = function (_Component) {
 exports.default = AdminOrdersContainer;
 
 /***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (_ref) {
-    var userPerfil = _ref.userPerfil,
-        arregloCompras = _ref.arregloCompras,
-        misReviews = _ref.misReviews;
-    return _react2.default.createElement(
-        "div",
-        { className: "col-xs-9" },
-        _react2.default.createElement(
-            "h1",
-            null,
-            "Compras"
-        ),
-        _react2.default.createElement(
-            "h1",
-            null,
-            "Reviews (PURAMENTE OPCIONAL) NO LO PIDE EN LOS PUNTOS"
-        )
-    );
-};
-
-/***/ }),
+/* 183 */,
 /* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37769,6 +37774,14 @@ var _user = __webpack_require__(10);
 var _UserPerfil = __webpack_require__(185);
 
 var _UserPerfil2 = _interopRequireDefault(_UserPerfil);
+
+var _AdminSingleOrder = __webpack_require__(58);
+
+var _AdminSingleOrder2 = _interopRequireDefault(_AdminSingleOrder);
+
+var _axios = __webpack_require__(7);
+
+var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37809,8 +37822,11 @@ var UserPerfilContainer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (UserPerfilContainer.__proto__ || Object.getPrototypeOf(UserPerfilContainer)).call(this, props));
 
     _this.state = {
-      orders: []
+      orders: [],
+      selectedCarrito: [],
+      ordenes: []
     };
+    _this.handleSubmitID = _this.handleSubmitID.bind(_this);
     return _this;
   }
 
@@ -37823,8 +37839,13 @@ var UserPerfilContainer = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.props.fetchUserPerfil(this.props.userId);
       this.props.fetchOrders();
+      _axios2.default.get('/api/ventas').then(function (res) {
+        return _this2.setState({ ordenes: res.data });
+      });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -37837,12 +37858,34 @@ var UserPerfilContainer = function (_Component) {
       }
     }
   }, {
+    key: 'handleSubmitID',
+    value: function handleSubmitID(evento) {
+      var _this3 = this;
+
+      evento.preventDefault();
+      var id = evento.target.ID.value;
+      console.log(id);
+
+      _axios2.default.get('/api/ventas/').then(function (res) {
+        return res.data;
+      }).then(function (ordenesTotales) {
+        var carrito = [];
+        for (var i = 0; i < ordenesTotales.length; i++) {
+          if (ordenesTotales[i].id == id) {
+            carrito.push(JSON.parse(ordenesTotales[i].carro));
+          }
+        }
+        _this3.setState({ selectedCarrito: carrito[0] });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      console.log(this.state.ordenes);
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_UserPerfil2.default, { user: this.props.user, orders: this.state.orders })
+        !!this.state.selectedCarrito && this.state.selectedCarrito.length > 0 ? _react2.default.createElement(_AdminSingleOrder2.default, { carrito: this.state.selectedCarrito }) : _react2.default.createElement(_UserPerfil2.default, { user: this.props.user, handleSubmitID: this.handleSubmitID, orders: this.state.orders })
       );
     }
   }]);
@@ -37851,6 +37894,13 @@ var UserPerfilContainer = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserPerfilContainer);
+
+// {
+//   this.state.selectedCarrito.length > 0 ?
+//   <AdminSingleOrder ordenes={this.state.ordenes} carrito={this.state.selectedCarrito}/>
+//   :
+//   <AdminOrdenes handleSubmitID={this.handleSubmitID}/>
+// }
 
 /***/ }),
 /* 185 */
@@ -37873,6 +37923,29 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "container" },
+    _react2.default.createElement(
+      "form",
+      { className: "form-inline", onSubmit: props.handleSubmitID },
+      _react2.default.createElement(
+        "div",
+        { className: "form-group" },
+        _react2.default.createElement(
+          "label",
+          { className: "sr-only" },
+          "ID Orden"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "input-group" },
+          _react2.default.createElement("input", { type: "text", name: "ID", className: "form-control", placeholder: "ID" })
+        )
+      ),
+      _react2.default.createElement(
+        "button",
+        { type: "submit", className: "btn btn-primary" },
+        "Ver m\xE1s detalles de Orden por ID"
+      )
+    ),
     _react2.default.createElement(
       "div",
       { className: "col-md-10 col-md-offset-1" },
@@ -37958,7 +38031,6 @@ exports.default = function (props) {
         _react2.default.createElement(
           "tbody",
           null,
-          console.log(props.orders),
           props.orders.length > 0 ? props.orders.map(function (order) {
             return _react2.default.createElement(
               "tr",
@@ -37992,15 +38064,6 @@ exports.default = function (props) {
                 "td",
                 null,
                 order.email
-              ),
-              _react2.default.createElement(
-                "td",
-                null,
-                _react2.default.createElement(
-                  "button",
-                  null,
-                  "Detalles de Compra"
-                )
               )
             );
           }) : _react2.default.createElement(

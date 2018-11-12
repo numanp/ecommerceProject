@@ -26,8 +26,6 @@ import AdminAddCategoryToProductContainer from './AdminAddCategoryToProductConta
 import AdminOrdenesContainer from '../containers/AdminOrdersContainer'
 // import EditCategoriaDeProducto from './EditCategoriaDeProducto';
 
-//decidir con cual de los dos User quedarse
-import UserProfile from '../components/UserProfile'
 import UserPerfilContainer from './UserPerfilContainer';
 
 function mapStateToProps(state) {
@@ -104,7 +102,7 @@ class Main extends Component {
         <Route exact path="/admin/users/" component={AdminUsersContainer} />
         <Route exact path="/admin/EditarProducto/:id" component={AdminEditProductContainer} />
         <Route exact path="/admin/editCategoriasProducto/:id" component={AdminAddCategoryToProductContainer} />
-        <Route exact path="/user/profile" component={UserProfile} />
+        <Route exact path="/user/profile" component={UserPerfilContainer} />
       </div>
     );
   }

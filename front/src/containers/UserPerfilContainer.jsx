@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchUserPerfil, fetchUsers } from '../redux/action-creators/users';
 import { fetchOrders } from '../redux/action-creators/user';
 import UserPerfil from '../components/UserPerfil';
+import AdminSingleOrder from '../components/AdminSingleOrder'
+import axios from 'axios';
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -31,7 +33,10 @@ class UserPerfilContainer extends Component {
     super(props);
     this.state = {
       orders: [],
+      selectedCarrito: [],
+      ordenes: []
     };
+    this.handleSubmitID = this.handleSubmitID.bind(this)
   }
 
   handleSubmit(event) {
@@ -42,6 +47,8 @@ class UserPerfilContainer extends Component {
   componentDidMount() {
     this.props.fetchUserPerfil(this.props.userId);
     this.props.fetchOrders();
+    axios.get('/api/ventas')
+    .then( res => this.setState({ ordenes: res.data }))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,10 +60,34 @@ class UserPerfilContainer extends Component {
     }
   }
 
+  handleSubmitID (evento) {
+    evento.preventDefault()
+    let id = evento.target.ID.value
+    console.log(id)
+
+    axios.get(`/api/ventas/`)
+    .then(res => res.data)
+    .then(ordenesTotales => {
+        var carrito = []
+        for (var i = 0; i < ordenesTotales.length; i++) {
+            if (ordenesTotales[i].id == id) {
+                carrito.push(JSON.parse(ordenesTotales[i].carro));
+            }
+        }
+        this.setState({ selectedCarrito: carrito[0] })
+    })
+  }
+
   render() {
+    console.log(this.state.ordenes)
     return (
       <div>
-        <UserPerfil user={this.props.user} orders={this.state.orders} />
+      {
+        !!this.state.selectedCarrito && this.state.selectedCarrito.length > 0 ?
+        <AdminSingleOrder carrito={this.state.selectedCarrito}/>
+        :
+        <UserPerfil user={this.props.user} handleSubmitID={this.handleSubmitID} orders={this.state.orders} />
+      }
       </div>
     );
   }
@@ -66,3 +97,10 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(UserPerfilContainer);
+
+// {
+//   this.state.selectedCarrito.length > 0 ?
+//   <AdminSingleOrder ordenes={this.state.ordenes} carrito={this.state.selectedCarrito}/>
+//   :
+//   <AdminOrdenes handleSubmitID={this.handleSubmitID}/>
+// }
