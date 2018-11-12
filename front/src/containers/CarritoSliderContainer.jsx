@@ -48,7 +48,7 @@ class CarritoSlider extends Component {
                 <div className="wrapper-sidebar" onClick={() => { /* this.updateCart(); this.forceUpdate() */ }}>
                     <nav id="sidebar-skeree" className="active" >
                         <div className="sidebar-header">
-                            <img src="/images/skereeteam.png" />
+                            <img src="/images/logo2.png" />
                         </div>
                         <ul className="list-unstyled components">
                             <li className="active">
@@ -59,10 +59,18 @@ class CarritoSlider extends Component {
                                             return (
                                                 <li key={product.id} className="li-sidebarSkeree">
                                                     <a className="a-carritoSlider" href="#">{product.nombre} - Cantidad:{product.q}-Subtotal:{product.precio * product.q}</a>
-                                                    <div className="btn-group" role="group" aria-label="...">
-                                                        <button type="button" className="btn btn-warning" onClick={() => { this.props.lessQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }} >Restar</button>
-                                                        <button type="button" className="btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10) }}>Eliminar</button>
-                                                        <button type="button" className="btn btn-success" onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}>Sumar</button>
+                                                    
+                                                    <div className="btn-group btn-clase-carrito" role="group" aria-label="...">
+
+
+                                                        <button type="button" className="btn icon-btn btn-warning" onClick={() => { this.props.lessQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span class="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span> Restar</button>
+
+
+                                                        <button type="button" className="btn icon-btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10); console.log('elimina', this.props.cart) }}><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span> Eliminar</button>
+
+    
+
+                                                        <button type="button" className="btn icon-btn btn-success"  onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Sumar</button>
                                                     </div>
                                                 </li>
                                             )
@@ -77,14 +85,15 @@ class CarritoSlider extends Component {
                                         <Link key={1} to={'/login'} role="button" className="btn btn-success comprar-carrito-btn">Loguearte para comprar</Link>
                                     ] :
                                     [
+
                                         <div key={2}>
-                                            <Link to={'/checkout'} role="button" className="btn btn-success comprar-carrito-btn">Checkout</Link>
+                                            <Link to={'/checkout'} role="button" className="btn icon-btn btn-success">Checkout</Link>
                                             <br></br>
                                             <br></br>
-                                            <button onClick={() => { saveCart(localStorage.getItem('cart'), this.props.logged.id) }} className="btn btn-success comprar-carrito-btn">Guardar carrito</button>
+                                            <button onClick={() => { saveCart(localStorage.getItem('cart'), this.props.logged.id) }} className="btn btn-success">Guardar carrito</button>
                                             <br></br>
                                             <br></br>
-                                            <button onClick={() => { getMyCart(this.props.logged.id); this.props.actualizarCarro(JSON.parse(localStorage.getItem('cart'))) }} className="btn btn-success comprar-carrito-btn">Continuar compra guardada</button>
+                                            <button onClick={() => { getMyCart(this.props.logged.id); this.props.actualizarCarro(JSON.parse(localStorage.getItem('cart'))) }} className="btn btn-success ">Continuar compra guardada</button>
                                         </div>
                                     ]
                             }

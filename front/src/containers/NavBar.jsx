@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchBar from './SearchBar';
-import {
-  removeLoginFromLocalStorage,
-  fetchCategorys,
-} from '../redux/action-creators/user';
-import {
-  getProductsByName,
-  fetchProductsByCategory,
-} from '../redux/action-creators/products';
-
+import { removeLoginFromLocalStorage, fetchCategorys } from '../redux/action-creators/user';
+import { getProductsByName, fetchProductsByCategory } from '../redux/action-creators/products';
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user,
@@ -18,7 +11,6 @@ function mapStateToProps(state, ownProps) {
     categorias: state.userAdmin.listaCategorias,
   };
 }
-
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     logout: () => {
@@ -35,7 +27,6 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
   };
 }
-
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +53,6 @@ class NavBar extends Component {
       });
     }
   }
-
   handleChange(evt) {
     const value = evt.target.value;
     this.setState({
@@ -70,21 +60,18 @@ class NavBar extends Component {
     });
     // console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
   }
-
   handleOnClick() {
     this.props.getProductsByName(this.state.nombreProducto);
     this.props.history.push('/productos');
   }
-
   handelOnKeyPress(event) {
     if (event.key == 'Enter') {
       this.handleOnClick();
     }
   }
-
   render() {
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-default navbar-inverse">
         <div className="container">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -101,44 +88,29 @@ class NavBar extends Component {
                 <span className="icon-bar" />
               </button>
               <Link to="/" className="navbar-brand">
-                <img src="./images/skereeteam.png" />
+                <img src="/images/logo1.png"></img>
               </Link>
             </div>
-            <div className="dropdown">
-              <button
-                className="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true"
-              >
-                Categorias
-                <span className="caret" />
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {
-                  this.props.categorias.map((categoria) => {
-                    return (
-                      <li key={categoria.id} onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
-                    )
-                  })
-                }
-
-              </ul>
-            </div>
-            <div
-              className="collapse navbar-collapse"
-              id="bs-example-navbar-collapse-1"
-            >
-              <ul key="1" className="nav navbar-nav navbar-left" key="1">
-                <SearchBar
-                  handleChange={this.handleChange}
-                  handleOnClick={this.handleOnClick}
-                  handelOnKeyPress={this.handelOnKeyPress}
-                />
-              </ul>
-
+            
+            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul key="1" className="nav navbar-left navbar-nav" key="1">
+                    <SearchBar handleChange={this.handleChange} handleOnClick={this.handleOnClick} handelOnKeyPress={this.handelOnKeyPress} />
+                    <div className="dropdown">
+                        <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Categorias
+                            <span className="caret"></span>
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {
+                            this.props.categorias.map((categoria) => {
+                                return (
+                                <li key={categoria.id} onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
+                                )
+                            })
+                            }
+                        </ul>
+                    </div>
+                </ul>
                 <ul className="nav navbar-nav navbar-right">
                 {
                   this.state.logueado ?
@@ -148,7 +120,7 @@ class NavBar extends Component {
                       </Link>
                     </li>
                     :
-                    <ul>
+                    <ul className="nav navbar-nav navbar-right">
                       <li>
                         <Link to="/signup">Registrate</Link>
                       </li>
@@ -173,7 +145,6 @@ class NavBar extends Component {
                           <Link to="/productos">Productos</Link>
                        </li>
                 </ul>
-              
             </div>
           </div>
         </div>
@@ -181,48 +152,4 @@ class NavBar extends Component {
     );
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
-
-
-
-// {this.state.logueado === true
-//   ? [
-//       <ul key="2" className="nav navbar-nav navbar-right">
-//         <li>
-//           <Link to="/login" onClick={() => this.props.logout()}>
-//             Logout
-//           </Link>
-//         </li>
-//         <li>
-//           <Link to="/productos">Productos</Link>
-//          </li>
-//       </ul>,
-//     ]
-//   : [
-//       <ul key="3" className="nav navbar-nav navbar-right">
-//         <li>
-//           <Link to="/signup">Registrate</Link>
-//         </li>
-//         <li>
-//           <Link to="/login">Login</Link>
-//         </li>
-//         <li>
-//           <Link to="/productos">Productos</Link>
-//         </li>
-//       </ul>,
-//     ]}
-//      {
-//         this.state.admin ? 
-//         <ul>
-//           <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
-//         </ul>
-//         : null
-//       }
-//       {
-//         this.state.logueado === true && !this.state.admin ?
-//         <ul>
-//         <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
-//        </ul> 
-//         : null
-//       }
