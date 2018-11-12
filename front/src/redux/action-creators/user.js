@@ -142,9 +142,11 @@ export const Fetch_Products = data => ({
 // //   user,
 // // });
 
-// const Fetch_categorys = data => ({
-//   type: FETCH_CATEGORYS,
-//   data,
+const get_categorys = data => ({
+  type: FETCH_CATEGORYS,
+  data,
+})
+
 export const addCategory = category => ({
   type: ADD_CATEGORY,
   category,
@@ -290,4 +292,4 @@ export const fetchCategorys = () => dispatch =>
   axios
     .get('/api/categorias')
     .then(res => res.data)
-    .then(data => dispatch(Fetch_categorys(data)));
+    .then(data => dispatch(get_categorys(data)));

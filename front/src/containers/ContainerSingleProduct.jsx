@@ -45,24 +45,20 @@ class ContainerSingleProduct extends Component {
                                             <img src={this.props.product.foto} />
                                         </div>
                                         <div className="tab-pane img-resp" id="pic-2">
-                                            <img src="https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg" />
+                                            <img src={this.props.product.imagenSingle1} />
                                         </div>
                                         <div className="tab-pane img-resp" id="pic-3">
-                                            <img src="https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$" />
+                                            <img src={this.props.product.imagenSingle2}  />
                                         </div>
                                         <div className="tab-pane img-resp" id="pic-4">
-                                            <img src="https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg" />
-                                        </div>
-                                        <div className="tab-pane img-resp" id="pic-5">
-                                            <img src="https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg" />
+                                            <img src={this.props.product.imagenSingle3}  />
                                         </div>
                                     </div>
                                     <ul className="preview-thumbnail nav nav-tabs">
                                         <li className="active"><a data-target="#pic-1" data-toggle="tab"><img src={this.props.product.foto} /></a></li>
-                                        <li><a data-target="#pic-2" data-toggle="tab"><img src="https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$" /></a></li>
-                                        <li><a data-target="#pic-3" data-toggle="tab"><img src="https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg" /></a></li>
-                                        <li><a data-target="#pic-4" data-toggle="tab"><img src="https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg" /></a></li>
-                                        <li><a data-target="#pic-5" data-toggle="tab"><img src="https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg" /></a></li>
+                                        <li><a data-target="#pic-2" data-toggle="tab"><img src={this.props.product.imagenSingle1} /></a></li>
+                                        <li><a data-target="#pic-3" data-toggle="tab"><img src={this.props.product.imagenSingle2} /></a></li>
+                                        <li><a data-target="#pic-4" data-toggle="tab"><img src={this.props.product.imagenSingle3} /></a></li>
                                     </ul>
                                 </div>
                                 <div className="details col-md-6">

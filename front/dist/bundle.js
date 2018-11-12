@@ -1048,9 +1048,13 @@ var Fetch_Products = exports.Fetch_Products = function Fetch_Products(data) {
 // //   user,
 // // });
 
-// const Fetch_categorys = data => ({
-//   type: FETCH_CATEGORYS,
-//   data,
+var get_categorys = function get_categorys(data) {
+  return {
+    type: _constants.FETCH_CATEGORYS,
+    data: data
+  };
+};
+
 var addCategory = exports.addCategory = function addCategory(category) {
   return {
     type: _constants.ADD_CATEGORY,
@@ -1245,7 +1249,7 @@ var fetchCategorys = exports.fetchCategorys = function fetchCategorys() {
     return _axios2.default.get('/api/categorias').then(function (res) {
       return res.data;
     }).then(function (data) {
-      return dispatch(Fetch_categorys(data));
+      return dispatch(get_categorys(data));
     });
   };
 };
@@ -4449,22 +4453,17 @@ var ContainerSingleProduct = function (_Component) {
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-2' },
-                                            _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle1 })
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-3' },
-                                            _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle2 })
                                         ),
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'tab-pane img-resp', id: 'pic-4' },
-                                            _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'tab-pane img-resp', id: 'pic-5' },
-                                            _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                            _react2.default.createElement('img', { src: this.props.product.imagenSingle3 })
                                         )
                                     ),
                                     _react2.default.createElement(
@@ -4485,7 +4484,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-2', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://images.philips.com/is/image/PhilipsConsumer/HP8195_06-IMS-es_AR?wid=494&hei=435&$pnglarge$' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle1 })
                                             )
                                         ),
                                         _react2.default.createElement(
@@ -4494,7 +4493,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-3', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://siegen.cl/12-large_default/secador-de-pelo-siegen-sg-3042.jpg' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle2 })
                                             )
                                         ),
                                         _react2.default.createElement(
@@ -4503,16 +4502,7 @@ var ContainerSingleProduct = function (_Component) {
                                             _react2.default.createElement(
                                                 'a',
                                                 { 'data-target': '#pic-4', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://home.ripley.cl/store/Attachment/WOP/D200/2000353128633/2000353128633_2.jpg' })
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            'li',
-                                            null,
-                                            _react2.default.createElement(
-                                                'a',
-                                                { 'data-target': '#pic-5', 'data-toggle': 'tab' },
-                                                _react2.default.createElement('img', { src: 'https://www.ecobadajoz.es/5924-thickbox_default/secador-de-pelo-2200w-2-niveles-de-potencia-orbegozo-mod-se-2320.jpg' })
+                                                _react2.default.createElement('img', { src: this.props.product.imagenSingle3 })
                                             )
                                         )
                                     )
@@ -32502,7 +32492,7 @@ module.exports = function spread(callback) {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32534,167 +32524,218 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function mapStateToProps(state, ownProps) {
-    //console.log(ownProps, 'STATE NAVBAR');
-    return {
-        user: state.user,
-        history: ownProps.history
-    };
+  return {
+    user: state.user,
+    history: ownProps.history,
+    categorias: state.userAdmin.listaCategorias
+  };
 }
-
 function mapDispatchToProps(dispatch, ownProps) {
-    return {
-        logout: function logout() {
-            dispatch((0, _user.removeLoginFromLocalStorage)());
-        },
-        getProductsByName: function getProductsByName(nombre) {
-            dispatch((0, _products.getProductsByName)(nombre));
-        }
-    };
+  return {
+    logout: function logout() {
+      dispatch((0, _user.removeLoginFromLocalStorage)());
+    },
+    getProductsByName: function getProductsByName(nombre) {
+      dispatch((0, _products.getProductsByName)(nombre));
+    },
+    fetchCategorys: function fetchCategorys() {
+      dispatch((0, _user.fetchCategorys)());
+    },
+    fetchProductsByCategory: function fetchProductsByCategory(id) {
+      dispatch((0, _products.fetchProductsByCategory)(id));
+    }
+  };
 }
 
 var NavBar = function (_Component) {
-    _inherits(NavBar, _Component);
+  _inherits(NavBar, _Component);
 
-    function NavBar(props) {
-        _classCallCheck(this, NavBar);
+  function NavBar(props) {
+    _classCallCheck(this, NavBar);
 
-        var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
 
-        _this.state = {
-            nombreProducto: ''
-        };
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.handleOnClick = _this.handleOnClick.bind(_this);
-        _this.handelOnKeyPress = _this.handelOnKeyPress.bind(_this);
-        return _this;
+    _this.state = {
+      nombreProducto: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleOnClick = _this.handleOnClick.bind(_this);
+    _this.handelOnKeyPress = _this.handelOnKeyPress.bind(_this);
+    return _this;
+  }
+
+  _createClass(NavBar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchCategorys();
+      var objeto = sessionStorage.getItem('login');
+      if (!!objeto) {
+        this.setState({
+          logueado: true
+        });
+      } else {
+        this.setState({
+          logueado: false
+        });
+      }
     }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(evt) {
+      var value = evt.target.value;
+      this.setState({
+        nombreProducto: value
+      });
+      console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+    }
+  }, {
+    key: 'handleOnClick',
+    value: function handleOnClick() {
+      this.props.getProductsByName(this.state.nombreProducto);
+      this.props.history.push('/productos');
+    }
+  }, {
+    key: 'handelOnKeyPress',
+    value: function handelOnKeyPress(event) {
+      if (event.key == 'Enter') {
+        this.handleOnClick();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-    _createClass(NavBar, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var objeto = sessionStorage.getItem('login');
-            if (!!objeto) {
-                this.setState({
-                    logueado: true
-                });
-            } else {
-                this.setState({
-                    logueado: false
-                });
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'nav',
-                { className: 'navbar navbar-default' },
+      return _react2.default.createElement(
+        'nav',
+        { className: 'navbar navbar-default navbar-inverse' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'container-fluid' },
+            _react2.default.createElement(
+              'div',
+              { className: 'navbar-header' },
+              _react2.default.createElement(
+                'button',
+                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-fluid' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'navbar-header' },
-                            _react2.default.createElement(
-                                'button',
-                                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'sr-only' },
-                                    'Toggle navigation'
-                                ),
-                                _react2.default.createElement('span', { className: 'icon-bar' }),
-                                _react2.default.createElement('span', { className: 'icon-bar' }),
-                                _react2.default.createElement('span', { className: 'icon-bar' })
-                            ),
-                            _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/', className: 'navbar-brand' },
-                                _react2.default.createElement('img', { src: '/images/skereeteam.png' })
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-                            _react2.default.createElement(
-                                'ul',
-                                _defineProperty({ key: '1', className: 'nav navbar-nav navbar-left' }, 'key', '1'),
-                                _react2.default.createElement(_SearchBar2.default, null)
-                            ),
-                            this.state.logueado === false ? [_react2.default.createElement(
-                                'ul',
-                                { key: '3', className: 'nav navbar-nav navbar-right' },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/signup' },
-                                        'Registrate'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login' },
-                                        'Login'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/carrito' },
-                                        'Carrito'
-                                    ),
-                                    ' '
-                                )
-                            )] : [_react2.default.createElement(
-                                'ul',
-                                { key: '2', className: 'nav navbar-nav navbar-right' },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/login', onClick: function onClick() {
-                                                return _this2.props.logout();
-                                            } },
-                                        'Logout'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    ' ',
-                                    _react2.default.createElement(
-                                        _reactRouterDom.Link,
-                                        { to: '/carrito' },
-                                        'Carrito'
-                                    ),
-                                    ' '
-                                )
-                            )]
-                        )
-                    )
+                  'span',
+                  { className: 'sr-only' },
+                  'Toggle navigation'
+                ),
+                _react2.default.createElement('span', { className: 'icon-bar' }),
+                _react2.default.createElement('span', { className: 'icon-bar' }),
+                _react2.default.createElement('span', { className: 'icon-bar' })
+              ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/', className: 'navbar-brand' },
+                _react2.default.createElement('img', { src: '/images/logo1.png' })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+              _react2.default.createElement(
+                'ul',
+                _defineProperty({ key: '1', className: 'nav navbar-left navbar-nav' }, 'key', '1'),
+                _react2.default.createElement(_SearchBar2.default, { handleChange: this.handleChange, handleOnClick: this.handleOnClick, handelOnKeyPress: this.handelOnKeyPress }),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'dropdown' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'btn btn-default dropdown-toggle', type: 'button', id: 'dropdownMenu1', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'true' },
+                    'Categorias',
+                    _react2.default.createElement('span', { className: 'caret' })
+                  ),
+                  _react2.default.createElement(
+                    'ul',
+                    { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenu1' },
+                    this.props.categorias.map(function (categoria) {
+                      return _react2.default.createElement(
+                        'li',
+                        { key: categoria.id, onClick: function onClick() {
+                            _this2.props.fetchProductsByCategory(categoria.id);
+                          } },
+                        ' ',
+                        categoria.nombre,
+                        ' '
+                      );
+                    })
+                  )
                 )
-            );
-        }
-    }]);
+              ),
+              this.state.logueado === true ? [_react2.default.createElement(
+                'ul',
+                { key: '2', className: 'nav navbar-nav navbar-right' },
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/productos' },
+                    'Productos'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/login', onClick: function onClick() {
+                        return _this2.props.logout();
+                      } },
+                    'Logout'
+                  )
+                )
+              )] : [_react2.default.createElement(
+                'ul',
+                { key: '3', className: 'nav navbar-nav navbar-right' },
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/productos' },
+                    'Productos'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/signup' },
+                    'Registrate'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  ' ',
+                  _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/login' },
+                    'Login'
+                  )
+                )
+              )]
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-    return NavBar;
+  return NavBar;
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavBar);
@@ -32799,7 +32840,9 @@ var SearchBar = function (_Component) {
                         ),
                         _react2.default.createElement(
                           "option",
-                          { value: "1" },
+                          { onClick: function onClick() {
+                              return console.log('click');
+                            }, value: "1" },
                           "CategoriaTuVieja"
                         ),
                         _react2.default.createElement(
@@ -34227,7 +34270,7 @@ var CarritoSlider = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'sidebar-header' },
-                            _react2.default.createElement('img', { src: '/images/skereeteam.png' })
+                            _react2.default.createElement('img', { src: '/images/logo2.png' })
                         ),
                         _react2.default.createElement(
                             'ul',
@@ -34258,29 +34301,32 @@ var CarritoSlider = function (_Component) {
                                             ),
                                             _react2.default.createElement(
                                                 'div',
-                                                { className: 'btn-group', role: 'group', 'aria-label': '...' },
+                                                { className: 'btn-group btn-clase-carrito', role: 'group', 'aria-label': '...' },
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-warning', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-warning', onClick: function onClick() {
                                                             _this2.props.lessQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    'Restar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-minus img-circle text-warning' }),
+                                                    ' Restar'
                                                 ),
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-danger', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-danger', onClick: function onClick() {
                                                             _this2.props.removeFromCart(product.id);setTimeout(function () {
                                                                 localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                             }, 10);console.log('elimina', _this2.props.cart);
                                                         } },
-                                                    'Eliminar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-trash img-circle text-danger' }),
+                                                    ' Eliminar'
                                                 ),
                                                 _react2.default.createElement(
                                                     'button',
-                                                    { type: 'button', className: 'btn btn-success', onClick: function onClick() {
+                                                    { type: 'button', className: 'btn icon-btn btn-success', onClick: function onClick() {
                                                             _this2.props.addQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    'Sumar'
+                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-plus img-circle text-success' }),
+                                                    ' Sumar'
                                                 )
                                             )
                                         );
@@ -34297,7 +34343,7 @@ var CarritoSlider = function (_Component) {
                                 { key: 2 },
                                 _react2.default.createElement(
                                     _reactRouterDom.Link,
-                                    { to: '/checkout', role: 'button', className: 'btn btn-success comprar-carrito-btn' },
+                                    { to: '/checkout', role: 'button', className: 'btn icon-btn btn-success' },
                                     'Checkout'
                                 ),
                                 _react2.default.createElement('br', null),
@@ -34306,7 +34352,7 @@ var CarritoSlider = function (_Component) {
                                     'button',
                                     { onClick: function onClick() {
                                             (0, _cart.saveCart)(localStorage.getItem('cart'), _this2.props.logged.id);
-                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                        }, className: 'btn btn-success' },
                                     'Guardar carrito'
                                 ),
                                 _react2.default.createElement('br', null),
@@ -34315,7 +34361,7 @@ var CarritoSlider = function (_Component) {
                                     'button',
                                     { onClick: function onClick() {
                                             (0, _cart.getMyCart)(_this2.props.logged.id);_this2.props.actualizarCarro(JSON.parse(localStorage.getItem('cart')));
-                                        }, className: 'btn btn-success comprar-carrito-btn' },
+                                        }, className: 'btn btn-success ' },
                                     'Continuar compra guardada'
                                 )
                             )]
@@ -34489,7 +34535,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
+exports.fetchProductsByCategory = exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
 
 var _constants = __webpack_require__(7);
 
@@ -34580,6 +34626,14 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
         type: _constants.DELETE_PRODUCT,
         productId: productId
       });
+    });
+  };
+};
+
+var fetchProductsByCategory = exports.fetchProductsByCategory = function fetchProductsByCategory(categoryId) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/productos/todoDeUnaCategoria/' + categoryId).then(function (productos) {
+      fetchProductsUser(productos);
     });
   };
 };
@@ -34708,8 +34762,7 @@ var ProductosSubContainer = function (_Component) {
               )
             );
           })
-        ),
-        '); })}'
+        )
       );
     }
   }]);

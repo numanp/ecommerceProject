@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
   render() {
     return (
       <div className="col-md-12">
@@ -36,7 +34,7 @@ export default class SearchBar extends Component {
                         <option value="0" defaultValue>
                           todos los Snippets
                         </option>
-                        <option value="1">CategoriaTuVieja</option>
+                        <option onClick={() => console.log('click')} value="1">CategoriaTuVieja</option>
                         <option value="2">CategoriaLancelot</option>
                         <option value="3">CategoriaElBolson</option>
                       </select>
@@ -71,4 +69,3 @@ export default class SearchBar extends Component {
     );
   }
 }
-
