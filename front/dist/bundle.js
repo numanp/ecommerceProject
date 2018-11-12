@@ -5089,10 +5089,6 @@ var _ContainerReview = __webpack_require__(166);
 
 var _ContainerReview2 = _interopRequireDefault(_ContainerReview);
 
-var _reviewSubContainer = __webpack_require__(169);
-
-var _reviewSubContainer2 = _interopRequireDefault(_reviewSubContainer);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5313,7 +5309,7 @@ var ContainerSingleProduct = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_ContainerReview2.default, { producto: this.props.idproduct })
+                _react2.default.createElement(_ContainerReview2.default, null)
             );
         }
     }]);
@@ -5336,6 +5332,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (props) {
     var users = props.users;
+    console.log(users);
     return _react2.default.createElement(
         "div",
         { className: "container" },
@@ -35197,12 +35194,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    review: ownProps.review,
     rev: state.review,
     user: state.user,
-    producto: ownProps.producto,
+    producto: state.products.product,
     users: state.users
   };
 }
@@ -35214,9 +35210,6 @@ function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       dispatch((0, _users.fetchUsers)());
-    },
-    fetchReviews: function fetchReviews(producto) {
-      dispatch((0, _reviewAction.fetchReviews)(producto));
     }
   };
 }
@@ -35234,6 +35227,7 @@ var ContainerReview = function (_Component) {
       addReview: [],
       reviews: [],
       currentProduct: 0,
+      producto: _this.props.producto,
       rating: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
@@ -35242,30 +35236,24 @@ var ContainerReview = function (_Component) {
     return _this;
   }
 
-  // componentDidMount(){
-  //   console.log(this.props.producto)
-
-  // }
-
-  /*   componentWillReceiveProps(nextProps) {
-      if (nextProps.producto.id == this.state.producto.id) {
-        return
-      } else {
-        this.setState({ producto: nextProps.producto })
-        axios.get(`/api/reviews/${nextProps.producto.id}`)
-          .then(reviews => this.setState({ reviews: reviews.data }))
-      }
-  
-      this.handleChange = this.handleChange.bind(this)
-      this.handleSubmit = this.handleSubmit.bind(this)
-    } */
-
-
   _createClass(ContainerReview, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      if (nextProps.producto.id == this.state.producto.id) {
+        return;
+      } else {
+        this.setState({ producto: nextProps.producto });
+        _axios2.default.get('/api/reviews/' + nextProps.producto.id).then(function (reviews) {
+          return _this2.setState({ reviews: reviews.data });
+        });
+      }
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.fetchUsers();
-      setTimeout((0, _reviewAction.fetchReviews)(this.props.producto), 10);
     }
   }, {
     key: 'handleChange',
@@ -35286,9 +35274,6 @@ var ContainerReview = function (_Component) {
       this.setState({ rating: nextValue });
     }
   }, {
-    key: 'fechReviews',
-    value: function fechReviews(reviews) {}
-  }, {
     key: 'render',
     value: function render() {
       // console.log(this.state.rating)
@@ -35299,7 +35284,7 @@ var ContainerReview = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit, rating: this.state.rating, onStarClick: this.onStarClick }),
-        _react2.default.createElement(_Reviews2.default, { users: this.props.users, reviews: this.state.reviews, user: this.props.user, addReview: this.props.rev })
+        _react2.default.createElement(_Reviews2.default, { reviews: this.state.reviews, users: this.props.users, addReview: this.props.rev })
       );
     }
   }]);
@@ -35308,8 +35293,6 @@ var ContainerReview = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerReview);
-
-// reviews={this.props.reviews}
 
 /***/ }),
 /* 167 */
@@ -35362,7 +35345,7 @@ exports.default = function (_ref) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'row', id: 'post-review-box', style: { display: "none" } },
+                        { className: 'row', id: 'post-review-box' },
                         _react2.default.createElement(
                             'div',
                             { className: 'col-md-12' },
@@ -35474,135 +35457,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 169 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _reviewAction = __webpack_require__(63);
-
-var _users = __webpack_require__(64);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function mapStateToProps(state, ownProps) {
-    return {
-        review: ownProps.review,
-        rev: state.review,
-        user: state.user,
-        producto: ownProps.producto,
-        users: state.users
-    };
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        addReview: function (_addReview) {
-            function addReview(_x, _x2, _x3, _x4) {
-                return _addReview.apply(this, arguments);
-            }
-
-            addReview.toString = function () {
-                return _addReview.toString();
-            };
-
-            return addReview;
-        }(function (value, user, product, estrellas) {
-            dispatch(addReview(value, user, product, estrellas));
-        }),
-        fetchUsers: function fetchUsers() {
-            dispatch((0, _users.fetchUsers)());
-        },
-        fetchReviews: function fetchReviews(producto) {
-            dispatch((0, _reviewAction.fetchReviews)(producto));
-        }
-    };
-}
-
-var reviewSubContainer = function (_Component) {
-    _inherits(reviewSubContainer, _Component);
-
-    function reviewSubContainer(props) {
-        _classCallCheck(this, reviewSubContainer);
-
-        var _this = _possibleConstructorReturn(this, (reviewSubContainer.__proto__ || Object.getPrototypeOf(reviewSubContainer)).call(this, props));
-
-        _this.state = {
-            value: '',
-            addReview: [],
-            reviews: [],
-            currentProduct: 0,
-            rating: 0
-        };
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
-        _this.onStarClick = _this.onStarClick.bind(_this);
-        return _this;
-    }
-
-    _createClass(reviewSubContainer, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.fetchReviews(2);
-            this.props.fetchUsers();
-            setTimeout((0, _reviewAction.fetchReviews)(this.props.producto), 10);
-        }
-    }, {
-        key: 'handleChange',
-        value: function handleChange(evt) {
-            this.setState({
-                value: evt.target.value
-            });
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(evt) {
-            evt.preventDefault();
-            this.props.addReview(this.state.value, this.props.user, this.props.producto, this.state.rating);
-        }
-    }, {
-        key: 'onStarClick',
-        value: function onStarClick(nextValue, prevValue, name) {
-            this.setState({ rating: nextValue });
-        }
-    }, {
-        key: 'fechReviews',
-        value: function fechReviews(reviews) {}
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                'HOLA'
-            );
-        }
-    }]);
-
-    return reviewSubContainer;
-}(_react.Component);
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(reviewSubContainer);
-
-/***/ }),
+/* 169 */,
 /* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function (props) {
     var users = props.users
+    console.log(users)
     return (
         <div className="container">
             <div className="row">

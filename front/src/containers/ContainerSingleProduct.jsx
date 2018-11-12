@@ -8,7 +8,7 @@ import { addToCart } from '../redux/action-creators/cart';
 import Reviews from '../components/Reviews';
 import Descripcion from '../components/Descripcion';
 import ContainerReview from './ContainerReview';
-import ReviewSubContainer from './reviewSubContainer';
+
 
 function mapStateToProps(state, ownProps) {
     return {
@@ -102,7 +102,7 @@ class ContainerSingleProduct extends Component {
                         </div>
                     </div>
                 </div>
-                <ContainerReview producto={this.props.idproduct} />
+                <ContainerReview />
             </div>
 
         );

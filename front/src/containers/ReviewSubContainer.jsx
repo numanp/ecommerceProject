@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Reviews from '../components/Reviews'
+import ReviewInput from '../components/ReviewInput'
 import { connect } from 'react-redux';
-import { fetchReviews } from '../redux/action-creators/review-action';
+import { addReview } from '../redux/action-creators/review-action'
+import axios from 'axios';
+import StarRatingComponent from 'react-star-rating-component';
 import { fetchUsers } from '../redux/action-creators/users';
+import { fetchReviews } from '../redux/action-creators/review-action';
 
 function mapStateToProps(state, ownProps) {
     return {
-        review: ownProps.review,
         rev: state.review,
         user: state.user,
         producto: ownProps.producto,
         users: state.users
     }
 }
+
+
+
 function mapDispatchToProps(dispatch) {
     return {
         addReview: function (value, user, product, estrellas) {
@@ -26,7 +33,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-class reviewSubContainer extends Component {
+class ReviewSubContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,11 +46,6 @@ class reviewSubContainer extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onStarClick = this.onStarClick.bind(this)
-    }
-    componentDidMount() {
-        this.props.fetchReviews(2)
-        this.props.fetchUsers()
-        setTimeout(fetchReviews(this.props.producto), 10)
     }
     handleChange(evt) {
         this.setState({
@@ -59,19 +61,17 @@ class reviewSubContainer extends Component {
     onStarClick(nextValue, prevValue, name) {
         this.setState({ rating: nextValue });
     }
-
-    fechReviews(reviews) {
-
+    componentDidMount() {
+        setTimeout(fetchReviews(2), 5)
     }
     render() {
         return (
             <div>
-                HOLA
+                hola
             </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps, mapDispatchToProps
-)(reviewSubContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewSubContainer)
