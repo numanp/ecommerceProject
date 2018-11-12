@@ -9,20 +9,20 @@ module.exports = router;
 router.post('/email', (req, res) => {
   console.log("MAIL ENVIANDO?")
   //NO TOCAR LA KEY ESTA HARCODEADISIMA
-  sgMail.setApiKey('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');
-  var productosComprados = req.body.productos
+  sgMail.setApiKey('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');
+  /* var productosComprados = req.body.productos
   var htmlEnviar = '<p> Has comprado los siguientes productos ';
   for (var i = 0; i < productosComprados.length; i++) {
     htmlEnviar += productosComprados[i].producto + ", ";
   }
-  htmlEnviar += '</p>'
+  htmlEnviar += '</p>' */
   const msg = {
-    to: req.body.mail,
-    from: 'diegofernandezfontana@gmail.com',
+    to: req.body.email,
+    from: 'f_lp_s@hotmail.com',
     subject: 'Tu compra se ha realizado correctamente',
     text: 'Compra realizada correctamente',
     html: `<h1>Felicitaciones tu compra se a realizado con exito</h1>
-            ${htmlEnviar}
+          
     `,
   };
   sgMail.send(msg);

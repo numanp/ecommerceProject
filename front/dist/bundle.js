@@ -35021,7 +35021,7 @@ var CarritoSlider = function (_Component) {
                                                     { type: 'button', className: 'btn icon-btn btn-warning', onClick: function onClick() {
                                                             _this2.props.lessQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-minus img-circle text-warning' }),
+                                                    _react2.default.createElement('span', { className: 'glyphicon btn-glyphicon glyphicon-minus img-circle text-warning' }),
                                                     ' Restar'
                                                 ),
                                                 _react2.default.createElement(
@@ -35031,7 +35031,7 @@ var CarritoSlider = function (_Component) {
                                                                 localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                             }, 10);console.log('elimina', _this2.props.cart);
                                                         } },
-                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-trash img-circle text-danger' }),
+                                                    _react2.default.createElement('span', { className: 'glyphicon btn-glyphicon glyphicon-trash img-circle text-danger' }),
                                                     ' Eliminar'
                                                 ),
                                                 _react2.default.createElement(
@@ -35039,7 +35039,7 @@ var CarritoSlider = function (_Component) {
                                                     { type: 'button', className: 'btn icon-btn btn-success', onClick: function onClick() {
                                                             _this2.props.addQtoProduct(product.id);localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
                                                         } },
-                                                    _react2.default.createElement('span', { 'class': 'glyphicon btn-glyphicon glyphicon-plus img-circle text-success' }),
+                                                    _react2.default.createElement('span', { className: 'glyphicon btn-glyphicon glyphicon-plus img-circle text-success' }),
                                                     ' Sumar'
                                                 )
                                             )
@@ -35309,7 +35309,7 @@ var ProductosSubContainer = function (_Component) {
                 _react2.default.createElement(
                   'span',
                   { className: 'thumbnail' },
-                  _react2.default.createElement('img', { className: 'img-size', src: product.imagenSingle1, alt: '...' }),
+                  _react2.default.createElement('img', { className: 'img-size', src: product.foto, alt: '...' }),
                   _react2.default.createElement(
                     'h4',
                     { className: 'h4-productos' },
