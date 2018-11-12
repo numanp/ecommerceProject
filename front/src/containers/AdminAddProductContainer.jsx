@@ -8,7 +8,7 @@ class AdminAddProductContainer extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  componentDidMount() {}
+  componentDidMount() { }
   //MANEJA FORMULARIO PARA AGREGAR PRODUCTO
 
   handleSubmit(evt) {
@@ -21,6 +21,7 @@ class AdminAddProductContainer extends Component {
       imagenSingle1: evt.target.imagenSingle1.value,
       imagenSingle2: evt.target.imagenSingle2.value,
       imagenSingle3: evt.target.imagenSingle3.value,
+      foto: evt.target.foto.value,
       // foto1: evt.target.imgProducto1.value,
       // foto2: evt.target.imgProducto2.value,
       // foto3: evt.target.imgProducto3.value,
@@ -45,10 +46,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addProduct: function(producto) {
+    addProduct: function (producto) {
       dispatch(addProduct(producto));
     },
-    fetchCategorys: function(categorias) {
+    fetchCategorys: function (categorias) {
       dispatch(fetchCategorys(categorias));
     },
   };

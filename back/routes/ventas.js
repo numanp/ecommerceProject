@@ -38,6 +38,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  console.log('IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', req.params.id)
   models.User.findById(req.params.id).then(usuario => {
     usuario.getCompras().then(compras => {
       res.status(200).send(compras);

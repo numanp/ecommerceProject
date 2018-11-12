@@ -18,7 +18,7 @@ import AdminManejarProductos from './AdminManejarProductos';
 import AdminEditProductContainer from './AdminEditProductContainer';
 import AdminUsersContainer from './AdminUsersContainer';
 import AdminOrdenes from '../components/AdminOrdenes';
-import AdminSingleOrder from '../components/AdminSingleOrder';  
+import AdminSingleOrder from '../components/AdminSingleOrder';
 import AdminAddCategoryContainer from './AdminAddCategoryContainer';
 import AdminProductos from '../components/AdminProductos';
 import CheckoutContainer from '../containers/CheckoutContainer';

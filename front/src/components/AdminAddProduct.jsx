@@ -29,6 +29,12 @@ export default props => (
         </div>
         <div className="form-group">
           <label htmlFor="imagenSingle1">
+            Foto principal
+          </label>
+          <input name="foto" type="text" className="form-control" placeholder="foto principal "/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagenSingle1">
             Image 1
           </label>
           <input name="imagenSingle1" type="text" className="form-control" placeholder="Imagen 1 "/>

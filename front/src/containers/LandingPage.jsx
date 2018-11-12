@@ -5,7 +5,7 @@ import { getProducts } from '../redux/action-creators/products';
 import WebStoreSlider from '../components/WebStoreSlider'
 import ContenidoCelulares from '../components/ContenidoCelulares';
 import ContenidoInformativo from '../components/ContenidoInformativo'
-import GroupProducts from '../components/GroupProducts'
+
 
 function mapStateToProps(state) {
     return {
@@ -33,7 +33,6 @@ class LandingPage extends Component {
         return (
             <div>
                 <WebStoreSlider />
-                <GroupProducts productos={this.props.productos} />
                 <ContenidoCelulares />
                 <ContenidoInformativo />
             </div>
