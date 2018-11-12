@@ -10,7 +10,7 @@ export default ({listaCategorias, categoriasProducto, handleClick, producto, han
            <h2>Categorias:</h2>
             <ul>
                 { producto ? producto.categorias.map(categoria =>
-                <li key={categoria.nombre}>{categoria.nombre} <button className="btn btn-danger" onClick={() => eliminarCat(`${categoria.id}`)}> Eliminar </button></li>
+                <li key={categoria.nombre}>{categoria.nombre} </li>
                 
                 ) : null
             }

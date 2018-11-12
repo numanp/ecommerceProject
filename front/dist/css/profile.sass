@@ -53,11 +53,12 @@ $navbarGrisOscuro: #666
         display: flex
         border-top-left-radius: 10px
         border-top-right-radius: 10px
-        min-height: 170px
+        min-height: 200px
         padding: 0px
         .caption
             padding: 0px 
             flex-grow: 1
+            display: grid
         h3
             border-top-left-radius: 10px
             border-top-right-radius: 10px
@@ -79,6 +80,9 @@ $navbarGrisOscuro: #666
                 background-color: $adminCeleste
                 color: white
                 transition-duration: 0.2s
+        form
+            .form-group
+                display: grid
         
 
 
@@ -293,4 +297,26 @@ $navbarGrisOscuro: #666
                 color: white
 
 
- 
+#verOrdenesAdmin
+    background-color: $navbarGrisClaro
+    padding: 0px
+    .jumbotron
+        background-color: $navbarGrisClaro
+        display: flex
+        align-items: flex-start
+        flex-direction: column
+        padding: 10px
+        h2
+            margin: 0px
+            margin-bottom: 5px
+        .verOrdenesIndividual
+            border-radius: 3px
+            background-color: white
+            padding: 10px
+            border: 1px solid $grisMediano
+            min-width: 100%
+            margin: 2px
+            img
+                max-width: 100%
+                max-height: 150px
+            

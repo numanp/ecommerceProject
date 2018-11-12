@@ -65,7 +65,6 @@ export const getSingleProduct_wCategories = id => {
 
 export const postCategoriesToProducts = (id, arr) => {
   return dispatch => {
-    console.log('----action creator');
     axios
       .post(`/api/productos/catAproducto/${id}`, arr)
       .then(console.log('TODO SALIO BIEN'));
@@ -85,35 +84,10 @@ export const deleteProduct = productId => {
       );
 };
 
-export const getAllCategoriasProducto = catesProducto => ({
-  type: FETCH_CATEGORIES_PRODUCT,
-  catesProducto,
-});
-
-
-
-export const getCategoriasProductoIndividual = id => {
+export const fetchProductsByCategory = categoryId => {
   return dispatch =>
-    axios
-      .get(`/api/productos/productoxcategoria/${id}`)
-      .then(categorias => dispatch(getAllCategoriasProducto(categorias.data.categorias)))
-     // .then(res => dispatch(getAllCategoriasProducto(res.data)));
-};
-
-export const deleteOneCategorie = catEliminar => ({
-  type: DELETE_CATEGORY_PRODUCTO,
-  catEliminar,
-});
-
-
-
-export const deleteCategoriaProducto = id => {
-  return dispatch =>
-    axios
-      .get(`/api/productos/productoxcategoria/${id}`)
-      .then(categorias => dispatch(deleteOneCategorie(categorias.data)))
-     // .then(res => dispatch(getAllCategoriasProducto(res.data)));
-};
-
-
-
+    axios.get(`/api/productos/todoDeUnaCategoria/${categoryId}`)
+      .then((productos) => {
+        dispatch(fetchProductsUser(productos.data))
+      })
+}

@@ -6,25 +6,18 @@ const sgMail = require('@sendgrid/mail'); //PARA EL MAIL
 
 module.exports = router;
 
-router.get('/email', (req, res) => {
+router.post('/email', (req, res) => {
   console.log("MAIL ENVIANDO?")
   //NO TOCAR LA KEY ESTA HARCODEADISIMA
   sgMail.setApiKey('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');
-  var productosComprados = [
-    {
-      producto: 'PelotaFutbol',
-    },
-    {
-      producto: 'Libro'
-    }
-  ]
+  var productosComprados = req.body.productos
   var htmlEnviar = '<p> Has comprado los siguientes productos ';
   for (var i = 0; i < productosComprados.length; i++) {
     htmlEnviar += productosComprados[i].producto + ", ";
   }
   htmlEnviar += '</p>'
   const msg = {
-    to: 'diegofernandezfontana@gmail.com',
+    to: req.body.mail,
     from: 'diegofernandezfontana@gmail.com',
     subject: 'Tu compra se ha realizado correctamente',
     text: 'Compra realizada correctamente',
@@ -33,7 +26,7 @@ router.get('/email', (req, res) => {
     `,
   };
   sgMail.send(msg);
-  res.redirect('/');
+  res.send('mail enviado');
 
 })
 

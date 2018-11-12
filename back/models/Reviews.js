@@ -9,5 +9,5 @@ const Review = db.define('review', {
     type: Sequelize.INTEGER
   }
 });
-// FALTA FK 
+
 module.exports = Review 

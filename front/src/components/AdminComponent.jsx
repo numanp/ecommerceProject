@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default () => (
+export default (props) => (
   <div className="container-fluid" id="adminPanel">
     <div className="container">
 
@@ -24,7 +24,7 @@ export default () => (
               <h3>Crear Categorias</h3>
               <p className='adminP'>Agregar categorias a la base de datos.</p>
               <Link to="/admin/agregarCategoria" className="btn btn-primary">
-                Crear Categoria
+                Crear/Eliminar Categorias
               </Link>
             </div>
           </div>
@@ -36,7 +36,7 @@ export default () => (
               <h3>Editar productos</h3>
               <p className='adminP'>Editar productos y cambiar sus propiedades.</p>
               <Link to="/admin/adminListaProductos" className="btn btn-primary">
-                Editar Producto
+                Editar Productos
               </Link>
             </div>
           </div>
@@ -58,36 +58,39 @@ export default () => (
           <div className="thumbnail">
             <div className="caption">
               <h3>Buscar por orden especifica</h3>
+              <p  className='adminP'>Buscar por el ID de la orden especifica</p>
               <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Buscar numero de orden"
-                />
+                <form className="form-inline" onSubmit={props.handleOrderById}>
+                  <div className="form-group">
+                    <label className="sr-only" >ID Orden</label>
+                    <div className="input-group">
+                      <input type="text" className="form-control" placeholder="Search" name="ID"/>   
+                    </div>
+                  </div>
+                  <button type="submit" className="btn btn-primary">Ver más detalles de Orden por ID</button>
+                </form>
               </div>
-              <p>
-                <a href="#" className="btn btn-primary">
-                  Buscar
-                </a>
-              </p>
             </div>
           </div>
         </div>
+        
+      
+
+        
+   
 
       <div className="col-sm-6 col-md-4">
         <div className="thumbnail">
           <div className="caption">
             <h3>Lista de Usuarios</h3>
-            <p>
+            <p className='adminP'>Ver listado de ordenes y ordenes en especifico.</p>
               <Link to="/admin/users" className="btn btn-primary">
                 Manejo de Usuarios
               </Link>
-            </p>
           </div>
         </div>
       </div>
+  </div> { /*FIN ROW */}
     </div>{' '}
       </div>
-    {/* CIERRO ROW*/}
-  </div>
-);
+)

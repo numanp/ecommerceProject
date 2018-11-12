@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchBar from './SearchBar';
-import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
-import { getProductsByName } from '../redux/action-creators/products';
+import {
+  removeLoginFromLocalStorage,
+  fetchCategorys,
+} from '../redux/action-creators/user';
+import {
+  getProductsByName,
+  fetchProductsByCategory,
+} from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
-  //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
+    categorias: state.userAdmin.listaCategorias,
   };
 }
 
@@ -21,25 +27,34 @@ function mapDispatchToProps(dispatch, ownProps) {
     getProductsByName: nombre => {
       dispatch(getProductsByName(nombre));
     },
+    fetchCategorys: () => {
+      dispatch(fetchCategorys());
+    },
+    fetchProductsByCategory: id => {
+      dispatch(fetchProductsByCategory(id));
+    },
   };
 }
 
 class NavBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       nombreProducto: '',
+      admin: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
   }
   componentDidMount() {
-    // console.log(this.state, 'estado interno navbar');
+    this.props.fetchCategorys();
     var objeto = sessionStorage.getItem('login');
+
     if (!!objeto) {
       this.setState({
         logueado: true,
+        admin: JSON.parse(objeto).admin
       });
     } else {
       this.setState({
@@ -53,7 +68,7 @@ class NavBar extends Component {
     this.setState({
       nombreProducto: value,
     });
-    console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
+    // console.log(this.state.nombreProducto, 'STATE NOMBRE HANDLECHANGE');
   }
 
   handleOnClick() {
@@ -68,59 +83,146 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log(this.state.logueado)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
           <div className="container-fluid">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <button
+                type="button"
+                className="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false"
+              >
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+                <span className="icon-bar" />
               </button>
               <Link to="/" className="navbar-brand">
-                <img src="./images/skereeteam.png"></img>
+                <img src="./images/skereeteam.png" />
               </Link>
             </div>
+            <div className="dropdown">
+              <button
+                className="btn btn-default dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true"
+              >
+                Categorias
+                <span className="caret" />
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {
+                  this.props.categorias.map((categoria) => {
+                    return (
+                      <li key={categoria.id} onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
+                    )
+                  })
+                }
 
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul key="1" className="nav navbar-nav navbar-left" key="1">
-                <SearchBar handleChange={this.handleChange} handleOnClick={this.handleOnClick} handelOnKeyPress={this.handelOnKeyPress} />
               </ul>
-              {
-                this.state.logueado === true
-                ? [
-                    <ul className="nav navbar-nav navbar-right" key="2">
-                      <li key="Logout">
-                        <Link to="/login" onClick={() => this.props.logout()}> Logout</Link>
-                      </li>
-                      <li key='productos'>
-                        <Link to="/productos">Productos</Link>
-                      </li>
-                    </ul>,
-                  ]
-                : [
-                    <ul className="nav navbar-nav navbar-right">
-                      <li key='singup'>
+            </div>
+            <div
+              className="collapse navbar-collapse"
+              id="bs-example-navbar-collapse-1"
+            >
+              <ul key="1" className="nav navbar-nav navbar-left" key="1">
+                <SearchBar
+                  handleChange={this.handleChange}
+                  handleOnClick={this.handleOnClick}
+                  handelOnKeyPress={this.handelOnKeyPress}
+                />
+              </ul>
+
+                <ul className="nav navbar-nav navbar-right">
+                {
+                  this.state.logueado ?
+                    <li>
+                      <Link to="/login" onClick={() => this.props.logout()}>
+                        Logout
+                      </Link>
+                    </li>
+                    :
+                    <ul>
+                      <li>
                         <Link to="/signup">Registrate</Link>
                       </li>
-                      <li key='login'>
+                      <li>
                         <Link to="/login">Login</Link>
-                      </li>
-                      <li key='productos'>
-                        <Link to="/productos">Productos</Link>
-                      </li>
-                    </ul>,
-                  ]} 
+                      </li>                    
+                    </ul>
+                }
+
+                {
+                   this.state.admin ? 
+                     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+                   : null
+                 }
+                 {
+                   this.state.logueado === true && !this.state.admin ?
+                   <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+                   : null
+                 }
+                 
+                 <li>
+                          <Link to="/productos">Productos</Link>
+                       </li>
+                </ul>
+              
             </div>
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 
+
+
+// {this.state.logueado === true
+//   ? [
+//       <ul key="2" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/login" onClick={() => this.props.logout()}>
+//             Logout
+//           </Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//          </li>
+//       </ul>,
+//     ]
+//   : [
+//       <ul key="3" className="nav navbar-nav navbar-right">
+//         <li>
+//           <Link to="/signup">Registrate</Link>
+//         </li>
+//         <li>
+//           <Link to="/login">Login</Link>
+//         </li>
+//         <li>
+//           <Link to="/productos">Productos</Link>
+//         </li>
+//       </ul>,
+//     ]}
+//      {
+//         this.state.admin ? 
+//         <ul>
+//           <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+//         </ul>
+//         : null
+//       }
+//       {
+//         this.state.logueado === true && !this.state.admin ?
+//         <ul>
+//         <li> <Link to="/user/profile"> Mi Cuenta </Link> </li>
+//        </ul> 
+//         : null
+//       }

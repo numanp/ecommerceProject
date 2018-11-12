@@ -6,37 +6,39 @@ export default class AdminSingleOrder extends Component {
     }
 
     render() {
-      console.log('props carrito',this.props.carrito)
-      console.log('props ordenes',this.props.ordenes)
-
       return (
+        <div className="container-fluid" id='verOrdenesAdmin'>
         <div className="container">
         <div className="jumbotron">
-        <h1>Detalles de la orden</h1>
-        <div>
-            Hola
-        </div>
+        <h1 className="text-center">Detalles de la orden</h1>
         {
-        
+            
             this.props.carrito.length > 0  ?
             this.props.carrito.map( carrito => (
-                    <ul key={carrito.id}>
-                        <li>Creado: {carrito.createdAt}</li>
-                        <li>Descripcion: {carrito.descripcion}</li>
-                        <li>Disponibildad: {carrito.disponibilidad}</li>
-                        <li>Foto: {carrito.foto}</li>
-                        <li>ID: {carrito.id}</li>
-                        <li>Nombre: {carrito.nombre}</li>
-                        <li>Precio: {carrito.precio}</li>
-                        <li>Cantidad: {carrito.q}</li>
-                        <li>Stock: {carrito.stock}</li>
-                    </ul>
-                    
-            ))
-            : 
-            <div> Vacío </div>
-        }
+                <div key={carrito.id} className="verOrdenesIndividual">
+                <div className="col-md-3">
+                    <img src={carrito.imagenSingle1} alt=""/>
+                    {console.log(carrito)}
+                </div>
+                    <div className="col-md-4">
+                        <h2>Producto: </h2>
+                        <h2><b>{carrito.descripcion}</b></h2>
+                        <p>ID: {carrito.id}</p>
+                    </div>
+                    {/*}<p>Disponibildad: {carrito.disponibipdad}</p> */}
+                    <div className="col-md-4">
+                    <p>Precio: {carrito.precio}</p>
+                    <p>Cantidad: {carrito.q}</p>
+                    <p>Total: <b>${ parseInt(carrito.precio) * parseInt(carrito.q)} </b></p>
+                    </div>
+                </div>
+                
+                
+                ))
+                : null
+            }
 
+        </div>
         </div>
     </div>
     )
