@@ -33,19 +33,16 @@ class Login extends Component {
   componentDidMount() {
     setTimeout(() => { this.props.getCart(JSON.parse(localStorage.getItem('cart'))); if (this.props.loggedIn.id) this.props.history.push('/productos') }, 10)
   }
+  componentDidMount() {}
   emailChange(e) {
-    this.setState(
-      {
-        email: e.target.value
-      }
-    )
+    this.setState({
+      email: e.target.value,
+    });
   }
   passwordChange(e) {
-    this.setState(
-      {
-        password: e.target.value
-      }
-    )
+    this.setState({
+      password: e.target.value,
+    });
   }
 
   logn(object) {

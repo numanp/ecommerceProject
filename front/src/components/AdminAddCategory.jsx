@@ -44,14 +44,7 @@ export default props => (
                           />{' '}
                           Eliminar categoria
                         </button>
-                        <button className="btn btn-warning">
-                          <span
-                            className="
-										glyphicon glyphicon-pencil"
-                            aria-hidden="true"
-                          />{' '}
-                          Editar categoria
-                        </button>
+                       
                       </li>
                     );
                   })

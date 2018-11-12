@@ -10,20 +10,20 @@ export default ({listaCategorias, categoriasProducto, handleClick, producto, han
            <h2>Categorias:</h2>
             <ul>
                 { producto ? producto.categorias.map(categoria =>
-                <li>{categoria.nombre}</li>
+                <li key={categoria.nombre}>{categoria.nombre}</li>
                 ) : null
             }
             </ul>
             <h1>Editar Categorias producto 1</h1>
-            <select className="form-control  botonAgregarCategoria" name="AgregarCat" id="">
+            <select className="form-control  botonAgregarCategoria" name="AgregarCat" id="" >
                 {
                     listaCategorias.map(categoria => 
-                        <option value={categoria.id}>{categoria.nombre} </option>
+                        <option value={categoria.id} key={categoria.id}>{categoria.nombre} </option>
                     )
                 }
             </select>
             <br/><br/>
-            <button className="btn btn-primary" onClick={() => handleClick()}>Agregar Categorias</button>
+            <button className="btn btn-primary " onClick={() => handleClick()}>Agregar Categorias</button>
             <button className="btn btn-primary " onClick={() => handleAgregarCategorias()}>Confirmar Cambios</button>
 
 	</div>

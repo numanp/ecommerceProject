@@ -10,6 +10,10 @@ router.get('/me', (req, res) => {
   res.send(req.user || 'no estas logeado');
 });
 
+// router.get('/perfil/:userId', (req, res) => {
+//   models.User.findById(req.params.userId).then(user => res.send(user));
+// });
+
 router.get('/:userId', (req, res) => {
   models.User.findById(req.params.userId).then(user => res.send(user));
 });
