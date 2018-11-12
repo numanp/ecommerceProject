@@ -37,7 +37,7 @@ export default props => (
         </div>
         <div className="form-group">
           <label htmlFor="foto">
-            Imagen
+            Imagen Uno
             {/* Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , )
             APLICAR SPLIT */}
           </label>
@@ -46,7 +46,49 @@ export default props => (
             type="text"
             className="form-control"
             value={props.selectedProd.foto}
-            placeholder="Separar imagenes por ,"
+            onChange={props.handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagenSingle1">
+            Imagen Dos
+            {/* Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , )
+            APLICAR SPLIT */}
+          </label>
+          <input
+            name="imagenSingle1"
+            type="text"
+            className="form-control"
+            value={props.selectedProd.imagenSingle1}
+            onChange={props.handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagenSingle2">
+            Imagen Tres
+            {/* Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , )
+            APLICAR SPLIT */}
+          </label>
+          <input
+            name="imagenSingle2"
+            type="text"
+            className="form-control"
+            value={props.selectedProd.imagenSingle2}
+            onChange={props.handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="imagenSingle3">
+            Imagen Cuatro
+            {/* Image(DEBERIA TENER UNA FUNCION PARA SEPARAR IMAGENES POR , )
+            APLICAR SPLIT */}
+          </label>
+          <input
+            name="imagenSingle3"
+            type="text"
+            className="form-control"
+            value={props.selectedProd.imagenSingle3}
             onChange={props.handleChange}
           />
         </div>

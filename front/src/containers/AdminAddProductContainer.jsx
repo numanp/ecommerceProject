@@ -21,6 +21,9 @@ class AdminAddProductContainer extends Component {
       imagenSingle1: evt.target.imagenSingle1.value,
       imagenSingle2: evt.target.imagenSingle2.value,
       imagenSingle3: evt.target.imagenSingle3.value,
+      // foto1: evt.target.imgProducto1.value,
+      // foto2: evt.target.imgProducto2.value,
+      // foto3: evt.target.imgProducto3.value,
       stock: evt.target.stockProducto.value,
     };
     this.props.addProduct(productoAgregar);

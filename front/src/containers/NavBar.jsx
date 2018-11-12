@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchBar from './SearchBar';
-import { removeLoginFromLocalStorage } from '../redux/action-creators/user';
-import { getProductsByName } from '../redux/action-creators/products';
+import {
+  removeLoginFromLocalStorage,
+  fetchCategorys,
+} from '../redux/action-creators/user';
+import {
+  getProductsByName,
+  fetchProductsByCategory,
+} from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
   //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
+    categorias: state.userAdmin.listaCategorias,
   };
 }
 
@@ -21,12 +28,18 @@ function mapDispatchToProps(dispatch, ownProps) {
     getProductsByName: nombre => {
       dispatch(getProductsByName(nombre));
     },
+    fetchCategorys: () => {
+      dispatch(fetchCategorys());
+    },
+    fetchProductsByCategory: id => {
+      dispatch(fetchProductsByCategory(id));
+    },
   };
 }
 
 class NavBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       nombreProducto: '',
     };
@@ -35,7 +48,7 @@ class NavBar extends Component {
     this.handelOnKeyPress = this.handelOnKeyPress.bind(this);
   }
   componentDidMount() {
-    // console.log(this.state, 'estado interno navbar');
+    this.props.fetchCategorys();
     var objeto = sessionStorage.getItem('login');
     if (!!objeto) {
       this.setState({
@@ -46,6 +59,9 @@ class NavBar extends Component {
         logueado: false,
       });
     }
+    setTimeout(() => {
+      console.log(this.props.categorias);
+    }, 10);
   }
 
   handleChange(evt) {
@@ -74,53 +90,91 @@ class NavBar extends Component {
         <div className="container">
           <div className="container-fluid">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <button
+                type="button"
+                className="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false"
+              >
                 <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+                <span className="icon-bar" />
               </button>
               <Link to="/" className="navbar-brand">
-                <img src="./images/skereeteam.png"></img>
+                <img src="./images/skereeteam.png" />
               </Link>
             </div>
-
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul key="1" className="nav navbar-nav navbar-left" key="1">
-                <SearchBar handleChange={this.handleChange} handleOnClick={this.handleOnClick} handelOnKeyPress={this.handelOnKeyPress} />
+            <div className="dropdown">
+              <button
+                className="btn btn-default dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true"
+              >
+                Categorias
+                <span className="caret" />
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {this.props.categorias.map(categoria => {
+                  return (
+                    <li
+                      onClick={() => {
+                        this.props.fetchProductsByCategory(categoria.id);
+                      }}
+                    >
+                      {' '}
+                      {categoria.nombre}{' '}
+                    </li>
+                  );
+                })}
               </ul>
-              {
-                this.state.logueado === true
+            </div>
+            <div
+              className="collapse navbar-collapse"
+              id="bs-example-navbar-collapse-1"
+            >
+              <ul key="1" className="nav navbar-nav navbar-left" key="1">
+                <SearchBar
+                  handleChange={this.handleChange}
+                  handleOnClick={this.handleOnClick}
+                  handelOnKeyPress={this.handelOnKeyPress}
+                />
+              </ul>
+              {this.state.logueado === true
                 ? [
-                    <ul className="nav navbar-nav navbar-right" key="2">
-                      <li key="Logout">
-                        <Link to="/login" onClick={() => this.props.logout()}> Logout</Link>
+                    <ul key="2" className="nav navbar-nav navbar-right">
+                      <li>
+                        <Link to="/login" onClick={() => this.props.logout()}>
+                          Logout
+                        </Link>
                       </li>
-                      <li key='productos'>
-                        <Link to="/productos">Productos</Link>
+                      <li>
+                        <Link to="/carrito">Carrito</Link>
                       </li>
                     </ul>,
                   ]
                 : [
-                    <ul className="nav navbar-nav navbar-right" key="3">
-                      <li key='singup'>
+                    <ul key="3" className="nav navbar-nav navbar-right">
+                      <li>
                         <Link to="/signup">Registrate</Link>
                       </li>
-                      <li key='login'>
+                      <li>
                         <Link to="/login">Login</Link>
                       </li>
-                      <li key='productos'>
+                      <li>
                         <Link to="/productos">Productos</Link>
                       </li>
-                    </ul>
-                  ]
-              }
-           
+                    </ul>,
+                  ]}
             </div>
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 

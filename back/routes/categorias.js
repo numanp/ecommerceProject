@@ -8,9 +8,9 @@ router.post('/', (req, res) => {
   models.Categoria.create({
     nombre: req.body.nombre,
   })
-  .then((data) => {
-    res.status(200).send(data);
-  });
+    .then((data) => {
+      res.status(200).send(data);
+    });
 });
 
 router.put('/:nombre', (req, res) => {

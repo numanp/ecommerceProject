@@ -35,24 +35,33 @@ router.get('/:id', (req, res) => {
 //PARA TRAER TODAS LAS CATEGORIAS DE CIERTO PRODUCTO
 // powered by diego
 router.get('/productoxcategoria/:id', (req, res) => {
-	models.Producto.findOne({
-		where: {id: req.params.id},
-		include: [models.Categoria]
-	})
-	.then(producto => res.send(producto))
-	
+  models.Producto.findOne({
+    where: { id: req.params.id },
+    include: [models.Categoria]
+  })
+    .then(producto => res.send(producto))
+
 });
 
+router.get('/todoDeUnaCategoria/:id', (req, res) => {
+  models.Categoria.findAll({
+    where: { id: req.params.id },
+    include: [models.Producto]
+  })
+    .then((productos) => res.send(productos))
+})
+
 router.post('/catAproducto/:id', (req, res) => {
-  	var arreglo = req.body;
-  	models.Producto.findById(req.params.id)
- 	.then(producto => {
-		arreglo.forEach(el => producto.setCategorias(el))
-	  	res.send('TODO SALIO BIEN')}
-	) 
-	.catch(e=> res.send('SWISS MEDICAL NO FUNCIONA'))
-    //res.send(producto))
-	
+  var arreglo = req.body;
+  models.Producto.findById(req.params.id)
+    .then(producto => {
+      arreglo.forEach(el => producto.setCategorias(el))
+      res.send('TODO SALIO BIEN')
+    }
+    )
+    .catch(e => res.send('SWISS MEDICAL NO FUNCIONA'))
+  //res.send(producto))
+
 });
 
 
