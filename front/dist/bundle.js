@@ -739,6 +739,8 @@ var PRODUCT_AMOUNT = exports.PRODUCT_AMOUNT = 'PRODUCT_AMOUNT'; // wtf
 var UPDATE_PRODUCT = exports.UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 var DELETE_PRODUCT = exports.DELETE_PRODUCT = 'DELETE_PRODUCT';
 var FETCH_PRODUCTS_BY_NAME = exports.FETCH_PRODUCTS_BY_NAME = 'FETCH_PRODUCTS_BY_NAME';
+var FETCH_CATEGORIES_PRODUCT = exports.FETCH_CATEGORIES_PRODUCT = 'FETCH_CATEGORIES_PRODUCT';
+var DELETE_CATEGORY_PRODUCTO = exports.DELETE_CATEGORY_PRODUCTO = 'DELETE_CATEGORY_PRODUCTO';
 
 // User admin
 var ADD_CATEGORY = exports.ADD_CATEGORY = 'ADD_CATEGORY';
@@ -1641,7 +1643,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
+exports.deleteCategoriaProducto = exports.deleteOneCategorie = exports.getCategoriasProductoIndividual = exports.getAllCategoriasProducto = exports.deleteProduct = exports.postCategoriesToProducts = exports.getSingleProduct_wCategories = exports.getSingleProduct = exports.getProducts = exports.fetchSingleProductxCategories = exports.getProductsByName = exports.fetchProductsUser = exports.fetchSingleProduct = undefined;
 
 var _constants = __webpack_require__(6);
 
@@ -1734,6 +1736,38 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
       });
     });
   };
+};
+
+var getAllCategoriasProducto = exports.getAllCategoriasProducto = function getAllCategoriasProducto(catesProducto) {
+  return {
+    type: _constants.FETCH_CATEGORIES_PRODUCT,
+    catesProducto: catesProducto
+  };
+};
+
+var getCategoriasProductoIndividual = exports.getCategoriasProductoIndividual = function getCategoriasProductoIndividual(id) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/productos/productoxcategoria/' + id).then(function (categorias) {
+      return dispatch(getAllCategoriasProducto(categorias.data.categorias));
+    });
+  };
+  // .then(res => dispatch(getAllCategoriasProducto(res.data)));
+};
+
+var deleteOneCategorie = exports.deleteOneCategorie = function deleteOneCategorie(catEliminar) {
+  return {
+    type: _constants.DELETE_CATEGORY_PRODUCTO,
+    catEliminar: catEliminar
+  };
+};
+
+var deleteCategoriaProducto = exports.deleteCategoriaProducto = function deleteCategoriaProducto(id) {
+  return function (dispatch) {
+    return _axios2.default.get('/api/productos/productoxcategoria/' + id).then(function (categorias) {
+      return dispatch(deleteOneCategorie(categorias.data));
+    });
+  };
+  // .then(res => dispatch(getAllCategoriasProducto(res.data)));
 };
 
 /***/ }),
@@ -32012,7 +32046,8 @@ var productsReducer = function productsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     products: [],
     product: {},
-    productosParaCarrito: []
+    productosParaCarrito: [],
+    categoriasProducto: []
   };
   var action = arguments[1];
 
@@ -32032,6 +32067,16 @@ var productsReducer = function productsReducer() {
     case _constants.FETCH_SINGLE_PRODUCT_wCATEGORIES:
       return Object.assign({}, state, {
         producto_wCategories: action.producto
+      });
+    case _constants.FETCH_CATEGORIES_PRODUCT:
+      return Object.assign({}, state, {
+        categoriasProducto: action.catesProducto
+      });
+    case _constants.DELETE_CATEGORY_PRODUCTO:
+      console.log(state);
+      console.log(action.cateEliminar);
+      return Object.assign({}, state, {
+        categoriasProducto: action.catEliminar
       });
     default:
       return state;
@@ -37962,6 +38007,7 @@ var AdminAddCategoryToProductContainer = function (_Component) {
             idProducto: 0
         };
         _this.handleClick = _this.handleClick.bind(_this);
+        _this.eliminarCat = _this.eliminarCat.bind(_this);
         _this.handleAgregarCategorias = _this.handleAgregarCategorias.bind(_this);
         return _this;
     }
@@ -37971,6 +38017,7 @@ var AdminAddCategoryToProductContainer = function (_Component) {
         value: function componentDidMount() {
             this.props.fetchCategorys();
             this.props.getSingleProduct_wCategories(this.props.match.params.id);
+            this.props.getCategoriasProductoIndividual(this.props.match.params.id);
         }
     }, {
         key: 'componentWillReceiveProps',
@@ -37995,6 +38042,12 @@ var AdminAddCategoryToProductContainer = function (_Component) {
             }
         }
     }, {
+        key: 'eliminarCat',
+        value: function eliminarCat(valor) {
+            console.log(valor);
+            this.props.deleteCategoriaProducto(valor);
+        }
+    }, {
         key: 'handleAgregarCategorias',
         value: function handleAgregarCategorias() {
             console.log(this.props);
@@ -38013,7 +38066,8 @@ var AdminAddCategoryToProductContainer = function (_Component) {
                     handleClick: this.handleClick,
                     handleAgregarCategorias: this.handleAgregarCategorias,
                     arregloCategorias: this.state.arregloCategorias,
-                    producto: this.props.producto.producto_wCategories
+                    producto: this.props.producto.producto_wCategories,
+                    eliminarCat: this.eliminarCat
                 })
             );
         }
@@ -38041,6 +38095,12 @@ function mapDispatchToProps(dispatch) {
         },
         postCategoriesToProducts: function postCategoriesToProducts(id, arr) {
             dispatch((0, _products.postCategoriesToProducts)(id, arr));
+        },
+        getCategoriasProductoIndividual: function getCategoriasProductoIndividual(id) {
+            dispatch((0, _products.getCategoriasProductoIndividual)(id));
+        },
+        deleteCategoriaProducto: function deleteCategoriaProducto(id) {
+            dispatch((0, _products.deleteCategoriaProducto)(id));
         }
     };
 }
@@ -38079,7 +38139,8 @@ exports.default = function (_ref) {
         categoriasProducto = _ref.categoriasProducto,
         handleClick = _ref.handleClick,
         producto = _ref.producto,
-        handleAgregarCategorias = _ref.handleAgregarCategorias;
+        handleAgregarCategorias = _ref.handleAgregarCategorias,
+        eliminarCat = _ref.eliminarCat;
     return _react2.default.createElement(
         'div',
         { className: 'container-fluid', id: 'AgregarCatAPrdoucto' },
@@ -38109,7 +38170,15 @@ exports.default = function (_ref) {
                     return _react2.default.createElement(
                         'li',
                         { key: categoria.nombre },
-                        categoria.nombre
+                        categoria.nombre,
+                        ' ',
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn btn-danger', onClick: function onClick() {
+                                    return eliminarCat('' + categoria.id);
+                                } },
+                            ' Eliminar '
+                        )
                     );
                 }) : null
             ),

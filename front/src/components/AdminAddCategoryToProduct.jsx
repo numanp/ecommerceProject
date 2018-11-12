@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 
 
-export default ({listaCategorias, categoriasProducto, handleClick, producto, handleAgregarCategorias}) => (
+export default ({listaCategorias, categoriasProducto, handleClick, producto, handleAgregarCategorias,eliminarCat}) => (
     <div  className="container-fluid" id="AgregarCatAPrdoucto" >
 		<div  className="container agregarCatInd"   >
            <h1><b> {producto ? producto.nombre : null} </b></h1>
            <h2>Categorias:</h2>
             <ul>
                 { producto ? producto.categorias.map(categoria =>
-                <li key={categoria.nombre}>{categoria.nombre}</li>
+                <li key={categoria.nombre}>{categoria.nombre} <button className="btn btn-danger" onClick={() => eliminarCat(`${categoria.id}`)}> Eliminar </button></li>
+                
                 ) : null
             }
             </ul>

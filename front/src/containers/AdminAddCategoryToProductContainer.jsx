@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminAddCategoryToProduct from '../components/AdminAddCategoryToProduct'
 import { fetchCategorys } from '../redux/action-creators/user'
-import { getSingleProduct_wCategories, postCategoriesToProducts } from '../redux/action-creators/products'
+import { getSingleProduct_wCategories, postCategoriesToProducts, getCategoriasProductoIndividual , deleteCategoriaProducto} from '../redux/action-creators/products'
 
 
 class AdminAddCategoryToProductContainer extends Component {
@@ -14,11 +14,13 @@ class AdminAddCategoryToProductContainer extends Component {
             idProducto: 0
         }
         this.handleClick = this.handleClick.bind(this);
+        this.eliminarCat = this.eliminarCat.bind(this);
         this.handleAgregarCategorias = this.handleAgregarCategorias.bind(this);
     }
     componentDidMount() {
         this.props.fetchCategorys();
         this.props.getSingleProduct_wCategories(this.props.match.params.id);
+        this.props.getCategoriasProductoIndividual(this.props.match.params.id)
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.producto.producto_wCategories !== undefined){
@@ -41,6 +43,11 @@ class AdminAddCategoryToProductContainer extends Component {
         
        
     }
+
+    eliminarCat(valor){
+        console.log(valor)
+        this.props.deleteCategoriaProducto(valor)
+    }
     handleAgregarCategorias(){
         console.log(this.props)
         console.log(this.state)
@@ -58,6 +65,7 @@ class AdminAddCategoryToProductContainer extends Component {
                         handleAgregarCategorias={this.handleAgregarCategorias}
                         arregloCategorias={this.state.arregloCategorias}
                         producto={this.props.producto.producto_wCategories}
+                        eliminarCat={this.eliminarCat}
                 />
             </div>
         )
@@ -84,6 +92,12 @@ function mapDispatchToProps(dispatch){
         },
         postCategoriesToProducts: function(id,arr){
             dispatch(postCategoriesToProducts(id,arr))
+        },
+        getCategoriasProductoIndividual: function(id){
+            dispatch(getCategoriasProductoIndividual(id))
+        },
+        deleteCategoriaProducto: function(id){
+            dispatch(deleteCategoriaProducto(id))
         }
     }
 }
