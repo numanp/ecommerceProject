@@ -160,7 +160,7 @@ class NavBar extends Component {
 
                 {
                    this.state.admin ? 
-                     <li> <Link to="/admin/verOrdenes"> Panel Admin </Link> </li>
+                     <li> <Link to="/admin/"> Panel Admin </Link> </li>
                    : null
                  }
                  {

@@ -33419,7 +33419,7 @@ var NavBar = function (_Component) {
                   ' ',
                   _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/admin/verOrdenes' },
+                    { to: '/admin/' },
                     ' Panel Admin '
                   ),
                   ' '
