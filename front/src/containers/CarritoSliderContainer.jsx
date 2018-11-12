@@ -59,18 +59,18 @@ class CarritoSlider extends Component {
                                             return (
                                                 <li key={product.id} className="li-sidebarSkeree">
                                                     <a className="a-carritoSlider" href="#">{product.nombre} - Cantidad:{product.q}-Subtotal:{product.precio * product.q}</a>
-                                                    
+
                                                     <div className="btn-group btn-clase-carrito" role="group" aria-label="...">
 
 
-                                                        <button type="button" className="btn icon-btn btn-warning" onClick={() => { this.props.lessQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span class="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span> Restar</button>
+                                                        <button type="button" className="btn icon-btn btn-warning" onClick={() => { this.props.lessQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span className="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span> Restar</button>
 
 
-                                                        <button type="button" className="btn icon-btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10); console.log('elimina', this.props.cart) }}><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span> Eliminar</button>
+                                                        <button type="button" className="btn icon-btn btn-danger" onClick={() => { this.props.removeFromCart(product.id); setTimeout(() => { localStorage.setItem('cart', JSON.stringify(this.props.cart)) }, 10); console.log('elimina', this.props.cart) }}><span className="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span> Eliminar</button>
 
-    
 
-                                                        <button type="button" className="btn icon-btn btn-success"  onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Sumar</button>
+
+                                                        <button type="button" className="btn icon-btn btn-success" onClick={() => { this.props.addQtoProduct(product.id); localStorage.setItem('cart', JSON.stringify(this.props.cart)) }}><span className="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Sumar</button>
                                                     </div>
                                                 </li>
                                             )
