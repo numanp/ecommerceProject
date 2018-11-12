@@ -5,6 +5,7 @@ export const SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS';
 
 //USER_REDUCER
 export const ADD_REVIEW = 'ADD_REVIEW';
+export const FETCH_REVIEWS = 'FETCH_REVIEWS';
 export const FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';

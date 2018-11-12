@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import AdminProductos from '../components/AdminProductos';
-import {fetchProducts} from '../redux/action-creators/user'
+import { fetchProducts } from '../redux/action-creators/user'
 
 class AdminManejarProductos extends Component {
     constructor(props) {
@@ -13,28 +13,27 @@ class AdminManejarProductos extends Component {
 
     render() {
         return (
-            <div>   
-            {
-                <AdminProductos listaProductos={this.props.listaProductos} />     
-            }
-         </div>   
+            <div>
+                {
+                    <AdminProductos listaProductos={this.props.listaProductos} />
+                }
+            </div>
         )
     }
 }
 
-function mapStateToProps (state){
-  //  console.log(state)
-    return{ 
+function mapStateToProps(state) {
+    return {
         listaProductos: state.userAdmin.listaProductos
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return{
-            fetchProducts: function (productos){
-                dispatch(fetchProducts(productos))
-            }
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchProducts: function (productos) {
+            dispatch(fetchProducts(productos))
         }
+    }
 }
 
 

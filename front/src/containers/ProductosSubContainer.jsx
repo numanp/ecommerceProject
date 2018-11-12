@@ -70,8 +70,9 @@ class ProductosSubContainer extends Component {
                     </div>
                   </span>
                 </div>
-              );
-            })}
+              )
+            })
+          }
         </div>
       </div>
     );

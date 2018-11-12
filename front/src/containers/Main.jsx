@@ -57,11 +57,11 @@ class Main extends Component {
     return axios.post('api/user/signup', object);
   }
   logn(object) {
-    console.log('hola')
-    axios.post('api/login', object).then(res => console.log(res));
+    axios.post('/api/login', object)
+      .then(res => console.log(res.data));
   }
   componentDidMount() {
-    axios.get('api/user/me').then(response => {
+    axios.get('/api/user/me').then(response => {
       this.props.logginSuccess(response.data);
     });
     // axios.get('/api/user/3')
@@ -77,16 +77,8 @@ class Main extends Component {
           render={props => <NavBar {...props} admin={this.state.admin} />}
         />
         <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/signup"
-          render={props => <SignUp {...props} sign={this.sign} />}
-        />
-        <Route
-          exact
-          path="/login"
-          render={() => <Login logout={this.logout} logn={this.logn} />}
-        />
+        <Route exact path="/signup" render={props => <SignUp {...props} sign={this.sign} />} />
+        <Route exact path="/login" render={(props) => <Login {...props} logout={this.logout} logn={this.logn} />} />
         <Route path="/productos" component={Productos} />
         <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/admin/agregarProducto" component={AdminAddProductContainer} />

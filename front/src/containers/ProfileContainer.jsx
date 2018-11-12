@@ -62,9 +62,6 @@ export default class ProfileContainer extends React.Component {
             },
 
         ]
-
-        //console.log(userPerfil);
-
         //ARREGLO COMPRAS SERIA EL ARREGLO A ENVIAR CON LA DATA DEL USUARIO Y SUS COMPRAS
         return <UserProfile userPerfil={[userPerfil]} arregloCompras={arregloCompras} misReviews={misReviews} />;
     }

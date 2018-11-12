@@ -40,7 +40,6 @@ class AdminEditProductContainer extends Component {
   }
 
   render() {
-    console.log('This props: ', this.props);
     return (
       <div>
         {
@@ -57,8 +56,6 @@ class AdminEditProductContainer extends Component {
   }
 }
 function mapStateToProps(state, ownProps) {
-  console.log(ownProps, 'ownprops');
-  console.log('STATE.USERADMIN.LISTAPROD', state.userAdmin.listaProductos);
   const productID = ownProps.match.params.id;
   const selectedProd = state.userAdmin.listaProductos.find(
     prod => prod.id === parseInt(productID, 10),
@@ -73,19 +70,19 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCategorys: function(categorias) {
+    fetchCategorys: function (categorias) {
       dispatch(fetchCategorys(categorias));
     },
-    getSingleProduct: function(producto) {
+    getSingleProduct: function (producto) {
       dispatch(getSingleProduct(producto));
     },
-    updateProduct: function(producto) {
+    updateProduct: function (producto) {
       dispatch(updateProduct(producto));
     },
-    deleteProduct: function(productId) {
+    deleteProduct: function (productId) {
       dispatch(deleteProduct(productId));
     },
-    fetchProducts: function() {
+    fetchProducts: function () {
       dispatch(fetchProducts());
     },
   };

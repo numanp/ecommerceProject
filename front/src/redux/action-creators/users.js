@@ -7,14 +7,16 @@ import {
   FETCH_USER_PERFIL,
 } from '../constants';
 
-export const fetchUsers = () => dispatch =>
+export const fetchUsers = () => dispatch => {
   axios.get('/api/user').then(res => {
-    console.log({ res });
-    dispatch({
-      type: FETCH_USERS,
-      users: res.data,
-    });
-  });
+    dispatch(getUsers(res.data));
+  })
+};
+
+export const getUsers = (users) => ({
+  type: FETCH_USERS,
+  users
+})
 
 export const fetchUserPerfil = userId => dispatch =>
   axios.get(`/api/user/${userId}`).then(res => {

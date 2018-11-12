@@ -12,7 +12,6 @@ import {
 } from '../redux/action-creators/products';
 
 function mapStateToProps(state, ownProps) {
-  //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
@@ -62,17 +61,6 @@ class NavBar extends Component {
         logueado: false,
       });
     }
-    setTimeout(() => {
-    }, 10);
-
-    // let admin = JSON.parse(sessionStorage.getItem('login')).admin
-
-    // if (!!admin) {
-    //   this.setState({
-    //     admin: admin
-    //   })
-    // } 
-
   }
 
   handleChange(evt) {
@@ -95,7 +83,6 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log('admin',this.state.admin)
     return (
       <nav className="navbar navbar-default">
         <div className="container">
@@ -130,18 +117,14 @@ class NavBar extends Component {
                 <span className="caret" />
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {this.props.categorias.map(categoria => {
-                  return (
-                    <li
-                      onClick={() => {
-                        this.props.fetchProductsByCategory(categoria.id);
-                      }}
-                    >
-                      {' '}
-                      {categoria.nombre}{' '}
-                    </li>
-                  );
-                })}
+                {
+                  this.props.categorias.map((categoria) => {
+                    return (
+                      <li key={categoria.id} onClick={() => { this.props.fetchProductsByCategory(categoria.id) }}> {categoria.nombre} </li>
+                    )
+                  })
+                }
+
               </ul>
             </div>
             <div

@@ -711,6 +711,7 @@ var SEND_EMAIL_STATUS = exports.SEND_EMAIL_STATUS = 'SEND_EMAIL_STATUS';
 
 //USER_REDUCER
 var ADD_REVIEW = exports.ADD_REVIEW = 'ADD_REVIEW';
+var FETCH_REVIEWS = exports.FETCH_REVIEWS = 'FETCH_REVIEWS';
 var FETCH_ORDERS_USER = exports.FETCH_ORDERS_USER = 'FETCH_ORDERS_USER';
 var LOGIN = exports.LOGIN = 'LOGIN';
 var LOGOUT = exports.LOGOUT = 'LOGOUT';
@@ -1542,7 +1543,6 @@ var getSingleProduct_wCategories = exports.getSingleProduct_wCategories = functi
 
 var postCategoriesToProducts = exports.postCategoriesToProducts = function postCategoriesToProducts(id, arr) {
   return function (dispatch) {
-    console.log('----action creator');
     _axios2.default.post('/api/productos/catAproducto/' + id, arr).then(console.log('TODO SALIO BIEN'));
   };
 };
@@ -1563,7 +1563,7 @@ var deleteProduct = exports.deleteProduct = function deleteProduct(productId) {
 var fetchProductsByCategory = exports.fetchProductsByCategory = function fetchProductsByCategory(categoryId) {
   return function (dispatch) {
     return _axios2.default.get('/api/productos/todoDeUnaCategoria/' + categoryId).then(function (productos) {
-      fetchProductsUser(productos);
+      dispatch(fetchProductsUser(productos.data));
     });
   };
 };
@@ -4483,6 +4483,8 @@ var _reactRedux = __webpack_require__(2);
 
 var _products = __webpack_require__(14);
 
+var _cart = __webpack_require__(15);
+
 var _Reviews = __webpack_require__(55);
 
 var _Reviews2 = _interopRequireDefault(_Reviews);
@@ -4495,6 +4497,10 @@ var _ContainerReview = __webpack_require__(165);
 
 var _ContainerReview2 = _interopRequireDefault(_ContainerReview);
 
+var _reviewSubContainer = __webpack_require__(186);
+
+var _reviewSubContainer2 = _interopRequireDefault(_reviewSubContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4505,7 +4511,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function mapStateToProps(state, ownProps) {
     return {
-        product: state.products.product
+        product: state.products.product,
+        cart: state.cart,
+        idproduct: ownProps.match.params.productId,
+        review: state.review
     };
 }
 
@@ -4513,6 +4522,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     return {
         getSingleProduct: function getSingleProduct(idProducto) {
             dispatch((0, _products.getSingleProduct)(idProducto));
+        },
+        addToCart: function addToCart(producto) {
+            dispatch((0, _cart.addToCart)(producto));
         }
     };
 }
@@ -4529,7 +4541,7 @@ var ContainerSingleProduct = function (_Component) {
     _createClass(ContainerSingleProduct, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.props.getSingleProduct(this.props.match.params.productId);
+            this.props.getSingleProduct(this.props.idproduct);
         }
     }, {
         key: 'render',
@@ -4697,7 +4709,7 @@ var ContainerSingleProduct = function (_Component) {
                                         _react2.default.createElement(
                                             'button',
                                             { className: 'add-to-cart btn btn-success', type: 'button', onClick: function onClick(e) {
-                                                    e.preventDefault();console.log(_this2.props);var obj = { q: 1, id: _this2.props.product.id };_this2.props.addToCart(obj);setTimeout(function () {
+                                                    e.preventDefault();var obj = _this2.props.product;obj.q = 1;_this2.props.addToCart(obj);setTimeout(function () {
                                                         localStorage.setItem("cart", JSON.stringify(_this2.props.cart));
                                                     }, 10);
                                                 } },
@@ -4709,7 +4721,7 @@ var ContainerSingleProduct = function (_Component) {
                         )
                     )
                 ),
-                _react2.default.createElement(_ContainerReview2.default, null)
+                _react2.default.createElement(_ContainerReview2.default, { producto: this.props.idproduct })
             );
         }
     }]);
@@ -4727,19 +4739,84 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 exports.default = function (props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "reviews cajaopinionproducto" },
-    _react2.default.createElement(
-      "h2",
-      null,
-      "Opiniones sobre el producto"
-    )
-  );
+    var users = props.users;
+    return _react2.default.createElement(
+        "div",
+        { className: "container" },
+        _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+                "div",
+                { className: "col-sm-7" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "review-block" },
+                    props.reviews && props.reviews.map(function (review) {
+                        var user = {};
+                        var idEstrellas = 0;
+                        var estrellas = review.estrellas;
+                        var arr = [];
+                        for (var i = 0; i < estrellas; i++) {
+                            arr.push(i);
+                        }
+                        for (var j = 0; j < users.length; j++) {
+                            if (users[j].id == review.userId) {
+                                user = users[j];
+                            }
+                        }
+
+                        return _react2.default.createElement(
+                            "div",
+                            { key: review.id },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "row" },
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "col-sm-3" },
+                                    _react2.default.createElement("img", { src: "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg", className: "img-rounded img-user-review" }),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-name" },
+                                        "Usuario: ",
+                                        user.nombre
+                                    ),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-date" },
+                                        review.createdAt.substring(0, 10)
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "col-sm-9" },
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-rate" },
+                                        arr.map(function (estrellas) {
+                                            idEstrellas++;
+                                            return _react2.default.createElement("span", { key: idEstrellas, className: "glyphicon glyphicon-star estrellas-review-user", "aria-hidden": "true" });
+                                        })
+                                    ),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "review-block-description" },
+                                        review.comentario
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement("hr", null)
+                        );
+                    })
+                )
+            )
+        )
+    );
 };
 
 var _react = __webpack_require__(0);
@@ -4747,6 +4824,47 @@ var _react = __webpack_require__(0);
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+{/* <div class="col-sm-3">
+    			<div class="rating-block">
+    				<h4>Average user rating</h4>
+    				<h2 class="bold padding-bottom-7">4.3 <small>/ 5</small></h2>
+    				<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    				  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    				</button>
+    				<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    				  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    				</button>
+    				<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+    				  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    				</button>
+    				<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+    				  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    				</button>
+    				<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+    				  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+    				</button>
+    			</div>
+    </div> */}
+
+{/* ESTE ES EL QUE ANDA */}
+
+{/* <div className="reviews cajaopinionproducto">
+    <h2>Opiniones sobre el producto</h2>
+    {
+     props.reviews && props.reviews.map(review =>{
+       return(
+         <div key={review.id} className="container">
+         <div className='row'>
+         <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+         <p className='opinionProducto'>- {review.comentario} </p>
+         </div>
+         </div>
+         </div>
+       )
+     })
+    }
+    </div> */}
 
 /***/ }),
 /* 56 */
@@ -31857,6 +31975,8 @@ var reviewReducer = function reviewReducer() {
     switch (action.type) {
         case _constants.ADD_REVIEW:
             return [].concat(_toConsumableArray(state), [action.review]);
+        case _constants.FETCH_REVIEWS:
+            return [].concat(_toConsumableArray(state), [action.reviews]);
 
         default:
             return state;
@@ -32103,9 +32223,8 @@ var Main = function (_Component) {
   }, {
     key: 'logn',
     value: function logn(object) {
-      console.log('hola');
-      _axios2.default.post('api/login', object).then(function (res) {
-        return console.log(res);
+      _axios2.default.post('/api/login', object).then(function (res) {
+        return console.log(res.data);
       });
     }
   }, {
@@ -32113,7 +32232,7 @@ var Main = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('api/user/me').then(function (response) {
+      _axios2.default.get('/api/user/me').then(function (response) {
         _this2.props.logginSuccess(response.data);
       });
       // axios.get('/api/user/3')
@@ -32135,20 +32254,12 @@ var Main = function (_Component) {
           }
         }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LandingPage2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, {
-          exact: true,
-          path: '/signup',
-          render: function render(props) {
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/signup', render: function render(props) {
             return _react2.default.createElement(_SignUp2.default, _extends({}, props, { sign: _this3.sign }));
-          }
-        }),
-        _react2.default.createElement(_reactRouterDom.Route, {
-          exact: true,
-          path: '/login',
-          render: function render() {
-            return _react2.default.createElement(_Login2.default, { logout: _this3.logout, logn: _this3.logn });
-          }
-        }),
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', render: function render(props) {
+            return _react2.default.createElement(_Login2.default, _extends({}, props, { logout: _this3.logout, logn: _this3.logn }));
+          } }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/productos', component: _ProductosContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _AdminContainer2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin/agregarProducto', component: _AdminAddProductContainer2.default }),
@@ -33098,7 +33209,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function mapStateToProps(state, ownProps) {
-  //console.log(ownProps, 'STATE NAVBAR');
   return {
     user: state.user,
     history: ownProps.history,
@@ -33157,15 +33267,6 @@ var NavBar = function (_Component) {
           logueado: false
         });
       }
-      setTimeout(function () {}, 10);
-
-      // let admin = JSON.parse(sessionStorage.getItem('login')).admin
-
-      // if (!!admin) {
-      //   this.setState({
-      //     admin: admin
-      //   })
-      // } 
     }
   }, {
     key: 'handleChange',
@@ -33194,7 +33295,6 @@ var NavBar = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      // console.log('admin',this.state.admin)
       return _react2.default.createElement(
         'nav',
         { className: 'navbar navbar-default' },
@@ -33253,11 +33353,9 @@ var NavBar = function (_Component) {
                 this.props.categorias.map(function (categoria) {
                   return _react2.default.createElement(
                     'li',
-                    {
-                      onClick: function onClick() {
+                    { key: categoria.id, onClick: function onClick() {
                         _this2.props.fetchProductsByCategory(categoria.id);
-                      }
-                    },
+                      } },
                     ' ',
                     categoria.nombre,
                     ' '
@@ -33500,7 +33598,9 @@ var SearchBar = function (_Component) {
                         ),
                         _react2.default.createElement(
                           "option",
-                          { value: "1" },
+                          { onClick: function onClick() {
+                              return console.log('click');
+                            }, value: "1" },
                           "CategoriaTuVieja"
                         ),
                         _react2.default.createElement(
@@ -33581,6 +33681,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(2);
 
+var _products = __webpack_require__(14);
+
 var _WebStoreSlider = __webpack_require__(155);
 
 var _WebStoreSlider2 = _interopRequireDefault(_WebStoreSlider);
@@ -33612,7 +33714,11 @@ function mapStateToProps(state) {
     };
 }
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        getProducts: function getProducts() {
+            dispatch((0, _products.getProducts)());
+        }
+    };
 }
 
 var LandingPage = function (_Component) {
@@ -33625,6 +33731,11 @@ var LandingPage = function (_Component) {
     }
 
     _createClass(LandingPage, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.getProducts();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -34154,196 +34265,33 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //ABAJO DE TODO ESTA EL MAP DEL COMPONENTE, los divs estan solo de prueba para testear
 
 exports.default = function (productos) {
+    var count = 0;
     return _react2.default.createElement(
-        "div",
-        { className: "container" },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-            "div",
-            { className: "row" },
+            'div',
+            { className: 'row' },
             _react2.default.createElement(
-                "h1",
+                'h1',
                 null,
-                "Proba tu suerte!"
+                'Proba tu suerte!'
             ),
             _react2.default.createElement(
-                "div",
-                { id: "adv_team_4_columns_carousel", className: "carousel slide four_shows_one_move team_columns_carousel_wrapper", "data-ride": "carousel", "data-interval": "2000", "data-pause": "hover" },
+                'div',
+                { id: 'adv_team_4_columns_carousel', className: 'carousel slide four_shows_one_move team_columns_carousel_wrapper', 'data-ride': 'carousel', 'data-interval': '2000', 'data-pause': 'hover' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "carousel-inner", role: "listbox" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "item" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 01" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "item active" },
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-1" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-2" },
-                            _react2.default.createElement("img", { src: "https://avatars1.githubusercontent.com/u/2078339?s=400&v=4", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 col-sm-6 col-md-3 team_columns_item_image cloneditem-3" },
-                            _react2.default.createElement("img", { src: "http://placehold.it/150x150", alt: "slider 02" }),
-                            _react2.default.createElement(
-                                "div",
-                                { className: "team_columns_item_caption" },
-                                _react2.default.createElement(
-                                    "h4",
-                                    { className: "h4-group-products" },
-                                    "PROBANDO"
-                                ),
-                                _react2.default.createElement("hr", null),
-                                _react2.default.createElement(
-                                    "h5",
-                                    null,
-                                    "PROBANDO"
-                                )
-                            )
-                        )
-                    )
+                    'div',
+                    { className: 'carousel-inner', role: 'listbox' },
+                    _react2.default.createElement('div', { className: 'item' }),
+                    _react2.default.createElement('div', { className: 'item active' })
                 )
             )
         )
@@ -34449,9 +34397,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    loggedIn: state.user.logged
+    loggedIn: state.user.logged,
+    history: ownProps.history
   };
 }
 
@@ -34459,6 +34408,9 @@ function mapDispatchToProps(dispatch) {
   return {
     login: function login(user) {
       dispatch((0, _user.addLoginToLocalStorage)(user));
+    },
+    getCart: function getCart(carro) {
+      dispatch((0, _cart.actualizarCarro)(carro));
     }
   };
 }
@@ -34480,6 +34432,15 @@ var Login = function (_Component) {
   }
 
   _createClass(Login, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.props.getCart(JSON.parse(localStorage.getItem('cart')));if (_this2.props.loggedIn.id) _this2.props.history.push('/productos');
+      }, 10);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {}
   }, {
@@ -34504,7 +34465,7 @@ var Login = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -34528,7 +34489,7 @@ var Login = function (_Component) {
                 {
                   onSubmit: function onSubmit(e) {
                     e.preventDefault();
-                    _this2.props.login(_this2.state);
+                    _this3.props.login(_this3.state);
                   }
                 },
                 _react2.default.createElement(
@@ -34541,7 +34502,7 @@ var Login = function (_Component) {
                   ),
                   _react2.default.createElement('input', {
                     onChange: function onChange(e) {
-                      return _this2.emailChange(e);
+                      return _this3.emailChange(e);
                     },
                     type: 'text',
                     name: 'email',
@@ -34561,7 +34522,7 @@ var Login = function (_Component) {
                   ),
                   _react2.default.createElement('input', {
                     onChange: function onChange(e) {
-                      return _this2.passwordChange(e);
+                      return _this3.passwordChange(e);
                     },
                     type: 'password',
                     name: 'password',
@@ -34702,7 +34663,6 @@ var SignUp = function (_Component) {
                   onSubmit: function onSubmit(event) {
                     event.preventDefault();
                     _this2.props.sign(_this2.state).then(function (answer) {
-                      console.log({ answer: answer });
                       if (answer.status === 200) {
                         _this2.props.history.push('/login');
                       }
@@ -34928,7 +34888,7 @@ var CarritoSlider = function (_Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'sidebar-header' },
-                            _react2.default.createElement('img', { src: './images/skereeteam.png' })
+                            _react2.default.createElement('img', { src: '/images/skereeteam.png' })
                         ),
                         _react2.default.createElement(
                             'ul',
@@ -34972,7 +34932,7 @@ var CarritoSlider = function (_Component) {
                                                     { type: 'button', className: 'btn btn-danger', onClick: function onClick() {
                                                             _this2.props.removeFromCart(product.id);setTimeout(function () {
                                                                 localStorage.setItem('cart', JSON.stringify(_this2.props.cart));
-                                                            }, 10);console.log('elimina', _this2.props.cart);
+                                                            }, 10);
                                                         } },
                                                     'Eliminar'
                                                 ),
@@ -35163,9 +35123,9 @@ var ProductosContainer = function (_Component) {
                 _react2.default.createElement(
                     _reactRouterDom.Switch,
                     null,
-                    _react2.default.createElement(_reactRouterDom.Route, { path: match.path + '/:productId', render: function render(_ref) {
+                    _react2.default.createElement(_reactRouterDom.Route, { path: '/productos/:productId', render: function render(_ref) {
                             var match = _ref.match;
-                            return _react2.default.createElement(_ContainerSingleProduct2.default, { match: match, cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, product: _this2.props.product, user: _this2.props.user });
+                            return _react2.default.createElement(_ContainerSingleProduct2.default, { match: match, cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart /* product={this.props.product} */, user: _this2.props.user });
                         } }),
                     _react2.default.createElement(_reactRouterDom.Route, { render: function render() {
                             return _react2.default.createElement(_ProductosSubContainer2.default, { cart: _this2.props.cart, lessQtoProduct: _this2.props.lessQtoProduct, addQtoProduct: _this2.props.addQtoProduct, removeFromCart: _this2.props.removeFromCart, addToCart: _this2.props.addToCart, selectProduct: _this2.props.getSingleProduct, products: _this2.props.productos, user: _this2.props.user });
@@ -35389,6 +35349,16 @@ var _reactRedux = __webpack_require__(2);
 
 var _reviewAction = __webpack_require__(167);
 
+var _axios = __webpack_require__(7);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactStarRatingComponent = __webpack_require__(187);
+
+var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+var _users = __webpack_require__(176);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35397,18 +35367,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
+    review: ownProps.review,
     rev: state.review,
     user: state.user,
-    producto: state.products.product
+    producto: ownProps.producto,
+    users: state.users
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    addReview: function addReview(value, user, product) {
-      dispatch((0, _reviewAction.addReview)(value, user, product));
+    addReview: function addReview(value, user, product, estrellas) {
+      dispatch((0, _reviewAction.addReview)(value, user, product, estrellas));
+    },
+    fetchUsers: function fetchUsers() {
+      dispatch((0, _users.fetchUsers)());
+    },
+    fetchReviews: function fetchReviews(producto) {
+      dispatch((0, _reviewAction.fetchReviews)(producto));
     }
   };
 }
@@ -35424,15 +35402,42 @@ var ContainerReview = function (_Component) {
     _this.state = {
       value: '',
       addReview: [],
-      currentProduct: 0
-
+      reviews: [],
+      currentProduct: 0,
+      rating: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.onStarClick = _this.onStarClick.bind(_this);
     return _this;
   }
 
+  // componentDidMount(){
+  //   console.log(this.props.producto)
+
+  // }
+
+  /*   componentWillReceiveProps(nextProps) {
+      if (nextProps.producto.id == this.state.producto.id) {
+        return
+      } else {
+        this.setState({ producto: nextProps.producto })
+        axios.get(`/api/reviews/${nextProps.producto.id}`)
+          .then(reviews => this.setState({ reviews: reviews.data }))
+      }
+  
+      this.handleChange = this.handleChange.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
+    } */
+
+
   _createClass(ContainerReview, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchUsers();
+      setTimeout((0, _reviewAction.fetchReviews)(this.props.producto), 10);
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange(evt) {
       this.setState({
@@ -35443,7 +35448,12 @@ var ContainerReview = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
       evt.preventDefault();
-      this.props.addReview(this.state.value, this.props.user, this.props.producto);
+      this.props.addReview(this.state.value, this.props.user, this.props.producto, this.state.rating);
+    }
+  }, {
+    key: 'onStarClick',
+    value: function onStarClick(nextValue, prevValue, name) {
+      this.setState({ rating: nextValue });
     }
   }, {
     key: 'fechReviews',
@@ -35451,11 +35461,15 @@ var ContainerReview = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      // console.log(this.state.rating)
+      // console.log(this.state.reviews)
+      // console.log(this.props.producto)
+      // const { rating } = this.state.rating;
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit }),
-        _react2.default.createElement(_Reviews2.default, { user: this.props.user, addReview: this.props.rev, product: this.props.producto })
+        _react2.default.createElement(_ReviewInput2.default, { handleChange: this.handleChange, handleSubmit: this.handleSubmit, rating: this.state.rating, onStarClick: this.onStarClick }),
+        _react2.default.createElement(_Reviews2.default, { users: this.props.users, reviews: this.state.reviews, user: this.props.user, addReview: this.props.rev })
       );
     }
   }]);
@@ -35464,6 +35478,8 @@ var ContainerReview = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ContainerReview);
+
+// reviews={this.props.reviews}
 
 /***/ }),
 /* 166 */
@@ -35480,31 +35496,93 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _reactStarRatingComponent = __webpack_require__(187);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _reactStarRatingComponent2 = _interopRequireDefault(_reactStarRatingComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (_ref) {
     var handleChange = _ref.handleChange,
         handleSubmit = _ref.handleSubmit,
-        addreview = _ref.addreview;
+        addreview = _ref.addreview,
+        rating = _ref.rating,
+        onStarClick = _ref.onStarClick;
 
     return _react2.default.createElement(
-        'form',
-        { className: 'form-horizontal inputReview', onSubmit: handleSubmit },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-            'label',
-            { className: 'input-review-text' },
-            'Dejanos tu review sobre este producto:'
-        ),
-        _react2.default.createElement('textarea', _defineProperty({ placeholder: 'deja tu review aca...', type: 'text', name: 'addreview', className: '', addreview: addreview, onChange: handleChange }, 'className', 'form-control custom-control')),
-        _react2.default.createElement(
-            'button',
-            { type: 'submit', className: 'btn btn-success input-review-button' },
-            'enviar!'
+            'div',
+            { className: 'row', style: { marginTop: "40px" } },
+            _react2.default.createElement(
+                'div',
+                { className: 'col-md-12' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'well well-sm' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'text-right' },
+                        _react2.default.createElement(
+                            'a',
+                            { className: 'btn btn-success btn-green', href: '#reviews-anchor', id: 'open-review-box' },
+                            'Dejanos tu review!'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'row', id: 'post-review-box', style: { display: "none" } },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-12' },
+                            _react2.default.createElement(
+                                'form',
+                                { onSubmit: handleSubmit, acceptCharset: 'UTF-8', action: '', method: 'post' },
+                                _react2.default.createElement('input', { id: 'ratings-hidden', name: 'rating', type: 'hidden' }),
+                                _react2.default.createElement('textarea', { className: 'form-control animated', cols: '50', id: 'new-review', name: 'comment', placeholder: 'escribi aca y puntua!', rows: '5', addreview: addreview, onChange: handleChange }),
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'text-right' },
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'contenedorEstrellas' },
+                                        _react2.default.createElement(_reactStarRatingComponent2.default, { onStarClick: onStarClick.bind(undefined), name: 'rate1', starCount: 5, value: rating })
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        null,
+                                        _react2.default.createElement(
+                                            'a',
+                                            { className: 'btn btn-danger btn-sm', href: '#', id: 'close-review-box', style: { display: "none", marginRight: "10px" } },
+                                            _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' }),
+                                            'Cancel'
+                                        ),
+                                        _react2.default.createElement(
+                                            'button',
+                                            { className: 'btn btn-success btn-lg', type: 'submit' },
+                                            'Save'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
         )
     );
 };
+//import ContainerStars from '../containers/ContainerStars'
+
+
+{/* <form className="form-horizontal inputReview" onSubmit={handleSubmit}>
+    <label className='input-review-text'>Dejanos tu review sobre este producto:</label>
+       <textarea placeholder="deja tu review aca..." type="text" name="addreview" className='' addreview={addreview} onChange={handleChange} className="form-control custom-control"></textarea>
+       <button type="submit" className="btn btn-success input-review-button">
+         enviar!
+       </button>
+    </form> */}
 
 /***/ }),
 /* 167 */
@@ -35516,7 +35594,8 @@ exports.default = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.addReview = undefined;
+exports.getReviews = exports.addReview = undefined;
+exports.fetchReviews = fetchReviews;
 
 var _axios = __webpack_require__(7);
 
@@ -35533,24 +35612,49 @@ var saveReview = function saveReview(review) {
     };
 };
 
-var addReview = exports.addReview = function addReview(value, user, product) {
+// const getReview = (review) => ({
+//     type: FETCH_REVIEW,
+//     review
+// })
+
+var addReview = exports.addReview = function addReview(value, user, product, estrellas) {
     return function (dispatch) {
-        console.log("ACTION-VALUE", value, "ACTION-USER", user, "ACTION-PRODUCT", product);
+        // console.log("ACTION-VALUE", value, "ACTION-USER", user, "ACTION-PRODUCT", product)
         var reviewUser = {
             comentario: value,
             user: user,
-            product: product
+            product: product,
+            estrellas: estrellas
         };
-
         _axios2.default.post('/api/reviews/' + product.id, reviewUser).then(function (res) {
-            return console.log('AXIOSSSS', res.data);
-        }).then(function (res) {
-            dispatch(saveReview(res.data));
+            dispatch(saveReview(value, user, product, estrellas));
         });
     };
 };
 
-// .then(res => {dispatch (saveReview(value, user, product))
+var getReviews = exports.getReviews = function getReviews(reviews) {
+    return {
+        type: _constants.FETCH_REVIEWS,
+        reviews: reviews
+    };
+};
+
+/* export const fetchReviews = (idProduct) => (dispatch) => {
+
+    axios.get(`/api/reviews/${idProduct}`)
+        .then(res => {
+            console.log(res.data)
+            dispatch(getReviews(res.data))
+        })
+} */
+
+function fetchReviews(idProduct) {
+    return function (dispatch) {
+        return _axios2.default.get('/api/reviews/' + idProduct).then(function (res) {
+            dispatch(getReviews(res.data));
+        });
+    };
+}
 
 /***/ }),
 /* 168 */
@@ -36186,7 +36290,6 @@ var AdminManejarProductos = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-    //  console.log(state)
     return {
         listaProductos: state.userAdmin.listaProductos
     };
@@ -36287,7 +36390,6 @@ var AdminEditProductContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('This props: ', this.props);
       return _react2.default.createElement(
         'div',
         null,
@@ -36306,8 +36408,6 @@ var AdminEditProductContainer = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state, ownProps) {
-  console.log(ownProps, 'ownprops');
-  console.log('STATE.USERADMIN.LISTAPROD', state.userAdmin.listaProductos);
   var productID = ownProps.match.params.id;
   var selectedProd = state.userAdmin.listaProductos.find(function (prod) {
     return prod.id === parseInt(productID, 10);
@@ -36783,7 +36883,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeUserAdmin = exports.deleteUser = exports.fetchUserPerfil = exports.fetchUsers = undefined;
+exports.makeUserAdmin = exports.deleteUser = exports.fetchUserPerfil = exports.getUsers = exports.fetchUsers = undefined;
 
 var _axios = __webpack_require__(7);
 
@@ -36795,13 +36895,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var fetchUsers = exports.fetchUsers = function fetchUsers() {
   return function (dispatch) {
-    return _axios2.default.get('/api/user').then(function (res) {
-      console.log({ res: res });
-      dispatch({
-        type: _constants.FETCH_USERS,
-        users: res.data
-      });
+    _axios2.default.get('/api/user').then(function (res) {
+      dispatch(getUsers(res.data));
     });
+  };
+};
+
+var getUsers = exports.getUsers = function getUsers(users) {
+  return {
+    type: _constants.FETCH_USERS,
+    users: users
   };
 };
 
@@ -36924,7 +37027,6 @@ var AdminAddCategoryContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.listaCategorias);
       return _react2.default.createElement(
         'div',
         null,
@@ -37182,6 +37284,14 @@ var CheckoutContainer = function (_Component) {
             _axios2.default.post('/api/ventas', this.obj).then(function () {
                 return console.log('orden creada');
             }).then(function () {
+                var arrProds = JSON.parse(_this2.obj.carro);
+                var productos = [];
+                arrProds.map(function (prod) {
+                    return productos.push(prod.nombre);
+                });
+                _axios2.default.post('/api/ventas/email', { productos: productos, email: _this2.obj.email }).then(function (res) {
+                    console.log(res);
+                });
                 _this2.props.history.push('/');
                 localStorage.setItem('cart', JSON.stringify([]));
             });
@@ -37493,14 +37603,14 @@ var AdminAddCategoryToProductContainer = function (_Component) {
     }, {
         key: 'handleAgregarCategorias',
         value: function handleAgregarCategorias() {
-            console.log(this.props);
-            console.log(this.state);
             this.props.postCategoriesToProducts(this.state.idProducto, this.state.arregloCategorias);
         }
     }, {
         key: 'render',
         value: function render() {
-
+            {
+                this.props.producto ? console.log(this.props.producto) : null;
+            }
             return _react2.default.createElement(
                 'div',
                 null,
@@ -38085,6 +38195,457 @@ exports.default = function (props) {
     )
   );
 };
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(2);
+
+var _reviewAction = __webpack_require__(167);
+
+var _users = __webpack_require__(176);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        review: ownProps.review,
+        rev: state.review,
+        user: state.user,
+        producto: ownProps.producto,
+        users: state.users
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        addReview: function (_addReview) {
+            function addReview(_x, _x2, _x3, _x4) {
+                return _addReview.apply(this, arguments);
+            }
+
+            addReview.toString = function () {
+                return _addReview.toString();
+            };
+
+            return addReview;
+        }(function (value, user, product, estrellas) {
+            dispatch(addReview(value, user, product, estrellas));
+        }),
+        fetchUsers: function fetchUsers() {
+            dispatch((0, _users.fetchUsers)());
+        },
+        fetchReviews: function fetchReviews(producto) {
+            dispatch((0, _reviewAction.fetchReviews)(producto));
+        }
+    };
+}
+
+var reviewSubContainer = function (_Component) {
+    _inherits(reviewSubContainer, _Component);
+
+    function reviewSubContainer(props) {
+        _classCallCheck(this, reviewSubContainer);
+
+        var _this = _possibleConstructorReturn(this, (reviewSubContainer.__proto__ || Object.getPrototypeOf(reviewSubContainer)).call(this, props));
+
+        _this.state = {
+            value: '',
+            addReview: [],
+            reviews: [],
+            currentProduct: 0,
+            rating: 0
+        };
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.onStarClick = _this.onStarClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(reviewSubContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.fetchReviews(2);
+            this.props.fetchUsers();
+            setTimeout((0, _reviewAction.fetchReviews)(this.props.producto), 10);
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(evt) {
+            this.setState({
+                value: evt.target.value
+            });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(evt) {
+            evt.preventDefault();
+            this.props.addReview(this.state.value, this.props.user, this.props.producto, this.state.rating);
+        }
+    }, {
+        key: 'onStarClick',
+        value: function onStarClick(nextValue, prevValue, name) {
+            this.setState({ rating: nextValue });
+        }
+    }, {
+        key: 'fechReviews',
+        value: function fechReviews(reviews) {}
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                'HOLA'
+            );
+        }
+    }]);
+
+    return reviewSubContainer;
+}(_react.Component);
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(reviewSubContainer);
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__(188);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StarRatingComponent = function (_Component) {
+  _inherits(StarRatingComponent, _Component);
+
+  function StarRatingComponent(props) {
+    _classCallCheck(this, StarRatingComponent);
+
+    var _this = _possibleConstructorReturn(this, (StarRatingComponent.__proto__ || Object.getPrototypeOf(StarRatingComponent)).call(this));
+
+    _this.state = {
+      value: props.value
+    };
+    return _this;
+  }
+
+  _createClass(StarRatingComponent, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var value = nextProps.value;
+
+
+      if (value != null && value !== this.state.value) {
+        this.setState({ value: value });
+      }
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(inputValue) {
+      var _props = this.props,
+          editing = _props.editing,
+          value = _props.value;
+
+
+      if (!editing) {
+        return;
+      }
+
+      // do not update internal state based on input value if prop passed
+      if (value != null) {
+        return;
+      }
+
+      this.setState({ value: inputValue });
+    }
+  }, {
+    key: 'onStarClick',
+    value: function onStarClick(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props2 = this.props,
+          onStarClick = _props2.onStarClick,
+          editing = _props2.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarClick && onStarClick(index, value, name, e);
+    }
+  }, {
+    key: 'onStarHover',
+    value: function onStarHover(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props3 = this.props,
+          onStarHover = _props3.onStarHover,
+          editing = _props3.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarHover && onStarHover(index, value, name, e);
+    }
+  }, {
+    key: 'onStarHoverOut',
+    value: function onStarHoverOut(index, value, name, e) {
+      e.stopPropagation();
+
+      var _props4 = this.props,
+          onStarHoverOut = _props4.onStarHoverOut,
+          editing = _props4.editing;
+
+
+      if (!editing) {
+        return;
+      }
+
+      onStarHoverOut && onStarHoverOut(index, value, name, e);
+    }
+  }, {
+    key: 'renderStars',
+    value: function renderStars() {
+      var _this2 = this;
+
+      var _props5 = this.props,
+          name = _props5.name,
+          starCount = _props5.starCount,
+          starColor = _props5.starColor,
+          emptyStarColor = _props5.emptyStarColor,
+          editing = _props5.editing;
+      var value = this.state.value;
+
+
+      var starStyles = function starStyles(i, value) {
+        return {
+          float: 'right',
+          cursor: editing ? 'pointer' : 'default',
+          color: value >= i ? starColor : emptyStarColor
+        };
+      };
+      var radioStyles = {
+        display: 'none',
+        position: 'absolute',
+        marginLeft: -9999
+      };
+
+      // populate stars
+      var starNodes = [];
+
+      var _loop = function _loop(i) {
+        var id = name + '_' + i;
+        var starNodeInput = _react2.default.createElement('input', {
+          key: 'input_' + id,
+          style: radioStyles,
+          className: 'dv-star-rating-input',
+          type: 'radio',
+          name: name,
+          id: id,
+          value: i,
+          checked: value === i,
+          onChange: _this2.onChange.bind(_this2, i, name)
+        });
+        var starNodeLabel = _react2.default.createElement(
+          'label',
+          {
+            key: 'label_' + id,
+            style: starStyles(i, value),
+            className: 'dv-star-rating-star ' + (value >= i ? 'dv-star-rating-full-star' : 'dv-star-rating-empty-star'),
+            htmlFor: id,
+            onClick: function onClick(e) {
+              return _this2.onStarClick(i, value, name, e);
+            },
+            onMouseOver: function onMouseOver(e) {
+              return _this2.onStarHover(i, value, name, e);
+            },
+            onMouseLeave: function onMouseLeave(e) {
+              return _this2.onStarHoverOut(i, value, name, e);
+            }
+          },
+          _this2.renderIcon(i, value, name, id)
+        );
+
+        starNodes.push(starNodeInput);
+        starNodes.push(starNodeLabel);
+      };
+
+      for (var i = starCount; i > 0; i--) {
+        _loop(i);
+      }
+
+      return starNodes.length ? starNodes : null;
+    }
+  }, {
+    key: 'renderIcon',
+    value: function renderIcon(index, value, name, id) {
+      var _props6 = this.props,
+          renderStarIcon = _props6.renderStarIcon,
+          renderStarIconHalf = _props6.renderStarIconHalf;
+
+
+      if (typeof renderStarIconHalf === 'function' && Math.ceil(value) === index && value % 1 !== 0) {
+        return renderStarIconHalf(index, value, name, id);
+      }
+
+      if (typeof renderStarIcon === 'function') {
+        return renderStarIcon(index, value, name, id);
+      }
+
+      return _react2.default.createElement(
+        'i',
+        { key: 'icon_' + id, style: { fontStyle: 'normal' } },
+        '\u2605'
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props7 = this.props,
+          editing = _props7.editing,
+          className = _props7.className;
+
+      var classes = (0, _classnames2.default)('dv-star-rating', {
+        'dv-star-rating-non-editable': !editing
+      }, className);
+
+      return _react2.default.createElement(
+        'div',
+        { style: { display: 'inline-block', position: 'relative' }, className: classes },
+        this.renderStars()
+      );
+    }
+  }]);
+
+  return StarRatingComponent;
+}(_react.Component);
+
+StarRatingComponent.propTypes = {
+  name: _propTypes2.default.string.isRequired,
+  value: _propTypes2.default.number,
+  editing: _propTypes2.default.bool,
+  starCount: _propTypes2.default.number,
+  starColor: _propTypes2.default.string,
+  onStarClick: _propTypes2.default.func,
+  onStarHover: _propTypes2.default.func,
+  onStarHoverOut: _propTypes2.default.func,
+  renderStarIcon: _propTypes2.default.func,
+  renderStarIconHalf: _propTypes2.default.func
+};
+StarRatingComponent.defaultProps = {
+  starCount: 5,
+  editing: true,
+  starColor: '#ffb400',
+  emptyStarColor: '#333'
+};
+exports.default = StarRatingComponent;
+module.exports = exports['default'];
+
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
 
 /***/ })
 /******/ ]);

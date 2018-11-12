@@ -9,7 +9,7 @@ import { getSingleProduct_wCategories, postCategoriesToProducts } from '../redux
 class AdminAddCategoryToProductContainer extends Component {
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             arregloCategorias: [],
             idProducto: 0
         }
@@ -20,53 +20,50 @@ class AdminAddCategoryToProductContainer extends Component {
         this.props.fetchCategorys();
         this.props.getSingleProduct_wCategories(this.props.match.params.id);
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps.producto.producto_wCategories !== undefined){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.producto.producto_wCategories !== undefined) {
             this.state.idProducto = nextProps.producto.producto_wCategories.id;
         }
-        if(nextProps.producto.producto_wCategories !== undefined){
-            for(var i = 0; i < nextProps.producto.producto_wCategories.categorias.length; i++){
-                if(this.state.arregloCategorias.indexOf(nextProps.producto.producto_wCategories.categorias[i].id) < 0){
-                    this.state.arregloCategorias.push( nextProps.producto.producto_wCategories.categorias[i].id) 
+        if (nextProps.producto.producto_wCategories !== undefined) {
+            for (var i = 0; i < nextProps.producto.producto_wCategories.categorias.length; i++) {
+                if (this.state.arregloCategorias.indexOf(nextProps.producto.producto_wCategories.categorias[i].id) < 0) {
+                    this.state.arregloCategorias.push(nextProps.producto.producto_wCategories.categorias[i].id)
                 }
             }
         }
-}
-    
-    handleClick(evt){
-        var categoria = document.querySelector('.botonAgregarCategoria');  
-        if(this.state.arregloCategorias.indexOf(parseInt(categoria.value)) < 0){
+    }
+
+    handleClick(evt) {
+        var categoria = document.querySelector('.botonAgregarCategoria');
+        if (this.state.arregloCategorias.indexOf(parseInt(categoria.value)) < 0) {
             this.state.arregloCategorias.push(parseInt(categoria.value))
         }
-        
-       
+
     }
-    handleAgregarCategorias(){
-        console.log(this.props)
-        console.log(this.state)
-        this.props.postCategoriesToProducts(this.state.idProducto,this.state.arregloCategorias)
+    handleAgregarCategorias() {
+        this.props.postCategoriesToProducts(this.state.idProducto, this.state.arregloCategorias)
     }
 
 
     render() {
-       
+        { this.props.producto ? console.log(this.props.producto) : null }
         return (
             <div>
-               <AdminAddCategoryToProduct 
-                        listaCategorias={this.props.listaCategorias}  
-                        handleClick={this.handleClick} 
-                        handleAgregarCategorias={this.handleAgregarCategorias}
-                        arregloCategorias={this.state.arregloCategorias}
-                        producto={this.props.producto.producto_wCategories}
+                <AdminAddCategoryToProduct
+                    listaCategorias={this.props.listaCategorias}
+                    handleClick={this.handleClick}
+                    handleAgregarCategorias={this.handleAgregarCategorias}
+                    arregloCategorias={this.state.arregloCategorias}
+                    producto={this.props.producto.producto_wCategories}
                 />
             </div>
         )
     }
 }
 
-function mapStateToProps (state){
- 
-    return{
+function mapStateToProps(state) {
+
+    return {
         listaCategorias: state.userAdmin.listaCategorias,
         producto: state.products
 
@@ -74,16 +71,16 @@ function mapStateToProps (state){
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         fetchCategorys: function () {
             dispatch(fetchCategorys())
         },
-        getSingleProduct_wCategories: function(id){
+        getSingleProduct_wCategories: function (id) {
             dispatch(getSingleProduct_wCategories(id))
         },
-        postCategoriesToProducts: function(id,arr){
-            dispatch(postCategoriesToProducts(id,arr))
+        postCategoriesToProducts: function (id, arr) {
+            dispatch(postCategoriesToProducts(id, arr))
         }
     }
 }
