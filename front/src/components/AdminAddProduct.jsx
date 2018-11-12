@@ -28,22 +28,28 @@ export default props => (
           />
         </div>
         <div className="form-group">
-          <label htmlFor="imgProducto1">
+          <label htmlFor="imagenSingle1">
+            Foto principal
+          </label>
+          <input name="foto" type="text" className="form-control" placeholder="foto principal "/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagenSingle1">
             Image 1
           </label>
-          <input name="imgProducto1" type="text" className="form-control" placeholder="Separar "/>
+          <input name="imagenSingle1" type="text" className="form-control" placeholder="Imagen 1 "/>
         </div>
         <div className="form-group">
-          <label htmlFor="imgProducto2">
+          <label htmlFor="imagenSingle2">
             Image 2
           </label>
-          <input name="imgProducto2" type="text" className="form-control" placeholder="Separar "/>
+          <input name="imagenSingle2" type="text" className="form-control" placeholder="Imagen 2 "/>
         </div>
         <div className="form-group">
-          <label htmlFor="imgProducto3">
+          <label htmlFor="imagenSingle3">
             Image 3
           </label>
-          <input name="imgProducto3" type="text" className="form-control" placeholder="Separar "/>
+          <input name="imagenSingle3" type="text" className="form-control" placeholder="Imagen 3 "/>
         </div>
 
         <div className="form-group">

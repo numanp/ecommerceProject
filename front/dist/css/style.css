@@ -360,13 +360,11 @@ body {
 }
 
 .thumbnail {
-  opacity: 0.7;
+  opacity: 1;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 .thumbnail:hover {
-  opacity: 1;
-  box-shadow: 0px 0px 10px #4bc6ff;
 }
 .line {
   margin-bottom: 5px;
@@ -378,11 +376,8 @@ body {
   }
 }
 span.thumbnail {
-  border: 1px solid #00c4ff !important;
-  border-radius: 0px !important;
-  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.16);
-  -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.16);
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #ececec;
+  border-radius: 2px;
   padding: 10px;
 }
 .container-productos .h4-productos {
@@ -666,20 +661,12 @@ span.thumbnail {
 
 /* -------------------------aca empieza ReviewInput-------------------------------- */
 
-.inputReview {
-  margin-top: 5%;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+.animated {
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  transition: height 0.2s;
 }
 
-.input-review-text {
-  font-size: 2em;
-}
-
-.input-review-button {
-  margin-top: 1%;
-}
 
 /* -------------------------aca termina ReviewInput-------------------------------- */
 
@@ -697,6 +684,63 @@ span.thumbnail {
 }
 
 /* -------------------------aca empieza Review-------------------------------- */
+
+.btn-grey{
+  background-color:#D8D8D8;
+color:#FFF;
+}
+.rating-block{
+background-color:#FAFAFA;
+border:1px solid #EFEFEF;
+padding:15px 15px 20px 15px;
+border-radius:3px;
+}
+.bold{
+font-weight:700;
+}
+.padding-bottom-7{
+padding-bottom:7px;
+}
+
+.review-block{
+background-color:#FAFAFA;
+border:1px solid #EFEFEF;
+padding:15px;
+border-radius:3px;
+margin-bottom:15px;
+}
+.review-block-name{
+font-size:12px;
+margin:10px 0;
+}
+.review-block-date{
+font-size:12px;
+}
+.review-block-rate{
+font-size:13px;
+margin-bottom:15px;
+}
+.review-block-title{
+font-size:15px;
+font-weight:700;
+margin-bottom:10px;
+}
+.review-block-description{
+font-size:13px;
+}
+
+.img-user-review{
+  width: 75px
+}
+
+.estrellas-review-user{
+  font-size: 2em;
+  color: #345ad8;
+}
+
+.contenedorEstrellas{
+  margin: 2% 0%;
+}
 
 /* -------------------------aca termina Review-------------------------------- */
 

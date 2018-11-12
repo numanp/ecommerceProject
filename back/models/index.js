@@ -26,8 +26,10 @@ Venta.belongsTo(User);
 User.hasMany(Producto, { as: 'publicaciones' });
 
 Producto.hasMany(Review, { as: 'Reviews' });
+Review.belongsTo(Producto)
 
 User.hasMany(Review, { as: 'userReviews' });
+Review.belongsTo(User)
 
 Producto.belongsToMany(Venta, { through: 'ProductoVenta' });
 Venta.belongsToMany(Producto, { through: 'ProductoVenta' });

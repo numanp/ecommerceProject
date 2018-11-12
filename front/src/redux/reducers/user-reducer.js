@@ -4,8 +4,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   SIGN_UP,
+  FETCH_USER_PERFIL,
 } from '../constants';
-
 
 const initialState = {};
 
@@ -22,14 +22,20 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         /* loggedIn: true, */
-        logged: action.user
+        logged: action.user,
       });
 
     case LOGOUT:
       return Object.assign({}, state, {
         /* loggedIn: false, */
-        user: action.user
+        user: action.user,
       });
+    case FETCH_USER_PERFIL: {
+      console.log({ action });
+      return Object.assign({}, state, {
+        user: action.user,
+      });
+    }
 
     case SIGN_UP:
       return {};
